@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 2 Contribution Tracking -- off-chain indexer complete, API endpoints next
+**Current focus:** Phase 2 Contribution Tracking -- on-chain instructions and off-chain indexer complete, Plan 05 remaining
 
 ## Current Position
 
 Phase: 2 of 6 (Contribution Tracking)
 Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 02-04-PLAN.md (off-chain indexer and Helius webhook)
+Last activity: 2026-02-08 -- Completed 02-03-PLAN.md (contribution instructions with bankrun tests)
 
 Progress: [████████░░] 50% (8/16 estimated total plans)
 
@@ -68,6 +68,9 @@ Recent decisions affecting current work:
 - [02-02]: Score formula uses sqrt diminishing returns for both task count and time active
 - [02-02]: Node.js built-in test runner (node:test) for @gsd/utils tests -- zero extra dependencies
 - [02-02]: DataView with explicit little-endian byte writes for Borsh-compatible serialization
+- [02-03]: BN.js required for u64 instruction args in Anchor TypeScript client
+- [02-03]: Tree test params: depth=3, buffer=8 (1304 bytes) for bankrun tests
+- [02-03]: SPL program .so files downloaded from mainnet and committed to tests/fixtures/
 - [02-04]: Inline base58 encode/decode in indexer to avoid adding bs58 dependency to webhook handler
 - [02-04]: Helius webhook auth uses Authorization header comparison (not query parameter)
 - [02-04]: leafIndex defaults to 0 in contribution record (tree indexer updates later if needed)
@@ -92,4 +95,4 @@ Recent decisions affecting current work:
 
 Last session: 2026-02-08
 Stopped at: Phase 2 in progress. Plans 01-04 complete (state structs, CPI helpers, shared utils, on-chain instructions, off-chain indexer). Plan 05 remaining.
-Resume file: .planning/phases/02-contribution-tracking/02-04-SUMMARY.md
+Resume file: .planning/phases/02-contribution-tracking/02-03-SUMMARY.md
