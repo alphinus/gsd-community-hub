@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 3 of 6 (Governance and Idea Rounds)
-Plan: 1 of 7 in current phase
+Plan: 2 of 7 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 03-01-PLAN.md (governance state accounts and error codes)
+Last activity: 2026-02-08 -- Completed 03-02-PLAN.md (governance types, PDAs, and Prisma models)
 
-Progress: [██████████░░░░░░] 63% (10/16 estimated total plans)
+Progress: [███████████░░░░░] 69% (11/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 11 min
+- Total plans completed: 11
+- Average duration: 10 min
 - Total execution time: 1.7 hours
 
 **By Phase:**
@@ -29,11 +29,11 @@ Progress: [██████████░░░░░░] 63% (10/16 estimate
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
-| 03 | 1 | 4 min | 4 min |
+| 03 | 2 | 6 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 6m, 3m, 4m, 9m, 4m
-- Trend: fast (03-01 state definitions only, no instruction logic)
+- Last 5 plans: 3m, 4m, 9m, 4m, 2m
+- Trend: fast (types/schema plans are quick)
 
 *Updated after each plan completion*
 
@@ -81,6 +81,8 @@ Recent decisions affecting current work:
 - [02-05]: Removed .js extensions from @gsd/utils and @gsd/types barrel exports (Turbopack module resolution)
 - [03-01]: QuorumType::required_bps() impl placed in governance_config.rs (co-located with GovernanceConfig)
 - [03-01]: GovernanceError kept as separate enum from GsdHubError for domain separation
+- [03-02]: TypeScript string unions mirror Rust enums with lowercase variants for JSON serialization
+- [03-02]: VoteDepositInfo.isEligible is a computed client-side field (not on-chain) for convenience
 
 ### Pending Todos
 
@@ -102,5 +104,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 3 plan 1 complete. Governance state accounts defined. Continue with 03-02.
-Resume file: .planning/phases/03-governance-idea-rounds/03-01-SUMMARY.md
+Stopped at: Phase 3 plan 2 complete. Governance types, PDAs, and Prisma models created. Continue with 03-03.
+Resume file: .planning/phases/03-governance-idea-rounds/03-02-SUMMARY.md
