@@ -21,7 +21,28 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  contributions Contribution[]
+
   @@index([walletAddress])
+}
+
+model Contribution {
+  id                   String   @id @default(cuid())
+  walletAddress        String
+  taskRef              String
+  verificationScore    Int
+  contentHash          String
+  leafHash             String
+  leafIndex            Int
+  treeAddress          String
+  transactionSignature String   @unique
+  description          String?
+  createdAt            DateTime @default(now())
+
+  user User @relation(fields: [walletAddress], references: [walletAddress])
+
+  @@index([walletAddress])
+  @@index([treeAddress, leafIndex])
 }
 
 model ProgramUpgrade {
