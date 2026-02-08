@@ -10,6 +10,9 @@
       "default": "./src/index.ts"
     }
   },
+  "scripts": {
+    "test": "npx tsx --test tests/**/*.test.ts"
+  },
   "dependencies": {
     "@solana/web3.js": "^1.98.0",
     "@gsd/types": "workspace:*"
