@@ -1,11 +1,19 @@
+pub mod create_round;
 pub mod init_contribution_tree;
+pub mod init_governance_config;
 pub mod record_contribution;
 pub mod register;
+pub mod submit_idea;
+pub mod transition_round;
 pub mod update_hash;
 pub mod update_score;
 
+pub use create_round::*;
 pub use init_contribution_tree::*;
+pub use init_governance_config::*;
 pub use record_contribution::*;
 pub use register::*;
+pub use submit_idea::*;
+pub use transition_round::*;
 pub use update_hash::*;
 pub use update_score::*;

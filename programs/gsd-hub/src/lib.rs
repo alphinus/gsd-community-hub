@@ -6,6 +6,7 @@ pub mod instructions;
 pub mod state;
 
 use instructions::*;
+use state::QuorumType;
 
 declare_id!("Gn3kafdEiBZ51T5ewMTtXLUDYzECk87kPwxDAjspqYhw");
 
@@ -67,5 +68,39 @@ pub mod gsd_hub {
             contribution_score,
             score_version,
         )
+    }
+
+    pub fn init_governance_config(
+        ctx: Context<InitGovernanceConfig>,
+        deposit_timelock: i64,
+        execution_timelock: i64,
+    ) -> Result<()> {
+        instructions::init_governance_config::handler(ctx, deposit_timelock, execution_timelock)
+    }
+
+    pub fn create_round(
+        ctx: Context<CreateRound>,
+        submission_start: i64,
+        submission_end: i64,
+        voting_end: i64,
+        quorum_type: QuorumType,
+        content_hash: [u8; 32],
+    ) -> Result<()> {
+        instructions::create_round::handler(
+            ctx,
+            submission_start,
+            submission_end,
+            voting_end,
+            quorum_type,
+            content_hash,
+        )
+    }
+
+    pub fn submit_idea(ctx: Context<SubmitIdea>, content_hash: [u8; 32]) -> Result<()> {
+        instructions::submit_idea::handler(ctx, content_hash)
+    }
+
+    pub fn transition_round(ctx: Context<TransitionRound>) -> Result<()> {
+        instructions::transition_round::handler(ctx)
     }
 }
