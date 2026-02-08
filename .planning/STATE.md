@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 3 complete. Next: Phase 4 Revenue Mechanics (requires planning).
+**Current focus:** Phase 4 planned. Next: Execute Phase 4 Revenue Mechanics (5 plans in 5 waves).
 
 ## Current Position
 
-Phase: 3 of 6 (Governance and Idea Rounds) -- COMPLETE
-Plan: 7 of 7 in current phase
-Status: Complete
-Last activity: 2026-02-08 -- Completed all 7 plans in Phase 3 (governance state, types, instructions, voting, indexer, UI, treasury)
+Phase: 4 of 6 (Revenue Mechanics) -- PLANNED
+Plan: 0 of 5 in current phase
+Status: Planning complete, ready for execution
+Last activity: 2026-02-08 -- Phase 4 planned (5 plans, 5 waves, research + verification passed)
 
-Progress: [████████████████] 100% (16/16 estimated total plans for phases 1-3)
+Progress: [████████████████░░░░] 76% (16/21 estimated total plans for phases 1-4)
 
 ## Performance Metrics
 
