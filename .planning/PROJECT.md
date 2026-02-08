@@ -85,5 +85,19 @@ Every contributor's work is tracked on-chain and rewarded proportionally — if 
 | 60/20/10/10 revenue split | 60% devs, 20% treasury, 10% buy-and-burn, 10% maintenance | — Pending |
 | Open source from day one | Trust rebuilding requires full transparency | — Pending |
 
+## Future Vision: GSD as Protocol
+
+Captured from Rettungsplan v3.0 (2026-02-08) for future roadmap consideration. Does not affect current milestone scope.
+
+**Core idea:** Evolve GSD from a single tool to an open, client-agnostic protocol. Define structured schemas (`.gsd/` directory: `project.json`, `requirements.json`, `roadmap.json`, `plan.json`, `state.json`) so that any IDE/CLI (Claude Code, Cursor, OpenCode, Gemini CLI) can implement GSD workflows. The protocol standardizes how AI-assisted build flows are structured, making GSD the common language across dev environments.
+
+**Related concepts:**
+- Deterministic Mode: fixed LLM settings for reproducible team outputs
+- Build League: continuous seasonal challenges replacing one-off hackathons (weekly micro-challenges, monthly majors, USDT primary rewards + GSD vesting bonus)
+- awesome-gsd: curated extension registry as immediate-value first step before full showcase platform
+- Anti-Rug Standard: exportable checklist/badge for transparent token governance that other projects can adopt
+
+**When to revisit:** After Phase 4 (revenue mechanics proven), evaluate protocol extraction as Phase 7+.
+
 ---
-*Last updated: 2026-02-08 after initialization*
+*Last updated: 2026-02-08 after Rettungsplan v3.0 review*

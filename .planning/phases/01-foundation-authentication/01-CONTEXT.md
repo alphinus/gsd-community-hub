@@ -76,7 +76,7 @@ KOLs coordinated dumps based on narrative, not fundamentals. The same KOLs flip 
 
 ### Multisig & Security
 - **Signer composition:** 3 core team + 2 trusted community members — signals shared ownership from day one
-- **Transparency:** Claude's Discretion — evaluate a dedicated security/transparency page showing multisig details (aligns with "proof visible")
+- **Transparency:** Claude's Discretion — evaluate a dedicated security/transparency page showing multisig details (aligns with "proof visible"). Consider framing as an "Anti-Rug Standard" — a reusable checklist that other Solana projects could adopt. Position $GSD as the reference example for transparent token governance. Include: mint authority status, freeze/metadata authority policies, all token parameters documented.
 - **Network:** Claude's Discretion — evaluate devnet-first vs mainnet approach for security-first phase
 - **Public changelog:** YES — every program upgrade logged with what changed, who signed, and on-chain tx. Full transparency for skeptics. Non-negotiable trust signal.
 
