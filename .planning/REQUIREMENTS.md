@@ -1,7 +1,7 @@
 # Requirements: GSD Community Hub
 
 **Defined:** 2026-02-08
-**Core Value:** Every contributor's work is tracked on-chain and rewarded proportionally — if the software succeeds economically, participants earn their fair share based on verified contributions.
+**Core Value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
 
 ## v1 Requirements
 
@@ -74,14 +74,14 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ## v2 Requirements
 
-Deferred to future release. Tracked but not in current roadmap.
+Deferred to future release. Mapped to Phases 5-6 in comprehensive roadmap.
 
 ### Advanced Governance
 
 - **ADVG-01**: Sybil resistance via Human Passport or equivalent identity verification
 - **ADVG-02**: Quadratic voting (sqrt(tokens) = vote weight) with sybil-resistant plugin
-- **ADVG-03**: Vote delegation — inactive holders can delegate to active contributors
-- **ADVG-04**: Reputation decay — old contributions count less over time
+- **ADVG-03**: Vote delegation -- inactive holders can delegate to active contributors
+- **ADVG-04**: Reputation decay -- old contributions count less over time
 - **ADVG-05**: Enhanced governance analytics and participation tracking
 
 ### AI Integration
@@ -106,21 +106,23 @@ Explicitly excluded. Documented to prevent scope creep.
 |---------|--------|
 | Staking for yield/APY | Unsustainable tokenomics, regulatory risk. Earning comes from contribution, not passive holding. |
 | Token-gated exclusive chat | Creates pay-to-play dynamics, fragments community. Open community with anti-spam thresholds only. |
-| Anonymous voting | Contradicts transparency mandate. Community has rug fear — transparent voting IS the trust mechanism. |
+| Anonymous voting | Contradicts transparency mandate. Community has rug fear -- transparent voting IS the trust mechanism. |
 | Built-in DEX/token swap | Jupiter, Raydium, Orca already exist. Building DEX invites regulatory scrutiny and security liability. |
 | Airdrop mechanics | Attracts mercenary capital, not contributors. Post-selloff token airdrops look desperate. |
-| Separate governance token | Fragments ecosystem. $GSD IS the governance token — one token, multiple utilities. |
+| Separate governance token | Fragments ecosystem. $GSD IS the governance token -- one token, multiple utilities. |
 | Real-time collaborative editing | Enormous complexity, solved by existing tools (Notion, HackMD). |
 | NFT rewards/badges | Distraction from revenue sharing. Contribution history IS the badge. |
 | Cross-chain governance | $GSD is Solana-only. Cross-chain bridges are security risks. |
 | Custom L1/L2 blockchain | Too complex for v1. Prove utility on Solana first. |
 | Mobile native app | Web-first, responsive design sufficient. |
 | Fiat on/off ramps | External wallets handle this. |
-| Automatic proposal execution without timelock | Dangerous — malicious proposals can drain treasury before review. |
+| Automatic proposal execution without timelock | Dangerous -- malicious proposals can drain treasury before review. |
 
 ## Traceability
 
 Which phases cover which requirements. Updated during roadmap creation.
+
+### v1 Requirements (Phases 1-4)
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
@@ -169,11 +171,38 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFR-04 | Phase 2 | Pending |
 | INFR-05 | Phase 2 | Pending |
 
+### v2 Requirements (Phases 5-6)
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| AIXT-01 | Phase 5 | Pending |
+| AIXT-02 | Phase 5 | Pending |
+| AIXT-03 | Phase 5 | Pending |
+| AIXT-04 | Phase 5 | Pending |
+| ADVG-01 | Phase 6 | Pending |
+| ADVG-02 | Phase 6 | Pending |
+| ADVG-03 | Phase 6 | Pending |
+| ADVG-04 | Phase 6 | Pending |
+| ADVG-05 | Phase 6 | Pending |
+
+### v2 Requirements (Deferred beyond Phase 6)
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| PLAT-01 | Deferred | Pending |
+| PLAT-02 | Deferred | Pending |
+| PLAT-03 | Deferred | Pending |
+| PLAT-04 | Deferred | Pending |
+
 **Coverage:**
-- v1 requirements: 43 total
-- Mapped to phases: 43
-- Unmapped: 0 ✓
+- v1 requirements: 44 total
+- Mapped to phases: 44
+- Unmapped: 0
+
+- v2 requirements: 13 total
+- Mapped to phases 5-6: 9
+- Deferred (PLAT): 4
 
 ---
 *Requirements defined: 2026-02-08*
-*Last updated: 2026-02-08 after initial definition*
+*Last updated: 2026-02-08 after roadmap creation*
