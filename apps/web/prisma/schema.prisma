@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  walletAddress String   @unique
+  displayName   String?  @db.VarChar(50)
+  bio           String?  @db.VarChar(500)
+  avatarUrl     String?
+  githubUrl     String?
+  twitterUrl    String?
+  websiteUrl    String?
+  profileHash   String?
+  onChainPda    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([walletAddress])
+}
+
+model ProgramUpgrade {
+  id                   String   @id @default(cuid())
+  programId            String
+  version              String
+  description          String
+  signers              String[]
+  transactionSignature String
+  multisigAddress      String
+  createdAt            DateTime @default(now())
+}

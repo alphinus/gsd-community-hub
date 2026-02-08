@@ -8,6 +8,14 @@
     "lint": "turbo run lint",
     "test": "turbo run test"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "prisma",
+      "sharp",
+      "unrs-resolver"
+    ]
+  },
   "devDependencies": {
     "@coral-xyz/anchor": "0.32.1",
     "@solana/web3.js": "^1.98.4",
