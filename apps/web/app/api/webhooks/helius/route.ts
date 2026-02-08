@@ -3,21 +3,22 @@ import {
   processContributionEvent,
   type HeliusEnhancedTransaction,
 } from "@/lib/contributions/indexer";
+import { processGovernanceEvent } from "@/lib/governance/indexer";
 
 /**
  * POST /api/webhooks/helius
  *
- * Receives Helius enhanced transaction webhooks for on-chain contribution events.
+ * Receives Helius enhanced transaction webhooks for on-chain events.
  *
  * Authentication: Validates the Authorization header against HELIUS_WEBHOOK_AUTH.
  * Payload: Array of Helius enhanced transactions.
  *
- * Each transaction is processed for contribution data:
- * - Finds gsd-hub program instructions
- * - Extracts ContributionLeaf from noop inner instructions
- * - Upserts to PostgreSQL with transaction signature idempotency
+ * Each transaction is processed for both contribution and governance data:
+ * - Contribution: Finds gsd-hub program instructions, extracts ContributionLeaf from noop
+ * - Governance: Identifies governance instruction discriminators (create_round, submit_idea, etc.)
  *
- * Duplicate webhook deliveries are silently ignored (no duplicate records).
+ * A transaction matches one processor or the other based on instruction type.
+ * Duplicate webhook deliveries are silently ignored (upsert idempotency).
  */
 export async function POST(request: NextRequest) {
   // Validate webhook authentication
@@ -48,8 +49,9 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Process each transaction
-  let processed = 0;
+  // Process each transaction through both contribution and governance processors
+  let contributionsProcessed = 0;
+  let governanceProcessed = 0;
   const errors: string[] = [];
 
   for (const tx of transactions) {
@@ -58,29 +60,48 @@ export async function POST(request: NextRequest) {
       continue;
     }
 
+    // Try contribution processor
     try {
       const count = await processContributionEvent(tx);
-      processed += count;
+      contributionsProcessed += count;
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Unknown error";
       console.error(
-        `Failed to process transaction ${tx.signature}:`,
+        `Failed to process contribution ${tx.signature}:`,
         message
       );
-      errors.push(`${tx.signature}: ${message}`);
+      errors.push(`contribution:${tx.signature}: ${message}`);
+    }
+
+    // Try governance processor
+    try {
+      const count = await processGovernanceEvent(tx);
+      governanceProcessed += count;
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unknown error";
+      console.error(
+        `Failed to process governance ${tx.signature}:`,
+        message
+      );
+      errors.push(`governance:${tx.signature}: ${message}`);
     }
   }
 
+  const totalProcessed = contributionsProcessed + governanceProcessed;
+
   if (errors.length > 0) {
     console.warn(
-      `Webhook processed ${processed} contributions with ${errors.length} errors`
+      `Webhook processed ${totalProcessed} events (${contributionsProcessed} contributions, ${governanceProcessed} governance) with ${errors.length} errors`
     );
   }
 
   return NextResponse.json({
     received: true,
-    processed,
+    processed: totalProcessed,
+    contributions: contributionsProcessed,
+    governance: governanceProcessed,
     total: transactions.length,
     errors: errors.length > 0 ? errors : undefined,
   });
