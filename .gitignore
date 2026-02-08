@@ -8,6 +8,7 @@ out/
 # Rust / Anchor
 target/
 *.so
+!tests/fixtures/*.so
 
 # Build outputs
 dist/
