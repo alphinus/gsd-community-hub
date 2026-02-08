@@ -88,11 +88,14 @@ Plans:
   2. Each contributor's share is weighted by their on-chain contribution score relative to the total, and contributors can claim their share via on-chain transaction
   3. 10% of every revenue event triggers buy-and-burn: $GSD is purchased on Jupiter and sent to a burn address, with every burn traceable to its originating revenue event
   4. Revenue distribution history is publicly viewable on the treasury dashboard, showing all splits, claims, and burns
-**Plans**: TBD
+**Plans:** 5 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [ ] 04-01-PLAN.md -- Revenue state accounts, error codes, TypeScript types, PDA helpers, and Prisma models
+- [ ] 04-02-PLAN.md -- On-chain revenue instructions (init_config, record_event, claim_share, execute_burn) with bankrun tests
+- [ ] 04-03-PLAN.md -- Revenue webhook indexer and API endpoints (events, claims, burns, summary)
+- [ ] 04-04-PLAN.md -- Server-side Jupiter buy-and-burn distributor and distribution API endpoint
+- [ ] 04-05-PLAN.md -- Revenue claim UI components and treasury dashboard integration
 
 ### Phase 5: GSD Framework Integration
 **Goal**: AI-powered task verification automates contribution scoring that was previously manual, making the platform's differentiating feature -- framework-integrated development -- real (v2)
@@ -133,6 +136,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 1. Foundation & Authentication | 4/4 | Complete | 2026-02-08 |
 | 2. Contribution Tracking | 5/5 | Complete | 2026-02-08 |
 | 3. Governance & Idea Rounds | 7/7 | Complete | 2026-02-08 |
-| 4. Revenue Mechanics | 0/TBD | Not started | - |
+| 4. Revenue Mechanics | 0/5 | Planned | - |
 | 5. GSD Framework Integration | 0/TBD | Not started | - |
 | 6. Advanced Governance | 0/TBD | Not started | - |
