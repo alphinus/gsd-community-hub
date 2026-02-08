@@ -5,34 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 2 Contribution Tracking -- on-chain instructions and off-chain indexer complete, Plan 05 remaining
+**Current focus:** Phase 2 Contribution Tracking complete. Ready for Phase 3 (Governance).
 
 ## Current Position
 
-Phase: 2 of 6 (Contribution Tracking)
-Plan: 4 of 5 in current phase
-Status: In progress
-Last activity: 2026-02-08 -- Completed 02-03-PLAN.md (contribution instructions with bankrun tests)
+Phase: 2 of 6 (Contribution Tracking) -- COMPLETE
+Plan: 5 of 5 in current phase (all complete)
+Status: Phase complete
+Last activity: 2026-02-08 -- Completed 02-05-PLAN.md (contribution display and API endpoints)
 
-Progress: [████████░░] 50% (8/16 estimated total plans)
+Progress: [█████████░] 56% (9/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 11 min
-- Total execution time: 1.5 hours
+- Total execution time: 1.6 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
-| 02 | 4 | 22 min | 5.5 min |
+| 02 | 5 | 31 min | 6.2 min |
 
 **Recent Trend:**
-- Last 5 plans: 9m, 6m, 6m, 3m, 4m
-- Trend: accelerating
+- Last 5 plans: 6m, 6m, 3m, 4m, 9m
+- Trend: steady (02-05 slightly longer due to broken dependency + Turbopack fix)
 
 *Updated after each plan completion*
 
@@ -75,6 +75,9 @@ Recent decisions affecting current work:
 - [02-04]: Helius webhook auth uses Authorization header comparison (not query parameter)
 - [02-04]: leafIndex defaults to 0 in contribution record (tree indexer updates later if needed)
 - [02-04]: One contribution per transaction assumption simplifies processing
+- [02-05]: Merkle tree helpers implemented locally using @solana/web3.js (spl-account-compression v0.4.1 has broken dist paths)
+- [02-05]: BigInt score serialized as string for server/client boundary (JSON cannot serialize BigInt)
+- [02-05]: Removed .js extensions from @gsd/utils and @gsd/types barrel exports (Turbopack module resolution)
 
 ### Pending Todos
 
@@ -83,6 +86,7 @@ Recent decisions affecting current work:
 - Set NEXT_PUBLIC_MULTISIG_ADDRESS after multisig creation
 - Devnet SOL needed in wallet for on-chain PDA registration
 - Set up Helius account and configure webhook (see 02-USER-SETUP.md)
+- Pre-existing siws.ts type error (Phase 01-02) causes `next build` TS check to fail -- needs fix before production
 
 ### Blockers/Concerns
 
@@ -90,9 +94,10 @@ Recent decisions affecting current work:
 - [Research]: SolSplits long-term stability uncertain -- evaluate custom split program as alternative in Phase 4
 - [01-01]: anchor-bankrun@0.5.0 peer dependency warning with @coral-xyz/anchor@0.32.1 (works, but may need update)
 - [01-02]: Auth.js v5 is beta (5.0.0-beta.30) -- monitor for stable release
+- [01-02]: siws.ts SolanaSignInOutput type mismatch with @solana/wallet-standard-features -- causes strict TS build failure
 
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 2 in progress. Plans 01-04 complete (state structs, CPI helpers, shared utils, on-chain instructions, off-chain indexer). Plan 05 remaining.
-Resume file: .planning/phases/02-contribution-tracking/02-03-SUMMARY.md
+Stopped at: Phase 2 complete. All 5 plans executed. Ready for Phase 3 planning.
+Resume file: .planning/phases/02-contribution-tracking/02-05-SUMMARY.md
