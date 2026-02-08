@@ -29,10 +29,12 @@
     "bs58": "^6.0.0",
     "buffer": "^6.0.0",
     "crypto-browserify": "^3.12.0",
+    "lucide-react": "^0.563.0",
     "next": "^16.0.0",
     "next-auth": "5.0.0-beta.30",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sonner": "^2.0.7",
     "stream-browserify": "^3.0.0",
     "tweetnacl": "^1.0.0",
     "zustand": "^5.0.0"

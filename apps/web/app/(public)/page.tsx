@@ -23,7 +23,7 @@ export default function HomePage() {
       {/* CTA */}
       <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
         <Link
-          href="#connect"
+          href="/profile/edit"
           className="rounded-lg bg-[var(--color-gsd-accent)] px-8 py-3 text-lg font-semibold text-[var(--color-gsd-bg)] transition-colors hover:bg-[var(--color-gsd-accent-hover)]"
         >
           Join the Movement

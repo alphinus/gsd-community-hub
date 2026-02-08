@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 import { AppProviders } from "./providers";
 import { Header } from "@/components/layout/header";
 import "./globals.css";
@@ -28,6 +29,17 @@ export default function RootLayout({
         <AppProviders>
           <Header />
           <main className="min-h-screen">{children}</main>
+          <Toaster
+            theme="dark"
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "var(--color-gsd-surface)",
+                border: "1px solid var(--color-gsd-border)",
+                color: "var(--color-gsd-text)",
+              },
+            }}
+          />
         </AppProviders>
       </body>
     </html>
