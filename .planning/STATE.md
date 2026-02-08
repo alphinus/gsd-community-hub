@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 4 of 6 (Revenue Mechanics) -- IN PROGRESS
-Plan: 1 of 5 in current phase
+Plan: 2 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 04-01-PLAN.md (revenue state foundation)
+Last activity: 2026-02-08 -- Completed 04-02-PLAN.md (revenue instructions + tests)
 
-Progress: [█████████████████░░░] 81% (17/21 estimated total plans for phases 1-4)
+Progress: [██████████████████░░] 86% (18/21 estimated total plans for phases 1-4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
-- Average duration: 8.1 min
-- Total execution time: 2.3 hours
+- Total plans completed: 18
+- Average duration: 8.0 min
+- Total execution time: 2.4 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [█████████████████░░░] 81% (17
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
-| 04 | 1 | 3 min | 3 min |
+| 04 | 2 | 9 min | 4.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 4m, 6m, 4m, 4m, 3m
-- Trend: State/types plans very fast (~3m); UI/API plans ~4-6m; instruction + test plans ~6-8m
+- Last 5 plans: 6m, 4m, 4m, 3m, 6m
+- Trend: State/types plans very fast (~3m); instruction + test plans ~6m; UI/API plans ~4-6m
 
 *Updated after each plan completion*
 
@@ -101,6 +101,9 @@ Recent decisions affecting current work:
 - [04-01]: RevenueVault uses SystemAccount PDA pattern (no Anchor struct) -- SOL held directly, USDC via ATA
 - [04-01]: RevenueError kept as separate enum from GsdHubError/GovernanceError for domain separation
 - [04-01]: PendingRevenue model stores detected treasury inflows for admin review before distribution
+- [04-02]: Anchor PDA seeds use .as_ref() on all elements for consistent slice types in seed derivation
+- [04-02]: bankrun getSolBalance uses getAccountInfo().lamports (getBalance not available in bankrun)
+- [04-02]: Vault bump stored on RevenueEvent.vault_bump for claim instruction PDA signer re-derivation
 
 ### Pending Todos
 
@@ -125,5 +128,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 4, plan 1 complete. Next: 04-02 (revenue instructions).
-Resume file: .planning/phases/04-revenue-mechanics/04-01-SUMMARY.md
+Stopped at: Phase 4, plan 2 complete. Next: 04-03 (detection and distribution wiring).
+Resume file: .planning/phases/04-revenue-mechanics/04-02-SUMMARY.md
