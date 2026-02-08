@@ -20,3 +20,13 @@ export {
   VOTE_DEPOSIT_SEED,
   VOTE_RECORD_SEED,
 } from "./governance-pda";
+export {
+  getRevenueConfigPDA,
+  getRevenueEventPDA,
+  getRevenueClaimPDA,
+  getRevenueVaultPDA,
+  REVENUE_CONFIG_SEED,
+  REVENUE_EVENT_SEED,
+  REVENUE_CLAIM_SEED,
+  REVENUE_VAULT_SEED,
+} from "./revenue-pda";

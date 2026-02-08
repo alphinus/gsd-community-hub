@@ -130,3 +130,60 @@ model VoteDeposit {
 
   @@index([walletAddress])
 }
+
+model RevenueEvent {
+  id                      String   @id @default(cuid())
+  eventIndex              Int      @unique
+  onChainAddress          String   @unique
+  token                   String   // "sol" or "usdc"
+  totalAmount             BigInt
+  developerPool           BigInt
+  treasuryReserve         BigInt
+  burnAmount              BigInt
+  maintenanceAmount       BigInt
+  status                  String   @default("recorded")
+  originSignature         String   @unique
+  totalContributionScore  BigInt
+  claimedAmount           BigInt   @default(0)
+  burnSignature           String?
+  gsdBurned               BigInt   @default(0)
+  recordedAt              DateTime
+  createdAt               DateTime @default(now())
+
+  claims                  RevenueClaim[]
+
+  @@index([status])
+  @@index([recordedAt])
+}
+
+model RevenueClaim {
+  id                   String   @id @default(cuid())
+  revenueEventId       String
+  claimantWallet       String
+  contributionScore    BigInt
+  totalScore           BigInt
+  amount               BigInt
+  transactionSignature String   @unique
+  claimedAt            DateTime
+
+  revenueEvent         RevenueEvent @relation(fields: [revenueEventId], references: [id])
+
+  @@unique([revenueEventId, claimantWallet])
+  @@index([claimantWallet])
+}
+
+model PendingRevenue {
+  id                   String    @id @default(cuid())
+  transactionSignature String    @unique
+  token                String    // "sol" or "usdc"
+  amount               BigInt
+  fromAddress          String?
+  detectedAt           DateTime  @default(now())
+  status               String    @default("pending") // "pending", "approved", "rejected", "processed"
+  processedEventId     String?   // links to RevenueEvent.id once processed
+  reviewedAt           DateTime?
+  reviewNote           String?
+
+  @@index([status])
+  @@index([detectedAt])
+}

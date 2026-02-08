@@ -28,3 +28,12 @@ export type {
   TreasuryBalance,
   TreasuryTransaction,
 } from "./treasury";
+
+export type {
+  RevenueStatus,
+  RevenueToken,
+  RevenueEventInfo,
+  RevenueClaimInfo,
+  RevenueConfigInfo,
+  RevenueSummary,
+} from "./revenue";
