@@ -6,14 +6,7 @@ import {
 } from "@/lib/config/transparency-config";
 import { TreasuryDashboard } from "@/components/treasury/TreasuryDashboard";
 import { TransactionList } from "@/components/treasury/TransactionList";
-
-// ---------------------------------------------------------------------------
-// Treasury address (matches client.ts)
-// ---------------------------------------------------------------------------
-
-const treasuryAddress =
-  process.env.NEXT_PUBLIC_TREASURY_ADDRESS ||
-  "PLACEHOLDER_TREASURY_ADDRESS_11111111111111";
+import { TREASURY_ADDRESS_STR } from "@/lib/treasury/client";
 
 // ---------------------------------------------------------------------------
 // SEO metadata
@@ -63,7 +56,7 @@ export default function TreasuryPage() {
 
         <div className="flex flex-wrap gap-3">
           <a
-            href={explorerUrl(treasuryAddress)}
+            href={explorerUrl(TREASURY_ADDRESS_STR)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-2 text-sm text-[var(--color-gsd-accent)] transition-colors hover:border-[var(--color-gsd-accent)]/50"

@@ -11,16 +11,19 @@ import { Connection, PublicKey } from "@solana/web3.js";
 // Addresses
 // ---------------------------------------------------------------------------
 
-export const TREASURY_ADDRESS = new PublicKey(
+/** Treasury address string (before PublicKey conversion). */
+export const TREASURY_ADDRESS_STR =
   process.env.NEXT_PUBLIC_TREASURY_ADDRESS ||
-    // Fallback: Squads multisig vault PDA placeholder (update after setup)
-    "PLACEHOLDER_TREASURY_ADDRESS_11111111111111"
-);
+  // Fallback: devnet placeholder -- update with real multisig vault PDA after setup
+  "11111111111111111111111111111111";
 
-export const GSD_MINT_ADDRESS = new PublicKey(
+/** $GSD mint address string. */
+export const GSD_MINT_STR =
   process.env.NEXT_PUBLIC_GSD_MINT ||
-    "GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1"
-);
+  "GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1";
+
+export const TREASURY_ADDRESS = new PublicKey(TREASURY_ADDRESS_STR);
+export const GSD_MINT_ADDRESS = new PublicKey(GSD_MINT_STR);
 
 // ---------------------------------------------------------------------------
 // Types
