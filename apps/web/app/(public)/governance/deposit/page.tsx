@@ -90,7 +90,7 @@ export default function DepositPage() {
       {/* Back link */}
       <div className="mt-6 text-center">
         <Link
-          href="/governance"
+          href="/governance/dashboard"
           className="text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
         >
           Back to Governance Dashboard
