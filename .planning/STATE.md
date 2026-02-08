@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 4 in progress. Executing Revenue Mechanics (5 plans in 5 waves).
+**Current focus:** Phase 4 complete. Revenue Mechanics fully implemented (5/5 plans). Ready for Phase 5 planning.
 
 ## Current Position
 
-Phase: 4 of 6 (Revenue Mechanics) -- IN PROGRESS
-Plan: 4 of 5 in current phase
-Status: In progress
-Last activity: 2026-02-08 -- Completed 04-04-PLAN.md (distribution pipeline and admin API)
+Phase: 4 of 6 (Revenue Mechanics) -- COMPLETE
+Plan: 5 of 5 in current phase
+Status: Phase complete
+Last activity: 2026-02-08 -- Completed 04-05-PLAN.md (treasury dashboard revenue UI)
 
-Progress: [████████████████████░] 95% (20/21 estimated total plans for phases 1-4)
+Progress: [█████████████████████] 100% (21/21 total plans for phases 1-4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
-- Average duration: 7.6 min
-- Total execution time: 2.5 hours
+- Total plans completed: 21
+- Average duration: 7.5 min
+- Total execution time: 2.6 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [████████████████████░] 95% 
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
-| 04 | 4 | 16 min | 4.0 min |
+| 04 | 5 | 24 min | 4.8 min |
 
 **Recent Trend:**
-- Last 5 plans: 4m, 3m, 6m, 4m, 3m
-- Trend: State/types plans very fast (~3m); instruction + test plans ~6m; indexer/API/distribution plans ~3-4m
+- Last 5 plans: 3m, 6m, 4m, 3m, 8m
+- Trend: UI plans with human-verify checkpoints take longer (~8m); pure API/indexer plans fastest (~3-4m)
 
 *Updated after each plan completion*
 
@@ -112,6 +112,9 @@ Recent decisions affecting current work:
 - [04-04]: Buy-and-burn failure returns null instead of throwing, allowing distribution to complete without burn
 - [04-04]: Inline base58 decode for burn authority keypair loading (project convention from 02-04)
 - [04-04]: Jupiter swap confirmation failure still returns signature (swap may land on-chain despite timeout)
+- [04-05]: TreasuryTabs client component wraps tab navigation while treasury page remains Server Component for SEO
+- [04-05]: Claim panel shows claim history only (not 'claim now' button) -- v1 server-side distribution model
+- [04-05]: BigInt string amounts formatted client-side with token-specific decimal divisors
 
 ### Pending Todos
 
@@ -136,5 +139,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 4, plan 4 complete. Next: 04-05 (treasury dashboard UI).
-Resume file: .planning/phases/04-revenue-mechanics/04-04-SUMMARY.md
+Stopped at: Phase 4 complete (all 5 plans). Ready for Phase 5 planning.
+Resume file: .planning/phases/04-revenue-mechanics/04-05-SUMMARY.md
