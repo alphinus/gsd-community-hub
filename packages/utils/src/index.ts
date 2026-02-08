@@ -6,3 +6,5 @@ export {
   hexToBytes,
   bytesToHex,
 } from "./contribution-hash.js";
+export { calculateContributionScore, bigintSqrt } from "./score.js";
+export type { ScoreInput } from "./score.js";
