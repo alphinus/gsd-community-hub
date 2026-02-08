@@ -77,3 +77,39 @@ pub enum GovernanceError {
     #[msg("Insufficient deposit amount")]
     InsufficientDeposit,
 }
+
+#[error_code]
+pub enum RevenueError {
+    #[msg("Split ratios must sum to 10000 basis points")]
+    InvalidSplitRatios,
+
+    #[msg("Revenue amount below minimum threshold")]
+    BelowMinimumThreshold,
+
+    #[msg("Revenue event not in Recorded status")]
+    EventNotRecorded,
+
+    #[msg("Revenue event already completed")]
+    EventAlreadyCompleted,
+
+    #[msg("Contributor has no contribution score")]
+    NoContributionScore,
+
+    #[msg("Revenue share already claimed for this event")]
+    AlreadyClaimed,
+
+    #[msg("Claim calculation overflow")]
+    ClaimOverflow,
+
+    #[msg("Total contribution score is zero")]
+    DivisionByZero,
+
+    #[msg("Escrow balance insufficient for claim")]
+    InsufficientEscrowBalance,
+
+    #[msg("Not authorized to execute burn")]
+    UnauthorizedBurnAuthority,
+
+    #[msg("Burn already executed for this event")]
+    BurnAlreadyExecuted,
+}
