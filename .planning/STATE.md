@@ -5,33 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 2 Contribution Tracking -- shared utils complete, building API and indexer
+**Current focus:** Phase 2 Contribution Tracking -- off-chain indexer complete, API endpoints next
 
 ## Current Position
 
 Phase: 2 of 6 (Contribution Tracking)
-Plan: 2 of 5 in current phase
+Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 02-02-PLAN.md (shared utility packages with TDD)
+Last activity: 2026-02-08 -- Completed 02-04-PLAN.md (off-chain indexer and Helius webhook)
 
-Progress: [██████░░░░] 37% (6/16 estimated total plans)
+Progress: [████████░░] 50% (8/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 13 min
-- Total execution time: 1.4 hours
+- Total plans completed: 8
+- Average duration: 11 min
+- Total execution time: 1.5 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
-| 02 | 2 | 12 min | 6 min |
+| 02 | 4 | 22 min | 5.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 13m, 8m, 9m, 6m, 6m
+- Last 5 plans: 9m, 6m, 6m, 3m, 4m
 - Trend: accelerating
 
 *Updated after each plan completion*
@@ -68,6 +68,10 @@ Recent decisions affecting current work:
 - [02-02]: Score formula uses sqrt diminishing returns for both task count and time active
 - [02-02]: Node.js built-in test runner (node:test) for @gsd/utils tests -- zero extra dependencies
 - [02-02]: DataView with explicit little-endian byte writes for Borsh-compatible serialization
+- [02-04]: Inline base58 encode/decode in indexer to avoid adding bs58 dependency to webhook handler
+- [02-04]: Helius webhook auth uses Authorization header comparison (not query parameter)
+- [02-04]: leafIndex defaults to 0 in contribution record (tree indexer updates later if needed)
+- [02-04]: One contribution per transaction assumption simplifies processing
 
 ### Pending Todos
 
@@ -75,6 +79,7 @@ Recent decisions affecting current work:
 - Run `scripts/setup-multisig.ts` with member public keys to create devnet multisig
 - Set NEXT_PUBLIC_MULTISIG_ADDRESS after multisig creation
 - Devnet SOL needed in wallet for on-chain PDA registration
+- Set up Helius account and configure webhook (see 02-USER-SETUP.md)
 
 ### Blockers/Concerns
 
@@ -86,5 +91,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 2 in progress. Plans 01-02 complete (state structs, CPI helpers, shared utils). Plans 03-05 remaining.
-Resume file: .planning/phases/02-contribution-tracking/02-02-SUMMARY.md
+Stopped at: Phase 2 in progress. Plans 01-04 complete (state structs, CPI helpers, shared utils, on-chain instructions, off-chain indexer). Plan 05 remaining.
+Resume file: .planning/phases/02-contribution-tracking/02-04-SUMMARY.md
