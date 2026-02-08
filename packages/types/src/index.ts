@@ -9,3 +9,22 @@ export type {
   ContributionRecord,
   ContributionScore,
 } from "./contribution";
+
+export type {
+  RoundStatus,
+  QuorumType,
+  IdeaStatus,
+  VoteChoice,
+  IdeaRound,
+  Idea,
+  VoteRecord,
+  VoteDepositInfo,
+  GovernanceConfig,
+  CreateIdeaInput,
+  CreateRoundInput,
+} from "./governance";
+
+export type {
+  TreasuryBalance,
+  TreasuryTransaction,
+} from "./treasury";

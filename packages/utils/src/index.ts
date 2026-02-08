@@ -8,3 +8,15 @@ export {
 } from "./contribution-hash";
 export { calculateContributionScore, bigintSqrt } from "./score";
 export type { ScoreInput } from "./score";
+export {
+  getGovernanceConfigPDA,
+  getIdeaRoundPDA,
+  getIdeaPDA,
+  getVoteDepositPDA,
+  getVoteRecordPDA,
+  GOVERNANCE_CONFIG_SEED,
+  IDEA_ROUND_SEED,
+  IDEA_SEED,
+  VOTE_DEPOSIT_SEED,
+  VOTE_RECORD_SEED,
+} from "./governance-pda";
