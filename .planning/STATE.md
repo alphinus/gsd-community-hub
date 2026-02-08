@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 3 Governance and Idea Rounds in progress.
+**Current focus:** Phase 3 complete. Next: Phase 4 Revenue Mechanics (requires planning).
 
 ## Current Position
 
-Phase: 3 of 6 (Governance and Idea Rounds)
-Plan: 5 of 7 in current phase
-Status: In progress
-Last activity: 2026-02-08 -- Completed 03-05-PLAN.md (governance indexer and API endpoints)
+Phase: 3 of 6 (Governance and Idea Rounds) -- COMPLETE
+Plan: 7 of 7 in current phase
+Status: Complete
+Last activity: 2026-02-08 -- Completed all 7 plans in Phase 3 (governance state, types, instructions, voting, indexer, UI, treasury)
 
-Progress: [██████████████░░] 88% (14/16 estimated total plans)
+Progress: [████████████████] 100% (16/16 estimated total plans for phases 1-3)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 14
-- Average duration: 9 min
-- Total execution time: 2.0 hours
+- Total plans completed: 16
+- Average duration: 8.4 min
+- Total execution time: 2.2 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [██████████████░░] 88% (14/16 estimate
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
-| 03 | 5 | 24 min | 4.8 min |
+| 03 | 7 | 34 min | 4.9 min |
 
 **Recent Trend:**
-- Last 5 plans: 4m, 2m, 8m, 6m, 4m
-- Trend: API/indexer plans fast; instruction + test plans take longer
+- Last 5 plans: 8m, 6m, 4m, 6m, 4m
+- Trend: UI/API plans fast (~4-6m); instruction + test plans ~6-8m
 
 *Updated after each plan completion*
 
@@ -92,6 +92,11 @@ Recent decisions affecting current work:
 - [03-05]: Dual-processor webhook routes transactions through both contribution and governance processors
 - [03-05]: Off-chain content submitted via POST endpoints; indexer creates stub records from on-chain events
 - [03-05]: Reverse discriminator lookup map for O(1) instruction identification in governance indexer
+- [03-06]: Route group conflict resolved by moving auth governance pages to (public) group with client-side wallet checks
+- [03-06]: Deposit page auto-triggers wallet connect modal on mount
+- [03-07]: Treasury address falls back to System Program address when NEXT_PUBLIC_TREASURY_ADDRESS not set
+- [03-07]: SPL Token balance parsed via raw Buffer.readBigUInt64LE(64) instead of adding spl-token runtime dep
+- [03-07]: HELIUS_API_KEY optional for treasury -- balance-only mode with warning when key missing
 
 ### Pending Todos
 
@@ -101,6 +106,9 @@ Recent decisions affecting current work:
 - Devnet SOL needed in wallet for on-chain PDA registration
 - Set up Helius account and configure webhook (see 02-USER-SETUP.md)
 - Pre-existing siws.ts type error (Phase 01-02) causes `next build` TS check to fail -- needs fix before production
+- Set NEXT_PUBLIC_TREASURY_ADDRESS to real multisig vault PDA
+- Set NEXT_PUBLIC_GSD_MINT to real $GSD token mint address
+- Set HELIUS_API_KEY for treasury transaction history
 
 ### Blockers/Concerns
 
@@ -113,5 +121,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 3 plan 5 complete. Governance indexer and 5 API endpoints done. Continue with 03-06 (governance UI pages).
-Resume file: .planning/phases/03-governance-idea-rounds/03-05-SUMMARY.md
+Stopped at: Phase 3 complete (all 7 plans). All governance + treasury UI approved by user. Next: plan Phase 4 (Revenue Mechanics).
+Resume file: .planning/phases/03-governance-idea-rounds/03-07-SUMMARY.md
