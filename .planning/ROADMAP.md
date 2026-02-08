@@ -31,12 +31,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can view any developer's public profile page showing their wallet address and profile information
   4. All program upgrade authority is controlled by Squads multisig (3-of-5), verifiable on-chain -- no single wallet controls deployments
   5. Platform source code is publicly available on GitHub and the platform is fully usable without owning $GSD tokens
-**Plans**: TBD
+**Plans:** 4 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
-- [ ] 01-03: TBD
+- [ ] 01-01-PLAN.md -- Monorepo scaffold + Anchor program with developer profile PDA
+- [ ] 01-02-PLAN.md -- Next.js web app with wallet connection, SIWS auth, and database
+- [ ] 01-03-PLAN.md -- Developer profiles (create/edit/view) and public directory
+- [ ] 01-04-PLAN.md -- Transparency page with multisig details and public changelog
 
 ### Phase 2: Contribution Tracking
 **Goal**: Every developer's work is recorded on-chain with verifiable history and transparent scoring, forming the foundation for fair revenue distribution
@@ -122,7 +123,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 1. Foundation & Authentication | 0/TBD | Not started | - |
+| 1. Foundation & Authentication | 0/4 | Planning complete | - |
 | 2. Contribution Tracking | 0/TBD | Not started | - |
 | 3. Governance & Idea Rounds | 0/TBD | Not started | - |
 | 4. Revenue Mechanics | 0/TBD | Not started | - |
