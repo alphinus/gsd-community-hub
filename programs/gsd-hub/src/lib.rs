@@ -6,7 +6,7 @@ pub mod instructions;
 pub mod state;
 
 use instructions::*;
-use state::{QuorumType, VoteChoice};
+use state::{QuorumType, RevenueToken, VoteChoice};
 
 declare_id!("Gn3kafdEiBZ51T5ewMTtXLUDYzECk87kPwxDAjspqYhw");
 
@@ -122,5 +122,51 @@ pub mod gsd_hub {
 
     pub fn veto_idea(ctx: Context<VetoIdea>) -> Result<()> {
         instructions::veto_idea::handler(ctx)
+    }
+
+    pub fn init_revenue_config(
+        ctx: Context<InitRevenueConfig>,
+        treasury_address: Pubkey,
+        maintenance_address: Pubkey,
+        gsd_mint: Pubkey,
+        usdc_mint: Pubkey,
+        min_revenue_threshold: u64,
+    ) -> Result<()> {
+        instructions::init_revenue_config::handler(
+            ctx,
+            treasury_address,
+            maintenance_address,
+            gsd_mint,
+            usdc_mint,
+            min_revenue_threshold,
+        )
+    }
+
+    pub fn record_revenue_event(
+        ctx: Context<RecordRevenueEvent>,
+        total_amount: u64,
+        token: RevenueToken,
+        origin_signature: [u8; 64],
+        total_contribution_score: u64,
+    ) -> Result<()> {
+        instructions::record_revenue_event::handler(
+            ctx,
+            total_amount,
+            token,
+            origin_signature,
+            total_contribution_score,
+        )
+    }
+
+    pub fn claim_revenue_share(ctx: Context<ClaimRevenueShare>) -> Result<()> {
+        instructions::claim_revenue_share::handler(ctx)
+    }
+
+    pub fn execute_burn(
+        ctx: Context<ExecuteBurn>,
+        gsd_amount: u64,
+        burn_tx_signature: [u8; 64],
+    ) -> Result<()> {
+        instructions::execute_burn::handler(ctx, gsd_amount, burn_tx_signature)
     }
 }
