@@ -6,7 +6,7 @@ pub mod instructions;
 pub mod state;
 
 use instructions::*;
-use state::QuorumType;
+use state::{QuorumType, VoteChoice};
 
 declare_id!("Gn3kafdEiBZ51T5ewMTtXLUDYzECk87kPwxDAjspqYhw");
 
@@ -102,5 +102,25 @@ pub mod gsd_hub {
 
     pub fn transition_round(ctx: Context<TransitionRound>) -> Result<()> {
         instructions::transition_round::handler(ctx)
+    }
+
+    pub fn deposit_tokens(ctx: Context<DepositTokens>, amount: u64) -> Result<()> {
+        instructions::deposit_tokens::handler(ctx, amount)
+    }
+
+    pub fn withdraw_tokens(ctx: Context<WithdrawTokens>, amount: u64) -> Result<()> {
+        instructions::withdraw_tokens::handler(ctx, amount)
+    }
+
+    pub fn cast_vote(ctx: Context<CastVote>, vote: VoteChoice) -> Result<()> {
+        instructions::cast_vote::handler(ctx, vote)
+    }
+
+    pub fn relinquish_vote(ctx: Context<RelinquishVote>) -> Result<()> {
+        instructions::relinquish_vote::handler(ctx)
+    }
+
+    pub fn veto_idea(ctx: Context<VetoIdea>) -> Result<()> {
+        instructions::veto_idea::handler(ctx)
     }
 }
