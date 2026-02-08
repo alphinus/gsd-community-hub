@@ -5,7 +5,7 @@ import {
   transparencyConfig,
 } from "@/lib/config/transparency-config";
 import { TreasuryDashboard } from "@/components/treasury/TreasuryDashboard";
-import { TransactionList } from "@/components/treasury/TransactionList";
+import { TreasuryTabs } from "@/components/treasury/TreasuryTabs";
 import { TREASURY_ADDRESS_STR } from "@/lib/treasury/client";
 
 // ---------------------------------------------------------------------------
@@ -15,7 +15,7 @@ import { TREASURY_ADDRESS_STR } from "@/lib/treasury/client";
 export const metadata: Metadata = {
   title: "Treasury Dashboard | GSD Community Hub",
   description:
-    "Real-time view of the GSD community treasury. SOL and $GSD balances, inflows, outflows, and transaction history -- all verifiable on-chain.",
+    "Real-time view of the GSD community treasury. SOL and $GSD balances, revenue distribution, burn history, and transaction log -- all verifiable on-chain.",
 };
 
 // ---------------------------------------------------------------------------
@@ -33,19 +33,19 @@ export default function TreasuryPage() {
           Treasury
         </h1>
         <p className="mt-2 text-lg text-[var(--color-gsd-text-secondary)]">
-          Real-time view of the GSD community treasury. All balances and
-          transactions are verifiable on-chain.
+          Real-time view of the GSD community treasury. All balances,
+          revenue events, and transactions are verifiable on-chain.
         </p>
       </div>
 
-      {/* Balance cards */}
+      {/* Balance cards + revenue summary */}
       <section className="mb-8">
         <TreasuryDashboard />
       </section>
 
-      {/* Transaction history */}
+      {/* Tabbed content: Transactions | Revenue Events | My Claims | Burns */}
       <section className="mb-8">
-        <TransactionList />
+        <TreasuryTabs />
       </section>
 
       {/* Links and notes */}
@@ -108,8 +108,9 @@ export default function TreasuryPage() {
         <div className="mt-4 rounded-lg border border-orange-400/20 bg-orange-400/5 px-4 py-3">
           <p className="text-sm text-orange-300/90">
             <span className="font-medium">Burn tracking:</span> The
-            buy-and-burn mechanism will launch in Phase 4. Once active, burn
-            totals will be tracked and displayed here in real time.
+            buy-and-burn mechanism is active. 10% of each revenue event is used
+            to purchase and permanently burn $GSD tokens. Burn history is
+            viewable in the Burns tab above.
           </p>
         </div>
       </section>

@@ -5,6 +5,18 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import type { TreasuryData, TreasuryBalance } from "@/lib/treasury/client";
 
 // ---------------------------------------------------------------------------
+// Revenue summary type (from /api/revenue/summary)
+// ---------------------------------------------------------------------------
+
+interface RevenueSummaryResponse {
+  totalRevenue: string;
+  totalDistributed: string;
+  totalBurnAllocated: string;
+  totalGsdBurned: string;
+  eventCount: number;
+}
+
+// ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
@@ -19,6 +31,16 @@ function formatGsd(value: string): string {
   const num = Number(value);
   if (Number.isNaN(num)) return "0";
   return num.toLocaleString("en-US");
+}
+
+/** Format BigInt string amount: divide by 1e9 for SOL-scale amounts */
+function formatBigAmount(raw: string): string {
+  const num = Number(raw);
+  if (Number.isNaN(num) || num === 0) return "0";
+  return (num / 1e9).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 }
 
 function timeAgo(isoDate: string): string {
@@ -91,6 +113,36 @@ function BalanceCard({
         )}
       </CardContent>
     </Card>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Stat card (smaller, for revenue summary section)
+// ---------------------------------------------------------------------------
+
+function StatCard({
+  label,
+  value,
+  unit,
+}: {
+  label: string;
+  value: string;
+  unit?: string;
+}) {
+  return (
+    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-4 py-3">
+      <p className="text-xs font-medium text-[var(--color-gsd-text-muted)]">
+        {label}
+      </p>
+      <p className="mt-1 text-lg font-bold text-[var(--color-gsd-text)]">
+        {value}
+        {unit && (
+          <span className="ml-1 text-xs font-normal text-[var(--color-gsd-text-muted)]">
+            {unit}
+          </span>
+        )}
+      </p>
+    </div>
   );
 }
 
@@ -168,6 +220,7 @@ interface TreasuryDashboardProps {
 }
 
 export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
+  // Existing treasury balance/transactions fetch
   const { data, isLoading, isError } = useQuery<TreasuryData>({
     queryKey: ["treasury"],
     queryFn: async () => {
@@ -185,12 +238,25 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
       : undefined,
   });
 
+  // Revenue summary fetch (real burn totals + revenue stats)
+  const { data: revenueSummary } = useQuery<RevenueSummaryResponse>({
+    queryKey: ["revenue-summary"],
+    queryFn: async () => {
+      const res = await fetch("/api/revenue/summary");
+      if (!res.ok) throw new Error("Failed to fetch revenue summary");
+      return res.json();
+    },
+    refetchInterval: 30_000,
+  });
+
   if (isLoading) {
     return (
-      <div className="grid gap-4 sm:grid-cols-3">
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
+      <div className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </div>
       </div>
     );
   }
@@ -204,10 +270,12 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
   }
 
   const balance = data?.balance;
-  const burnTotal = data?.burnTotal ?? "0";
+  // Use real burn total from revenue summary; fall back to treasury data, then "0"
+  const totalGsdBurned = revenueSummary?.totalGsdBurned ?? data?.burnTotal ?? "0";
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
+      {/* Balance cards */}
       <div className="grid gap-4 sm:grid-cols-3">
         <BalanceCard
           label="SOL Balance"
@@ -223,12 +291,39 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
         />
         <BalanceCard
           label="Total Burned"
-          value={formatGsd(burnTotal)}
-          unit="$GSD"
+          value={formatBigAmount(totalGsdBurned)}
+          unit="$GSD burned"
           icon={<FireIcon />}
-          note="Coming in Phase 4"
         />
       </div>
+
+      {/* Revenue Summary section */}
+      {revenueSummary && revenueSummary.eventCount > 0 && (
+        <div className="space-y-2">
+          <h3 className="text-sm font-semibold text-[var(--color-gsd-text)]">
+            Revenue Summary
+          </h3>
+          <div className="grid gap-3 sm:grid-cols-4">
+            <StatCard
+              label="Total Revenue"
+              value={formatBigAmount(revenueSummary.totalRevenue)}
+            />
+            <StatCard
+              label="Distributed"
+              value={formatBigAmount(revenueSummary.totalDistributed)}
+            />
+            <StatCard
+              label="$GSD Burned"
+              value={formatBigAmount(revenueSummary.totalGsdBurned)}
+              unit="$GSD"
+            />
+            <StatCard
+              label="Revenue Events"
+              value={String(revenueSummary.eventCount)}
+            />
+          </div>
+        </div>
+      )}
 
       {balance?.lastUpdated && (
         <p className="text-xs text-[var(--color-gsd-text-muted)]">
