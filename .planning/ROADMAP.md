@@ -49,11 +49,14 @@ Plans:
   3. Contribution scores are calculated using the formula sqrt(tasks_completed * verification_score * time_active) and stored on-chain in the developer's PDA
   4. Off-chain contribution data is integrity-verifiable via on-chain SHA-256 content hashes
   5. On-chain events sync to the off-chain database within 3 seconds via Helius webhooks
-**Plans**: TBD
+**Plans:** 5 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md -- On-chain state structs (ContributionLeaf, TreeConfig, DeveloperProfile extension) and raw CPI helpers
+- [ ] 02-02-PLAN.md -- Shared TypeScript packages: contribution types, hash utility, and score calculation (TDD)
+- [ ] 02-03-PLAN.md -- On-chain instructions (init_tree, record_contribution, update_score) with bankrun tests
+- [ ] 02-04-PLAN.md -- Prisma Contribution model, Helius webhook receiver, indexer, and setup script
+- [ ] 02-05-PLAN.md -- Contribution API endpoints, UI components, and profile page integration
 
 ### Phase 3: Governance & Idea Rounds
 **Goal**: $GSD holders can participate in structured governance through time-bounded idea rounds with attack-resistant voting, introducing the token's first real utility
@@ -124,7 +127,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
 | 1. Foundation & Authentication | 4/4 | Complete | 2026-02-08 |
-| 2. Contribution Tracking | 0/TBD | Not started | - |
+| 2. Contribution Tracking | 0/5 | Planned | - |
 | 3. Governance & Idea Rounds | 0/TBD | Not started | - |
 | 4. Revenue Mechanics | 0/TBD | Not started | - |
 | 5. GSD Framework Integration | 0/TBD | Not started | - |
