@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 1 complete -- ready for Phase 2
+**Current focus:** Phase 2 Contribution Tracking -- building on-chain state and CPI infrastructure
 
 ## Current Position
 
-Phase: 1 of 6 (Foundation & Authentication) -- COMPLETE
-Plan: 4 of 4 in current phase
-Status: Phase complete
-Last activity: 2026-02-08 -- Completed all 4 plans in Phase 1
+Phase: 2 of 6 (Contribution Tracking)
+Plan: 1 of 5 in current phase
+Status: In progress
+Last activity: 2026-02-08 -- Completed 02-01-PLAN.md (state structs and CPI helpers)
 
-Progress: [██████░░░░] 25% (4/16 estimated total plans)
+Progress: [██████░░░░] 31% (5/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 18 min
-- Total execution time: 1.2 hours
+- Total plans completed: 5
+- Average duration: 15 min
+- Total execution time: 1.3 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
+| 02 | 1 | 6 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 41m, 13m, 8m, 9m
-- Trend: accelerating (wave parallelization effective)
+- Last 5 plans: 13m, 8m, 9m, 6m
+- Trend: accelerating
 
 *Updated after each plan completion*
 
@@ -61,6 +62,9 @@ Recent decisions affecting current work:
 - [01-04]: Transparency config uses placeholder multisig addresses (updated after setup-multisig.ts run)
 - [01-04]: Changelog API returns empty array with 200 when database unavailable (graceful degradation)
 - [01-04]: Anti-Rug Standard section uses factual language without defensive posture
+- [02-01]: sha2 crate added for leaf hashing (anchor-lang 0.32.1 split SDK does not re-export solana_program::hash)
+- [02-01]: Raw CPI discriminators computed via SHA-256 at runtime matching spl-account-compression Anchor IDL
+- [02-01]: NOOP_PROGRAM_ID co-located with ACCOUNT_COMPRESSION_PROGRAM_ID in compression.rs
 
 ### Pending Todos
 
@@ -73,12 +77,11 @@ Recent decisions affecting current work:
 
 - [Research]: Legal counsel needed before Phase 4 (revenue sharing securities classification risk)
 - [Research]: SolSplits long-term stability uncertain -- evaluate custom split program as alternative in Phase 4
-- [Research]: Phase 2 needs Merkle tree sizing research during planning
 - [01-01]: anchor-bankrun@0.5.0 peer dependency warning with @coral-xyz/anchor@0.32.1 (works, but may need update)
 - [01-02]: Auth.js v5 is beta (5.0.0-beta.30) -- monitor for stable release
 
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 1 complete. All 4 plans executed across 3 waves. Ready for Phase 2 planning.
-Resume file: .planning/phases/01-foundation-authentication/01-04-SUMMARY.md
+Stopped at: Phase 2 in progress. Plan 01 complete (state structs + CPI helpers). Plans 02-05 remaining.
+Resume file: .planning/phases/02-contribution-tracking/02-01-SUMMARY.md
