@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 3 of 6 (Governance and Idea Rounds)
-Plan: 3 of 7 in current phase
+Plan: 4 of 7 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 03-03-PLAN.md (round lifecycle instructions + bankrun tests)
+Last activity: 2026-02-08 -- Completed 03-04-PLAN.md (voting and token escrow instructions + bankrun tests)
 
-Progress: [████████████░░░░] 75% (12/16 estimated total plans)
+Progress: [█████████████░░░] 81% (13/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
+- Total plans completed: 13
 - Average duration: 10 min
-- Total execution time: 1.8 hours
+- Total execution time: 1.9 hours
 
 **By Phase:**
 
@@ -29,10 +29,10 @@ Progress: [████████████░░░░] 75% (12/16 estimate
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
-| 03 | 3 | 14 min | 4.7 min |
+| 03 | 4 | 20 min | 5.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 4m, 9m, 4m, 2m, 8m
+- Last 5 plans: 9m, 4m, 2m, 8m, 6m
 - Trend: instruction + test plans take longer than pure type plans
 
 *Updated after each plan completion*
@@ -86,6 +86,9 @@ Recent decisions affecting current work:
 - [03-03]: anchor-spl/idl-build feature required in Cargo.toml for Account<Mint> IDL generation compatibility
 - [03-03]: SPL Token program .so downloaded from mainnet to tests/fixtures/ for bankrun mint creation
 - [03-03]: Each bankrun test creates isolated context (no shared state between tests)
+- [03-04]: Global escrow vault ATA owned by governance_config PDA; PDA signs for withdrawals
+- [03-04]: init_if_needed on VoteDeposit allows cumulative deposits without separate init step
+- [03-04]: Timelock test requires custom round timing to test pre-eligible vote rejection
 
 ### Pending Todos
 
@@ -107,5 +110,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 3 plan 3 complete. Round lifecycle instructions + bankrun tests done. Continue with 03-04 (vote deposit and casting).
-Resume file: .planning/phases/03-governance-idea-rounds/03-03-SUMMARY.md
+Stopped at: Phase 3 plan 4 complete. Voting and token escrow instructions + 9 bankrun tests done. Continue with 03-05 (governance TypeScript SDK).
+Resume file: .planning/phases/03-governance-idea-rounds/03-04-SUMMARY.md
