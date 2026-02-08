@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 4 of 6 (Revenue Mechanics) -- IN PROGRESS
-Plan: 3 of 5 in current phase
+Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 04-03-PLAN.md (revenue detection, indexer & API)
+Last activity: 2026-02-08 -- Completed 04-04-PLAN.md (distribution pipeline and admin API)
 
-Progress: [███████████████████░] 90% (19/21 estimated total plans for phases 1-4)
+Progress: [████████████████████░] 95% (20/21 estimated total plans for phases 1-4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 19
-- Average duration: 7.8 min
+- Total plans completed: 20
+- Average duration: 7.6 min
 - Total execution time: 2.5 hours
 
 **By Phase:**
@@ -30,11 +30,11 @@ Progress: [███████████████████░] 90% (19
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
-| 04 | 3 | 13 min | 4.3 min |
+| 04 | 4 | 16 min | 4.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 4m, 4m, 3m, 6m, 4m
-- Trend: State/types plans very fast (~3m); instruction + test plans ~6m; indexer/API plans ~4m
+- Last 5 plans: 4m, 3m, 6m, 4m, 3m
+- Trend: State/types plans very fast (~3m); instruction + test plans ~6m; indexer/API/distribution plans ~3-4m
 
 *Updated after each plan completion*
 
@@ -108,6 +108,10 @@ Recent decisions affecting current work:
 - [04-03]: Revenue detection separated from instruction indexing (detectRevenueInflow on every tx, processRevenueEvent on gsd-hub only)
 - [04-03]: USDC amount conversion uses Math.round(tokenAmount * 1e6) for Helius human-readable decimals
 - [04-03]: Quad-processor webhook pipeline (contribution + governance + revenue-instructions + revenue-detection)
+- [04-04]: Distribution triggered manually via admin API, not automatically on webhook (v1 safety measure per research)
+- [04-04]: Buy-and-burn failure returns null instead of throwing, allowing distribution to complete without burn
+- [04-04]: Inline base58 decode for burn authority keypair loading (project convention from 02-04)
+- [04-04]: Jupiter swap confirmation failure still returns signature (swap may land on-chain despite timeout)
 
 ### Pending Todos
 
@@ -132,5 +136,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 4, plan 3 complete. Next: 04-04 (distribution pipeline and admin API).
-Resume file: .planning/phases/04-revenue-mechanics/04-03-SUMMARY.md
+Stopped at: Phase 4, plan 4 complete. Next: 04-05 (treasury dashboard UI).
+Resume file: .planning/phases/04-revenue-mechanics/04-04-SUMMARY.md
