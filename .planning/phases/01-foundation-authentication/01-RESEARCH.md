@@ -10,7 +10,9 @@ Phase 1 establishes the security-first foundation for the GSD Community Hub: a T
 
 The technical domain is well-established with mature libraries. The primary complexity lies in correctly integrating SIWS with Auth.js v5 for session management (a pattern that exists but requires careful wiring), designing a cost-efficient on-chain profile PDA (minimal on-chain data, rich off-chain profile in PostgreSQL), and setting up Squads multisig before any mainnet deployment. The 14-day timeline is achievable because every component has established patterns and reference implementations -- there is no novel research required, only disciplined execution of proven approaches.
 
-**Primary recommendation:** Use the Wallet Standard `signIn` feature (not legacy `signMessage`) for SIWS authentication, store minimal identity data on-chain (wallet, bump, timestamps) with all mutable profile data (name, bio, links) in PostgreSQL, deploy to devnet first with a clear mainnet migration path once security audit is complete, and configure Squads multisig from the first devnet deployment.
+Critical version updates discovered during research: Next.js 16 renames `middleware.ts` to `proxy.ts` with a Node.js runtime (not edge). Prisma is now at version 7.x with a fundamentally new architecture (Rust-free, driver adapters required, `prisma.config.ts` replaces schema-based config). The Squads SDK package is `@sqds/multisig` (not `@squads-protocol/multisig`). These are all actionable changes that must be reflected in implementation.
+
+**Primary recommendation:** Use the Wallet Standard `signIn` feature (not legacy `signMessage`) for SIWS authentication, store minimal identity data on-chain (wallet, bump, timestamps) with all mutable profile data (name, bio, links) in PostgreSQL via Prisma 7, deploy to devnet first with a clear mainnet migration path once security audit is complete, and configure Squads multisig from the first devnet deployment.
 
 <user_constraints>
 ## User Constraints (from CONTEXT.md)
@@ -70,7 +72,7 @@ Recommendations for all areas marked as Claude's Discretion, with rationale.
 - Phase 1 is explicitly token-optional (INFR-03). Showing $GSD balance contradicts this
 - Displaying token balance in Phase 1 signals "this is about the token" before the platform has proven its utility
 - When token integration arrives (Phase 3), add balance display in the governance section where it has functional meaning (voting weight)
-- Rationale: Aligns with pitfall research on premature token integration (Pitfall #9) and the "utility first" principle. The platform must prove its value before introducing token signals
+- Rationale: Aligns with "utility first" principle. The platform must prove its value before introducing token signals
 
 ### External Links
 **Recommendation: YES -- allow GitHub and Twitter/X links on developer profiles.**
@@ -83,15 +85,15 @@ Recommendations for all areas marked as Claude's Discretion, with rationale.
 ### Data Storage (On-Chain vs Off-Chain)
 **Recommendation: Minimal on-chain PDA (immutable identity anchor) + rich off-chain profile (PostgreSQL).**
 
-**On-chain (PDA -- ~73 bytes, ~0.001 SOL rent):**
+**On-chain (PDA -- ~89 bytes, ~0.00114 SOL rent):**
 - `authority` (Pubkey, 32 bytes) -- wallet that owns this profile
 - `bump` (u8, 1 byte) -- PDA canonical bump
 - `created_at` (i64, 8 bytes) -- profile creation timestamp
 - `updated_at` (i64, 8 bytes) -- last on-chain update timestamp
-- `profile_hash` (32 bytes) -- SHA-256 hash of off-chain profile for integrity verification
+- `profile_hash` ([u8; 32], 32 bytes) -- SHA-256 hash of off-chain profile for integrity verification
 - Discriminator: 8 bytes (Anchor automatic)
 
-**Off-chain (PostgreSQL):**
+**Off-chain (PostgreSQL via Prisma 7):**
 - `display_name` (String, max 50 chars)
 - `bio` (String, max 500 chars)
 - `avatar_url` (String, optional)
@@ -102,7 +104,7 @@ Recommendations for all areas marked as Claude's Discretion, with rationale.
 - `profile_hash` (String -- matches on-chain hash for integrity check)
 - `created_at`, `updated_at` timestamps
 
-**Rationale:** Storing display_name and bio on-chain would cost 4+50+4+500 = 558 additional bytes per profile (~0.004 SOL). At 10,000 developers = 40 SOL locked in rent. More importantly, every name/bio edit requires an on-chain transaction (~0.000005 SOL + user friction). Off-chain storage is free to update and provides better UX. The on-chain PDA proves "this wallet registered at this time" and the profile_hash enables anyone to verify the off-chain data hasn't been tampered with. This is the Content Hash Anchoring pattern from the architecture research.
+**Rationale:** Storing display_name and bio on-chain would cost 4+50+4+500 = 558 additional bytes per profile (~0.004 SOL). At 10,000 developers = 40 SOL locked in rent. More importantly, every name/bio edit requires an on-chain transaction (~0.000005 SOL + user friction). Off-chain storage is free to update and provides better UX. The on-chain PDA proves "this wallet registered at this time" and the profile_hash enables anyone to verify the off-chain data hasn't been tampered with. This is the Content Hash Anchoring pattern.
 
 ### Developer Directory
 **Recommendation: YES -- build a public, browsable developer directory.**
@@ -114,11 +116,12 @@ Recommendations for all areas marked as Claude's Discretion, with rationale.
 
 ### Frontend Framework
 **Recommendation: Next.js 16 with App Router, Tailwind CSS 4, shadcn/ui.**
-- Next.js 16 is the latest stable release with Turbopack as default bundler
+- Next.js 16.2.0 is the latest stable release with Turbopack as default bundler
 - App Router with React Server Components for SEO-friendly public pages (directory, profiles)
 - API Routes handle SIWS backend verification
 - Tailwind CSS 4 + shadcn/ui for accessible, customizable components without heavy CSS-in-JS
-- Rationale: Dominant choice in Solana dApp ecosystem. Server-side rendering matters for public profile pages (SEO, social sharing). API routes eliminate need for separate backend. Well-documented with multiple Solana-specific reference implementations
+- Important: Next.js 16 renames `middleware.ts` to `proxy.ts` (Node.js runtime, not edge)
+- Rationale: Dominant choice in Solana dApp ecosystem. Server-side rendering matters for public profile pages (SEO, social sharing). API routes eliminate need for separate backend
 
 ### Solana Program Framework
 **Recommendation: Anchor 0.32.1.**
@@ -145,14 +148,14 @@ gsd-community-hub/
   Cargo.toml
   rust-toolchain.toml # Pin Rust version
 ```
-- Rationale: Single repo enables atomic changes across frontend and program, shared types prevent drift, Turborepo caches builds for fast iteration. Matches the Solana Developers reference implementation structure. pnpm provides strict dependency resolution and workspace support
+- Rationale: Single repo enables atomic changes across frontend and program, shared types prevent drift, Turborepo caches builds for fast iteration. pnpm provides strict dependency resolution and workspace support
 
 ### Hosting
 **Recommendation: Vercel for Phase 1 (iteration speed), plan for decentralization later.**
 - Vercel provides native Next.js hosting, automatic preview deployments, edge functions
 - Free tier sufficient for development and early launch
 - Environment variables for RPC URLs, program IDs, database connection
-- Rationale: 14-day timeline demands fast iteration. Vercel deploys on every push. Decentralized hosting (IPFS, Arweave) can be evaluated in later phases once the platform has proven its value. The code itself is open source (INFR-01), which is the primary trust mechanism -- where it's hosted is secondary
+- Rationale: 14-day timeline demands fast iteration. Vercel deploys on every push. The code itself is open source (INFR-01), which is the primary trust mechanism -- where it's hosted is secondary
 
 ### Network Target
 **Recommendation: Devnet-first with mainnet migration after audit.**
@@ -160,7 +163,7 @@ gsd-community-hub/
 - Mainnet deployment requires: security audit completion (INFR-02), Squads multisig configured with 5 signers, community announcement
 - Use separate keypairs for devnet and mainnet (never share keys)
 - Design all code to be network-agnostic (RPC endpoint from environment variable)
-- Rationale: "Security-first" phase demands caution. Devnet allows rapid iteration with free SOL. Mainnet deployment with a security vulnerability would be catastrophic for trust. The public changelog requirement (locked decision) means every program upgrade is visible -- first mainnet deploy must be clean
+- Rationale: "Security-first" phase demands caution. Devnet allows rapid iteration with free SOL. Mainnet deployment with a security vulnerability would be catastrophic for trust
 
 ### Security Transparency Page
 **Recommendation: YES -- build a dedicated /transparency page.**
@@ -169,51 +172,53 @@ gsd-community-hub/
 - Show: link to open source repo, link to security audit (when complete)
 - Show: network status (devnet/mainnet), deployment timestamps
 - Publicly accessible (no wallet required)
-- Rationale: Directly serves the "proof visible" strategy and the locked "public changelog" decision. For a community with rug fear, a transparency page is not a nice-to-have -- it's the single most important trust signal after open source code. Cost: one static page with on-chain data reads
+- Rationale: Directly serves the "proof visible" strategy and the locked "public changelog" decision. For a community with rug fear, a transparency page is not a nice-to-have -- it's the single most important trust signal after open source code
 
 ## Standard Stack
 
 ### Core
 | Library | Version | Purpose | Why Standard |
 |---------|---------|---------|--------------|
-| Next.js | 16.x | Full-stack React framework | App Router, RSC, API routes, Turbopack default. Dominant in Solana dApp ecosystem |
-| React | 19.x | UI library | Required by Next.js 16. Server Components, Suspense, Actions |
+| Next.js | 16.2.x | Full-stack React framework | App Router, RSC, API routes, Turbopack default, proxy.ts. Dominant in Solana dApp ecosystem |
+| React | 19.x | UI library | Required by Next.js 16. Server Components, Suspense, Actions, View Transitions |
 | TypeScript | 5.7+ | Type safety | Non-negotiable for on-chain interactions. Anchor IDL types provide end-to-end safety |
 | Anchor | 0.32.1 | Solana program framework | IDL generation, automatic validation, TypeScript client. Latest stable release |
 | Rust | 1.91.1 | Program language | Required by Solana runtime. Pin via rust-toolchain.toml |
-| @solana/web3.js | 1.x | Solana RPC client | Anchor 0.32.1 only supports v1. Hard constraint |
+| @solana/web3.js | 1.98.x | Solana RPC client | Anchor 0.32.1 only supports v1 (not v2/Kit). Hard constraint |
 | @coral-xyz/anchor | 0.32.1 | Anchor TypeScript client | Auto-generated program clients from IDL |
 | @solana/wallet-adapter-react | 0.15.x | Wallet connection hooks | useWallet(), useConnection(), useAnchorWallet() |
 | @solana/wallet-adapter-react-ui | 0.9.x | Wallet UI components | Pre-built connect button, wallet modal |
 | Auth.js (next-auth) | 5.x | Session management | JWT sessions, credentials provider for SIWS |
-| Tailwind CSS | 4.x | Styling | Zero-config with Next.js 16, @theme directive |
+| Tailwind CSS | 4.x | Styling | CSS-first config (no tailwind.config.js), OKLCH colors, @import "tailwindcss" |
 | shadcn/ui | latest | Component library | Copy-paste Radix-based components. Accessible, customizable |
 | PostgreSQL | 16+ | Off-chain database | Profiles, cached data. Relational model fits domain |
-| Prisma | 6.x | ORM | Type-safe queries, migrations, generated types |
+| Prisma | 7.x | ORM | Rust-free client, driver adapters, prisma.config.ts, 3x faster queries, 90% smaller bundles |
 
 ### Supporting
 | Library | Version | Purpose | When to Use |
 |---------|---------|---------|-------------|
 | @solana/wallet-standard-util | 1.1.x | SIWS verification | verifySignIn() for server-side signature validation |
 | @solana/wallet-standard-features | 1.1.x | SIWS types | SolanaSignInInput/Output type definitions |
-| @sqds/multisig | 2.1.x | Squads SDK | Creating multisig, managing members, proposing transactions |
+| @sqds/multisig | ^2.1.3 | Squads v4 SDK | Creating multisig, managing members, proposing transactions |
+| @prisma/adapter-pg | latest | Prisma PostgreSQL driver | Required by Prisma 7 -- all DBs need driver adapters |
 | Zustand | 5.x | Client state | UI state, wallet connection state |
 | TanStack Query | 5.x | Server/async state | Caching RPC calls, profile data fetching |
 | bs58 | latest | Base58 encoding | Solana address encoding/decoding |
 | tweetnacl | latest | Cryptography | ed25519 signature verification (SIWS fallback) |
 | Turborepo | latest | Monorepo builds | Build caching, task orchestration |
 | pnpm | latest | Package manager | Strict deps, workspace support |
-| Vitest | 4.x | Frontend testing | Unit/integration tests |
-| solana-bankrun | latest | Program testing | Fast program tests without validator |
+| Vitest | 4.x | Frontend testing | Unit/integration tests, browser mode stable |
+| solana-bankrun | 0.4.x | Program testing | Fast program tests without validator |
 | anchor-bankrun | latest | Anchor + bankrun | startAnchor() for test environment |
 
 ### Alternatives Considered
 | Instead of | Could Use | Tradeoff |
 |------------|-----------|----------|
-| Auth.js v5 (next-auth) | Custom JWT implementation | Auth.js handles CSRF, session rotation, middleware. Custom = more control but more security risk in DIY code |
+| Auth.js v5 (next-auth) | Custom JWT implementation | Auth.js handles CSRF, session rotation, proxy guards. Custom = more control but more security risk in DIY code |
 | Wallet Standard auto-detect | Manual wallet adapter imports | Manual gives explicit control but adds bundle size and maintenance burden for each wallet |
-| PostgreSQL + Prisma | Drizzle ORM | Drizzle is lighter but Prisma's migration system and Studio UI are more mature for team projects |
+| PostgreSQL + Prisma 7 | Drizzle ORM | Drizzle is lighter but Prisma's migration system and Studio UI are more mature for team projects |
 | Vercel | Self-hosted / Cloudflare Pages | Self-hosted gives more control but adds ops burden. Vercel optimized for Next.js |
+| Prisma 7 | Prisma 6.x | Prisma 6 is simpler (no driver adapter needed) but Prisma 7 is 3x faster, 90% smaller bundle, and is the actively developed version |
 
 **Installation:**
 ```bash
@@ -223,7 +228,7 @@ pnpm add @solana/web3.js@1 @coral-xyz/anchor@0.32.1
 pnpm add @solana/wallet-adapter-base @solana/wallet-adapter-react @solana/wallet-adapter-react-ui
 pnpm add @solana/wallet-standard-features @solana/wallet-standard-util
 pnpm add next-auth@5
-pnpm add @prisma/client
+pnpm add @prisma/client @prisma/adapter-pg
 pnpm add zustand@5 @tanstack/react-query@5
 pnpm add bs58 tweetnacl
 
@@ -267,7 +272,7 @@ gsd-community-hub/
                 page.tsx       # Public profile view
           transparency/
             page.tsx           # Transparency/security page
-        (auth)/                # Auth required (middleware protected)
+        (auth)/                # Auth required (proxy protected)
           dashboard/
             page.tsx           # User dashboard
           profile/
@@ -293,10 +298,14 @@ gsd-community-hub/
       lib/
         anchor/                # Anchor client setup, program hooks
         solana/                # Solana helpers (connection, PDA derivation)
-        db/                    # Prisma client singleton
+        db/                    # Prisma client singleton with driver adapter
         auth/                  # Auth configuration
       prisma/
         schema.prisma          # Database schema
+        prisma.config.ts       # Prisma 7 config (DB URL, migrations)
+        generated/             # Prisma 7 generated client output
+          prisma/
+            client.ts
         migrations/            # Prisma migrations
       anchor-idl/              # Generated IDL files
   programs/
@@ -360,7 +369,7 @@ Frontend: POST to /api/auth/callback/credentials
     v
 Backend (Auth.js CredentialsProvider):
     1. verifySignIn(input, output) via @solana/wallet-standard-util
-    2. Verify domain matches NEXTAUTH_URL
+    2. Verify domain matches AUTH_URL
     3. Verify nonce matches CSRF token
     4. Signature valid? -> Create JWT session
     |
@@ -386,7 +395,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         publicKey: { type: "text" },
       },
       async authorize(credentials) {
-        // Verify SIWS signature
+        // Deserialize and verify SIWS signature
+        // verifySignIn(input, output) returns boolean
         // Return { id: publicKey } on success, null on failure
       },
     }),
@@ -519,18 +529,35 @@ export async function computeProfileHash(profile: {
 4. Verify on-chain that upgrade authority = Squads vault PDA
 5. Document multisig address, member addresses, threshold on /transparency page
 
-**For CI/CD automated upgrades:**
-```yaml
-# GitHub Actions (future - Phase 1 uses manual deployment)
-- uses: Squads-Protocol/squads-v4-program-upgrade@beta
-  with:
-    network-url: "https://api.devnet.solana.com"
-    multisig-pda: ${{ secrets.SQUADS_MULTISIG_PDA }}
-    program-id: ${{ secrets.PROGRAM_ID }}
-    keypair: ${{ secrets.DEPLOYER_KEYPAIR }}
+**Squads v4 SDK usage:**
+```typescript
+import * as multisig from "@sqds/multisig"
+import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js"
+
+const connection = new Connection("https://api.devnet.solana.com", "confirmed")
+const createKey = Keypair.generate()
+
+const [multisigPda] = multisig.getMultisigPda({
+  createKey: createKey.publicKey,
+})
+
+await multisig.rpc.multisigCreateV2({
+  connection,
+  createKey,
+  creator: creatorKeypair,
+  multisigPda,
+  members: [
+    { key: signer1.publicKey, permissions: multisig.types.Permissions.all() },
+    { key: signer2.publicKey, permissions: multisig.types.Permissions.all() },
+    { key: signer3.publicKey, permissions: multisig.types.Permissions.all() },
+    { key: signer4.publicKey, permissions: multisig.types.Permissions.all() },
+    { key: signer5.publicKey, permissions: multisig.types.Permissions.all() },
+  ],
+  threshold: 3,
+})
 ```
 
-### Pattern 5: Wallet Provider Setup (Next.js App Router)
+### Pattern 5: Wallet Provider Setup (Next.js 16 App Router)
 **What:** Client-side wallet context wrapping the entire application.
 **When to use:** Root layout provider setup.
 
@@ -565,105 +592,55 @@ export const AppProviders: FC<{ children: ReactNode }> = ({ children }) => {
 
 Key: `wallets={[]}` enables Wallet Standard auto-detection. All compliant wallets (Phantom, Solflare, Backpack, etc.) appear automatically.
 
-### Anti-Patterns to Avoid
-- **Storing display_name/bio on-chain:** 558+ bytes per profile. Use PostgreSQL with on-chain hash verification instead
-- **Using signMessage instead of signIn:** Legacy pattern. signIn is standardized, shifts message construction to wallet (safer), and provides one-click UX
-- **Single wallet upgrade authority:** Even on devnet, practice with multisig. Never deploy to mainnet with single key
-- **Polling RPC for profile changes:** Use TanStack Query with appropriate stale times. Future phases will add webhooks
-- **Importing individual wallet adapters:** Wallet Standard auto-detect eliminates need for PhantomWalletAdapter, SolflareWalletAdapter, etc.
-- **Using Pages Router:** App Router is the standard since Next.js 13. All new features target App Router only
-- **Storing sessions in localStorage:** Use HTTP-only cookies via Auth.js for security (prevents XSS-based session theft)
+### Pattern 6: Next.js 16 Proxy for Route Protection
+**What:** Next.js 16 renames middleware.ts to proxy.ts with Node.js runtime (not edge).
+**When to use:** Protecting authenticated routes.
 
-## Don't Hand-Roll
+```typescript
+// apps/web/proxy.ts (NOT middleware.ts)
+export { auth as proxy } from "@/auth"
 
-| Problem | Don't Build | Use Instead | Why |
-|---------|-------------|-------------|-----|
-| Wallet connection UI | Custom wallet modal, adapter management | @solana/wallet-adapter-react-ui WalletMultiButton | Battle-tested across hundreds of dApps, handles edge cases (disconnect, switch, mobile) |
-| Session management | Custom JWT implementation with cookie handling | Auth.js v5 with Credentials provider | CSRF protection, session rotation, middleware guards, secure cookie handling all built in |
-| SIWS message format | Custom message construction and verification | @solana/wallet-standard-features signIn + @solana/wallet-standard-util verifySignIn | Standard format prevents phishing, wallet validates domain, consistent UX |
-| PDA derivation + validation | Manual seed hashing and bump management | Anchor's seeds/bump constraints with InitSpace | Anchor auto-validates ownership, derivation, and space. Manual = security vulnerabilities |
-| Database migrations | Manual SQL scripts | Prisma migrate | Type-safe schema changes, rollback support, team coordination |
-| Component library | Custom buttons, modals, forms from scratch | shadcn/ui (Radix-based) | Accessible, keyboard-navigable, styled with Tailwind. Copy-paste = you own the code |
-| Multisig management | Custom multisig program | Squads Protocol v4 | Secures $10B+ on Solana. Audited, battle-tested, has CLI and SDK |
+export const config = {
+  matcher: ["/(auth)/:path*", "/api/profile/:path*"],
+}
+```
 
-**Key insight:** The 14-day timeline leaves zero room for custom implementations of solved problems. Every hour spent building custom wallet connection, session management, or component UI is an hour not spent on the actual differentiating features.
+**Important difference from older patterns:**
+- File is named `proxy.ts`, not `middleware.ts`
+- Export is named `proxy`, not `middleware`
+- Runtime is Node.js (not edge) -- this is actually better for Auth.js since it has full Node.js API access
+- Config flag is `skipProxyUrlNormalize` (not `skipMiddlewareUrlNormalize`)
+- Always verify sessions close to data fetching too, not just in proxy
 
-## Common Pitfalls
+### Pattern 7: Prisma 7 Setup (New Architecture)
+**What:** Prisma 7 requires driver adapters, prisma.config.ts, and generates client to a specified output directory.
+**When to use:** All database operations.
 
-### Pitfall 1: Node.js Polyfill Issues with Solana Libraries in Next.js
-**What goes wrong:** `@solana/web3.js` and Anchor rely on Node.js built-ins (Buffer, crypto, stream) that are not available in browser environments. Next.js 16 with Turbopack may not resolve these automatically.
-**Why it happens:** web3.js v1 was designed for Node.js and uses node-native modules. Turbopack's resolve behavior differs from webpack.
-**How to avoid:**
-- Use `resolveAlias` in `next.config.ts` turbopack section to alias missing Node.js modules
-- Add `buffer` package as a dependency and ensure it's available globally
-- If Turbopack fails, fallback aliases can be configured via the turbopack config
-- Test the build early -- don't wait until end of sprint to discover polyfill issues
-**Warning signs:** "Module not found: Can't resolve 'buffer'" or "'crypto' is not available" errors at build time.
+```typescript
+// apps/web/prisma/prisma.config.ts
+import 'dotenv/config'
+import { defineConfig, env } from 'prisma/config'
 
-### Pitfall 2: Auth.js v5 Breaking Changes from v4 Examples
-**What goes wrong:** Most SIWS + NextAuth tutorials use v4 patterns (pages/api/auth/[...nextauth].ts, getServerSession, NEXTAUTH_SECRET). Auth.js v5 has breaking changes: new auth() function, AUTH_ env prefix, @auth/ adapter scope, different import paths.
-**Why it happens:** v5 is relatively new. Most search results and tutorials still reference v4.
-**How to avoid:**
-- Use the root-level `auth.ts` pattern (not pages/api/)
-- Export `{ auth, handlers, signIn, signOut }` from auth.ts
-- Use `AUTH_SECRET` not `NEXTAUTH_SECRET`
-- Use `auth()` not `getServerSession(authOptions)` in server components
-- Reference the official migration guide at authjs.dev/getting-started/migrating-to-v5
-**Warning signs:** "getServerSession is not a function" errors, cookie prefix mismatches (next-auth vs authjs).
+export default defineConfig({
+  schema: 'prisma/schema.prisma',
+  migrations: {
+    path: 'prisma/migrations',
+  },
+  datasource: {
+    url: env('DATABASE_URL'),
+  },
+})
+```
 
-### Pitfall 3: Anchor Account Space Miscalculation
-**What goes wrong:** Account created with wrong space, either wasting SOL (too large) or failing at runtime (too small). Anchor's discriminator (8 bytes) is commonly forgotten.
-**Why it happens:** Manual space calculation errors. Forgetting the 8-byte discriminator. Not accounting for String/Vec length prefix (4 bytes each).
-**How to avoid:**
-- Always use `#[derive(InitSpace)]` on account structs
-- Always use `space = 8 + AccountStruct::INIT_SPACE` in the init constraint
-- Use `#[max_len(N)]` attribute for String and Vec fields
-- Test account creation on devnet and verify account size matches expectations
-**Warning signs:** "Account data too small" errors at runtime, or unexplained high rent costs.
-
-### Pitfall 4: SIWS Nonce Replay Attacks
-**What goes wrong:** An attacker captures a signed SIWS message and replays it to authenticate as the victim. Without nonce verification, the same signature can be used indefinitely.
-**Why it happens:** Developers skip nonce generation/verification or use predictable nonces.
-**How to avoid:**
-- Use Auth.js CSRF token as the SIWS nonce (built-in, unique per session)
-- Verify nonce server-side before accepting signature
-- Include `issuedAt` and `expirationTime` in SolanaSignInInput
-- Nonces must be single-use: consumed on verification
-**Warning signs:** Same wallet authenticates from different IPs simultaneously, auth succeeds without fresh nonce request.
-
-### Pitfall 5: PDA Bump Seed Security
-**What goes wrong:** Program accepts user-provided bump seeds instead of deriving canonical bumps, allowing an attacker to derive a different PDA than expected.
-**Why it happens:** Developer confusion about bumps, or optimizing for compute units by skipping derivation.
-**How to avoid:**
-- Always use Anchor's `bump` constraint (auto-derives canonical bump)
-- Never accept bump as instruction data from the client
-- Store the canonical bump in the account struct and verify on subsequent accesses
-- Use `seeds::program` if deriving PDAs for other programs
-**Warning signs:** Accounts appearing at unexpected addresses, or the same "user" mapping to multiple PDAs.
-
-### Pitfall 6: Squads Multisig Key Management
-**What goes wrong:** One of the 5 multisig signers loses their key, reducing effective signer pool. Or, a signer's key is compromised, potentially enabling 3-of-5 threshold with only 2 honest signers.
-**Why it happens:** Key management is hard. Hardware wallets get lost. People forget passphrases.
-**How to avoid:**
-- All 5 signers must use hardware wallets (Ledger) or equivalent cold storage
-- Document key recovery procedures for each signer
-- Plan for key rotation: Squads supports member replacement via config transaction
-- Never have more than 2 signers from the same organization
-- Start with a lower-stakes devnet multisig to practice the signing flow before mainnet
-**Warning signs:** Signers unable to sign transactions in a timely manner, emergency situations with insufficient available signers.
-
-## Code Examples
-
-### Prisma Schema for Developer Profiles
 ```prisma
 // apps/web/prisma/schema.prisma
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "./generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -675,13 +652,201 @@ model User {
   githubUrl     String?
   twitterUrl    String?
   websiteUrl    String?
-  profileHash   String?  // SHA-256 hash matching on-chain PDA
-  onChainPda    String?  // PDA address for quick lookup
+  profileHash   String?
+  onChainPda    String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   @@index([walletAddress])
 }
+```
+
+```typescript
+// apps/web/lib/db/prisma.ts
+import { PrismaClient } from '../../prisma/generated/prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+})
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined
+}
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({ adapter })
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+```
+
+**Key Prisma 7 differences from older versions:**
+- `provider = "prisma-client"` (not `"prisma-client-js"`)
+- `output` field is mandatory in generator
+- Database URL configured in `prisma.config.ts` (not in schema)
+- Must use driver adapter (`@prisma/adapter-pg` for PostgreSQL)
+- `prisma generate` must be run explicitly (not automatic)
+- Project must have `"type": "module"` in package.json
+
+### Anti-Patterns to Avoid
+- **Storing display_name/bio on-chain:** 558+ bytes per profile. Use PostgreSQL with on-chain hash verification instead
+- **Using signMessage instead of signIn:** Legacy pattern. signIn is standardized, shifts message construction to wallet (safer), and provides one-click UX
+- **Single wallet upgrade authority:** Even on devnet, practice with multisig. Never deploy to mainnet with single key
+- **Polling RPC for profile changes:** Use TanStack Query with appropriate stale times. Future phases will add webhooks
+- **Importing individual wallet adapters:** Wallet Standard auto-detect eliminates need for PhantomWalletAdapter, SolflareWalletAdapter, etc.
+- **Using Pages Router:** App Router is the standard since Next.js 13. All new features target App Router only
+- **Storing sessions in localStorage:** Use HTTP-only cookies via Auth.js for security (prevents XSS-based session theft)
+- **Using middleware.ts in Next.js 16:** Renamed to proxy.ts. Use `export function proxy()` and Node.js runtime
+- **Using Prisma 6 patterns:** Prisma 7 requires driver adapters and prisma.config.ts. Don't configure DB URL in schema.prisma
+
+## Don't Hand-Roll
+
+| Problem | Don't Build | Use Instead | Why |
+|---------|-------------|-------------|-----|
+| Wallet connection UI | Custom wallet modal, adapter management | @solana/wallet-adapter-react-ui WalletMultiButton | Battle-tested across hundreds of dApps, handles edge cases (disconnect, switch, mobile) |
+| Session management | Custom JWT implementation with cookie handling | Auth.js v5 with Credentials provider | CSRF protection, session rotation, proxy guards, secure cookie handling all built in |
+| SIWS message format | Custom message construction and verification | @solana/wallet-standard-features signIn + @solana/wallet-standard-util verifySignIn | Standard format prevents phishing, wallet validates domain, consistent UX |
+| PDA derivation + validation | Manual seed hashing and bump management | Anchor's seeds/bump constraints with InitSpace | Anchor auto-validates ownership, derivation, and space. Manual = security vulnerabilities |
+| Database migrations | Manual SQL scripts | Prisma 7 migrate | Type-safe schema changes, rollback support, team coordination |
+| Component library | Custom buttons, modals, forms from scratch | shadcn/ui (Radix-based) | Accessible, keyboard-navigable, styled with Tailwind. Copy-paste = you own the code |
+| Multisig management | Custom multisig program | Squads Protocol v4 (@sqds/multisig) | Secures $10B+ on Solana. Audited, battle-tested, has CLI and SDK |
+| Node.js polyfills | Manual buffer/crypto shims | Turbopack resolveAlias config | Built-in Turbopack feature handles browser aliasing |
+
+**Key insight:** The 14-day timeline leaves zero room for custom implementations of solved problems. Every hour spent building custom wallet connection, session management, or component UI is an hour not spent on the actual differentiating features.
+
+## Common Pitfalls
+
+### Pitfall 1: Node.js Polyfill Issues with Solana Libraries in Next.js 16 / Turbopack
+**What goes wrong:** `@solana/web3.js` v1 and Anchor rely on Node.js built-ins (Buffer, crypto, stream) that are not available in browser environments. Turbopack's resolve behavior differs from webpack.
+**Why it happens:** web3.js v1 was designed for Node.js and uses node-native modules. Turbopack is the default bundler in Next.js 16.
+**How to avoid:**
+```javascript
+// next.config.ts
+const nextConfig = {
+  turbopack: {
+    resolveAlias: {
+      buffer: { browser: 'buffer/' },
+      crypto: { browser: 'crypto-browserify' },
+      stream: { browser: 'stream-browserify' },
+    },
+  },
+}
+```
+- Install polyfill packages: `pnpm add buffer crypto-browserify stream-browserify`
+- Add `import { Buffer } from 'buffer'; globalThis.Buffer = Buffer;` in client entry
+- Test the build early -- don't wait until end of sprint to discover polyfill issues
+**Warning signs:** "Module not found: Can't resolve 'buffer'" or "'crypto' is not available" errors at build time.
+
+### Pitfall 2: Auth.js v5 Breaking Changes from v4 Examples
+**What goes wrong:** Most SIWS + NextAuth tutorials use v4 patterns (pages/api/auth/[...nextauth].ts, getServerSession, NEXTAUTH_SECRET). Auth.js v5 has breaking changes: new auth() function, AUTH_ env prefix, different import paths.
+**Why it happens:** v5 has been stable for a while now but many tutorials still reference v4.
+**How to avoid:**
+- Use the root-level `auth.ts` pattern (not pages/api/)
+- Export `{ auth, handlers, signIn, signOut }` from auth.ts
+- Use `AUTH_SECRET` not `NEXTAUTH_SECRET`
+- Use `auth()` not `getServerSession(authOptions)` in server components
+- Reference the official migration guide at authjs.dev/getting-started/migrating-to-v5
+**Warning signs:** "getServerSession is not a function" errors, cookie prefix mismatches (next-auth vs authjs).
+
+### Pitfall 3: Next.js 16 Proxy vs Middleware Confusion
+**What goes wrong:** Using `middleware.ts` (deprecated name) or `export function middleware()` (deprecated export) in Next.js 16. Or assuming edge runtime which is NOT supported in proxy.
+**Why it happens:** Nearly all existing tutorials and examples use `middleware.ts`. The rename to `proxy.ts` happened in Next.js 16.
+**How to avoid:**
+- Name file `proxy.ts`, not `middleware.ts`
+- Export as `proxy`, not `middleware`
+- Config flags use `skipProxyUrlNormalize` (not `skipMiddlewareUrlNormalize`)
+- Node.js runtime is actually beneficial for Auth.js (full API access)
+- Run `npx @next/codemod@canary upgrade latest` to auto-migrate
+**Warning signs:** Deprecation warnings in build output, "middleware is deprecated" messages.
+
+### Pitfall 4: Prisma 7 Configuration Migration
+**What goes wrong:** Using Prisma 6.x patterns (DB URL in schema.prisma, `prisma-client-js` provider, no driver adapter) causes failures with Prisma 7.
+**Why it happens:** Prisma 7 completely changed the client architecture. It is Rust-free, requires driver adapters, and uses a separate config file.
+**How to avoid:**
+- Use `provider = "prisma-client"` (not `"prisma-client-js"`)
+- Add `output = "./generated/prisma"` to generator block (mandatory)
+- Configure database URL in `prisma.config.ts` (not in schema.prisma)
+- Install `@prisma/adapter-pg` for PostgreSQL
+- Run `prisma generate` explicitly (not automatic)
+- Ensure `"type": "module"` in package.json
+**Warning signs:** "Cannot find module 'prisma-client-js'" errors, missing generated types, connection failures.
+
+### Pitfall 5: Anchor Account Space Miscalculation
+**What goes wrong:** Account created with wrong space, either wasting SOL (too large) or failing at runtime (too small). Anchor's discriminator (8 bytes) is commonly forgotten.
+**Why it happens:** Manual space calculation errors. Forgetting the 8-byte discriminator. Not accounting for String/Vec length prefix (4 bytes each).
+**How to avoid:**
+- Always use `#[derive(InitSpace)]` on account structs
+- Always use `space = 8 + AccountStruct::INIT_SPACE` in the init constraint
+- Use `#[max_len(N)]` attribute for String and Vec fields
+- Test account creation on devnet and verify account size matches expectations
+**Warning signs:** "Account data too small" errors at runtime, or unexplained high rent costs.
+
+### Pitfall 6: SIWS Nonce Replay Attacks
+**What goes wrong:** An attacker captures a signed SIWS message and replays it to authenticate as the victim. Without nonce verification, the same signature can be used indefinitely.
+**Why it happens:** Developers skip nonce generation/verification or use predictable nonces.
+**How to avoid:**
+- Use Auth.js CSRF token as the SIWS nonce (built-in, unique per session)
+- Verify nonce server-side before accepting signature
+- Include `issuedAt` and `expirationTime` in SolanaSignInInput
+- Nonces must be single-use: consumed on verification
+- Phantom validates timestamps with +/-10 minute threshold
+**Warning signs:** Same wallet authenticates from different IPs simultaneously, auth succeeds without fresh nonce request.
+
+### Pitfall 7: PDA Bump Seed Security
+**What goes wrong:** Program accepts user-provided bump seeds instead of deriving canonical bumps, allowing an attacker to derive a different PDA than expected.
+**Why it happens:** Developer confusion about bumps, or optimizing for compute units by skipping derivation.
+**How to avoid:**
+- Always use Anchor's `bump` constraint (auto-derives canonical bump)
+- Never accept bump as instruction data from the client
+- Store the canonical bump in the account struct and verify on subsequent accesses
+- Use `seeds::program` if deriving PDAs for other programs
+**Warning signs:** Accounts appearing at unexpected addresses, or the same "user" mapping to multiple PDAs.
+
+### Pitfall 8: Squads Multisig Key Management
+**What goes wrong:** One of the 5 multisig signers loses their key, reducing effective signer pool. Or, a signer's key is compromised, potentially enabling 3-of-5 threshold with only 2 honest signers.
+**Why it happens:** Key management is hard. Hardware wallets get lost. People forget passphrases.
+**How to avoid:**
+- All 5 signers must use hardware wallets (Ledger) or equivalent cold storage
+- Document key recovery procedures for each signer
+- Plan for key rotation: Squads supports member replacement via config transaction
+- Never have more than 2 signers from the same organization
+- Start with a lower-stakes devnet multisig to practice the signing flow before mainnet
+**Warning signs:** Signers unable to sign transactions in a timely manner, emergency situations with insufficient available signers.
+
+### Pitfall 9: Premature Token Integration
+**What goes wrong:** Adding $GSD balance display, token-gating, or token references in Phase 1 signals "this is about the token" before the platform has proven utility. Skeptics (who are the target audience after rug fear) interpret this as desperation.
+**Why it happens:** Natural temptation to connect the platform to the token immediately.
+**How to avoid:**
+- Phase 1 is explicitly token-optional (INFR-03)
+- No token balance display, no token-gating, no token references in UI
+- Token integration arrives in Phase 3 where it has functional meaning (voting weight)
+- Let the platform prove its value first
+**Warning signs:** Any UI element referencing $GSD, token balances, or token-gated features in Phase 1.
+
+## Code Examples
+
+Verified patterns from official sources:
+
+### Turbopack Configuration for Solana
+```typescript
+// next.config.ts
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  turbopack: {
+    resolveAlias: {
+      // Polyfills for @solana/web3.js v1 in browser
+      buffer: { browser: 'buffer/' },
+      crypto: { browser: 'crypto-browserify' },
+      stream: { browser: 'stream-browserify' },
+    },
+  },
+  // Other Next.js 16 config
+  reactCompiler: true,
+}
+
+export default nextConfig
 ```
 
 ### Environment Variables
@@ -698,16 +863,6 @@ DATABASE_URL="postgresql://user:password@localhost:5432/gsd_hub"
 
 # Future: Helius RPC for production
 # NEXT_PUBLIC_RPC_URL="https://devnet.helius-rpc.com/?api-key=YOUR_KEY"
-```
-
-### Next.js Middleware for Auth Protection
-```typescript
-// apps/web/middleware.ts
-export { auth as middleware } from "@/auth"
-
-export const config = {
-  matcher: ["/(auth)/:path*", "/api/profile/:path*"],
-}
 ```
 
 ### Anchor Program Entry Point
@@ -770,12 +925,12 @@ pub fn handler(ctx: Context<UpdateProfileHash>, new_hash: [u8; 32]) -> Result<()
 }
 ```
 
-### Anchor Test Example
+### Anchor Test Example (bankrun)
 ```typescript
 // programs/gsd-hub/tests/register.test.ts
 import { startAnchor } from "anchor-bankrun"
 import { Program } from "@coral-xyz/anchor"
-import { PublicKey, Keypair } from "@solana/web3.js"
+import { PublicKey, SystemProgram } from "@solana/web3.js"
 import { BankrunProvider } from "anchor-bankrun"
 import { GsdHub } from "../target/types/gsd_hub"
 
@@ -815,74 +970,93 @@ describe("Developer Registration", () => {
 |--------------|------------------|--------------|--------|
 | connect + signMessage | Wallet Standard signIn | 2023 (Phantom v23.11) | One-click auth, wallet constructs message (safer), standardized format |
 | @solana/web3.js v2 (Kit) | @solana/web3.js v1 (with Anchor) | Ongoing transition | Must use v1 until Anchor supports Kit. Plan migration path |
-| getServerSession(authOptions) | auth() function | Auth.js v5 (2024) | Simpler API, App Router native, edge-compatible |
+| middleware.ts | proxy.ts | Next.js 16 (2025) | Node.js runtime (not edge), renamed export, better for Auth.js |
+| getServerSession(authOptions) | auth() function | Auth.js v5 | Simpler API, App Router native |
 | NEXTAUTH_SECRET | AUTH_SECRET | Auth.js v5 | All env vars use AUTH_ prefix |
-| @next-auth/prisma-adapter | @auth/prisma-adapter | Auth.js v5 | Scope change from next-auth to auth |
-| Manual webpack polyfills | Turbopack resolveAlias | Next.js 16 (2025) | Turbopack replaces webpack. Config syntax different |
-| Individual wallet imports | Wallet Standard auto-detect | 2023+ | wallets={[]} detects all compliant wallets. Less code, smaller bundle |
-| Pages Router | App Router | Next.js 13+ (2023) | Server Components, Suspense, streaming. All new features here |
+| prisma-client-js | prisma-client | Prisma 7 (2026) | Rust-free client, driver adapters, prisma.config.ts, 3x faster |
+| DB URL in schema.prisma | DB URL in prisma.config.ts | Prisma 7 | Separate config file, explicit setup |
+| tailwind.config.js | CSS-first config (@import) | Tailwind CSS 4 | No config file needed, @theme directive |
+| Webpack + manual polyfills | Turbopack + resolveAlias | Next.js 16 | Turbopack default bundler, different config syntax |
+| Individual wallet imports | Wallet Standard auto-detect | 2023+ | wallets={[]} detects all compliant wallets |
+| Pages Router | App Router | Next.js 13+ (2023) | Server Components, Suspense, streaming |
+| @sqds/sdk (Squads v3) | @sqds/multisig (Squads v4) | 2024 | Time locks, spending limits, roles, sub-accounts |
 
 **Deprecated/outdated:**
 - `@project-serum/anchor` -- use `@coral-xyz/anchor`
+- `@squads-protocol/multisig` -- use `@sqds/multisig`
 - Pages Router patterns -- use App Router exclusively
 - `getServerSession` / `getToken` from next-auth -- use `auth()` from Auth.js v5
 - Manual wallet adapter imports for Phantom/Solflare/Backpack -- Wallet Standard handles this
 - `NEXTAUTH_SECRET` / `NEXTAUTH_URL` -- use `AUTH_SECRET` / `AUTH_URL`
 - webpack fallback configurations -- use Turbopack resolveAlias
+- `middleware.ts` -- use `proxy.ts` in Next.js 16
+- `prisma-client-js` generator -- use `prisma-client` with Prisma 7
+- DB URL in schema.prisma -- use prisma.config.ts with Prisma 7
 
 ## Open Questions
 
-1. **Turbopack + Solana web3.js polyfills**
-   - What we know: web3.js v1 needs Node.js polyfills (Buffer, crypto). Turbopack supports resolveAlias but specific Solana configurations are underdocumented for Next.js 16
-   - What's unclear: Exact resolveAlias configuration needed. Whether web3.js v1 works out-of-box with Turbopack or needs manual configuration
-   - Recommendation: Test early in scaffolding. If Turbopack fails, try `turbopack: false` fallback to webpack temporarily, then fix properly. Document the working config
+1. **Turbopack + Solana web3.js polyfills exact configuration**
+   - What we know: Turbopack supports resolveAlias with browser condition for aliasing Node.js modules. Buffer, crypto, and stream need polyfills for web3.js v1
+   - What's unclear: Exact resolveAlias configuration confirmed working with @solana/web3.js v1 + @coral-xyz/anchor in Next.js 16.2. The resolveAlias browser condition syntax is documented but Solana-specific configs are sparse
+   - Recommendation: Test early in scaffolding (day 1). Configure resolveAlias for buffer/crypto/stream. If issues persist, fallback to `--webpack` flag temporarily while debugging. Document the working config once confirmed
 
 2. **Auth.js v5 Credentials Provider + SIWS Integration**
-   - What we know: Auth.js v5 supports Credentials provider. Phantom's SIWS demo uses wallet-standard signIn. verifySignIn() from @solana/wallet-standard-util handles verification
-   - What's unclear: Whether Auth.js v5's Credentials provider works seamlessly with the wallet-standard SolanaSignInOutput types (most examples use v4 patterns)
-   - Recommendation: Build a minimal proof-of-concept early (day 1-2). The integration is conceptually simple but the type wiring between wallet-standard and Auth.js may need adapter code
+   - What we know: Auth.js v5 supports Credentials provider. Phantom's SIWS demo uses wallet-standard signIn. verifySignIn() from @solana/wallet-standard-util handles verification. Auth.js v5 authorize function accepts credentials object
+   - What's unclear: Whether Auth.js v5's Credentials provider works seamlessly with the wallet-standard SolanaSignInOutput types. Type serialization between wallet-standard Uint8Array outputs and Auth.js string-based credentials may need adapter code
+   - Recommendation: Build a minimal proof-of-concept early (day 1-2). The integration is conceptually simple but the type wiring between wallet-standard and Auth.js may need serialization/deserialization helpers
 
 3. **Squads v4 Devnet Setup**
-   - What we know: Squads v4 program and accounts exist on devnet. SDK (@sqds/multisig) supports creating multisigs programmatically
+   - What we know: Squads v4 program exists on devnet. SDK (@sqds/multisig ^2.1.3) supports creating multisigs programmatically with multisigCreateV2
    - What's unclear: Whether all 5 proposed signers can be set up on devnet immediately, or if initial devnet deployment uses a simpler multisig (e.g., 2-of-3) for iteration speed
    - Recommendation: Start with 2-of-3 devnet multisig for development velocity, expand to 3-of-5 before mainnet. Document the expansion process
 
 4. **Profile Hash Determinism**
    - What we know: SHA-256 of JSON profile data stored on-chain for integrity verification
    - What's unclear: Whether JSON.stringify with sorted keys produces identical output across all JavaScript engines (edge cases with Unicode, undefined values)
-   - Recommendation: Define a strict canonical serialization format. Test across Node.js and browser environments. Consider using a more deterministic serialization like protobuf or CBOR if JSON proves unreliable
+   - Recommendation: Define a strict canonical serialization format. Test across Node.js and browser environments. Consider using a more deterministic serialization if JSON proves unreliable. Filter out undefined/null keys before hashing
+
+5. **Prisma 7 in Monorepo Context**
+   - What we know: Prisma 7 requires prisma.config.ts, driver adapters, explicit generate, and "type": "module"
+   - What's unclear: How Prisma 7's generated client output path interacts with Turborepo workspace resolution. Whether the generated client at `./generated/prisma` is correctly resolved across workspace boundaries
+   - Recommendation: Keep Prisma entirely within the apps/web workspace (not a shared package). Generated client stays co-located with the schema. If shared access is needed later, extract to a package
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- [Anchor Framework Docs](https://www.anchor-lang.com/docs) -- PDA constraints, InitSpace, program structure
-- [Anchor Space Reference](https://www.anchor-lang.com/docs/references/space) -- Account size calculation, type sizes
-- [Solana PDA Documentation](https://solana.com/docs/core/pda) -- PDA derivation, canonical bumps
-- [Auth.js v5 Migration Guide](https://authjs.dev/getting-started/migrating-to-v5) -- Breaking changes, new patterns
-- [Phantom SIWS Guide](https://phantom.com/learn/developers/sign-in-with-solana) -- signIn method, Wallet Standard integration
-- [Phantom SIWS GitHub](https://github.com/phantom/sign-in-with-solana) -- SolanaSignInInput/Output types, verifySignIn usage
-- [Solana Wallet Adapter Guide](https://solana.com/developers/guides/wallets/add-solana-wallet-adapter-to-nextjs) -- Next.js App Router provider setup
-- [Squads Documentation](https://docs.squads.so/main) -- Multisig creation, program upgrades, CLI commands
-- [Squads v4 Program Upgrade Action](https://github.com/Squads-Protocol/squads-v4-program-upgrade) -- CI/CD program deployment
-- [Next.js Turbopack Config](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack) -- resolveAlias, rules, resolveExtensions
-- [QuickNode SIWS + NextAuth Guide](https://www.quicknode.com/guides/solana-development/dapps/how-to-authenticate-users-with-a-solana-wallet) -- Full implementation with code
+- [Next.js 16 Blog Post](https://nextjs.org/blog/next-16) - Turbopack default, proxy.ts rename, React 19 confirmed
+- [Next.js 16 Upgrade Guide](https://nextjs.org/docs/app/guides/upgrading/version-16) - All breaking changes verified
+- [Next.js Turbopack Config](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack) - resolveAlias syntax confirmed
+- [Anchor Framework Docs](https://www.anchor-lang.com/docs) - PDA constraints, InitSpace, program structure
+- [Anchor Space Reference](https://www.anchor-lang.com/docs/references/space) - Account size calculation, type sizes
+- [Phantom SIWS Guide](https://phantom.com/learn/developers/sign-in-with-solana) - signIn method, Wallet Standard integration
+- [Phantom SIWS GitHub](https://github.com/phantom/sign-in-with-solana) - SolanaSignInInput/Output types, verifySignIn usage
+- [Auth.js v5 Protecting Routes](https://authjs.dev/getting-started/session-management/protecting) - proxy pattern, authorized callback
+- [Auth.js v5 Credentials](https://authjs.dev/getting-started/providers/credentials) - authorize function pattern
+- [Squads Documentation](https://docs.squads.so/main) - Multisig creation, program upgrades, SAT
+- [Squads v4 Quickstart](https://docs.squads.so/main/development/introduction/quickstart) - @sqds/multisig SDK usage confirmed
+- [Prisma 7 Upgrade Guide](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7) - Breaking changes, new architecture
+- [Prisma 7 Release Blog](https://www.prisma.io/blog/announcing-prisma-orm-7-0-0) - Rust-free, 3x faster, 90% smaller
 
 ### Secondary (MEDIUM confidence)
-- [Blocksmith Labs solana-next-auth](https://github.com/Blocksmith-Labs/solana-next-auth) -- NextAuth + SIWS reference implementation
-- [SIWS Specification (web3auth)](https://siws.web3auth.io/) -- CAIP-74 compliance, message format ABNF
-- [Chainstack: Anchor Accounts, Seeds, Bumps, PDAs](https://chainstack.com/solana-anchor-accounts-seeds-bumps-pdas-and-how-the-client-really-works/) -- Comprehensive PDA tutorial
-- [Helius: PDA Guide](https://www.helius.dev/blog/solana-pda) -- PDA best practices 2026
+- [@solana/wallet-adapter-react npm](https://www.npmjs.com/package/@solana/wallet-adapter-react) - Version 0.15.39 confirmed
+- [@solana/wallet-standard-util npm](https://www.npmjs.com/package/@solana/wallet-standard-util) - Version 1.1.2, verifySignIn confirmed
+- [@sqds/multisig npm](https://www.npmjs.com/package/@sqds/multisig) - Version ^2.1.3, weekly downloads 10k+
+- [@coral-xyz/anchor npm](https://www.npmjs.com/package/@coral-xyz/anchor) - Version 0.32.1 confirmed
+- [Solana Wallet Adapter Guide](https://solana.com/developers/cookbook/wallets/connect-wallet-react) - Provider setup with empty wallets array
+- [Auth0: What's New in Next.js 16](https://auth0.com/blog/whats-new-nextjs-16/) - proxy.ts details, breaking changes context
+- [Tailwind CSS v4 Blog](https://tailwindcss.com/blog/tailwindcss-v4) - CSS-first config, OKLCH colors
 
 ### Tertiary (LOW confidence -- needs validation)
-- Turbopack + Solana web3.js v1 polyfill configuration -- limited documentation. Needs hands-on testing
-- Auth.js v5 + Wallet Standard signIn type compatibility -- most examples use v4 patterns. Integration untested in this specific combination
+- Turbopack + Solana web3.js v1 polyfill exact working configuration -- limited documentation for this specific combination. Needs hands-on testing
+- Auth.js v5 + Wallet Standard signIn type serialization -- most examples use v4 patterns or simplified Credentials. The Uint8Array to string serialization bridge is untested in this exact combination
+- Prisma 7 generated client in Turborepo workspace context -- edge case interaction between output path and workspace resolution
 
 ## Metadata
 
 **Confidence breakdown:**
-- Standard stack: HIGH -- all libraries verified via npm, official docs, and GitHub releases. Version compatibility confirmed
-- Architecture: HIGH -- PDA patterns, SIWS flow, and content-hash anchoring are well-documented established patterns
-- Pitfalls: HIGH -- Node.js polyfills, Auth.js migration, and PDA security are well-documented. Turbopack-specific issues are MEDIUM
+- Standard stack: HIGH -- all libraries verified via npm, official docs, and GitHub releases. Version compatibility confirmed. Prisma 7 and Next.js 16 breaking changes documented
+- Architecture: HIGH -- PDA patterns, SIWS flow, content-hash anchoring, and proxy.ts are well-documented established patterns
+- Pitfalls: HIGH -- Node.js polyfills, Auth.js migration, proxy rename, Prisma 7 migration, and PDA security are all well-documented. Turbopack-specific Solana configs are MEDIUM
 - Discretion recommendations: MEDIUM-HIGH -- recommendations follow established patterns and align with project constraints. Token balance and directory decisions are judgment calls backed by pitfall research
 
 **Research date:** 2026-02-08
