@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Rust / Anchor
+target/
+*.so
+
+# Build outputs
+dist/
+
+# Generated
+generated/
+
+# Turborepo
+.turbo/
+
+# Environment
+.env
+.env*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+test-ledger/
+coverage/
