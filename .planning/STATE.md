@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 3 of 6 (Governance and Idea Rounds)
-Plan: 4 of 7 in current phase
+Plan: 5 of 7 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 03-04-PLAN.md (voting and token escrow instructions + bankrun tests)
+Last activity: 2026-02-08 -- Completed 03-05-PLAN.md (governance indexer and API endpoints)
 
-Progress: [█████████████░░░] 81% (13/16 estimated total plans)
+Progress: [██████████████░░] 88% (14/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
-- Average duration: 10 min
-- Total execution time: 1.9 hours
+- Total plans completed: 14
+- Average duration: 9 min
+- Total execution time: 2.0 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [█████████████░░░] 81% (13/16 estimate
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
-| 03 | 4 | 20 min | 5.0 min |
+| 03 | 5 | 24 min | 4.8 min |
 
 **Recent Trend:**
-- Last 5 plans: 9m, 4m, 2m, 8m, 6m
-- Trend: instruction + test plans take longer than pure type plans
+- Last 5 plans: 4m, 2m, 8m, 6m, 4m
+- Trend: API/indexer plans fast; instruction + test plans take longer
 
 *Updated after each plan completion*
 
@@ -89,6 +89,9 @@ Recent decisions affecting current work:
 - [03-04]: Global escrow vault ATA owned by governance_config PDA; PDA signs for withdrawals
 - [03-04]: init_if_needed on VoteDeposit allows cumulative deposits without separate init step
 - [03-04]: Timelock test requires custom round timing to test pre-eligible vote rejection
+- [03-05]: Dual-processor webhook routes transactions through both contribution and governance processors
+- [03-05]: Off-chain content submitted via POST endpoints; indexer creates stub records from on-chain events
+- [03-05]: Reverse discriminator lookup map for O(1) instruction identification in governance indexer
 
 ### Pending Todos
 
@@ -110,5 +113,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 3 plan 4 complete. Voting and token escrow instructions + 9 bankrun tests done. Continue with 03-05 (governance TypeScript SDK).
-Resume file: .planning/phases/03-governance-idea-rounds/03-04-SUMMARY.md
+Stopped at: Phase 3 plan 5 complete. Governance indexer and 5 API endpoints done. Continue with 03-06 (governance UI pages).
+Resume file: .planning/phases/03-governance-idea-rounds/03-05-SUMMARY.md
