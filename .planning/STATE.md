@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 3 of 6 (Governance and Idea Rounds)
-Plan: 2 of 7 in current phase
+Plan: 3 of 7 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 03-02-PLAN.md (governance types, PDAs, and Prisma models)
+Last activity: 2026-02-08 -- Completed 03-03-PLAN.md (round lifecycle instructions + bankrun tests)
 
-Progress: [███████████░░░░░] 69% (11/16 estimated total plans)
+Progress: [████████████░░░░] 75% (12/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 12
 - Average duration: 10 min
-- Total execution time: 1.7 hours
+- Total execution time: 1.8 hours
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [███████████░░░░░] 69% (11/16 estimate
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
-| 03 | 2 | 6 min | 3 min |
+| 03 | 3 | 14 min | 4.7 min |
 
 **Recent Trend:**
-- Last 5 plans: 3m, 4m, 9m, 4m, 2m
-- Trend: fast (types/schema plans are quick)
+- Last 5 plans: 4m, 9m, 4m, 2m, 8m
+- Trend: instruction + test plans take longer than pure type plans
 
 *Updated after each plan completion*
 
@@ -83,6 +83,9 @@ Recent decisions affecting current work:
 - [03-01]: GovernanceError kept as separate enum from GsdHubError for domain separation
 - [03-02]: TypeScript string unions mirror Rust enums with lowercase variants for JSON serialization
 - [03-02]: VoteDepositInfo.isEligible is a computed client-side field (not on-chain) for convenience
+- [03-03]: anchor-spl/idl-build feature required in Cargo.toml for Account<Mint> IDL generation compatibility
+- [03-03]: SPL Token program .so downloaded from mainnet to tests/fixtures/ for bankrun mint creation
+- [03-03]: Each bankrun test creates isolated context (no shared state between tests)
 
 ### Pending Todos
 
@@ -104,5 +107,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 3 plan 2 complete. Governance types, PDAs, and Prisma models created. Continue with 03-03.
-Resume file: .planning/phases/03-governance-idea-rounds/03-02-SUMMARY.md
+Stopped at: Phase 3 plan 3 complete. Round lifecycle instructions + bankrun tests done. Continue with 03-04 (vote deposit and casting).
+Resume file: .planning/phases/03-governance-idea-rounds/03-03-SUMMARY.md
