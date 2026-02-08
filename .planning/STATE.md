@@ -5,33 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 2 Contribution Tracking -- building on-chain state and CPI infrastructure
+**Current focus:** Phase 2 Contribution Tracking -- shared utils complete, building API and indexer
 
 ## Current Position
 
 Phase: 2 of 6 (Contribution Tracking)
-Plan: 1 of 5 in current phase
+Plan: 2 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-08 -- Completed 02-01-PLAN.md (state structs and CPI helpers)
+Last activity: 2026-02-08 -- Completed 02-02-PLAN.md (shared utility packages with TDD)
 
-Progress: [██████░░░░] 31% (5/16 estimated total plans)
+Progress: [██████░░░░] 37% (6/16 estimated total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 15 min
-- Total execution time: 1.3 hours
+- Total plans completed: 6
+- Average duration: 13 min
+- Total execution time: 1.4 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 | 4 | 71 min | 18 min |
-| 02 | 1 | 6 min | 6 min |
+| 02 | 2 | 12 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 13m, 8m, 9m, 6m
+- Last 5 plans: 13m, 8m, 9m, 6m, 6m
 - Trend: accelerating
 
 *Updated after each plan completion*
@@ -65,6 +65,9 @@ Recent decisions affecting current work:
 - [02-01]: sha2 crate added for leaf hashing (anchor-lang 0.32.1 split SDK does not re-export solana_program::hash)
 - [02-01]: Raw CPI discriminators computed via SHA-256 at runtime matching spl-account-compression Anchor IDL
 - [02-01]: NOOP_PROGRAM_ID co-located with ACCOUNT_COMPRESSION_PROGRAM_ID in compression.rs
+- [02-02]: Score formula uses sqrt diminishing returns for both task count and time active
+- [02-02]: Node.js built-in test runner (node:test) for @gsd/utils tests -- zero extra dependencies
+- [02-02]: DataView with explicit little-endian byte writes for Borsh-compatible serialization
 
 ### Pending Todos
 
@@ -83,5 +86,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 2 in progress. Plan 01 complete (state structs + CPI helpers). Plans 02-05 remaining.
-Resume file: .planning/phases/02-contribution-tracking/02-01-SUMMARY.md
+Stopped at: Phase 2 in progress. Plans 01-02 complete (state structs, CPI helpers, shared utils). Plans 03-05 remaining.
+Resume file: .planning/phases/02-contribution-tracking/02-02-SUMMARY.md
