@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 4 planned. Next: Execute Phase 4 Revenue Mechanics (5 plans in 5 waves).
+**Current focus:** Phase 4 in progress. Executing Revenue Mechanics (5 plans in 5 waves).
 
 ## Current Position
 
-Phase: 4 of 6 (Revenue Mechanics) -- PLANNED
-Plan: 0 of 5 in current phase
-Status: Planning complete, ready for execution
-Last activity: 2026-02-08 -- Phase 4 planned (5 plans, 5 waves, research + verification passed)
+Phase: 4 of 6 (Revenue Mechanics) -- IN PROGRESS
+Plan: 1 of 5 in current phase
+Status: In progress
+Last activity: 2026-02-08 -- Completed 04-01-PLAN.md (revenue state foundation)
 
-Progress: [████████████████░░░░] 76% (16/21 estimated total plans for phases 1-4)
+Progress: [█████████████████░░░] 81% (17/21 estimated total plans for phases 1-4)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
-- Average duration: 8.4 min
-- Total execution time: 2.2 hours
+- Total plans completed: 17
+- Average duration: 8.1 min
+- Total execution time: 2.3 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [████████████████░░░░] 76% (16
 | 01 | 4 | 71 min | 18 min |
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
+| 04 | 1 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 8m, 6m, 4m, 6m, 4m
-- Trend: UI/API plans fast (~4-6m); instruction + test plans ~6-8m
+- Last 5 plans: 4m, 6m, 4m, 4m, 3m
+- Trend: State/types plans very fast (~3m); UI/API plans ~4-6m; instruction + test plans ~6-8m
 
 *Updated after each plan completion*
 
@@ -97,6 +98,9 @@ Recent decisions affecting current work:
 - [03-07]: Treasury address falls back to System Program address when NEXT_PUBLIC_TREASURY_ADDRESS not set
 - [03-07]: SPL Token balance parsed via raw Buffer.readBigUInt64LE(64) instead of adding spl-token runtime dep
 - [03-07]: HELIUS_API_KEY optional for treasury -- balance-only mode with warning when key missing
+- [04-01]: RevenueVault uses SystemAccount PDA pattern (no Anchor struct) -- SOL held directly, USDC via ATA
+- [04-01]: RevenueError kept as separate enum from GsdHubError/GovernanceError for domain separation
+- [04-01]: PendingRevenue model stores detected treasury inflows for admin review before distribution
 
 ### Pending Todos
 
@@ -121,5 +125,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-08
-Stopped at: Phase 3 complete (all 7 plans). All governance + treasury UI approved by user. Next: plan Phase 4 (Revenue Mechanics).
-Resume file: .planning/phases/03-governance-idea-rounds/03-07-SUMMARY.md
+Stopped at: Phase 4, plan 1 complete. Next: 04-02 (revenue instructions).
+Resume file: .planning/phases/04-revenue-mechanics/04-01-SUMMARY.md
