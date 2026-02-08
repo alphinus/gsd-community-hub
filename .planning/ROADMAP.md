@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Authentication** - Security-first project scaffold with wallet auth, on-chain identity, and multisig governance
 - [x] **Phase 2: Contribution Tracking** - On-chain contribution records via State Compression with scoring and verification
 - [x] **Phase 3: Governance & Idea Rounds** - Custom governance with time-bounded idea rounds, token-weighted voting, and attack-resistant mechanisms
-- [ ] **Phase 4: Revenue Mechanics** - Contribution-weighted revenue sharing with buy-and-burn mechanism
+- [x] **Phase 4: Revenue Mechanics** - Contribution-weighted revenue sharing with buy-and-burn mechanism
 - [ ] **Phase 5: GSD Framework Integration** - AI-powered task verification and automated contribution scoring (v2)
 - [ ] **Phase 6: Advanced Governance** - Sybil-resistant quadratic voting, delegation, and reputation decay (v2)
 
@@ -91,11 +91,11 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
-- [ ] 04-01-PLAN.md -- Revenue state accounts, error codes, TypeScript types, PDA helpers, and Prisma models
-- [ ] 04-02-PLAN.md -- On-chain revenue instructions (init_config, record_event, claim_share, execute_burn) with bankrun tests
-- [ ] 04-03-PLAN.md -- Revenue webhook indexer and API endpoints (events, claims, burns, summary)
-- [ ] 04-04-PLAN.md -- Server-side Jupiter buy-and-burn distributor and distribution API endpoint
-- [ ] 04-05-PLAN.md -- Revenue claim UI components and treasury dashboard integration
+- [x] 04-01-PLAN.md -- Revenue state accounts, error codes, TypeScript types, PDA helpers, and Prisma models
+- [x] 04-02-PLAN.md -- On-chain revenue instructions (init_config, record_event, claim_share, execute_burn) with bankrun tests
+- [x] 04-03-PLAN.md -- Revenue webhook indexer and API endpoints (events, claims, burns, summary)
+- [x] 04-04-PLAN.md -- Server-side Jupiter buy-and-burn distributor and distribution API endpoint
+- [x] 04-05-PLAN.md -- Revenue claim UI components and treasury dashboard integration
 
 ### Phase 5: GSD Framework Integration
 **Goal**: AI-powered task verification automates contribution scoring that was previously manual, making the platform's differentiating feature -- framework-integrated development -- real (v2)
@@ -136,6 +136,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 1. Foundation & Authentication | 4/4 | Complete | 2026-02-08 |
 | 2. Contribution Tracking | 5/5 | Complete | 2026-02-08 |
 | 3. Governance & Idea Rounds | 7/7 | Complete | 2026-02-08 |
-| 4. Revenue Mechanics | 0/5 | Planned | - |
+| 4. Revenue Mechanics | 5/5 | Complete | 2026-02-08 |
 | 5. GSD Framework Integration | 0/TBD | Not started | - |
 | 6. Advanced Governance | 0/TBD | Not started | - |

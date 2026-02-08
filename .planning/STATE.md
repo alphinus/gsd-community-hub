@@ -127,6 +127,9 @@ Recent decisions affecting current work:
 - Set NEXT_PUBLIC_TREASURY_ADDRESS to real multisig vault PDA
 - Set NEXT_PUBLIC_GSD_MINT to real $GSD token mint address
 - Set HELIUS_API_KEY for treasury transaction history
+- Set JUPITER_API_KEY for buy-and-burn swap execution
+- Generate and set BURN_AUTHORITY_KEYPAIR for burn operations
+- Set REVENUE_ADMIN_SECRET for distribution API endpoint
 
 ### Blockers/Concerns
 
