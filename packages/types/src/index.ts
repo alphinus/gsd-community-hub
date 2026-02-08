@@ -2,10 +2,10 @@ export type {
   DeveloperProfile,
   CreateProfileInput,
   UpdateProfileInput,
-} from "./profile.js";
+} from "./profile";
 
 export type {
   ContributionData,
   ContributionRecord,
   ContributionScore,
-} from "./contribution.js";
+} from "./contribution";

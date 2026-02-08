@@ -1,10 +1,10 @@
-export { getDeveloperProfilePDA, DEVELOPER_SEED } from "./pda.js";
-export { computeProfileHash, profileHashToBytes32 } from "./hash.js";
+export { getDeveloperProfilePDA, DEVELOPER_SEED } from "./pda";
+export { computeProfileHash, profileHashToBytes32 } from "./hash";
 export {
   computeContributionLeafHash,
   serializeContributionLeaf,
   hexToBytes,
   bytesToHex,
-} from "./contribution-hash.js";
-export { calculateContributionScore, bigintSqrt } from "./score.js";
-export type { ScoreInput } from "./score.js";
+} from "./contribution-hash";
+export { calculateContributionScore, bigintSqrt } from "./score";
+export type { ScoreInput } from "./score";
