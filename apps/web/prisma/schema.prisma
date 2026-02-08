@@ -55,3 +55,78 @@ model ProgramUpgrade {
   multisigAddress      String
   createdAt            DateTime @default(now())
 }
+
+model IdeaRound {
+  id              String   @id @default(cuid())
+  roundIndex      Int      @unique
+  onChainAddress  String   @unique
+  title           String   @db.VarChar(200)
+  description     String   @db.Text
+  contentHash     String
+  status          String   @default("open")
+  submissionStart DateTime
+  submissionEnd   DateTime
+  votingEnd       DateTime
+  ideaCount       Int      @default(0)
+  quorumType      String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  ideas           Idea[]
+
+  @@index([status])
+  @@index([submissionEnd])
+  @@index([votingEnd])
+}
+
+model Idea {
+  id                   String   @id @default(cuid())
+  ideaIndex            Int
+  onChainAddress       String   @unique
+  roundId              String
+  authorWallet         String
+  title                String   @db.VarChar(200)
+  description          String   @db.Text
+  contentHash          String
+  status               String   @default("submitted")
+  yesWeight            BigInt   @default(0)
+  noWeight             BigInt   @default(0)
+  abstainWeight        BigInt   @default(0)
+  voterCount           Int      @default(0)
+  transactionSignature String   @unique
+  submittedAt          DateTime @default(now())
+
+  round                IdeaRound @relation(fields: [roundId], references: [id])
+  votes                Vote[]
+
+  @@index([roundId])
+  @@index([authorWallet])
+}
+
+model Vote {
+  id                   String   @id @default(cuid())
+  onChainAddress       String   @unique
+  ideaId               String
+  voterWallet          String
+  vote                 String
+  weight               BigInt
+  transactionSignature String   @unique
+  votedAt              DateTime
+
+  idea                 Idea @relation(fields: [ideaId], references: [id])
+
+  @@unique([ideaId, voterWallet])
+  @@index([voterWallet])
+}
+
+model VoteDeposit {
+  id              String   @id @default(cuid())
+  walletAddress   String   @unique
+  depositedAmount BigInt
+  depositTimestamp DateTime
+  eligibleAt      DateTime
+  activeVotes     Int      @default(0)
+  updatedAt       DateTime @updatedAt
+
+  @@index([walletAddress])
+}
