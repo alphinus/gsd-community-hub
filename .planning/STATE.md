@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 6 of 6 (Advanced Governance)
-Plan: 3 of 7 in current phase -- COMPLETE
+Plan: 5 of 7 in current phase -- COMPLETE
 Status: Executing phase
-Last activity: 2026-02-09 -- Completed 06-03 (reputation decay computation)
+Last activity: 2026-02-09 -- Completed 06-05 (analytics, decay, and human verification APIs)
 
-Progress: [█████████████████████████████░] 97% (32/36 plans through Phase 6-03)
+Progress: [██████████████████████████████] 97% (34/36 plans through Phase 6-05)
 
 ## Performance Metrics
 
@@ -43,6 +43,7 @@ Progress: [███████████████████████
 | Phase 06 P01 | 6 | 2 tasks | 11 files |
 | Phase 06 P02 | 14 | 2 tasks | 10 files |
 | Phase 06 P03 | 3 | 2 tasks | 3 files |
+| Phase 06 P05 | 4 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -164,6 +165,10 @@ Recent decisions affecting current work:
 - [06-03]: Test file placed in packages/utils/tests/ (not src/) to match existing node:test convention
 - [06-03]: DecayContribution uses number types (not BigInt) since decay multiplier operates in float space; BigInt conversion at sum level
 - [06-03]: Math.round() for float-to-BigInt conversion ensures exact half-life values (5000n not 4999n)
+- [06-05]: Decay endpoint restricted to own wallet only (session.publicKey must match requested wallet)
+- [06-05]: Analytics response cached 5 minutes via Cache-Control header for expensive aggregate queries
+- [06-05]: Gini coefficient rounded to 4 decimal places for consistent precision
+- [06-05]: Delegation helpers created as Rule 3 dependency (Plan 06-04 not yet executed at plan start)
 
 ### Pending Todos
 
@@ -192,5 +197,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 06-03-PLAN.md (reputation decay computation). Next: 06-04
-Resume file: .planning/phases/06-advanced-governance/06-04-PLAN.md
+Stopped at: Completed 06-05-PLAN.md (analytics, decay, and human verification APIs). Next: 06-06
+Resume file: .planning/phases/06-advanced-governance/06-06-PLAN.md
