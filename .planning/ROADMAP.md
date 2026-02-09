@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Contribution Tracking** - On-chain contribution records via State Compression with scoring and verification
 - [x] **Phase 3: Governance & Idea Rounds** - Custom governance with time-bounded idea rounds, token-weighted voting, and attack-resistant mechanisms
 - [x] **Phase 4: Revenue Mechanics** - Contribution-weighted revenue sharing with buy-and-burn mechanism
-- [ ] **Phase 5: GSD Framework Integration** - AI-powered task verification and automated contribution scoring (v2)
+- [x] **Phase 5: GSD Framework Integration** - AI-powered task verification and automated contribution scoring (v2)
 - [ ] **Phase 6: Advanced Governance** - Sybil-resistant quadratic voting, delegation, and reputation decay (v2)
 
 ## Phase Details
@@ -105,11 +105,17 @@ Plans:
   1. GSD framework automatically verifies task completion and generates verification scores that feed into the on-chain contribution scoring formula
   2. AI-powered proposal analysis provides feasibility assessment, cost estimation, and risk assessment for submitted ideas
   3. When AI verification confidence is below threshold, the system falls back to manual peer review with clear indication to the user
-**Plans**: TBD
+**Plans**: 8 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
+- [x] 05-01-PLAN.md -- Verification state foundation (Rust structs, TS types, PDA helpers, Prisma models)
+- [x] 05-02-PLAN.md -- AI verification engine (Zod schemas, code/workflow analyzers, scoring, Claude API)
+- [x] 05-03-PLAN.md -- On-chain verification instructions (4 Anchor instructions, 9 bankrun tests)
+- [x] 05-04-PLAN.md -- AI proposal analyzer (codebase summary, proposal analysis, idea integration)
+- [x] 05-05-PLAN.md -- Verification API pipeline (submit, report, reports list, webhook indexer)
+- [x] 05-06-PLAN.md -- Peer review system (3-tier consensus, reviewer assignment, 3 API endpoints)
+- [x] 05-07-PLAN.md -- Verification and review UI (9 components, 2 pages, profile integration)
+- [x] 05-08-PLAN.md -- Retroactive migration (rate-limited batch processing, admin API)
 
 ### Phase 6: Advanced Governance
 **Goal**: Governance evolves from simple token-weighted voting to sybil-resistant quadratic voting with delegation and reputation decay, preventing whale dominance while rewarding sustained participation (v2)
@@ -120,11 +126,15 @@ Plans:
   2. Voting weight uses quadratic formula (sqrt(tokens) = vote weight), reducing whale dominance while still rewarding token holdings
   3. Inactive token holders can delegate voting power to active contributors, and delegation is visible on governance dashboard
   4. Contribution reputation decays over time so old contributions count less, incentivizing sustained participation
-**Plans**: TBD
+**Plans**: 6 plans
 
 Plans:
-- [ ] 06-01: TBD
-- [ ] 06-02: TBD
+- [ ] 06-01-PLAN.md -- State foundation (GovernanceConfig extension, DelegationRecord PDA, TS types, Prisma models)
+- [ ] 06-02-PLAN.md -- On-chain quadratic voting, sybil gate, delegation instructions with bankrun tests
+- [ ] 06-03-PLAN.md -- Reputation decay utility (TDD: half-life exponential decay computation)
+- [ ] 06-04-PLAN.md -- Delegation webhook indexer, API endpoints (delegate, verification, analytics, decay)
+- [ ] 06-05-PLAN.md -- Civic Pass frontend, delegation UI, decay display, governance dashboard integration
+- [ ] 06-06-PLAN.md -- Governance analytics dashboard with recharts (participation, power distribution)
 
 ## Progress
 
@@ -137,5 +147,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 2. Contribution Tracking | 5/5 | Complete | 2026-02-08 |
 | 3. Governance & Idea Rounds | 7/7 | Complete | 2026-02-08 |
 | 4. Revenue Mechanics | 5/5 | Complete | 2026-02-08 |
-| 5. GSD Framework Integration | 0/TBD | Not started | - |
-| 6. Advanced Governance | 0/TBD | Not started | - |
+| 5. GSD Framework Integration | 8/8 | Complete | 2026-02-09 |
+| 6. Advanced Governance | 0/6 | Not started | - |
