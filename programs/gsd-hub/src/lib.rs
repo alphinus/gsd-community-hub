@@ -245,4 +245,26 @@ pub mod gsd_hub {
             peer_report_hash,
         )
     }
+
+    pub fn delegate_vote(ctx: Context<DelegateVote>) -> Result<()> {
+        instructions::delegate_vote::handler(ctx)
+    }
+
+    pub fn revoke_delegation(ctx: Context<RevokeDelegation>) -> Result<()> {
+        instructions::revoke_delegation::handler(ctx)
+    }
+
+    pub fn update_governance_config(
+        ctx: Context<UpdateGovernanceConfig>,
+        quadratic_voting_enabled: bool,
+        civic_gatekeeper_network: Pubkey,
+        decay_half_life_days: u16,
+    ) -> Result<()> {
+        instructions::update_governance_config::handler(
+            ctx,
+            quadratic_voting_enabled,
+            civic_gatekeeper_network,
+            decay_half_life_days,
+        )
+    }
 }

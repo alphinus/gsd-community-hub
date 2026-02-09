@@ -94,6 +94,24 @@ pub enum GovernanceError {
 
     #[msg("No active delegation found to revoke")]
     NoDelegation,
+
+    #[msg("Gateway token is invalid or owned by wrong program")]
+    InvalidGatewayToken,
+
+    #[msg("Gateway token subject does not match voter")]
+    GatewayTokenOwnerMismatch,
+
+    #[msg("Gateway token network does not match configured gatekeeper")]
+    GatewayNetworkMismatch,
+
+    #[msg("Gateway token is not in Active state")]
+    GatewayTokenNotActive,
+
+    #[msg("Gateway token has expired")]
+    GatewayTokenExpired,
+
+    #[msg("Cannot delegate with active votes")]
+    CannotDelegateWithActiveVotes,
 }
 
 #[error_code]
