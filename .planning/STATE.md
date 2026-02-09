@@ -14,7 +14,7 @@ Plan: 5 of 7 in current phase -- COMPLETE
 Status: Executing phase
 Last activity: 2026-02-09 -- Completed 06-05 (analytics, decay, and human verification APIs)
 
-Progress: [██████████████████████████████] 97% (34/36 plans through Phase 6-05)
+Progress: [██████████████████████████████] 97% (35/36 plans through Phase 6-05)
 
 ## Performance Metrics
 
@@ -43,6 +43,7 @@ Progress: [███████████████████████
 | Phase 06 P01 | 6 | 2 tasks | 11 files |
 | Phase 06 P02 | 14 | 2 tasks | 10 files |
 | Phase 06 P03 | 3 | 2 tasks | 3 files |
+| Phase 06 P04 | 4 | 2 tasks | 3 files |
 | Phase 06 P05 | 4 | 2 tasks | 6 files |
 
 ## Accumulated Context
@@ -168,6 +169,9 @@ Recent decisions affecting current work:
 - [06-05]: Decay endpoint restricted to own wallet only (session.publicKey must match requested wallet)
 - [06-05]: Analytics response cached 5 minutes via Cache-Control header for expensive aggregate queries
 - [06-05]: Gini coefficient rounded to 4 decimal places for consistent precision
+- [06-04]: Separate indexer file (governance-advanced-indexer.ts) rather than extending governance-indexer.ts for domain separation
+- [06-04]: effectiveFromRound derived from latest open/voting round at indexing time (defaults to 0 if none active)
+- [06-04]: 6-processor Helius webhook pipeline (contribution + governance + revenue + detection + verification + advanced-governance)
 - [06-05]: Delegation helpers created as Rule 3 dependency (Plan 06-04 not yet executed at plan start)
 
 ### Pending Todos
