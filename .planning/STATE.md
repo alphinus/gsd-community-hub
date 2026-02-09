@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 5 of 6 (GSD Framework Integration)
-Plan: 4 of 8 in current phase -- COMPLETE
+Plan: 6 of 8 in current phase -- COMPLETE
 Status: Executing
-Last activity: 2026-02-09 -- Completed 05-04-PLAN.md (AI proposal analyzer)
+Last activity: 2026-02-09 -- Completed 05-06-PLAN.md (Peer review system)
 
-Progress: [████████████████████████░░░] 86% (25/29 total plans)
+Progress: [█████████████████████████░░] 90% (26/29 total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 25
-- Average duration: 7.1 min
-- Total execution time: 3.0 hours
+- Total plans completed: 26
+- Average duration: 7.0 min
+- Total execution time: 3.1 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [███████████████████████
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
 | 04 | 5 | 24 min | 4.8 min |
-| 05 | 4 | 22 min | 5.5 min |
+| 05 | 5 | 27 min | 5.4 min |
 
 **Recent Trend:**
-- Last 5 plans: 3m, 8m, 5m, 7m, 4m
-- Trend: Proposal analysis plan ~4m; AI engine plans ~6-7m; On-chain instruction plans ~6m
+- Last 5 plans: 8m, 5m, 7m, 4m, 5m
+- Trend: Peer review plan ~5m; Proposal analysis plan ~4m; AI engine plans ~6-7m
 
 *Updated after each plan completion*
 
@@ -133,6 +133,10 @@ Recent decisions affecting current work:
 - [05-04]: Temperature 0 on proposal analysis calls matching verification engine convention
 - [05-04]: Analysis GET endpoint returns status field (pending/completed/unavailable) for polling support
 - [05-04]: JSON.parse(JSON.stringify(analysis)) for Prisma 7 strict Json field type compatibility
+- [05-06]: Score input as 0-100 at API level, scaled to 0-10000 BPS internally for on-chain consistency
+- [05-06]: Reviewer profiles auto-created on first review submission (permissionless entry to review system)
+- [05-06]: JSON.parse(JSON.stringify()) for Prisma 7 strict Json field compatibility on evidence and domain maps
+- [05-06]: Wallet address truncation (4+4 chars) in status endpoint for reviewer privacy
 
 ### Pending Todos
 
@@ -161,5 +165,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 05-04-PLAN.md (AI proposal analyzer)
-Resume file: .planning/phases/05-gsd-framework-integration/05-04-SUMMARY.md
+Stopped at: Completed 05-06-PLAN.md (Peer review system)
+Resume file: .planning/phases/05-gsd-framework-integration/05-06-SUMMARY.md
