@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db/prisma";
+import { analyzeProposal } from "@/lib/verification/proposal-analyzer";
 
 /**
  * GET /api/governance/rounds/:id/ideas - List paginated ideas for a round
@@ -160,6 +161,16 @@ export async function POST(
         status: "submitted",
         transactionSignature: `offchain-${Date.now()}`,
       },
+    });
+
+    // Trigger async AI proposal analysis (fire-and-forget, don't await)
+    // Analysis runs in background; idea submission returns immediately
+    analyzeProposal({
+      ideaId: idea.id,
+      title: body.title,
+      description: body.description,
+    }).catch((err) => {
+      console.error(`Proposal analysis failed for idea ${idea.id}:`, err);
     });
 
     // Serialize BigInt fields
