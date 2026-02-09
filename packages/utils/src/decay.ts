@@ -34,7 +34,11 @@ export function decayMultiplier(
   ageDays: number,
   halfLifeDays: number = DECAY_HALF_LIFE_DAYS
 ): number {
-  throw new Error("Not implemented");
+  // Edge cases: negative age treated as 0 (no decay), zero half-life treated as no decay
+  if (ageDays <= 0 || halfLifeDays <= 0) {
+    return 1.0;
+  }
+  return Math.pow(2, -ageDays / halfLifeDays);
 }
 
 /**
@@ -51,7 +55,17 @@ export function calculateDecayedScore(
   contributions: DecayContribution[],
   halfLifeDays: number = DECAY_HALF_LIFE_DAYS
 ): bigint {
-  throw new Error("Not implemented");
+  if (contributions.length === 0) {
+    return 0n;
+  }
+
+  let total = 0;
+  for (const c of contributions) {
+    total += c.verificationScore * decayMultiplier(c.ageDays, halfLifeDays);
+  }
+
+  // Round to nearest integer, convert to BigInt
+  return BigInt(Math.round(total));
 }
 
 /** Input for contribution score with decay, extending ScoreInput */
@@ -73,5 +87,13 @@ export function calculateContributionScoreWithDecay(
   input: DecayScoreInput,
   halfLifeDays: number = DECAY_HALF_LIFE_DAYS
 ): bigint {
-  throw new Error("Not implemented");
+  // Compute decayed total verification score from individual contributions
+  const decayedTotal = calculateDecayedScore(input.contributions, halfLifeDays);
+
+  // Feed the decayed total into the existing contribution score formula
+  return calculateContributionScore({
+    tasksCompleted: input.tasksCompleted,
+    totalVerificationScore: decayedTotal,
+    timeActiveDays: input.timeActiveDays,
+  });
 }

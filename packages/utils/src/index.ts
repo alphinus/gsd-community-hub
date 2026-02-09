@@ -9,6 +9,13 @@ export {
 export { calculateContributionScore, bigintSqrt } from "./score";
 export type { ScoreInput } from "./score";
 export {
+  decayMultiplier,
+  calculateDecayedScore,
+  calculateContributionScoreWithDecay,
+  DECAY_HALF_LIFE_DAYS,
+} from "./decay";
+export type { DecayContribution, DecayScoreInput } from "./decay";
+export {
   getGovernanceConfigPDA,
   getIdeaRoundPDA,
   getIdeaPDA,
