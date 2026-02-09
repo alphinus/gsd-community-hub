@@ -599,6 +599,8 @@ describe("Governance Voting and Token Escrow", () => {
           round: ideaRoundPda,
           voteRecord: voteRecordPda,
           voteDeposit: voteDepositPda,
+          governanceConfig: governanceConfigPda,
+          gatewayToken: null,
           voter: voter.publicKey,
           systemProgram: SystemProgram.programId,
         })
@@ -646,6 +648,8 @@ describe("Governance Voting and Token Escrow", () => {
         round: s.ideaRoundPda,
         voteRecord: s.voteRecordPda,
         voteDeposit: s.voteDepositPda,
+        governanceConfig: s.governanceConfigPda,
+        gatewayToken: null,
         voter: s.voter.publicKey,
         systemProgram: SystemProgram.programId,
       })
@@ -706,6 +710,8 @@ describe("Governance Voting and Token Escrow", () => {
         round: s.ideaRoundPda,
         voteRecord: s.voteRecordPda,
         voteDeposit: s.voteDepositPda,
+        governanceConfig: s.governanceConfigPda,
+        gatewayToken: null,
         voter: s.voter.publicKey,
         systemProgram: SystemProgram.programId,
       })
@@ -721,6 +727,8 @@ describe("Governance Voting and Token Escrow", () => {
           round: s.ideaRoundPda,
           voteRecord: s.voteRecordPda,
           voteDeposit: s.voteDepositPda,
+          governanceConfig: s.governanceConfigPda,
+          gatewayToken: null,
           voter: s.voter.publicKey,
           systemProgram: SystemProgram.programId,
         })
@@ -773,6 +781,8 @@ describe("Governance Voting and Token Escrow", () => {
         round: s.ideaRoundPda,
         voteRecord: s.voteRecordPda,
         voteDeposit: s.voteDepositPda,
+        governanceConfig: s.governanceConfigPda,
+        gatewayToken: null,
         voter: s.voter.publicKey,
         systemProgram: SystemProgram.programId,
       })
@@ -833,6 +843,8 @@ describe("Governance Voting and Token Escrow", () => {
         round: s.ideaRoundPda,
         voteRecord: s.voteRecordPda,
         voteDeposit: s.voteDepositPda,
+        governanceConfig: s.governanceConfigPda,
+        gatewayToken: null,
         voter: s.voter.publicKey,
         systemProgram: SystemProgram.programId,
       })
@@ -896,6 +908,8 @@ describe("Governance Voting and Token Escrow", () => {
         round: s.ideaRoundPda,
         voteRecord: s.voteRecordPda,
         voteDeposit: s.voteDepositPda,
+        governanceConfig: s.governanceConfigPda,
+        gatewayToken: null,
         voter: s.voter.publicKey,
         systemProgram: SystemProgram.programId,
       })

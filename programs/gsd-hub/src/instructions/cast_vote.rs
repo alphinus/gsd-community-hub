@@ -108,7 +108,7 @@ pub fn handler(ctx: Context<CastVote>, vote: VoteChoice) -> Result<()> {
             .ok_or(GovernanceError::HumanVerificationRequired)?;
 
         let civic_gateway =
-            Pubkey::from_str("gatem74V238djXdzWnJf2FWTnQ8pUV3yHZ7BLKhys").unwrap();
+            Pubkey::from_str("gatbGF9DvLAw3kWyn1EmH5Nh1Sqp8sTukF7yaQpSc71").unwrap();
         require!(
             gt_info.owner == &civic_gateway,
             GovernanceError::InvalidGatewayToken
