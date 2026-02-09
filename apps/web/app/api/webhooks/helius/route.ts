@@ -9,6 +9,7 @@ import {
   processRevenueDetection,
 } from "@/lib/revenue/indexer";
 import { processVerificationEvent } from "@/lib/verification/indexer";
+import { processAdvancedGovernanceEvent } from "@/lib/indexers/governance-advanced-indexer";
 
 /**
  * POST /api/webhooks/helius
@@ -18,12 +19,13 @@ import { processVerificationEvent } from "@/lib/verification/indexer";
  * Authentication: Validates the Authorization header against HELIUS_WEBHOOK_AUTH.
  * Payload: Array of Helius enhanced transactions.
  *
- * Each transaction is processed through 5 processors:
+ * Each transaction is processed through 6 processors:
  * 1. Contribution: Finds gsd-hub program instructions, extracts ContributionLeaf from noop
  * 2. Governance: Identifies governance instruction discriminators (create_round, submit_idea, etc.)
  * 3. Revenue instructions: Identifies revenue instruction discriminators (record_revenue_event, claim, burn)
  * 4. Revenue detection: Detects raw SOL/USDC inflows to treasury and persists as PendingRevenue
  * 5. Verification: Identifies verification instruction discriminators (submit_verification, peer_review, finalize)
+ * 6. Advanced governance: Identifies delegation and config update instructions (delegate_vote, revoke_delegation, update_governance_config)
  *
  * A transaction may match multiple processors. Each uses upsert for idempotency.
  * Duplicate webhook deliveries are silently ignored.
@@ -57,12 +59,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Process each transaction through all 5 processors
+  // Process each transaction through all 6 processors
   let contributionsProcessed = 0;
   let governanceProcessed = 0;
   let revenueProcessed = 0;
   let revenueDetected = 0;
   let verificationProcessed = 0;
+  let advancedGovernanceProcessed = 0;
   const errors: string[] = [];
 
   for (const tx of transactions) {
@@ -140,6 +143,20 @@ export async function POST(request: NextRequest) {
       );
       errors.push(`verification:${tx.signature}: ${message}`);
     }
+
+    // Try advanced governance processor (delegation, config updates)
+    try {
+      const count = await processAdvancedGovernanceEvent(tx);
+      advancedGovernanceProcessed += count;
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unknown error";
+      console.error(
+        `Failed to process advanced governance ${tx.signature}:`,
+        message
+      );
+      errors.push(`advanced-governance:${tx.signature}: ${message}`);
+    }
   }
 
   const totalProcessed =
@@ -147,11 +164,12 @@ export async function POST(request: NextRequest) {
     governanceProcessed +
     revenueProcessed +
     revenueDetected +
-    verificationProcessed;
+    verificationProcessed +
+    advancedGovernanceProcessed;
 
   if (errors.length > 0) {
     console.warn(
-      `Webhook processed ${totalProcessed} events (${contributionsProcessed} contributions, ${governanceProcessed} governance, ${revenueProcessed} revenue, ${revenueDetected} detected, ${verificationProcessed} verification) with ${errors.length} errors`
+      `Webhook processed ${totalProcessed} events (${contributionsProcessed} contributions, ${governanceProcessed} governance, ${revenueProcessed} revenue, ${revenueDetected} detected, ${verificationProcessed} verification, ${advancedGovernanceProcessed} advanced-governance) with ${errors.length} errors`
     );
   }
 
@@ -163,6 +181,7 @@ export async function POST(request: NextRequest) {
     revenue: revenueProcessed,
     revenueDetected,
     verificationProcessed,
+    advancedGovernanceProcessed,
     total: transactions.length,
     errors: errors.length > 0 ? errors : undefined,
   });
