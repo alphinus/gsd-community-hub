@@ -36,3 +36,12 @@ Thumbs.db
 # Test
 test-ledger/
 coverage/
+
+# Anchor
+.anchor/
+
+# Build artifacts
+*.tsbuildinfo
+
+# GSD planning (internal)
+.planning/agent-history.json

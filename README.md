@@ -19,7 +19,7 @@
   <img src="https://img.shields.io/badge/next.js-15-black?style=flat-square&logo=next.js" alt="Next.js" />
   <img src="https://img.shields.io/badge/rust-%23000000.svg?style=flat-square&logo=rust&logoColor=white" alt="Rust" />
   <img src="https://img.shields.io/badge/typescript-5.7-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/license-open%20source-green?style=flat-square" alt="Open Source" />
+  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License" />
 </p>
 
 ---
@@ -405,7 +405,7 @@ No staking yields. No airdrops. No promises. Just: **build stuff, get tracked, g
 
 ## License
 
-Open source. Transparency is the whole point.
+[MIT](LICENSE) -- open source, because transparency is the whole point.
 
 ---
 
