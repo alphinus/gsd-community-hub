@@ -38,6 +38,7 @@ Progress: [███████████████████████
 - Trend: Peer review plan ~5m; Proposal analysis plan ~4m; AI engine plans ~6-7m
 
 *Updated after each plan completion*
+| Phase 05 P05 | 6 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -137,6 +138,10 @@ Recent decisions affecting current work:
 - [05-06]: Reviewer profiles auto-created on first review submission (permissionless entry to review system)
 - [05-06]: JSON.parse(JSON.stringify()) for Prisma 7 strict Json field compatibility on evidence and domain maps
 - [05-06]: Wallet address truncation (4+4 chars) in status endpoint for reviewer privacy
+- [Phase 05]: [05-05]: Auth uses session.publicKey pattern (matching profile route convention) not session.user.name
+- [Phase 05]: [05-05]: On-chain recording deferred -- reports stored off-chain first, on-chain recording triggered separately when server signing available
+- [Phase 05]: [05-05]: GET verification endpoints are public (no auth) for transparency -- every report is publicly auditable
+- [Phase 05]: [05-05]: 5-processor Helius webhook pipeline (contribution + governance + revenue + detection + verification)
 
 ### Pending Todos
 
