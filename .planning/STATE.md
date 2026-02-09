@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 5 of 6 (GSD Framework Integration)
-Plan: 1 of 8 in current phase -- COMPLETE
+Plan: 2 of 8 in current phase -- COMPLETE
 Status: Executing
-Last activity: 2026-02-09 -- Completed 05-01-PLAN.md (verification & review state foundation)
+Last activity: 2026-02-09 -- Completed 05-02-PLAN.md (AI verification engine)
 
-Progress: [██████████████████████░░░░░] 76% (22/29 total plans)
+Progress: [██████████████████████░░░░░] 79% (23/29 total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
-- Average duration: 7.5 min
-- Total execution time: 2.6 hours
+- Total plans completed: 23
+- Average duration: 7.3 min
+- Total execution time: 2.8 hours
 
 **By Phase:**
 
@@ -31,11 +31,11 @@ Progress: [██████████████████████░
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
 | 04 | 5 | 24 min | 4.8 min |
-| 05 | 1 | 5 min | 5 min |
+| 05 | 2 | 12 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 6m, 4m, 3m, 8m, 5m
-- Trend: Foundation/type plans ~5m; UI plans with human-verify checkpoints take longer (~8m)
+- Last 5 plans: 4m, 3m, 8m, 5m, 7m
+- Trend: AI engine plans ~6-7m; Foundation/type plans ~5m; UI plans with checkpoints ~8m
 
 *Updated after each plan completion*
 
@@ -121,6 +121,11 @@ Recent decisions affecting current work:
 - [05-01]: ReviewerProfile stores aggregate totals on-chain; domain-specific breakdown in Prisma JSON fields
 - [05-01]: IdeaAnalysis model added to Prisma with relation to Idea for AI feasibility analysis
 - [05-01]: Verification scores use 0-10000 basis points normalization consistent with revenue/governance conventions
+- [05-02]: Zod v4.3.6 installed -- Anthropic SDK v0.74.0 supports zod v3 and v4 as peer dependencies
+- [05-02]: Server-side weighted score recomputation: AI overallScore is informational only, authoritative score computed by computeWeightedScore
+- [05-02]: Temperature 0 on verification calls to minimize scoring variance
+- [05-02]: Domain tags inferred from file paths via glob pattern matching, merged with AI-inferred tags
+- [05-02]: Using GA output_config.format API (not deprecated output_format parameter)
 
 ### Pending Todos
 
@@ -136,6 +141,7 @@ Recent decisions affecting current work:
 - Set JUPITER_API_KEY for buy-and-burn swap execution
 - Generate and set BURN_AUTHORITY_KEYPAIR for burn operations
 - Set REVENUE_ADMIN_SECRET for distribution API endpoint
+- Set ANTHROPIC_API_KEY for AI verification engine (Claude API access)
 
 ### Blockers/Concerns
 
@@ -148,5 +154,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 05-01-PLAN.md (verification & review state foundation)
-Resume file: .planning/phases/05-gsd-framework-integration/05-01-SUMMARY.md
+Stopped at: Completed 05-02-PLAN.md (AI verification engine)
+Resume file: .planning/phases/05-gsd-framework-integration/05-02-SUMMARY.md
