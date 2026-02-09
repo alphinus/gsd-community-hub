@@ -126,6 +126,9 @@ Recent decisions affecting current work:
 - [05-02]: Temperature 0 on verification calls to minimize scoring variance
 - [05-02]: Domain tags inferred from file paths via glob pattern matching, merged with AI-inferred tags
 - [05-02]: Using GA output_config.format API (not deprecated output_format parameter)
+- [05-03]: Confidence threshold determines AI verification auto-completion vs peer review requirement
+- [05-03]: Peer consensus calculation kept off-chain; finalize_peer_verification records result on-chain
+- [05-03]: VerificationType import added to lib.rs state re-exports for instruction handler signatures
 - [05-04]: Static codebase summary (6.9KB hardcoded) rather than dynamic generation for AI proposal analysis context
 - [05-04]: Temperature 0 on proposal analysis calls matching verification engine convention
 - [05-04]: Analysis GET endpoint returns status field (pending/completed/unavailable) for polling support
