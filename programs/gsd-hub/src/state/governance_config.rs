@@ -21,9 +21,15 @@ pub struct GovernanceConfig {
     pub deposit_timelock: i64,
     /// Seconds after approval before idea can be executed, default 48 hours (8 bytes)
     pub execution_timelock: i64,
+    /// Whether quadratic voting is enabled for staged rollout (1 byte)
+    pub quadratic_voting_enabled: bool,
+    /// Civic Pass gatekeeper network pubkey, default Pubkey::default() when disabled (32 bytes)
+    pub civic_gatekeeper_network: Pubkey,
+    /// Half-life in days for voting power decay, default 180 (2 bytes)
+    pub decay_half_life_days: u16,
 }
 // PDA seeds: ["governance_config"]
-// Total: 8 (disc) + 32 + 32 + 32 + 1 + 4 + 8 + 8 + 8 = 133 bytes
+// Total: 8 (disc) + 32 + 32 + 32 + 1 + 4 + 8 + 8 + 8 + 1 + 32 + 2 = 168 bytes
 
 impl QuorumType {
     /// Returns the required basis points (bps) for quorum.

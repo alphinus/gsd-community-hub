@@ -54,5 +54,10 @@ pub fn handler(
         execution_timelock
     };
 
+    // Phase 6 advanced governance fields -- disabled by default
+    config.quadratic_voting_enabled = false;
+    config.civic_gatekeeper_network = Pubkey::default();
+    config.decay_half_life_days = 180;
+
     Ok(())
 }

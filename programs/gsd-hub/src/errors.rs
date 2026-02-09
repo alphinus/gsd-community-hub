@@ -76,6 +76,24 @@ pub enum GovernanceError {
 
     #[msg("Insufficient deposit amount")]
     InsufficientDeposit,
+
+    #[msg("Civic Pass verification required for quadratic voting")]
+    HumanVerificationRequired,
+
+    #[msg("Delegation record does not match voter")]
+    InvalidDelegation,
+
+    #[msg("Delegation is not active")]
+    DelegationInactive,
+
+    #[msg("Cannot vote directly while voting power is delegated")]
+    VotingPowerDelegated,
+
+    #[msg("Active delegation already exists for this wallet")]
+    DelegationAlreadyExists,
+
+    #[msg("No active delegation found to revoke")]
+    NoDelegation,
 }
 
 #[error_code]

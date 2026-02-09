@@ -1,4 +1,5 @@
 pub mod contribution;
+pub mod delegation_record;
 pub mod developer;
 pub mod governance_config;
 pub mod idea;
@@ -16,6 +17,7 @@ pub mod vote_deposit;
 pub mod vote_record;
 
 pub use contribution::*;
+pub use delegation_record::*;
 pub use developer::*;
 pub use governance_config::*;
 pub use idea::*;
