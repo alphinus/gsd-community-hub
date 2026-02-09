@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 5 of 6 (GSD Framework Integration)
-Plan: 6 of 8 in current phase -- COMPLETE
+Plan: 8 of 8 in current phase -- COMPLETE (07 pending)
 Status: Executing
-Last activity: 2026-02-09 -- Completed 05-06-PLAN.md (Peer review system)
+Last activity: 2026-02-09 -- Completed 05-08-PLAN.md (Retroactive migration)
 
-Progress: [█████████████████████████░░] 90% (26/29 total plans)
+Progress: [██████████████████████████░] 93% (27/29 total plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 26
-- Average duration: 7.0 min
-- Total execution time: 3.1 hours
+- Total plans completed: 27
+- Average duration: 6.8 min
+- Total execution time: 3.15 hours
 
 **By Phase:**
 
@@ -31,14 +31,14 @@ Progress: [███████████████████████
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
 | 04 | 5 | 24 min | 4.8 min |
-| 05 | 5 | 27 min | 5.4 min |
+| 05 | 7 | 30 min | 4.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 8m, 5m, 7m, 4m, 5m
-- Trend: Peer review plan ~5m; Proposal analysis plan ~4m; AI engine plans ~6-7m
+- Last 5 plans: 5m, 7m, 4m, 5m, 3m
+- Trend: Migration plan ~3m; Peer review plan ~5m; AI engine plans ~6-7m
 
 *Updated after each plan completion*
-| Phase 05 P05 | 6 | 2 tasks | 6 files |
+| Phase 05 P08 | 3 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -142,6 +142,10 @@ Recent decisions affecting current work:
 - [Phase 05]: [05-05]: On-chain recording deferred -- reports stored off-chain first, on-chain recording triggered separately when server signing available
 - [Phase 05]: [05-05]: GET verification endpoints are public (no auth) for transparency -- every report is publicly auditable
 - [Phase 05]: [05-05]: 5-processor Helius webhook pipeline (contribution + governance + revenue + detection + verification)
+- [05-08]: All Phase 2-4 contributions classified as legacy (no recoverable artifacts in database for AI verification)
+- [05-08]: REVENUE_ADMIN_SECRET reused for migration admin auth to avoid new env vars (temporary endpoint)
+- [05-08]: In-memory migration state acceptable for v1 (~100-500 contributions); production would use BullMQ job queue
+- [05-08]: Default migration rate: 15/batch, 4min delay (~15/hour) within research rate limit
 
 ### Pending Todos
 
@@ -170,5 +174,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 05-06-PLAN.md (Peer review system)
-Resume file: .planning/phases/05-gsd-framework-integration/05-06-SUMMARY.md
+Stopped at: Completed 05-08-PLAN.md (Retroactive migration)
+Resume file: .planning/phases/05-gsd-framework-integration/05-08-SUMMARY.md
