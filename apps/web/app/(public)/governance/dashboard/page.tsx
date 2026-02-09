@@ -4,6 +4,9 @@ import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { VotingPowerDisplay } from "@/components/governance/VotingPowerDisplay";
+import { QuadraticVoteDisplay } from "@/components/governance/QuadraticVoteDisplay";
+import { HumanVerificationBadge } from "@/components/governance/HumanVerificationBadge";
+import { DecayedScoreDisplay } from "@/components/governance/DecayedScoreDisplay";
 
 interface VoteEntry {
   id: string;
@@ -21,6 +24,38 @@ interface VotesResponse {
   total: number;
   page: number;
   limit: number;
+}
+
+interface DepositInfo {
+  walletAddress: string;
+  depositedAmount: string;
+  depositTimestamp: string;
+  eligibleAt: string;
+  activeVotes: number;
+}
+
+interface DelegationResponse {
+  delegations: Array<{
+    delegatorWallet: string;
+    delegateWallet: string;
+    delegatedAmount: string;
+    isActive: boolean;
+  }>;
+  stats: {
+    asDelegator: { delegateWallet: string; delegatedAmount: string } | null;
+    asDelegate: {
+      delegatorCount: number;
+      totalDelegated: string;
+    };
+  };
+}
+
+interface AnalyticsResponse {
+  delegationStats: {
+    totalActiveDelegations: number;
+    totalDelegatedTokens: string;
+    topDelegates: Array<{ wallet: string; delegatorCount: number }>;
+  };
 }
 
 function DashboardSkeleton() {
@@ -66,6 +101,45 @@ export default function GovernanceDashboard() {
       staleTime: 30_000,
     });
 
+  // Fetch deposit info for quadratic display
+  const { data: depositData } = useQuery<{
+    deposit: DepositInfo | null;
+    isEligible: boolean;
+  }>({
+    queryKey: ["deposit", wallet],
+    queryFn: async () => {
+      const res = await fetch(`/api/governance/deposit?wallet=${wallet}`);
+      if (!res.ok) throw new Error("Failed to fetch deposit");
+      return res.json();
+    },
+    enabled: !!wallet,
+    staleTime: 30_000,
+  });
+
+  // Fetch delegation info
+  const { data: delegationData } = useQuery<DelegationResponse>({
+    queryKey: ["delegation", wallet],
+    queryFn: async () => {
+      const res = await fetch(`/api/governance/delegate?wallet=${wallet}`);
+      if (!res.ok) throw new Error("Failed to fetch delegation");
+      return res.json();
+    },
+    enabled: !!wallet,
+    staleTime: 30_000,
+  });
+
+  // Fetch analytics for delegation summary
+  const { data: analyticsData } = useQuery<AnalyticsResponse>({
+    queryKey: ["governance-analytics"],
+    queryFn: async () => {
+      const res = await fetch("/api/governance/analytics");
+      if (!res.ok) throw new Error("Failed to fetch analytics");
+      return res.json();
+    },
+    enabled: !!wallet,
+    staleTime: 60_000,
+  });
+
   if (!wallet) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-12">
@@ -81,19 +155,37 @@ export default function GovernanceDashboard() {
     );
   }
 
+  const depositAmount = depositData?.deposit?.depositedAmount ?? "0";
+  const delegatedToMe = delegationData?.stats?.asDelegate?.totalDelegated ?? "0";
+  const hasDelegation = !!delegationData?.stats?.asDelegator;
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="mb-6 text-3xl font-bold text-[var(--color-gsd-text)]">
         Governance Dashboard
       </h1>
 
-      {/* Voting power */}
-      <div className="mb-6">
+      {/* Voting power and verification */}
+      <div className="mb-6 grid gap-4 sm:grid-cols-2">
         <VotingPowerDisplay wallet={wallet} />
+        <HumanVerificationBadge wallet={wallet} />
       </div>
 
+      {/* Quadratic vote weight */}
+      {depositData?.deposit && (
+        <div className="mb-6">
+          <QuadraticVoteDisplay
+            depositedAmount={depositAmount}
+            isQuadratic={true}
+            delegatedAmount={
+              BigInt(delegatedToMe) > 0n ? delegatedToMe : undefined
+            }
+          />
+        </div>
+      )}
+
       {/* Quick links */}
-      <div className="mb-8 grid grid-cols-3 gap-3">
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Link
           href="/governance/deposit"
           className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
@@ -103,6 +195,17 @@ export default function GovernanceDashboard() {
           </p>
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Manage deposits
+          </p>
+        </Link>
+        <Link
+          href="/governance/delegate"
+          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
+        >
+          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
+            Delegate
+          </p>
+          <p className="text-xs text-[var(--color-gsd-text-muted)]">
+            {hasDelegation ? "Active" : "Manage"}
           </p>
         </Link>
         <Link
@@ -117,16 +220,76 @@ export default function GovernanceDashboard() {
           </p>
         </Link>
         <Link
-          href="/governance"
+          href="/governance/delegates"
           className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
         >
           <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-            Overview
+            Delegates
           </p>
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
-            How it works
+            Directory
           </p>
         </Link>
+      </div>
+
+      {/* Decayed score */}
+      <div className="mb-8">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
+          Contribution Score
+        </h2>
+        <DecayedScoreDisplay wallet={wallet} />
+      </div>
+
+      {/* Advanced Governance Summary */}
+      <div className="mb-8 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
+          Advanced Governance
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div>
+            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              Quadratic Voting
+            </p>
+            <p className="text-sm font-semibold text-emerald-500">Enabled</p>
+          </div>
+          <div>
+            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              Active Delegations
+            </p>
+            <p className="text-sm font-semibold text-[var(--color-gsd-text)]">
+              {analyticsData?.delegationStats?.totalActiveDelegations ?? 0}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              Total Delegated
+            </p>
+            <p className="text-sm font-semibold text-[var(--color-gsd-text)]">
+              {(
+                Number(
+                  BigInt(
+                    analyticsData?.delegationStats?.totalDelegatedTokens ?? "0"
+                  )
+                ) / 1e9
+              ).toFixed(2)}{" "}
+              $GSD
+            </p>
+          </div>
+        </div>
+        <div className="mt-4 flex items-center gap-3">
+          <Link
+            href="/governance/delegates"
+            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          >
+            View delegate directory
+          </Link>
+          <Link
+            href="/governance/delegate"
+            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          >
+            Manage delegation
+          </Link>
+        </div>
       </div>
 
       {/* Recent votes */}
