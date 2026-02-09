@@ -7,6 +7,7 @@ export const IDEA_ROUND_SEED = "idea_round";
 export const IDEA_SEED = "idea";
 export const VOTE_DEPOSIT_SEED = "vote_deposit";
 export const VOTE_RECORD_SEED = "vote_record";
+export const DELEGATION_SEED = "delegation";
 
 /**
  * Encode a number as a little-endian u32 buffer (4 bytes).
@@ -85,6 +86,20 @@ export function getVoteRecordPDA(
 ): [PublicKey, number] {
   return PublicKey.findProgramAddressSync(
     [Buffer.from(VOTE_RECORD_SEED), voter.toBuffer(), idea.toBuffer()],
+    programId
+  );
+}
+
+/**
+ * Derive a DelegationRecord PDA by delegator wallet.
+ * Seeds: ["delegation", delegator.key()]
+ */
+export function getDelegationPDA(
+  delegator: PublicKey,
+  programId: PublicKey
+): [PublicKey, number] {
+  return PublicKey.findProgramAddressSync(
+    [Buffer.from(DELEGATION_SEED), delegator.toBuffer()],
     programId
   );
 }

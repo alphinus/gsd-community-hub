@@ -14,11 +14,13 @@ export {
   getIdeaPDA,
   getVoteDepositPDA,
   getVoteRecordPDA,
+  getDelegationPDA,
   GOVERNANCE_CONFIG_SEED,
   IDEA_ROUND_SEED,
   IDEA_SEED,
   VOTE_DEPOSIT_SEED,
   VOTE_RECORD_SEED,
+  DELEGATION_SEED,
 } from "./governance-pda";
 export {
   getRevenueConfigPDA,

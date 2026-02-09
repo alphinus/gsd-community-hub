@@ -62,3 +62,10 @@ export {
   TIER_WEIGHTS,
   TIER_REWARD_RATES,
 } from "./review";
+
+export type {
+  HumanVerificationStatus,
+  HumanVerificationInfo,
+  DelegationInfo,
+  DelegationStats,
+} from "./identity";

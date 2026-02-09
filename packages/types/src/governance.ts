@@ -155,6 +155,12 @@ export interface GovernanceConfig {
   depositTimelock: number;
   /** Seconds after approval before idea can be executed */
   executionTimelock: number;
+  /** Whether quadratic voting is enabled for staged rollout */
+  quadraticVotingEnabled: boolean;
+  /** Base58-encoded Civic Pass gatekeeper network public key */
+  civicGatekeeperNetwork: string;
+  /** Half-life in days for voting power decay */
+  decayHalfLifeDays: number;
 }
 
 // --- Input types for API endpoints ---

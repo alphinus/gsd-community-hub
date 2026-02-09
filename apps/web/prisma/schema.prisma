@@ -72,7 +72,7 @@ model IdeaRound {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  ideas           Idea[]
+  ideas Idea[]
 
   @@index([status])
   @@index([submissionEnd])
@@ -96,9 +96,9 @@ model Idea {
   transactionSignature String   @unique
   submittedAt          DateTime @default(now())
 
-  round                IdeaRound @relation(fields: [roundId], references: [id])
-  votes                Vote[]
-  analysis             IdeaAnalysis?
+  round    IdeaRound     @relation(fields: [roundId], references: [id])
+  votes    Vote[]
+  analysis IdeaAnalysis?
 
   @@index([roundId])
   @@index([authorWallet])
@@ -114,44 +114,44 @@ model Vote {
   transactionSignature String   @unique
   votedAt              DateTime
 
-  idea                 Idea @relation(fields: [ideaId], references: [id])
+  idea Idea @relation(fields: [ideaId], references: [id])
 
   @@unique([ideaId, voterWallet])
   @@index([voterWallet])
 }
 
 model VoteDeposit {
-  id              String   @id @default(cuid())
-  walletAddress   String   @unique
-  depositedAmount BigInt
+  id               String   @id @default(cuid())
+  walletAddress    String   @unique
+  depositedAmount  BigInt
   depositTimestamp DateTime
-  eligibleAt      DateTime
-  activeVotes     Int      @default(0)
-  updatedAt       DateTime @updatedAt
+  eligibleAt       DateTime
+  activeVotes      Int      @default(0)
+  updatedAt        DateTime @updatedAt
 
   @@index([walletAddress])
 }
 
 model RevenueEvent {
-  id                      String   @id @default(cuid())
-  eventIndex              Int      @unique
-  onChainAddress          String   @unique
-  token                   String   // "sol" or "usdc"
-  totalAmount             BigInt
-  developerPool           BigInt
-  treasuryReserve         BigInt
-  burnAmount              BigInt
-  maintenanceAmount       BigInt
-  status                  String   @default("recorded")
-  originSignature         String   @unique
-  totalContributionScore  BigInt
-  claimedAmount           BigInt   @default(0)
-  burnSignature           String?
-  gsdBurned               BigInt   @default(0)
-  recordedAt              DateTime
-  createdAt               DateTime @default(now())
+  id                     String   @id @default(cuid())
+  eventIndex             Int      @unique
+  onChainAddress         String   @unique
+  token                  String // "sol" or "usdc"
+  totalAmount            BigInt
+  developerPool          BigInt
+  treasuryReserve        BigInt
+  burnAmount             BigInt
+  maintenanceAmount      BigInt
+  status                 String   @default("recorded")
+  originSignature        String   @unique
+  totalContributionScore BigInt
+  claimedAmount          BigInt   @default(0)
+  burnSignature          String?
+  gsdBurned              BigInt   @default(0)
+  recordedAt             DateTime
+  createdAt              DateTime @default(now())
 
-  claims                  RevenueClaim[]
+  claims RevenueClaim[]
 
   @@index([status])
   @@index([recordedAt])
@@ -167,7 +167,7 @@ model RevenueClaim {
   transactionSignature String   @unique
   claimedAt            DateTime
 
-  revenueEvent         RevenueEvent @relation(fields: [revenueEventId], references: [id])
+  revenueEvent RevenueEvent @relation(fields: [revenueEventId], references: [id])
 
   @@unique([revenueEventId, claimantWallet])
   @@index([claimantWallet])
@@ -176,12 +176,12 @@ model RevenueClaim {
 model PendingRevenue {
   id                   String    @id @default(cuid())
   transactionSignature String    @unique
-  token                String    // "sol" or "usdc"
+  token                String // "sol" or "usdc"
   amount               BigInt
   fromAddress          String?
   detectedAt           DateTime  @default(now())
   status               String    @default("pending") // "pending", "approved", "rejected", "processed"
-  processedEventId     String?   // links to RevenueEvent.id once processed
+  processedEventId     String? // links to RevenueEvent.id once processed
   reviewedAt           DateTime?
   reviewNote           String?
 
@@ -193,9 +193,9 @@ model VerificationReport {
   id                   String   @id @default(cuid())
   walletAddress        String
   taskRef              String
-  verificationType     String   // "ai" or "peer"
-  overallScore         Int      // 0-10000
-  confidence           Int      // 0-10000
+  verificationType     String // "ai" or "peer"
+  overallScore         Int // 0-10000
+  confidence           Int // 0-10000
   reportJson           Json
   reportHash           String
   onChainAddress       String?  @unique
@@ -204,7 +204,7 @@ model VerificationReport {
   configVersion        Int      @default(1)
   createdAt            DateTime @default(now())
 
-  peerReviews          PeerReview[]
+  peerReviews PeerReview[]
 
   @@index([walletAddress])
   @@index([taskRef])
@@ -212,20 +212,20 @@ model VerificationReport {
 }
 
 model PeerReview {
-  id                     String   @id @default(cuid())
-  verificationReportId   String
-  reviewerWallet         String
-  reviewerTier           Int
-  reviewerWeight         Float
-  score                  Int      // 0-10000
-  passed                 Boolean
-  evidenceJson           Json
-  reviewHash             String
-  onChainAddress         String?  @unique
-  transactionSignature   String?  @unique
-  createdAt              DateTime @default(now())
+  id                   String   @id @default(cuid())
+  verificationReportId String
+  reviewerWallet       String
+  reviewerTier         Int
+  reviewerWeight       Float
+  score                Int // 0-10000
+  passed               Boolean
+  evidenceJson         Json
+  reviewHash           String
+  onChainAddress       String?  @unique
+  transactionSignature String?  @unique
+  createdAt            DateTime @default(now())
 
-  verificationReport     VerificationReport @relation(fields: [verificationReportId], references: [id])
+  verificationReport VerificationReport @relation(fields: [verificationReportId], references: [id])
 
   @@unique([verificationReportId, reviewerWallet])
 }
@@ -247,7 +247,7 @@ model ReviewerProfile {
 model IdeaAnalysis {
   id               String   @id @default(cuid())
   ideaId           String   @unique
-  feasibilityScore Int      // 0-100
+  feasibilityScore Int // 0-100
   estimatedEffort  String
   riskLevel        String
   recommendation   String
@@ -256,7 +256,37 @@ model IdeaAnalysis {
   modelUsed        String
   createdAt        DateTime @default(now())
 
-  idea             Idea @relation(fields: [ideaId], references: [id])
+  idea Idea @relation(fields: [ideaId], references: [id])
 
   @@index([feasibilityScore])
+}
+
+model Delegation {
+  id                   String    @id @default(cuid())
+  onChainAddress       String    @unique
+  delegatorWallet      String    @unique
+  delegateWallet       String
+  delegatedAmount      BigInt
+  isActive             Boolean   @default(true)
+  effectiveFromRound   Int
+  transactionSignature String    @unique
+  delegatedAt          DateTime
+  revokedAt            DateTime?
+  createdAt            DateTime  @default(now())
+
+  @@index([delegateWallet])
+  @@index([isActive])
+}
+
+model HumanVerification {
+  id                String    @id @default(cuid())
+  walletAddress     String    @unique
+  gatekeeperNetwork String
+  verified          Boolean   @default(false)
+  verifiedAt        DateTime?
+  expiresAt         DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([walletAddress])
 }
