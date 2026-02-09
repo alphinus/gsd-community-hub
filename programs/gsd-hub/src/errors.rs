@@ -113,3 +113,45 @@ pub enum RevenueError {
     #[msg("Burn already executed for this event")]
     BurnAlreadyExecuted,
 }
+
+#[error_code]
+pub enum VerificationError {
+    #[msg("Verification score must be 0-10000")]
+    InvalidVerificationScore,
+
+    #[msg("Confidence must be 0-10000")]
+    InvalidConfidence,
+
+    #[msg("Verification report already exists for this task")]
+    VerificationAlreadyExists,
+
+    #[msg("Report hash must be 32 bytes")]
+    InvalidReportHash,
+
+    #[msg("AI confidence below threshold -- peer review required")]
+    BelowConfidenceThreshold,
+
+    #[msg("Reviewer cannot review their own submission")]
+    ReviewerIsDeveloper,
+
+    #[msg("Peer review already submitted for this report")]
+    ReviewAlreadySubmitted,
+
+    #[msg("Not enough peer reviews for consensus")]
+    InsufficientReviewers,
+
+    #[msg("Peer review consensus not reached")]
+    ConsensusNotReached,
+
+    #[msg("Peer review period has expired")]
+    ReviewTimeout,
+
+    #[msg("Reviewer tier must be 1-3")]
+    InvalidTier,
+
+    #[msg("Verification weight parameters must sum to 10000 bps")]
+    WeightsMustSumTo10000,
+
+    #[msg("Not authorized to manage verification config")]
+    UnauthorizedVerificationAdmin,
+}
