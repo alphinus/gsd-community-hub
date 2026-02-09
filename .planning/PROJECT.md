@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A decentralized community development platform built on Solana that transforms the existing $GSD memecoin into a genuine utility token. Teams collaborate through time-bounded idea rounds, wallet-verified contributions, and on-chain governance — powered by the open-source GSD execution framework. Revenue from successful projects is distributed fairly based on verifiable contribution history.
+A decentralized community development platform built on Solana that transforms the $GSD memecoin into a genuine utility token. Features wallet-verified developer registration, on-chain contribution tracking via State Compression, time-bounded idea rounds with attack-resistant governance, contribution-weighted revenue sharing with buy-and-burn mechanics, AI-powered task verification, and sybil-resistant quadratic voting with delegation -- all open source and verifiable on-chain.
 
 ## Core Value
 
@@ -12,92 +12,110 @@ Every contributor's work is tracked on-chain and rewarded proportionally — if 
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ Wallet-verified developer registration on Solana (PDA-based identity) — v1.0
+- ✓ Idea Pool with time-bounded submission rounds — v1.0
+- ✓ $GSD-weighted voting and approval system (custom governance) — v1.0
+- ✓ On-chain contribution tracking with verifiable developer history — v1.0
+- ✓ Revenue sharing based on contribution weight (60/20/10/10 model) — v1.0
+- ✓ Token burn mechanism on revenue events (Jupiter buy-and-burn) — v1.0
+- ✓ Integration with GSD execution framework for AI-powered development — v1.0
+- ✓ Sybil-resistant quadratic voting with Civic Pass — v1.0
+- ✓ Vote delegation for inactive token holders — v1.0
+- ✓ Reputation decay for sustained participation incentives — v1.0
+- ✓ Governance analytics dashboard — v1.0
 
 ### Active
 
-- [ ] Wallet-verified developer registration on Solana (PDA-based identity)
-- [ ] Idea Pool with time-bounded submission rounds
-- [ ] $GSD-weighted voting and approval system (SPL Governance)
-- [ ] On-chain contribution tracking with verifiable developer history
-- [ ] Revenue sharing based on contribution weight (SolSplits)
-- [ ] Team workspace for collaborative development
-- [ ] Integration with GSD execution framework for AI-powered development
-- [ ] Token burn mechanism on revenue events
+- [ ] Multi-project workspaces with separate contribution tracking
+- [ ] Retroactive funding rounds for past contributions
+- [ ] Cross-DAO collaboration (other DAOs use GSD for contribution tracking)
+- [ ] Notification system (email/webhook/Discord bot for round events, votes, assignments)
+- [ ] Fix siws.ts type error for production builds
+- [ ] Auth.js v5 stable migration (currently pinned to beta)
+- [ ] Security audit for on-chain programs before mainnet
 
 ### Out of Scope
 
-- Custom L1/L2 blockchain — Too complex for v1, revisit after proving utility on Solana
-- Mobile native app — Web-first, responsive design sufficient for v1
+- Custom L1/L2 blockchain — Too complex, revisit after proving utility on Solana
+- Mobile native app — Web-first, responsive design sufficient
 - Real-time chat/messaging — Use existing tools (Discord/Telegram), don't rebuild
 - NFT marketplace — Not core to contribution/revenue model
-- Cross-chain bridges — Solana-only for v1
+- Cross-chain bridges — Solana-only, bridges are security risks
 - Fiat on/off ramps — External wallets handle this
-- AI agent marketplace — Future consideration after core platform proves value
+- Staking for yield/APY — Unsustainable tokenomics, regulatory risk
+- Token-gated exclusive chat — Creates pay-to-play dynamics
+- Anonymous voting — Contradicts transparency mandate
+- Built-in DEX/token swap — Jupiter/Raydium already exist
+- Airdrop mechanics — Attracts mercenary capital, not contributors
+- Separate governance token — $GSD IS the governance token
+- Automatic proposal execution without timelock — Dangerous for treasury security
 
 ## Context
 
+Shipped v1.0 with ~146,772 LOC (TypeScript + Rust) across 329 files.
+Tech stack: Next.js 15, Anchor 0.32.1, Prisma 7, Solana Web3.js, Auth.js v5, TanStack Query, recharts.
+Built in 2 days (2026-02-08 to 2026-02-09) across 6 phases, 36 plans, 64 feature commits.
+
 **Token Context:**
 - $GSD exists on Solana: `GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1`
-- ~3,390 holders, ~$900K-$3.6M market cap, post-selloff
-- Token currently rides on GSD framework branding but lacks genuine utility
-- Community needs proof that real development is happening
+- ~3,390 holders, ~$900K-$3.6M market cap
+- Token now has genuine utility: governance voting, contribution scoring, revenue distribution, buy-and-burn
 
-**Strategic Context:**
-- Memecoin mindshare collapsed ~90% in 2025 (from 20% to 2.5%)
-- "Utility nachträglich" is normally a top signal — but GSD is different because the open-source framework EXISTS BEFORE the token
-- This isn't a rescue attempt — it's evolution from meme to mission
-- The GSD framework (11 AI agents, 40+ workflows) provides genuine tech foundation
+**Architecture:**
+- Monorepo (pnpm): `programs/gsd-hub` (Anchor), `apps/web` (Next.js), `packages/types`, `packages/utils`
+- On-chain: PDA-based profiles, State Compression contributions, custom governance, revenue vault, verification records, delegation
+- Off-chain: Prisma PostgreSQL, Helius 6-processor webhook pipeline, Jupiter integration
+- AI: Claude API verification engine with Zod schemas, peer review fallback
 
-**Technical Foundation:**
-- GSD Plugin System: goal-backward verification, wave-based parallel execution, per-task atomic commits
-- Solana State Compression: Merkle trees for 99.9% cheaper on-chain storage
-- SPL Governance (Realms): Solana-native DAO framework
-- SolSplits: On-chain revenue splitting
-- Protocol Guild time-weight formula for fair contribution scoring
-
-**Research Findings:**
-- Successful utility transitions: Solana (SOL), XRP — key was delivering real product
-- Anti-patterns: Dogecoin (utility without product), SafeMoon (unsustainable tokenomics)
-- Relevant models: Coordinape (peer allocation), SourceCred (algorithmic scoring), Protocol Guild (time-weighted)
-- On-chain identity: ERC-8004 (trustless agent identity, live Jan 2026)
-- Governance: Snapshot (off-chain gasless voting), Realms (on-chain SPL Governance)
+**Known Issues:**
+- siws.ts type mismatch causes strict TS build failure (workaround: skip TS check in build)
+- Auth.js v5 beta pinned to 5.0.0-beta.30
+- anchor-bankrun@0.5.0 peer dependency warning
+- On-chain programs need security audit before mainnet
+- Legal review needed for revenue sharing (securities classification risk)
 
 ## Constraints
 
 - **Blockchain**: Solana — $GSD token already exists here, no migration possible
-- **Token Contract**: Existing SPL token `GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1` — cannot modify, must build utility around it
-- **Open Source**: Everything must be fully open source — transparency is non-negotiable for trust rebuilding
-- **Identity**: GSD branding and philosophy must be reflected — "get shit done" culture, not corporate governance theater
-- **Trust**: Every claim must be verifiable on-chain — community has rug fear from selloff
-- **Framework**: Must integrate with actual GSD execution framework — this is what makes it real, not vapor
+- **Token Contract**: Existing SPL token `GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1` — cannot modify
+- **Open Source**: Everything fully open source — transparency non-negotiable
+- **Identity**: GSD branding and "get shit done" philosophy
+- **Trust**: Every claim must be verifiable on-chain
+- **Framework**: Integrates with actual GSD execution framework
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Build on Solana (not custom chain) | $GSD token already exists on Solana, proven ecosystem | — Pending |
-| PDA-based developer registry | On-chain, permissionless, verifiable identity | — Pending |
-| SPL Governance for voting | Native Solana integration, battle-tested with Realms | — Pending |
-| Contribution-weighted revenue sharing | Fair distribution based on verified work, not token holdings alone | — Pending |
-| Time-bounded idea rounds | Creates urgency, prevents stagnation, enables structured evaluation | — Pending |
-| √(tokens) quadratic voting | Prevents whale dominance while still rewarding holders | — Pending |
-| 60/20/10/10 revenue split | 60% devs, 20% treasury, 10% buy-and-burn, 10% maintenance | — Pending |
-| Open source from day one | Trust rebuilding requires full transparency | — Pending |
+| Build on Solana (not custom chain) | $GSD token already exists on Solana, proven ecosystem | ✓ Good |
+| PDA-based developer registry | On-chain, permissionless, verifiable identity | ✓ Good |
+| Custom governance (not SPL Governance) | More control over idea rounds, voting mechanics, attack resistance | ✓ Good |
+| Contribution-weighted revenue sharing | Fair distribution based on verified work | ✓ Good |
+| Time-bounded idea rounds | Creates urgency, prevents stagnation | ✓ Good |
+| √(tokens) quadratic voting | Prevents whale dominance while rewarding holders | ✓ Good |
+| 60/20/10/10 revenue split | Balanced distribution: devs, treasury, burn, maintenance | ✓ Good |
+| Open source from day one | Trust rebuilding requires full transparency | ✓ Good |
+| State Compression for contributions | 99.9% cheaper on-chain storage via Merkle trees | ✓ Good |
+| Helius webhook pipeline | Real-time on-chain to off-chain sync, evolved from 1 to 6 processors | ✓ Good |
+| AI verification with peer review fallback | Automated scoring with human override for low-confidence results | ✓ Good |
+| Civic Pass for sybil resistance | Gateway token verification prevents wallet-splitting attacks | ✓ Good |
+| Manual revenue distribution (v1) | Safety measure — admin-triggered, not automatic on webhook | ⚠️ Revisit |
+| Auth.js v5 beta | Only version supporting SIWS pattern — monitor for stable | ⚠️ Revisit |
+| Static codebase summary for AI | Hardcoded 6.9KB context — needs dynamic generation for evolving codebase | ⚠️ Revisit |
 
 ## Future Vision: GSD as Protocol
 
-Captured from Rettungsplan v3.0 (2026-02-08) for future roadmap consideration. Does not affect current milestone scope.
+Captured from Rettungsplan v3.0 (2026-02-08) for future roadmap consideration.
 
-**Core idea:** Evolve GSD from a single tool to an open, client-agnostic protocol. Define structured schemas (`.gsd/` directory: `project.json`, `requirements.json`, `roadmap.json`, `plan.json`, `state.json`) so that any IDE/CLI (Claude Code, Cursor, OpenCode, Gemini CLI) can implement GSD workflows. The protocol standardizes how AI-assisted build flows are structured, making GSD the common language across dev environments.
+**Core idea:** Evolve GSD from a single tool to an open, client-agnostic protocol. Define structured schemas (`.gsd/` directory: `project.json`, `requirements.json`, `roadmap.json`, `plan.json`, `state.json`) so that any IDE/CLI can implement GSD workflows.
 
 **Related concepts:**
 - Deterministic Mode: fixed LLM settings for reproducible team outputs
-- Build League: continuous seasonal challenges replacing one-off hackathons (weekly micro-challenges, monthly majors, USDT primary rewards + GSD vesting bonus)
-- awesome-gsd: curated extension registry as immediate-value first step before full showcase platform
-- Anti-Rug Standard: exportable checklist/badge for transparent token governance that other projects can adopt
+- Build League: continuous seasonal challenges replacing one-off hackathons
+- awesome-gsd: curated extension registry
+- Anti-Rug Standard: exportable checklist/badge for transparent token governance
 
-**When to revisit:** After Phase 4 (revenue mechanics proven), evaluate protocol extraction as Phase 7+.
+**When to revisit:** After v1.0 deployed to mainnet and community feedback gathered.
 
 ---
-*Last updated: 2026-02-08 after Rettungsplan v3.0 review*
+*Last updated: 2026-02-09 after v1.0 milestone*
