@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Governance & Idea Rounds** - Custom governance with time-bounded idea rounds, token-weighted voting, and attack-resistant mechanisms
 - [x] **Phase 4: Revenue Mechanics** - Contribution-weighted revenue sharing with buy-and-burn mechanism
 - [x] **Phase 5: GSD Framework Integration** - AI-powered task verification and automated contribution scoring (v2)
-- [ ] **Phase 6: Advanced Governance** - Sybil-resistant quadratic voting, delegation, and reputation decay (v2)
+- [x] **Phase 6: Advanced Governance** - Sybil-resistant quadratic voting, delegation, and reputation decay (v2)
 
 ## Phase Details
 
@@ -129,13 +129,13 @@ Plans:
 **Plans**: 7 plans
 
 Plans:
-- [ ] 06-01-PLAN.md -- State foundation (GovernanceConfig extension, DelegationRecord PDA, TS types, Prisma models)
-- [ ] 06-02-PLAN.md -- On-chain quadratic voting, sybil gate, delegation instructions with bankrun tests
-- [ ] 06-03-PLAN.md -- Reputation decay utility (TDD: half-life exponential decay computation)
-- [ ] 06-04-PLAN.md -- Delegation webhook indexer and delegation query API
-- [ ] 06-05-PLAN.md -- Analytics, human verification, and decay API endpoints with Gini computation
-- [ ] 06-06-PLAN.md -- Civic Pass frontend, delegation UI, decay display, governance dashboard integration
-- [ ] 06-07-PLAN.md -- Governance analytics dashboard with recharts (participation, power distribution)
+- [x] 06-01-PLAN.md -- State foundation (GovernanceConfig extension, DelegationRecord PDA, TS types, Prisma models)
+- [x] 06-02-PLAN.md -- On-chain quadratic voting, sybil gate, delegation instructions with bankrun tests
+- [x] 06-03-PLAN.md -- Reputation decay utility (TDD: half-life exponential decay computation)
+- [x] 06-04-PLAN.md -- Delegation webhook indexer and delegation query API
+- [x] 06-05-PLAN.md -- Analytics, human verification, and decay API endpoints with Gini computation
+- [x] 06-06-PLAN.md -- Civic Pass frontend, delegation UI, decay display, governance dashboard integration
+- [x] 06-07-PLAN.md -- Governance analytics dashboard with recharts (participation, power distribution)
 
 ## Progress
 
@@ -149,4 +149,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 3. Governance & Idea Rounds | 7/7 | Complete | 2026-02-08 |
 | 4. Revenue Mechanics | 5/5 | Complete | 2026-02-08 |
 | 5. GSD Framework Integration | 8/8 | Complete | 2026-02-09 |
-| 6. Advanced Governance | 0/7 | Not started | - |
+| 6. Advanced Governance | 7/7 | Complete | 2026-02-09 |
