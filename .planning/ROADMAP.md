@@ -126,15 +126,16 @@ Plans:
   2. Voting weight uses quadratic formula (sqrt(tokens) = vote weight), reducing whale dominance while still rewarding token holdings
   3. Inactive token holders can delegate voting power to active contributors, and delegation is visible on governance dashboard
   4. Contribution reputation decays over time so old contributions count less, incentivizing sustained participation
-**Plans**: 6 plans
+**Plans**: 7 plans
 
 Plans:
 - [ ] 06-01-PLAN.md -- State foundation (GovernanceConfig extension, DelegationRecord PDA, TS types, Prisma models)
 - [ ] 06-02-PLAN.md -- On-chain quadratic voting, sybil gate, delegation instructions with bankrun tests
 - [ ] 06-03-PLAN.md -- Reputation decay utility (TDD: half-life exponential decay computation)
-- [ ] 06-04-PLAN.md -- Delegation webhook indexer, API endpoints (delegate, verification, analytics, decay)
-- [ ] 06-05-PLAN.md -- Civic Pass frontend, delegation UI, decay display, governance dashboard integration
-- [ ] 06-06-PLAN.md -- Governance analytics dashboard with recharts (participation, power distribution)
+- [ ] 06-04-PLAN.md -- Delegation webhook indexer and delegation query API
+- [ ] 06-05-PLAN.md -- Analytics, human verification, and decay API endpoints with Gini computation
+- [ ] 06-06-PLAN.md -- Civic Pass frontend, delegation UI, decay display, governance dashboard integration
+- [ ] 06-07-PLAN.md -- Governance analytics dashboard with recharts (participation, power distribution)
 
 ## Progress
 
@@ -148,4 +149,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 3. Governance & Idea Rounds | 7/7 | Complete | 2026-02-08 |
 | 4. Revenue Mechanics | 5/5 | Complete | 2026-02-08 |
 | 5. GSD Framework Integration | 8/8 | Complete | 2026-02-09 |
-| 6. Advanced Governance | 0/6 | Not started | - |
+| 6. Advanced Governance | 0/7 | Not started | - |
