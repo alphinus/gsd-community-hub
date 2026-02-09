@@ -115,6 +115,26 @@ export default async function GovernancePage() {
         </div>
       </div>
 
+      {/* Analytics card */}
+      <div className="mb-8 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-[var(--color-gsd-text)]">
+              Analytics Dashboard
+            </h2>
+            <p className="mt-1 text-sm text-[var(--color-gsd-text-muted)]">
+              Voter participation, power distribution, and delegation metrics
+            </p>
+          </div>
+          <Link
+            href="/governance/analytics"
+            className="rounded-lg bg-[var(--color-gsd-surface-raised)] px-4 py-2 text-sm font-medium text-[var(--color-gsd-text)] transition-colors hover:bg-[var(--color-gsd-accent)] hover:text-[var(--color-gsd-bg)]"
+          >
+            View Analytics
+          </Link>
+        </div>
+      </div>
+
       {/* Navigation */}
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link

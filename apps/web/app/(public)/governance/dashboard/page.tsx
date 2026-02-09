@@ -185,7 +185,7 @@ export default function GovernanceDashboard() {
       )}
 
       {/* Quick links */}
-      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
         <Link
           href="/governance/deposit"
           className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
@@ -228,6 +228,17 @@ export default function GovernanceDashboard() {
           </p>
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Directory
+          </p>
+        </Link>
+        <Link
+          href="/governance/analytics"
+          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
+        >
+          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
+            Analytics
+          </p>
+          <p className="text-xs text-[var(--color-gsd-text-muted)]">
+            Charts & data
           </p>
         </Link>
       </div>
