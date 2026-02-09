@@ -41,6 +41,7 @@ Progress: [███████████████████████
 *Updated after each plan completion*
 | Phase 05 P07 | 6 | 2 tasks | 12 files |
 | Phase 06 P01 | 6 | 2 tasks | 11 files |
+| Phase 06 P02 | 14 | 2 tasks | 10 files |
 | Phase 06 P03 | 3 | 2 tasks | 3 files |
 
 ## Accumulated Context
@@ -155,6 +156,11 @@ Recent decisions affecting current work:
 - [06-01]: New GovernanceConfig fields appended after existing for backward-compatible extension (realloc in future update instruction)
 - [06-01]: DelegationRecord uses single PDA per delegator (one active delegation per wallet)
 - [06-01]: init_governance_config defaults: quadratic disabled, Pubkey::default() gatekeeper, 180-day decay half-life
+- [06-02]: Manual gateway token deserialization (byte offsets) instead of solana_gateway crate dependency
+- [06-02]: Civic Gateway program ID corrected to gatbGF9DvLAw3kWyn1EmH5Nh1Sqp8sTukF7yaQpSc71 (plan had invalid base58)
+- [06-02]: DelegationRecord closed on revoke allowing new delegation PDA creation
+- [06-02]: Raw byte deserialization for delegation check in cast_vote to avoid Anchor lifetime conflicts
+- [06-02]: Existing governance-voting tests updated with governanceConfig and gatewayToken accounts
 - [06-03]: Test file placed in packages/utils/tests/ (not src/) to match existing node:test convention
 - [06-03]: DecayContribution uses number types (not BigInt) since decay multiplier operates in float space; BigInt conversion at sum level
 - [06-03]: Math.round() for float-to-BigInt conversion ensures exact half-life values (5000n not 4999n)
