@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 4 complete. Revenue Mechanics fully implemented (5/5 plans). Ready for Phase 5 planning.
+**Current focus:** Phase 5 in progress. GSD Framework Integration -- verification and peer review subsystem.
 
 ## Current Position
 
-Phase: 4 of 6 (Revenue Mechanics) -- COMPLETE
-Plan: 5 of 5 in current phase
-Status: Phase complete
-Last activity: 2026-02-08 -- Completed 04-05-PLAN.md (treasury dashboard revenue UI)
+Phase: 5 of 6 (GSD Framework Integration)
+Plan: 1 of 8 in current phase -- COMPLETE
+Status: Executing
+Last activity: 2026-02-09 -- Completed 05-01-PLAN.md (verification & review state foundation)
 
-Progress: [█████████████████████] 100% (21/21 total plans for phases 1-4)
+Progress: [██████████████████████░░░░░] 76% (22/29 total plans)
 
 ## Performance Metrics
 
@@ -31,10 +31,11 @@ Progress: [█████████████████████] 100%
 | 02 | 5 | 31 min | 6.2 min |
 | 03 | 7 | 34 min | 4.9 min |
 | 04 | 5 | 24 min | 4.8 min |
+| 05 | 1 | 5 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 3m, 6m, 4m, 3m, 8m
-- Trend: UI plans with human-verify checkpoints take longer (~8m); pure API/indexer plans fastest (~3-4m)
+- Last 5 plans: 6m, 4m, 3m, 8m, 5m
+- Trend: Foundation/type plans ~5m; UI plans with human-verify checkpoints take longer (~8m)
 
 *Updated after each plan completion*
 
@@ -115,6 +116,11 @@ Recent decisions affecting current work:
 - [04-05]: TreasuryTabs client component wraps tab navigation while treasury page remains Server Component for SEO
 - [04-05]: Claim panel shows claim history only (not 'claim now' button) -- v1 server-side distribution model
 - [04-05]: BigInt string amounts formatted client-side with token-specific decimal divisors
+- [05-01]: VerificationError as separate enum following GovernanceError/RevenueError domain separation pattern
+- [05-01]: PDA seeds: verification_config, verification, peer_review, reviewer -- consistent between Rust and TypeScript
+- [05-01]: ReviewerProfile stores aggregate totals on-chain; domain-specific breakdown in Prisma JSON fields
+- [05-01]: IdeaAnalysis model added to Prisma with relation to Idea for AI feasibility analysis
+- [05-01]: Verification scores use 0-10000 basis points normalization consistent with revenue/governance conventions
 
 ### Pending Todos
 
@@ -141,6 +147,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-08
-Stopped at: Phase 4 complete (all 5 plans). Ready for Phase 5 planning.
-Resume file: .planning/phases/04-revenue-mechanics/04-05-SUMMARY.md
+Last session: 2026-02-09
+Stopped at: Completed 05-01-PLAN.md (verification & review state foundation)
+Resume file: .planning/phases/05-gsd-framework-integration/05-01-SUMMARY.md
