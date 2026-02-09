@@ -8,6 +8,7 @@ import {
   processRevenueEvent,
   processRevenueDetection,
 } from "@/lib/revenue/indexer";
+import { processVerificationEvent } from "@/lib/verification/indexer";
 
 /**
  * POST /api/webhooks/helius
@@ -17,11 +18,12 @@ import {
  * Authentication: Validates the Authorization header against HELIUS_WEBHOOK_AUTH.
  * Payload: Array of Helius enhanced transactions.
  *
- * Each transaction is processed through 4 processors:
+ * Each transaction is processed through 5 processors:
  * 1. Contribution: Finds gsd-hub program instructions, extracts ContributionLeaf from noop
  * 2. Governance: Identifies governance instruction discriminators (create_round, submit_idea, etc.)
  * 3. Revenue instructions: Identifies revenue instruction discriminators (record_revenue_event, claim, burn)
  * 4. Revenue detection: Detects raw SOL/USDC inflows to treasury and persists as PendingRevenue
+ * 5. Verification: Identifies verification instruction discriminators (submit_verification, peer_review, finalize)
  *
  * A transaction may match multiple processors. Each uses upsert for idempotency.
  * Duplicate webhook deliveries are silently ignored.
@@ -55,11 +57,12 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Process each transaction through all 4 processors
+  // Process each transaction through all 5 processors
   let contributionsProcessed = 0;
   let governanceProcessed = 0;
   let revenueProcessed = 0;
   let revenueDetected = 0;
+  let verificationProcessed = 0;
   const errors: string[] = [];
 
   for (const tx of transactions) {
@@ -123,17 +126,32 @@ export async function POST(request: NextRequest) {
       );
       errors.push(`revenue-detection:${tx.signature}: ${message}`);
     }
+
+    // Try verification processor
+    try {
+      const count = await processVerificationEvent(tx);
+      verificationProcessed += count;
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unknown error";
+      console.error(
+        `Failed to process verification ${tx.signature}:`,
+        message
+      );
+      errors.push(`verification:${tx.signature}: ${message}`);
+    }
   }
 
   const totalProcessed =
     contributionsProcessed +
     governanceProcessed +
     revenueProcessed +
-    revenueDetected;
+    revenueDetected +
+    verificationProcessed;
 
   if (errors.length > 0) {
     console.warn(
-      `Webhook processed ${totalProcessed} events (${contributionsProcessed} contributions, ${governanceProcessed} governance, ${revenueProcessed} revenue, ${revenueDetected} detected) with ${errors.length} errors`
+      `Webhook processed ${totalProcessed} events (${contributionsProcessed} contributions, ${governanceProcessed} governance, ${revenueProcessed} revenue, ${revenueDetected} detected, ${verificationProcessed} verification) with ${errors.length} errors`
     );
   }
 
@@ -144,6 +162,7 @@ export async function POST(request: NextRequest) {
     governance: governanceProcessed,
     revenue: revenueProcessed,
     revenueDetected,
+    verificationProcessed,
     total: transactions.length,
     errors: errors.length > 0 ? errors : undefined,
   });
