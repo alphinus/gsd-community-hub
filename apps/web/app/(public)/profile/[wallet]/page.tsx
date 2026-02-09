@@ -4,6 +4,8 @@ import { prisma } from "@/lib/db/prisma";
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { ScoreBadge } from "@/components/contributions/score-badge";
 import { ContributionList } from "@/components/contributions/contribution-list";
+import { VerificationHistory } from "@/components/verification/VerificationHistory";
+import { VerificationScoreBadge } from "@/components/verification/VerificationScoreBadge";
 import { calculateContributionScore } from "@gsd/utils";
 
 interface ProfilePageProps {
@@ -159,9 +161,40 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     console.error("Failed to load contribution data:", error);
   }
 
+  // Fetch average verification score for profile header badge
+  let avgVerificationScore: number | null = null;
+  let verificationCount = 0;
+  try {
+    const [verAgg, verCount] = await Promise.all([
+      prisma.verificationReport.aggregate({
+        where: { walletAddress: wallet },
+        _avg: { overallScore: true },
+      }),
+      prisma.verificationReport.count({
+        where: { walletAddress: wallet },
+      }),
+    ]);
+    verificationCount = verCount;
+    if (verCount > 0 && verAgg._avg.overallScore != null) {
+      avgVerificationScore = Math.round(verAgg._avg.overallScore);
+    }
+  } catch {
+    // Graceful degradation: skip verification badge
+  }
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
       <ProfileHeader profile={profile} />
+
+      {/* Verification score in profile header area */}
+      {avgVerificationScore != null && (
+        <div className="mt-4 flex items-center gap-2">
+          <span className="text-xs text-[var(--color-gsd-text-muted)]">
+            Avg Verification Score:
+          </span>
+          <VerificationScoreBadge score={avgVerificationScore} size="sm" />
+        </div>
+      )}
 
       {/* Contribution section */}
       <div className="mt-10 space-y-6">
@@ -181,6 +214,22 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             initialData={initialContributions}
           />
         </div>
+      </div>
+
+      {/* Verification History section */}
+      <div className="mt-10">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
+          Verification History
+        </h2>
+        {verificationCount > 0 ? (
+          <VerificationHistory walletAddress={wallet} />
+        ) : (
+          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+            <p className="text-sm text-[var(--color-gsd-text-muted)]">
+              No AI verifications yet
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
