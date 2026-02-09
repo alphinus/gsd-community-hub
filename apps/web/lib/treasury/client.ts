@@ -20,7 +20,7 @@ export const TREASURY_ADDRESS_STR =
 /** $GSD mint address string. */
 export const GSD_MINT_STR =
   process.env.NEXT_PUBLIC_GSD_MINT ||
-  "GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1";
+  "8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS";
 
 export const TREASURY_ADDRESS = new PublicKey(TREASURY_ADDRESS_STR);
 export const GSD_MINT_ADDRESS = new PublicKey(GSD_MINT_STR);

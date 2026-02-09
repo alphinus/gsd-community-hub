@@ -299,7 +299,7 @@ HELIUS_WEBHOOK_AUTH="<openssl rand -hex 32>"
 # ─── Optional (full functionality) ──────────────────
 
 NEXT_PUBLIC_TREASURY_ADDRESS="<multisig-vault-pda>"
-NEXT_PUBLIC_GSD_MINT="GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1"
+NEXT_PUBLIC_GSD_MINT="8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS"
 JUPITER_API_KEY="<for-buy-and-burn>"
 BURN_AUTHORITY_KEYPAIR="<base58-encoded>"
 REVENUE_ADMIN_SECRET="<for-distribution-api>"
@@ -361,7 +361,7 @@ Every Solana transaction runs through 6 specialized indexers:
 ## $GSD Token
 
 ```
-GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1
+8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS
 ```
 
 The token is **not modified** by this platform. We build utility around it:

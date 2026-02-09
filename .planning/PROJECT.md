@@ -57,7 +57,7 @@ Tech stack: Next.js 15, Anchor 0.32.1, Prisma 7, Solana Web3.js, Auth.js v5, Tan
 Built in 2 days (2026-02-08 to 2026-02-09) across 6 phases, 36 plans, 64 feature commits.
 
 **Token Context:**
-- $GSD exists on Solana: `GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1`
+- $GSD exists on Solana: `8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS`
 - ~3,390 holders, ~$900K-$3.6M market cap
 - Token now has genuine utility: governance voting, contribution scoring, revenue distribution, buy-and-burn
 
@@ -77,7 +77,7 @@ Built in 2 days (2026-02-08 to 2026-02-09) across 6 phases, 36 plans, 64 feature
 ## Constraints
 
 - **Blockchain**: Solana — $GSD token already exists here, no migration possible
-- **Token Contract**: Existing SPL token `GSD4YHbEyRq6rZGzG6c7uikMMmeRAZ2SnwNGEig6N3j1` — cannot modify
+- **Token Contract**: Existing SPL token `8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS` — cannot modify
 - **Open Source**: Everything fully open source — transparency non-negotiable
 - **Identity**: GSD branding and "get shit done" philosophy
 - **Trust**: Every claim must be verifiable on-chain
