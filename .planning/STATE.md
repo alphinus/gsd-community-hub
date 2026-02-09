@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 6 of 6 (Advanced Governance)
-Plan: 1 of 7 in current phase -- COMPLETE
+Plan: 3 of 7 in current phase -- COMPLETE
 Status: Executing phase
-Last activity: 2026-02-09 -- Completed 06-01 (state foundation for advanced governance)
+Last activity: 2026-02-09 -- Completed 06-03 (reputation decay computation)
 
-Progress: [████████████████████████████░] 97% (30/36 plans through Phase 6-01)
+Progress: [█████████████████████████████░] 97% (32/36 plans through Phase 6-03)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 28
-- Average duration: 6.7 min
-- Total execution time: 3.25 hours
+- Total plans completed: 30
+- Average duration: 6.5 min
+- Total execution time: 3.35 hours
 
 **By Phase:**
 
@@ -32,15 +32,16 @@ Progress: [███████████████████████
 | 03 | 7 | 34 min | 4.9 min |
 | 04 | 5 | 24 min | 4.8 min |
 | 05 | 8 | 36 min | 4.5 min |
-| 06 | 1 | 6 min | 6.0 min |
+| 06 | 3 | 9 min | 3.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 7m, 4m, 5m, 3m, 6m
-- Trend: UI plan ~6m; Migration plan ~3m; Peer review plan ~5m; AI engine plans ~6-7m
+- Last 5 plans: 5m, 3m, 6m, 6m, 3m
+- Trend: UI plan ~6m; Migration plan ~3m; TDD utility plans ~3m; State plans ~6m
 
 *Updated after each plan completion*
 | Phase 05 P07 | 6 | 2 tasks | 12 files |
 | Phase 06 P01 | 6 | 2 tasks | 11 files |
+| Phase 06 P03 | 3 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -154,6 +155,9 @@ Recent decisions affecting current work:
 - [06-01]: New GovernanceConfig fields appended after existing for backward-compatible extension (realloc in future update instruction)
 - [06-01]: DelegationRecord uses single PDA per delegator (one active delegation per wallet)
 - [06-01]: init_governance_config defaults: quadratic disabled, Pubkey::default() gatekeeper, 180-day decay half-life
+- [06-03]: Test file placed in packages/utils/tests/ (not src/) to match existing node:test convention
+- [06-03]: DecayContribution uses number types (not BigInt) since decay multiplier operates in float space; BigInt conversion at sum level
+- [06-03]: Math.round() for float-to-BigInt conversion ensures exact half-life values (5000n not 4999n)
 
 ### Pending Todos
 
@@ -182,5 +186,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 06-01-PLAN.md (state foundation). Next: 06-02 (delegation instructions)
-Resume file: .planning/phases/06-advanced-governance/06-02-PLAN.md
+Stopped at: Completed 06-03-PLAN.md (reputation decay computation). Next: 06-04
+Resume file: .planning/phases/06-advanced-governance/06-04-PLAN.md
