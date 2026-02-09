@@ -6,7 +6,7 @@ pub mod instructions;
 pub mod state;
 
 use instructions::*;
-use state::{QuorumType, RevenueToken, VoteChoice};
+use state::{QuorumType, RevenueToken, VerificationType, VoteChoice};
 
 declare_id!("Gn3kafdEiBZ51T5ewMTtXLUDYzECk87kPwxDAjspqYhw");
 
@@ -168,5 +168,81 @@ pub mod gsd_hub {
         burn_tx_signature: [u8; 64],
     ) -> Result<()> {
         instructions::execute_burn::handler(ctx, gsd_amount, burn_tx_signature)
+    }
+
+    pub fn init_verification_config(
+        ctx: Context<InitVerificationConfig>,
+        confidence_threshold: u16,
+        code_quality_weight: u16,
+        task_fulfillment_weight: u16,
+        test_coverage_weight: u16,
+        workflow_discipline_weight: u16,
+        plan_adherence_weight: u16,
+        min_reviewers: u8,
+        consensus_threshold_bps: u16,
+        review_timeout_days: u8,
+    ) -> Result<()> {
+        instructions::init_verification_config::handler(
+            ctx,
+            confidence_threshold,
+            code_quality_weight,
+            task_fulfillment_weight,
+            test_coverage_weight,
+            workflow_discipline_weight,
+            plan_adherence_weight,
+            min_reviewers,
+            consensus_threshold_bps,
+            review_timeout_days,
+        )
+    }
+
+    pub fn submit_verification(
+        ctx: Context<SubmitVerification>,
+        task_ref: [u8; 32],
+        verification_type: VerificationType,
+        score: u16,
+        confidence: u16,
+        report_hash: [u8; 32],
+    ) -> Result<()> {
+        instructions::submit_verification::handler(
+            ctx,
+            task_ref,
+            verification_type,
+            score,
+            confidence,
+            report_hash,
+        )
+    }
+
+    pub fn submit_peer_review(
+        ctx: Context<SubmitPeerReview>,
+        tier: u8,
+        weight: u16,
+        score: u16,
+        passed: bool,
+        review_hash: [u8; 32],
+    ) -> Result<()> {
+        instructions::submit_peer_review::handler(
+            ctx,
+            tier,
+            weight,
+            score,
+            passed,
+            review_hash,
+        )
+    }
+
+    pub fn finalize_peer_verification(
+        ctx: Context<FinalizePeerVerification>,
+        final_score: u16,
+        final_confidence: u16,
+        peer_report_hash: [u8; 32],
+    ) -> Result<()> {
+        instructions::finalize_peer_verification::handler(
+            ctx,
+            final_score,
+            final_confidence,
+            peer_report_hash,
+        )
     }
 }
