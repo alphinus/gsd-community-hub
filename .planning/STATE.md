@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Every contributor's work is tracked on-chain and rewarded proportionally -- if the software succeeds economically, participants earn their fair share based on verified contributions.
-**Current focus:** Phase 5 in progress. GSD Framework Integration -- verification and peer review subsystem.
+**Current focus:** Phase 6 in progress. Advanced Governance -- delegation, quadratic voting, Civic Pass sybil resistance.
 
 ## Current Position
 
-Phase: 5 of 6 (GSD Framework Integration)
-Plan: 8 of 8 in current phase -- COMPLETE
-Status: Executing
-Last activity: 2026-02-09 -- Completed 05-07-PLAN.md (Verification and review UI) -- checkpoint pending
+Phase: 6 of 6 (Advanced Governance)
+Plan: 1 of 7 in current phase -- COMPLETE
+Status: Executing phase
+Last activity: 2026-02-09 -- Completed 06-01 (state foundation for advanced governance)
 
-Progress: [███████████████████████████░] 96% (28/29 total plans)
+Progress: [████████████████████████████░] 97% (30/36 plans through Phase 6-01)
 
 ## Performance Metrics
 
@@ -32,6 +32,7 @@ Progress: [███████████████████████
 | 03 | 7 | 34 min | 4.9 min |
 | 04 | 5 | 24 min | 4.8 min |
 | 05 | 8 | 36 min | 4.5 min |
+| 06 | 1 | 6 min | 6.0 min |
 
 **Recent Trend:**
 - Last 5 plans: 7m, 4m, 5m, 3m, 6m
@@ -39,6 +40,7 @@ Progress: [███████████████████████
 
 *Updated after each plan completion*
 | Phase 05 P07 | 6 | 2 tasks | 12 files |
+| Phase 06 P01 | 6 | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -149,6 +151,9 @@ Recent decisions affecting current work:
 - [05-08]: REVENUE_ADMIN_SECRET reused for migration admin auth to avoid new env vars (temporary endpoint)
 - [05-08]: In-memory migration state acceptable for v1 (~100-500 contributions); production would use BullMQ job queue
 - [05-08]: Default migration rate: 15/batch, 4min delay (~15/hour) within research rate limit
+- [06-01]: New GovernanceConfig fields appended after existing for backward-compatible extension (realloc in future update instruction)
+- [06-01]: DelegationRecord uses single PDA per delegator (one active delegation per wallet)
+- [06-01]: init_governance_config defaults: quadratic disabled, Pubkey::default() gatekeeper, 180-day decay half-life
 
 ### Pending Todos
 
@@ -177,5 +182,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 05-07-PLAN.md (Verification and review UI) -- checkpoint pending human-verify
-Resume file: .planning/phases/05-gsd-framework-integration/05-07-SUMMARY.md
+Stopped at: Completed 06-01-PLAN.md (state foundation). Next: 06-02 (delegation instructions)
+Resume file: .planning/phases/06-advanced-governance/06-02-PLAN.md
