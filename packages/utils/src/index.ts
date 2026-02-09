@@ -30,3 +30,17 @@ export {
   REVENUE_CLAIM_SEED,
   REVENUE_VAULT_SEED,
 } from "./revenue-pda";
+export {
+  getVerificationConfigPDA,
+  getVerificationReportPDA,
+  getPeerReviewPDA,
+  getReviewerProfilePDA,
+  VERIFICATION_CONFIG_SEED,
+  VERIFICATION_REPORT_SEED,
+  PEER_REVIEW_SEED,
+  REVIEWER_PROFILE_SEED,
+} from "./verification-pda";
+export {
+  computeVerificationReportHash,
+  computeTaskRef,
+} from "./verification-hash";

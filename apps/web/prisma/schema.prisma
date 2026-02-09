@@ -98,6 +98,7 @@ model Idea {
 
   round                IdeaRound @relation(fields: [roundId], references: [id])
   votes                Vote[]
+  analysis             IdeaAnalysis?
 
   @@index([roundId])
   @@index([authorWallet])
@@ -186,4 +187,76 @@ model PendingRevenue {
 
   @@index([status])
   @@index([detectedAt])
+}
+
+model VerificationReport {
+  id                   String   @id @default(cuid())
+  walletAddress        String
+  taskRef              String
+  verificationType     String   // "ai" or "peer"
+  overallScore         Int      // 0-10000
+  confidence           Int      // 0-10000
+  reportJson           Json
+  reportHash           String
+  onChainAddress       String?  @unique
+  transactionSignature String?  @unique
+  status               String   @default("completed")
+  configVersion        Int      @default(1)
+  createdAt            DateTime @default(now())
+
+  peerReviews          PeerReview[]
+
+  @@index([walletAddress])
+  @@index([taskRef])
+  @@index([status])
+}
+
+model PeerReview {
+  id                     String   @id @default(cuid())
+  verificationReportId   String
+  reviewerWallet         String
+  reviewerTier           Int
+  reviewerWeight         Float
+  score                  Int      // 0-10000
+  passed                 Boolean
+  evidenceJson           Json
+  reviewHash             String
+  onChainAddress         String?  @unique
+  transactionSignature   String?  @unique
+  createdAt              DateTime @default(now())
+
+  verificationReport     VerificationReport @relation(fields: [verificationReportId], references: [id])
+
+  @@unique([verificationReportId, reviewerWallet])
+}
+
+model ReviewerProfile {
+  id                    String   @id @default(cuid())
+  walletAddress         String   @unique
+  tier                  Int      @default(1)
+  totalReviews          Int      @default(0)
+  domainReviews         Json     @default("{}")
+  verifiedContributions Int      @default(0)
+  domainContributions   Json     @default("{}")
+  reviewQualityScore    Float    @default(1.0)
+  updatedAt             DateTime @updatedAt
+
+  @@index([tier])
+}
+
+model IdeaAnalysis {
+  id               String   @id @default(cuid())
+  ideaId           String   @unique
+  feasibilityScore Int      // 0-100
+  estimatedEffort  String
+  riskLevel        String
+  recommendation   String
+  analysisJson     Json
+  analysisHash     String
+  modelUsed        String
+  createdAt        DateTime @default(now())
+
+  idea             Idea @relation(fields: [ideaId], references: [id])
+
+  @@index([feasibilityScore])
 }
