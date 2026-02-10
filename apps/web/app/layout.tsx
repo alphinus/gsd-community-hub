@@ -24,7 +24,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GSD Community Hub",
+  title: {
+    default: "GSD Community Hub",
+    template: "%s | GSD Community Hub",
+  },
   description:
     "Open source developer community on Solana. Collaborate, build, earn. Every contribution tracked on-chain, every reward verifiable.",
   keywords: [
@@ -35,6 +38,22 @@ export const metadata: Metadata = {
     "GSD",
     "blockchain",
   ],
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://gsd-community-hub.vercel.app",
+  ),
+  openGraph: {
+    title: "GSD Community Hub",
+    description:
+      "Open source developer community on Solana. Collaborate, build, earn.",
+    siteName: "GSD Community Hub",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GSD Community Hub",
+    description:
+      "Open source developer community on Solana. Collaborate, build, earn.",
+  },
 };
 
 export default function RootLayout({

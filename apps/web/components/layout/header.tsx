@@ -66,10 +66,29 @@ export function Header() {
         <div className="flex h-14 items-center justify-between px-5">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
+            {/* Hexagonal icon mark */}
+            <svg width="28" height="28" viewBox="0 0 32 32" className="shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <defs>
+                <linearGradient id="hdr-g" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#1e3a5f"/>
+                  <stop offset="100%" stopColor="#4fd1c5"/>
+                </linearGradient>
+              </defs>
+              <g transform="translate(16,16)">
+                <polygon points="0,-11 9.5,-5.5 9.5,5.5 0,11 -9.5,5.5 -9.5,-5.5" fill="none" stroke="url(#hdr-g)" strokeWidth="1" opacity="0.5"/>
+                <rect x="-5" y="-5.5" width="10" height="1.5" rx="0.75" fill="#4fd1c5" opacity="0.9"/>
+                <rect x="-5" y="-0.75" width="8" height="1.5" rx="0.75" fill="#38b2ac"/>
+                <rect x="-5" y="4" width="6" height="1.5" rx="0.75" fill="#4fd1c5" opacity="0.7"/>
+                <circle cx="0" cy="-11" r="1.5" fill="#4fd1c5"/>
+                <circle cx="9.5" cy="-5.5" r="1.2" fill="#38b2ac"/>
+                <circle cx="9.5" cy="5.5" r="1.2" fill="#38b2ac"/>
+                <circle cx="0" cy="11" r="1.5" fill="#4fd1c5"/>
+              </g>
+            </svg>
             <span className="text-xl font-extralight tracking-wider gradient-text-cyan">
               GSD
             </span>
-            <span className="text-sm font-light text-[var(--color-gsd-text-muted)] group-hover:text-[var(--color-gsd-text-secondary)] transition-colors tracking-wide">
+            <span className="hidden sm:inline text-sm font-light text-[var(--color-gsd-text-muted)] group-hover:text-[var(--color-gsd-text-secondary)] transition-colors tracking-wide">
               Community Hub
             </span>
           </Link>
