@@ -29,7 +29,7 @@ const tabs: TabDef[] = [
 // ---------------------------------------------------------------------------
 
 export function TreasuryTabs() {
-  const [activeTab, setActiveTab] = useState<TabId>("transactions");
+  const [activeTab, setActiveTab] = useState<TabId>("revenue");
 
   return (
     <div>

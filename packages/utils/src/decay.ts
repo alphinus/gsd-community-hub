@@ -10,7 +10,7 @@
  * correctness is critical.
  */
 
-import { calculateContributionScore, type ScoreInput } from "./score.js";
+import { calculateContributionScore, type ScoreInput } from "./score";
 
 /** Default half-life in days: contributions lose half their weight every 180 days */
 export const DECAY_HALF_LIFE_DAYS = 180;

@@ -11,6 +11,8 @@ function serializeBigInts<T extends Record<string, unknown>>(
   for (const [key, value] of Object.entries(obj)) {
     if (typeof value === "bigint") {
       result[key] = value.toString();
+    } else if (value instanceof Date) {
+      result[key] = value.toISOString();
     } else if (value && typeof value === "object" && !Array.isArray(value)) {
       result[key] = serializeBigInts(value as Record<string, unknown>);
     } else {

@@ -7,6 +7,7 @@ import {
   BarChart3,
   Users,
 } from "lucide-react";
+import { prisma } from "@/lib/db/prisma";
 
 function FeatureCard({
   icon: Icon,
@@ -54,7 +55,21 @@ function StatPill({ value, label }: { value: string; label: string }) {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch live stats from DB
+  let stats = { builders: 0, contributions: 0, rounds: 0, verifications: 0 };
+  try {
+    const [builders, contributions, rounds, verifications] = await Promise.all([
+      prisma.user.count({ where: { displayName: { not: null } } }),
+      prisma.contribution.count(),
+      prisma.ideaRound.count(),
+      prisma.verificationReport.count(),
+    ]);
+    stats = { builders, contributions, rounds, verifications };
+  } catch {
+    // Graceful fallback
+  }
+
   return (
     <div className="relative">
       {/* Mesh Gradient Background */}
@@ -86,7 +101,7 @@ export default function HomePage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row opacity-0 animate-slide-up delay-200 motion-reduce:opacity-100 motion-reduce:animate-none">
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row animate-slide-up delay-200">
           <Link
             href="/profile/edit"
             className="rounded-xl gradient-violet px-8 py-3.5 text-lg font-semibold text-white shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-theme duration-200 hover:shadow-[0_0_40px_rgba(139,92,246,0.35)] hover:brightness-110 cursor-pointer"
@@ -102,10 +117,11 @@ export default function HomePage() {
         </div>
 
         {/* Live Stats */}
-        <div className="mt-16 flex flex-wrap justify-center gap-4 opacity-0 animate-slide-up delay-300 motion-reduce:opacity-100 motion-reduce:animate-none">
-          <StatPill value="100%" label="On-chain Governance" />
-          <StatPill value="Open" label="Source Code" />
-          <StatPill value="Solana" label="Network" />
+        <div className="mt-16 flex flex-wrap justify-center gap-4 animate-slide-up delay-300">
+          <StatPill value={String(stats.builders)} label="Builders" />
+          <StatPill value={String(stats.contributions)} label="Contributions" />
+          <StatPill value={String(stats.rounds)} label="Governance Rounds" />
+          <StatPill value={String(stats.verifications)} label="Verifications" />
         </div>
       </section>
 
