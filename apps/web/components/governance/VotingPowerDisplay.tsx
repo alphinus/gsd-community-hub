@@ -17,7 +17,7 @@ interface VotingPowerDisplayProps {
 
 function VotingPowerSkeleton() {
   return (
-    <div className="animate-pulse rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+    <div className="animate-shimmer-violet glass rounded-2xl p-4">
       <div className="mb-2 h-4 w-24 rounded bg-[var(--color-gsd-surface-raised)]" />
       <div className="h-8 w-16 rounded bg-[var(--color-gsd-surface-raised)]" />
     </div>
@@ -42,7 +42,7 @@ export function VotingPowerDisplay({ wallet }: VotingPowerDisplayProps) {
 
   if (isError) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+      <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
         Unable to load voting power.
       </div>
     );
@@ -53,7 +53,7 @@ export function VotingPowerDisplay({ wallet }: VotingPowerDisplayProps) {
 
   if (!deposit) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+      <div className="glass rounded-2xl p-4">
         <p className="mb-2 text-xs font-medium text-[var(--color-gsd-text-muted)]">
           Voting Power
         </p>
@@ -62,7 +62,7 @@ export function VotingPowerDisplay({ wallet }: VotingPowerDisplayProps) {
         </p>
         <Link
           href="/governance/deposit"
-          className="mt-2 inline-block text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          className="mt-2 inline-block cursor-pointer text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline transition-theme duration-200"
         >
           Deposit tokens to vote
         </Link>
@@ -75,12 +75,12 @@ export function VotingPowerDisplay({ wallet }: VotingPowerDisplayProps) {
   ).toFixed(2);
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200">
       <p className="mb-1 text-xs font-medium text-[var(--color-gsd-text-muted)]">
         Voting Power
       </p>
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+        <span className="text-2xl font-bold gradient-text-violet">
           {formattedAmount}
         </span>
         <span className="text-xs text-[var(--color-gsd-text-muted)]">$GSD</span>
@@ -89,8 +89,8 @@ export function VotingPowerDisplay({ wallet }: VotingPowerDisplayProps) {
         <span
           className={
             isEligible
-              ? "text-emerald-500"
-              : "text-amber-500"
+              ? "text-[var(--color-gsd-success)]"
+              : "text-[var(--color-gsd-gold)]"
           }
         >
           {isEligible ? "Eligible" : "Timelock active"}

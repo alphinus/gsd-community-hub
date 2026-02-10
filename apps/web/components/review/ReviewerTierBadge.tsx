@@ -1,8 +1,8 @@
 /**
  * Reviewer tier badge with tier-specific icon and color.
  *
- * Explorer: compass icon, blue
- * Builder: hammer icon, purple
+ * Explorer: compass icon, violet
+ * Builder: hammer icon, lighter violet
  * Architect: crown icon, gold
  */
 
@@ -20,20 +20,20 @@ const tierConfig: Record<
 > = {
   1: {
     name: "Explorer",
-    color: "text-blue-400",
-    bgColor: "bg-blue-500/10 border-blue-500/20",
+    color: "text-[var(--color-gsd-accent)]",
+    bgColor: "bg-[var(--color-gsd-accent)]/10 border-[var(--color-gsd-accent)]/20",
     Icon: Compass,
   },
   2: {
     name: "Builder",
-    color: "text-purple-400",
-    bgColor: "bg-purple-500/10 border-purple-500/20",
+    color: "text-[var(--color-gsd-accent-hover)]",
+    bgColor: "bg-[var(--color-gsd-accent-hover)]/10 border-[var(--color-gsd-accent-hover)]/20",
     Icon: Hammer,
   },
   3: {
     name: "Architect",
-    color: "text-yellow-400",
-    bgColor: "bg-yellow-500/10 border-yellow-500/20",
+    color: "text-[var(--color-gsd-gold)]",
+    bgColor: "bg-[var(--color-gsd-gold)]/10 border-[var(--color-gsd-gold)]/20",
     Icon: Crown,
   },
 };
@@ -53,7 +53,7 @@ export function ReviewerTierBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full border font-medium ${config.bgColor} ${config.color} ${sizes.wrapper}`}
+      className={`inline-flex items-center gap-1 rounded-full border font-medium transition-theme duration-200 ${config.bgColor} ${config.color} ${sizes.wrapper}`}
     >
       <Icon className={sizes.icon} />
       {config.name}

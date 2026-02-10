@@ -23,8 +23,8 @@ interface ContributionCardProps {
  */
 function getScoreColor(score: number): string {
   const pct = score / 100;
-  if (pct >= 80) return "bg-emerald-500";
-  if (pct >= 50) return "bg-amber-500";
+  if (pct >= 80) return "bg-[var(--color-gsd-accent)]";
+  if (pct >= 50) return "bg-[var(--color-gsd-gold)]";
   return "bg-red-500";
 }
 
@@ -72,7 +72,7 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
   const txExplorerUrl = explorerUrl(contribution.transactionSignature, "tx");
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/30">
       {/* Header: task ref + timestamp */}
       <div className="mb-3 flex items-start justify-between gap-2">
         <p className="text-sm font-medium text-[var(--color-gsd-text)] break-all">
@@ -95,7 +95,7 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
           <div
-            className={`h-full rounded-full transition-all ${scoreColor}`}
+            className={`h-full rounded-full transition-theme ${scoreColor}`}
             style={{ width: `${scoreWidth}%` }}
           />
         </div>
@@ -112,7 +112,7 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
           </code>
           <button
             onClick={handleCopyHash}
-            className="inline-flex h-5 w-5 items-center justify-center text-[var(--color-gsd-text-muted)] transition-colors hover:text-[var(--color-gsd-text)]"
+            className="inline-flex h-5 w-5 cursor-pointer items-center justify-center text-[var(--color-gsd-text-muted)] transition-theme duration-200 hover:text-[var(--color-gsd-text)]"
             title="Copy content hash"
           >
             {copied ? (
@@ -127,7 +127,7 @@ export function ContributionCard({ contribution }: ContributionCardProps) {
           href={txExplorerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          className="inline-flex cursor-pointer items-center gap-1 text-xs text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
         >
           Verify on-chain
           <ExternalLink className="h-3 w-3" />

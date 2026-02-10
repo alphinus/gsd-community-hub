@@ -5,20 +5,22 @@ import { DepositPanel } from "@/components/governance/DepositPanel";
 
 export default function DepositPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12">
+    <div className="relative mx-auto max-w-2xl px-4 py-12">
+      <div className="absolute inset-0 mesh-gradient -z-10" />
+
       {/* Header */}
       <div className="mb-8">
         <div className="mb-2 flex items-center gap-2 text-sm text-[var(--color-gsd-text-muted)]">
           <Link
             href="/governance"
-            className="hover:text-[var(--color-gsd-text)]"
+            className="hover:text-[var(--color-gsd-accent)] transition-colors cursor-pointer"
           >
             Governance
           </Link>
-          <span>/</span>
+          <span className="text-[var(--color-gsd-border)]">/</span>
           <span className="text-[var(--color-gsd-text)]">Deposit</span>
         </div>
-        <h1 className="text-3xl font-bold text-[var(--color-gsd-text)]">
+        <h1 className="text-3xl font-bold gradient-text-violet">
           Token Deposit
         </h1>
         <p className="mt-2 text-[var(--color-gsd-text-secondary)]">
@@ -31,13 +33,13 @@ export default function DepositPage() {
       <DepositPanel />
 
       {/* Info section */}
-      <div className="mt-8 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="mt-8 rounded-2xl glass p-6">
         <h2 className="mb-3 text-base font-semibold text-[var(--color-gsd-text)]">
           How Deposits Work
         </h2>
         <div className="space-y-3 text-sm text-[var(--color-gsd-text-muted)]">
           <div className="flex gap-3">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-xs font-bold text-emerald-500">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-gsd-accent)]/15 text-xs font-bold text-[var(--color-gsd-accent)]">
               1
             </span>
             <p>
@@ -49,7 +51,7 @@ export default function DepositPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-xs font-bold text-amber-500">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-gsd-gold)]/15 text-xs font-bold text-[var(--color-gsd-gold)]">
               2
             </span>
             <p>
@@ -61,7 +63,7 @@ export default function DepositPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-xs font-bold text-emerald-500">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-gsd-accent)]/15 text-xs font-bold text-[var(--color-gsd-accent)]">
               3
             </span>
             <p>
@@ -73,7 +75,7 @@ export default function DepositPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gray-500/15 text-xs font-bold text-gray-400">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-[var(--color-gsd-text-muted)]">
               4
             </span>
             <p>
@@ -91,7 +93,7 @@ export default function DepositPage() {
       <div className="mt-6 text-center">
         <Link
           href="/governance/dashboard"
-          className="text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          className="text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
         >
           Back to Governance Dashboard
         </Link>

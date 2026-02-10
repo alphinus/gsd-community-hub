@@ -35,23 +35,25 @@ export function ProfileCard({ profile }: ProfileCardProps) {
 
   return (
     <Link href={`/profile/${profile.walletAddress}`}>
-      <Card className="group cursor-pointer transition-all hover:border-[var(--color-gsd-accent)]/50 hover:shadow-lg hover:shadow-[var(--color-gsd-accent)]/5">
+      <Card className="glass group cursor-pointer transition-theme duration-200 hover:glow-violet-strong motion-safe:hover:scale-[1.02]">
         <CardContent className="p-5">
           <div className="flex items-start gap-4">
-            {/* Avatar */}
-            <div
-              className="h-12 w-12 shrink-0 rounded-full transition-transform group-hover:scale-105"
-              style={{
-                background: profile.avatarUrl
-                  ? `url(${profile.avatarUrl}) center/cover`
-                  : walletGradient(profile.walletAddress),
-              }}
-            />
+            {/* Avatar with gradient ring on hover */}
+            <div className="shrink-0 rounded-full p-[2px] transition-theme duration-200 group-hover:bg-gradient-to-br group-hover:from-[var(--color-gsd-accent)] group-hover:to-[var(--color-gsd-gold)]">
+              <div
+                className="h-12 w-12 rounded-full ring-2 ring-transparent transition-transform duration-200 motion-safe:group-hover:scale-105"
+                style={{
+                  background: profile.avatarUrl
+                    ? `url(${profile.avatarUrl}) center/cover`
+                    : walletGradient(profile.walletAddress),
+                }}
+              />
+            </div>
 
             <div className="min-w-0 flex-1">
               {/* Name + Verified */}
               <div className="flex items-center gap-2">
-                <h3 className="truncate text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent)]">
+                <h3 className="truncate text-sm font-semibold text-[var(--color-gsd-text)] transition-theme duration-200 group-hover:text-[var(--color-gsd-accent-hover)]">
                   {profile.displayName}
                 </h3>
                 {profile.onChainPda && (

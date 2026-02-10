@@ -185,7 +185,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 space-y-6 sm:p-8">
       {/* Display Name */}
       <div className="space-y-2">
         <Label htmlFor="displayName">
@@ -273,13 +273,13 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
       <Button
         type="submit"
         disabled={isSubmitting || !displayName || !bio}
-        className="w-full"
+        className="w-full gradient-violet text-white shadow-lg shadow-[var(--color-gsd-accent)]/20 motion-safe:hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--color-gsd-accent)]/30 glow-violet"
         size="lg"
       >
         {isSubmitting ? (
           <span className="flex items-center gap-2">
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-[var(--color-gsd-bg)] border-t-transparent" />
-            {submitStep}
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-[var(--color-gsd-accent)]" />
+            <span className="text-[var(--color-gsd-accent-light)]">{submitStep}</span>
           </span>
         ) : mode === "create" ? (
           "Join the Movement"

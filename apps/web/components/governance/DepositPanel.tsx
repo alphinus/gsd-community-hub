@@ -177,7 +177,7 @@ export function DepositPanel() {
 
   if (!walletConnected) {
     return (
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-6 py-12 text-center">
+      <div className="glass rounded-2xl px-6 py-12 text-center">
         <p className="text-sm text-[var(--color-gsd-text-muted)]">
           Connect your wallet to manage token deposits
         </p>
@@ -187,7 +187,7 @@ export function DepositPanel() {
 
   if (isLoading) {
     return (
-      <div className="animate-pulse space-y-4 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="animate-shimmer-violet space-y-4 glass rounded-2xl p-6">
         <div className="h-6 w-48 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-20 w-full rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-10 w-full rounded bg-[var(--color-gsd-surface-raised)]" />
@@ -198,7 +198,7 @@ export function DepositPanel() {
   return (
     <div className="space-y-6">
       {/* Current deposit info */}
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="glass rounded-2xl p-6">
         <h3 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
           Your Deposit
         </h3>
@@ -206,7 +206,7 @@ export function DepositPanel() {
         {deposit ? (
           <div className="space-y-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+              <span className="text-3xl font-bold gradient-text-violet">
                 {(Number(BigInt(deposit.depositedAmount)) / 1e9).toFixed(2)}
               </span>
               <span className="text-sm text-[var(--color-gsd-text-muted)]">
@@ -220,8 +220,8 @@ export function DepositPanel() {
                 <span
                   className={
                     isEligible
-                      ? "font-medium text-emerald-500"
-                      : "font-medium text-amber-500"
+                      ? "font-medium text-[var(--color-gsd-success)]"
+                      : "font-medium text-[var(--color-gsd-gold)]"
                   }
                 >
                   {isEligible ? "Eligible to vote" : "Timelock active"}
@@ -242,7 +242,7 @@ export function DepositPanel() {
       </div>
 
       {/* Deposit form */}
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="glass rounded-2xl p-6">
         <h3 className="mb-4 text-base font-semibold text-[var(--color-gsd-text)]">
           Deposit Tokens
         </h3>
@@ -263,7 +263,7 @@ export function DepositPanel() {
           <Button
             type="submit"
             disabled={isDepositing || !depositAmount}
-            className="w-full"
+            className="w-full bg-[var(--color-gsd-accent)] hover:bg-[var(--color-gsd-accent-hover)]"
           >
             {isDepositing ? (
               <span className="flex items-center gap-2">
@@ -282,7 +282,7 @@ export function DepositPanel() {
       </div>
 
       {/* Withdraw form */}
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="glass rounded-2xl p-6">
         <h3 className="mb-4 text-base font-semibold text-[var(--color-gsd-text)]">
           Withdraw Tokens
         </h3>

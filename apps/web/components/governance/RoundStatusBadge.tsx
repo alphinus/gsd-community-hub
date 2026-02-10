@@ -53,5 +53,12 @@ export function RoundStatusBadge({
 
   const { label, variant } = getEffectiveStatus(status, subEnd, vEnd);
 
-  return <Badge variant={variant}>{label}</Badge>;
+  return (
+    <Badge
+      variant={variant}
+      className="rounded-xl transition-theme duration-200"
+    >
+      {label}
+    </Badge>
+  );
 }

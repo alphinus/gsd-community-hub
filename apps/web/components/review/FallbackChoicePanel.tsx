@@ -23,8 +23,8 @@ export function FallbackChoicePanel({
   onChoice,
 }: FallbackChoicePanelProps) {
   return (
-    <Card className="overflow-hidden">
-      <div className="h-1 bg-gradient-to-r from-amber-500 to-yellow-400" />
+    <Card className="glass overflow-hidden">
+      <div className="h-1 bg-gradient-to-r from-[var(--color-gsd-gold)] to-yellow-400" />
 
       <CardHeader>
         <CardTitle className="text-base">
@@ -41,12 +41,12 @@ export function FallbackChoicePanel({
           {/* Peer Review option */}
           <button
             onClick={() => onChoice("peer_review")}
-            className="group rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-5 text-left transition-all hover:border-purple-500/40 hover:bg-purple-500/5"
+            className="group cursor-pointer glass-surface rounded-2xl p-5 text-left transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/40 hover:bg-[var(--color-gsd-accent)]/5 glow-violet"
           >
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10">
-              <Users className="h-5 w-5 text-purple-400" />
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-gsd-accent)]/10">
+              <Users className="h-5 w-5 text-[var(--color-gsd-accent-hover)]" />
             </div>
-            <h4 className="mb-1 text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-purple-300">
+            <h4 className="mb-1 text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent-hover)]">
               Request Peer Review
             </h4>
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
@@ -57,12 +57,12 @@ export function FallbackChoicePanel({
           {/* Re-submit option */}
           <button
             onClick={() => onChoice("resubmit")}
-            className="group rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-5 text-left transition-all hover:border-emerald-500/40 hover:bg-emerald-500/5"
+            className="group cursor-pointer glass-surface rounded-2xl p-5 text-left transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/40 hover:bg-[var(--color-gsd-accent)]/5 glow-violet"
           >
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
-              <RefreshCw className="h-5 w-5 text-emerald-400" />
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-gsd-accent)]/10">
+              <RefreshCw className="h-5 w-5 text-[var(--color-gsd-accent-hover)]" />
             </div>
-            <h4 className="mb-1 text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-emerald-300">
+            <h4 className="mb-1 text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent-hover)]">
               Re-submit with More Context
             </h4>
             <p className="text-xs text-[var(--color-gsd-text-muted)]">

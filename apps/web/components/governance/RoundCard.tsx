@@ -76,11 +76,11 @@ export function RoundCard({ round }: RoundCardProps) {
   const ideaCount = round.ideaCount ?? round._count?.ideas ?? 0;
 
   return (
-    <Link href={`/governance/rounds/${round.id}`} className="block group">
-      <Card className="transition-colors group-hover:border-[var(--color-gsd-accent)]/50">
+    <Link href={`/governance/rounds/${round.id}`} className="block group cursor-pointer">
+      <Card className="glass transition-theme duration-200 group-hover:glow-violet group-hover:border-[var(--color-gsd-accent)]/50">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-base leading-snug">
+            <CardTitle className="text-base leading-snug text-[var(--color-gsd-text)]">
               {round.title}
             </CardTitle>
             <RoundStatusBadge
@@ -89,7 +89,7 @@ export function RoundCard({ round }: RoundCardProps) {
               votingEnd={round.votingEnd}
             />
           </div>
-          <CardDescription className="line-clamp-2">
+          <CardDescription className="line-clamp-2 text-[var(--color-gsd-text-secondary)]">
             {round.description}
           </CardDescription>
         </CardHeader>

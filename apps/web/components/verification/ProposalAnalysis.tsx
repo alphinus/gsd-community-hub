@@ -46,9 +46,9 @@ interface ProposalAnalysisProps {
 function getRiskColor(risk: string): string {
   switch (risk) {
     case "low":
-      return "text-emerald-400";
+      return "text-[var(--color-gsd-success)]";
     case "medium":
-      return "text-amber-400";
+      return "text-[var(--color-gsd-gold)]";
     case "high":
       return "text-orange-400";
     case "critical":
@@ -95,9 +95,9 @@ function FeasibilityBanner({
 }) {
   if (score >= 60) {
     return (
-      <div className="flex items-center gap-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-4 py-3">
-        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-400" />
-        <span className="text-sm text-emerald-300">
+      <div className="flex items-center gap-2 rounded-2xl bg-[var(--color-gsd-accent)]/10 border border-[var(--color-gsd-accent)]/20 px-4 py-3">
+        <CheckCircle className="h-4 w-4 shrink-0 text-[var(--color-gsd-accent-hover)]" />
+        <span className="text-sm text-[var(--color-gsd-accent-hover)]">
           AI Assessment: Feasible
         </span>
       </div>
@@ -106,9 +106,9 @@ function FeasibilityBanner({
 
   if (score >= 30) {
     return (
-      <div className="flex items-center gap-2 rounded-lg bg-amber-500/10 border border-amber-500/20 px-4 py-3">
-        <AlertTriangle className="h-4 w-4 shrink-0 text-amber-400" />
-        <span className="text-sm text-amber-300">
+      <div className="flex items-center gap-2 rounded-2xl bg-[var(--color-gsd-gold)]/10 border border-[var(--color-gsd-gold)]/20 px-4 py-3">
+        <AlertTriangle className="h-4 w-4 shrink-0 text-[var(--color-gsd-gold)]" />
+        <span className="text-sm text-[var(--color-gsd-gold)]">
           AI Assessment: Needs Revision -- flagged for careful review
         </span>
       </div>
@@ -116,7 +116,7 @@ function FeasibilityBanner({
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3">
+    <div className="flex items-center gap-2 rounded-2xl bg-red-500/10 border border-red-500/20 px-4 py-3">
       <XCircle className="h-4 w-4 shrink-0 text-red-400" />
       <span className="text-sm text-red-300">
         AI Assessment: Technically Infeasible -- requires 80% supermajority to
@@ -139,7 +139,7 @@ function ExpandableSection({
     <div className="border-t border-[var(--color-gsd-border-subtle)] pt-3">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center gap-2 text-left"
+        className="flex w-full cursor-pointer items-center gap-2 text-left transition-theme duration-200"
       >
         {expanded ? (
           <ChevronDown className="h-4 w-4 text-[var(--color-gsd-text-muted)]" />
@@ -176,7 +176,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
   // Loading state
   if (isLoading) {
     return (
-      <Card>
+      <Card className="glass">
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-5 w-5 animate-spin text-[var(--color-gsd-text-muted)]" />
           <span className="ml-2 text-sm text-[var(--color-gsd-text-muted)]">
@@ -190,7 +190,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
   // Pending state
   if (data?.status === "pending") {
     return (
-      <Card>
+      <Card className="glass">
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-5 w-5 animate-spin text-[var(--color-gsd-accent)]" />
           <span className="ml-2 text-sm text-[var(--color-gsd-text-muted)]">
@@ -204,7 +204,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
   // Unavailable state
   if (!data || data.status === "unavailable") {
     return (
-      <Card>
+      <Card className="glass">
         <CardContent className="flex items-center justify-center py-6">
           <Info className="h-4 w-4 text-[var(--color-gsd-text-muted)]" />
           <span className="ml-2 text-sm text-[var(--color-gsd-text-muted)]">
@@ -225,8 +225,8 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
   } = data;
 
   return (
-    <Card className="overflow-hidden">
-      <div className="h-1 bg-gradient-to-r from-emerald-500 to-teal-400" />
+    <Card className="glass overflow-hidden">
+      <div className="h-1 bg-gradient-to-r from-[var(--color-gsd-accent)] to-[var(--color-gsd-accent-hover)]" />
 
       <CardHeader>
         <CardTitle className="text-base">AI Proposal Analysis</CardTitle>
@@ -239,7 +239,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
         {/* Metrics row */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {/* Feasibility score */}
-          <div className="rounded-lg bg-[var(--color-gsd-surface-raised)] p-3 text-center">
+          <div className="rounded-2xl bg-[var(--color-gsd-surface-raised)] p-3 text-center">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Feasibility
             </p>
@@ -252,7 +252,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
           </div>
 
           {/* Effort estimate */}
-          <div className="rounded-lg bg-[var(--color-gsd-surface-raised)] p-3 text-center">
+          <div className="rounded-2xl bg-[var(--color-gsd-surface-raised)] p-3 text-center">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">Effort</p>
             <p className="mt-1 text-sm font-semibold text-[var(--color-gsd-text)]">
               {getEffortLabel(estimatedEffort)}
@@ -260,7 +260,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
           </div>
 
           {/* Risk level */}
-          <div className="rounded-lg bg-[var(--color-gsd-surface-raised)] p-3 text-center">
+          <div className="rounded-2xl bg-[var(--color-gsd-surface-raised)] p-3 text-center">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">Risk</p>
             <p
               className={`mt-1 text-sm font-semibold capitalize ${getRiskColor(
@@ -272,7 +272,7 @@ export function ProposalAnalysis({ ideaId }: ProposalAnalysisProps) {
           </div>
 
           {/* Recommendation */}
-          <div className="rounded-lg bg-[var(--color-gsd-surface-raised)] p-3 text-center">
+          <div className="rounded-2xl bg-[var(--color-gsd-surface-raised)] p-3 text-center">
             <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
               Recommendation
             </p>

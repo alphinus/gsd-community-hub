@@ -44,7 +44,7 @@ function CopyButton({ text }: { text: string }) {
       variant="ghost"
       size="icon"
       onClick={handleCopy}
-      className="h-5 w-5 shrink-0"
+      className="h-5 w-5 shrink-0 cursor-pointer transition-theme duration-200"
       title="Copy to clipboard"
     >
       <svg
@@ -76,7 +76,7 @@ export function ChangelogList() {
   });
 
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Program Upgrade Changelog</CardTitle>
@@ -97,13 +97,13 @@ export function ChangelogList() {
         )}
 
         {isError && (
-          <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+          <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
             Unable to load changelog. The database may not be configured yet.
           </div>
         )}
 
         {data && data.upgrades.length === 0 && (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="glass-surface rounded-2xl px-6 py-12 text-center">
             <p className="text-sm text-[var(--color-gsd-text-muted)]">
               No program upgrades yet. Initial deployment pending.
             </p>
@@ -115,7 +115,7 @@ export function ChangelogList() {
             {data.upgrades.map((upgrade) => (
               <div
                 key={upgrade.id}
-                className="relative rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4"
+                className="relative glass-surface rounded-2xl p-4 transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/20"
               >
                 {/* Header: version + date */}
                 <div className="mb-2 flex items-center justify-between">
@@ -150,7 +150,7 @@ export function ChangelogList() {
                         href={explorerUrl(signer)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                        className="cursor-pointer font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                       >
                         {truncateAddress(signer)}
                       </a>
@@ -168,7 +168,7 @@ export function ChangelogList() {
                     href={explorerUrl(upgrade.transactionSignature, "tx")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                    className="cursor-pointer font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                   >
                     {truncateAddress(upgrade.transactionSignature, 8)}
                   </a>

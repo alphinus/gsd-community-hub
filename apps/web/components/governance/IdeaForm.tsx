@@ -140,7 +140,7 @@ export function IdeaForm({
 
   if (!walletConnected) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-8 text-center">
+      <div className="glass rounded-2xl px-6 py-8 text-center">
         <p className="text-sm text-[var(--color-gsd-text-muted)]">
           Connect your wallet to submit an idea
         </p>
@@ -199,7 +199,7 @@ export function IdeaForm({
       <Button
         type="submit"
         disabled={isSubmitting || !title || !description}
-        className="w-full"
+        className="w-full bg-[var(--color-gsd-accent)] hover:bg-[var(--color-gsd-accent-hover)]"
       >
         {isSubmitting ? (
           <span className="flex items-center gap-2">

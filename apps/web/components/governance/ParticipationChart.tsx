@@ -38,7 +38,7 @@ export function ParticipationChart({
 }: ParticipationChartProps) {
   if (turnoutByRound.length === 0) {
     return (
-      <div className="flex h-[300px] items-center justify-center rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)]">
+      <div className="flex h-[300px] items-center justify-center glass rounded-2xl">
         <p className="text-sm text-[var(--color-gsd-text-muted)]">
           No voting rounds completed yet
         </p>
@@ -73,30 +73,30 @@ export function ParticipationChart({
   return (
     <div className="space-y-4">
       {/* Bar chart */}
-      <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+      <div className="glass rounded-2xl p-4">
         <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
           Voter Turnout by Round
         </h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#3f3f46" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(139, 92, 246, 0.15)" />
             <XAxis
               dataKey="name"
-              tick={{ fill: "#a1a1aa", fontSize: 12 }}
-              axisLine={{ stroke: "#3f3f46" }}
+              tick={{ fill: "#94A3B8", fontSize: 12 }}
+              axisLine={{ stroke: "rgba(139, 92, 246, 0.2)" }}
             />
             <YAxis
-              tick={{ fill: "#a1a1aa", fontSize: 12 }}
-              axisLine={{ stroke: "#3f3f46" }}
+              tick={{ fill: "#94A3B8", fontSize: 12 }}
+              axisLine={{ stroke: "rgba(139, 92, 246, 0.2)" }}
               domain={[0, 100]}
               tickFormatter={(v: number) => `${v}%`}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#18181b",
-                border: "1px solid #3f3f46",
-                borderRadius: "0.5rem",
-                color: "#fafafa",
+                backgroundColor: "#161637",
+                border: "1px solid rgba(139, 92, 246, 0.3)",
+                borderRadius: "1rem",
+                color: "#F8FAFC",
                 fontSize: "0.875rem",
               }}
               formatter={(value: number | undefined) => [
@@ -106,7 +106,7 @@ export function ParticipationChart({
             />
             <Bar
               dataKey="turnout"
-              fill="#10b981"
+              fill="#8B5CF6"
               radius={[4, 4, 0, 0]}
               maxBarSize={48}
             />
@@ -115,7 +115,7 @@ export function ParticipationChart({
       </div>
 
       {/* Participation trends table */}
-      <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+      <div className="glass rounded-2xl p-4">
         <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
           Participation Trends (Rolling Averages)
         </h3>
@@ -123,12 +123,12 @@ export function ParticipationChart({
           {trends.map((trend) => (
             <div
               key={trend.period}
-              className="rounded-lg bg-[var(--color-gsd-bg)] p-3 text-center"
+              className="rounded-2xl bg-[var(--color-gsd-bg)] p-3 text-center transition-theme duration-200"
             >
               <p className="text-xs text-[var(--color-gsd-text-muted)]">
                 Last {trend.period}
               </p>
-              <p className="mt-1 text-lg font-bold text-emerald-500">
+              <p className="mt-1 text-lg font-bold text-[var(--color-gsd-accent)]">
                 {trend.turnout}
               </p>
               <p className="text-xs text-[var(--color-gsd-text-muted)]">

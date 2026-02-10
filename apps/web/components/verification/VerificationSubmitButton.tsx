@@ -93,7 +93,11 @@ export function VerificationSubmitButton({
   }
 
   return (
-    <Button onClick={handleSubmit} disabled={isLoading}>
+    <Button
+      onClick={handleSubmit}
+      disabled={isLoading}
+      className="glow-violet"
+    >
       {isLoading ? (
         <>
           <Loader2 className="h-4 w-4 animate-spin" />

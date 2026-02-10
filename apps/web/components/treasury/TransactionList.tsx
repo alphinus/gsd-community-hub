@@ -53,7 +53,7 @@ function FlowIcon({ type }: { type: "inflow" | "outflow" }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-emerald-400"
+        className="text-[var(--color-gsd-success)]"
       >
         <path d="M12 17V3" />
         <path d="m6 11 6 6 6-6" />
@@ -119,7 +119,7 @@ export function TransactionList({
   const transactions = data?.transactions ?? [];
 
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Recent Transactions</CardTitle>
@@ -145,14 +145,14 @@ export function TransactionList({
 
         {/* Error */}
         {isError && (
-          <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+          <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
             Unable to load transaction history.
           </div>
         )}
 
         {/* Empty state */}
         {!isLoading && !isError && transactions.length === 0 && (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="glass-surface rounded-2xl px-6 py-12 text-center">
             <p className="text-sm text-[var(--color-gsd-text-muted)]">
               No treasury transactions yet.
             </p>
@@ -172,7 +172,7 @@ export function TransactionList({
                 className="flex items-center gap-3 py-3 first:pt-0 last:pb-0"
               >
                 {/* Direction icon */}
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-gsd-bg)]">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-gsd-surface-raised)]">
                   <FlowIcon type={tx.type} />
                 </div>
 
@@ -182,7 +182,7 @@ export function TransactionList({
                     <span
                       className={`text-sm font-medium ${
                         tx.type === "inflow"
-                          ? "text-emerald-400"
+                          ? "text-[var(--color-gsd-success)]"
                           : "text-red-400"
                       }`}
                     >
@@ -210,7 +210,7 @@ export function TransactionList({
                     href={explorerUrl(tx.signature, "tx")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-[10px] text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                    className="cursor-pointer font-mono text-[10px] text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                   >
                     {truncateAddress(tx.signature, 4)}
                   </a>

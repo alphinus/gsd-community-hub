@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ProfileCard } from "./profile-card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { ChevronLeft, ChevronRight, AlertTriangle, Users } from "lucide-react";
 
 interface Developer {
   walletAddress: string;
@@ -47,12 +48,12 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
   if (isLoading && !data) {
     return (
       <div className="space-y-6">
-        <div className="h-8 w-64 animate-pulse rounded-lg bg-[var(--color-gsd-surface-raised)]" />
+        <div className="h-8 w-64 animate-shimmer-violet rounded-2xl bg-[var(--color-gsd-surface-raised)]" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className="h-36 animate-pulse rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)]"
+              className="h-36 animate-shimmer-violet rounded-2xl glass"
             />
           ))}
         </div>
@@ -62,7 +63,8 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
 
   if (isError) {
     return (
-      <div className="rounded-xl border border-[var(--color-gsd-error)]/20 bg-[var(--color-gsd-error)]/5 p-8 text-center">
+      <div className="glass rounded-2xl border border-[var(--color-gsd-error)]/20 p-8 text-center">
+        <AlertTriangle className="mx-auto mb-3 h-8 w-8 text-[var(--color-gsd-error)]/70" />
         <p className="text-[var(--color-gsd-error)]">
           Failed to load directory. Please try again later.
         </p>
@@ -77,7 +79,8 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
   // Empty state
   if (total === 0) {
     return (
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-12 text-center">
+      <div className="glass rounded-2xl p-12 text-center">
+        <Users className="mx-auto mb-3 h-10 w-10 text-[var(--color-gsd-accent)]/50" />
         <p className="text-lg font-medium text-[var(--color-gsd-text-secondary)]">
           Be the first to join.
         </p>
@@ -92,7 +95,7 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
     <div className="space-y-6">
       {/* Total count */}
       <p className="text-lg font-medium text-[var(--color-gsd-text-secondary)]">
-        <span className="text-[var(--color-gsd-accent)] font-bold">{total}</span>{" "}
+        <span className="gradient-text-aurora font-bold">{total}</span>{" "}
         {total === 1 ? "builder has" : "builders have"} joined the movement
       </p>
 
@@ -111,7 +114,9 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
             size="sm"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page <= 1}
+            className="gap-1 hover:border-[var(--color-gsd-accent)]/50 hover:text-[var(--color-gsd-accent)]"
           >
+            <ChevronLeft className="h-4 w-4" />
             Previous
           </Button>
           <span className="text-sm text-[var(--color-gsd-text-muted)]">
@@ -122,8 +127,10 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
             size="sm"
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page >= totalPages}
+            className="gap-1 hover:border-[var(--color-gsd-accent)]/50 hover:text-[var(--color-gsd-accent)]"
           >
             Next
+            <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
       )}

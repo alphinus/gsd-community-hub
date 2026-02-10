@@ -48,18 +48,20 @@ export default function ProfileEditPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12">
         <div className="space-y-4">
-          <div className="h-8 w-48 animate-pulse rounded-lg bg-[var(--color-gsd-surface-raised)]" />
-          <div className="h-96 animate-pulse rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)]" />
+          <div className="h-8 w-48 rounded-xl animate-shimmer-violet" />
+          <div className="h-96 rounded-2xl animate-shimmer-violet" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12">
-      <Card>
+    <div className="relative mx-auto max-w-2xl px-4 py-12">
+      <div className="absolute inset-0 mesh-gradient -z-10" />
+
+      <Card className="glass">
         <CardHeader>
-          <CardTitle className="text-2xl">
+          <CardTitle className="text-2xl gradient-text-violet">
             {mode === "create" ? "Join the Movement" : "Edit Profile"}
           </CardTitle>
           {mode === "create" && (

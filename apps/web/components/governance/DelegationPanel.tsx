@@ -187,7 +187,7 @@ export function DelegationPanel() {
 
   if (!walletConnected) {
     return (
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-6 py-12 text-center">
+      <div className="glass rounded-2xl px-6 py-12 text-center">
         <p className="text-sm text-[var(--color-gsd-text-muted)]">
           Connect your wallet to manage delegation
         </p>
@@ -197,7 +197,7 @@ export function DelegationPanel() {
 
   if (isLoading) {
     return (
-      <div className="animate-pulse space-y-4 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="animate-shimmer-violet space-y-4 glass rounded-2xl p-6">
         <div className="h-6 w-48 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-20 w-full rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-10 w-full rounded bg-[var(--color-gsd-surface-raised)]" />
@@ -208,15 +208,15 @@ export function DelegationPanel() {
   return (
     <div className="space-y-6">
       {/* Current delegation status */}
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="glass rounded-2xl p-6">
         <h3 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
           Delegation Status
         </h3>
 
         {activeDelegation ? (
           <div className="space-y-3">
-            <div className="rounded-md bg-emerald-500/10 px-4 py-3">
-              <p className="text-sm text-emerald-400">
+            <div className="rounded-xl bg-[var(--color-gsd-accent)]/10 px-4 py-3">
+              <p className="text-sm text-[var(--color-gsd-accent-hover)]">
                 You are delegating{" "}
                 <span className="font-semibold">
                   {(
@@ -229,7 +229,7 @@ export function DelegationPanel() {
                   {truncateAddress(activeDelegation.delegateWallet)}
                 </span>
               </p>
-              <p className="mt-1 text-xs text-emerald-400/70">
+              <p className="mt-1 text-xs text-[var(--color-gsd-accent)]/70">
                 Effective from Round {activeDelegation.effectiveFromRound}
               </p>
             </div>
@@ -237,7 +237,7 @@ export function DelegationPanel() {
               variant="outline"
               onClick={handleRevoke}
               disabled={isRevoking}
-              className="w-full border-red-500/30 text-red-400 hover:bg-red-500/10"
+              className="w-full border-[var(--color-gsd-error)]/30 text-[var(--color-gsd-error)] hover:bg-[var(--color-gsd-error)]/10"
             >
               {isRevoking ? (
                 <span className="flex items-center gap-2">
@@ -259,7 +259,7 @@ export function DelegationPanel() {
 
       {/* Delegate form */}
       {!activeDelegation && (
-        <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+        <div className="glass rounded-2xl p-6">
           <h3 className="mb-4 text-base font-semibold text-[var(--color-gsd-text)]">
             Delegate Voting Power
           </h3>
@@ -278,7 +278,7 @@ export function DelegationPanel() {
             <Button
               type="submit"
               disabled={isDelegating || !delegateAddress}
-              className="w-full"
+              className="w-full bg-[var(--color-gsd-accent)] hover:bg-[var(--color-gsd-accent-hover)]"
             >
               {isDelegating ? (
                 <span className="flex items-center gap-2">
@@ -300,7 +300,7 @@ export function DelegationPanel() {
       {/* Delegation history */}
       {delegationData &&
         delegationData.delegations.length > 0 && (
-          <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+          <div className="glass rounded-2xl p-6">
             <h3 className="mb-4 text-base font-semibold text-[var(--color-gsd-text)]">
               Delegation History
             </h3>
@@ -308,7 +308,7 @@ export function DelegationPanel() {
               {delegationData.delegations.map((d) => (
                 <div
                   key={d.id}
-                  className="flex items-center justify-between rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-3"
+                  className="flex items-center justify-between rounded-2xl glass-surface px-4 py-3 transition-theme duration-200"
                 >
                   <div>
                     <p className="text-sm text-[var(--color-gsd-text)]">
@@ -323,7 +323,7 @@ export function DelegationPanel() {
                   <div className="text-right">
                     <span
                       className={`text-xs font-medium ${
-                        d.isActive ? "text-emerald-500" : "text-gray-400"
+                        d.isActive ? "text-[var(--color-gsd-success)]" : "text-[var(--color-gsd-text-muted)]"
                       }`}
                     >
                       {d.isActive ? "Active" : "Revoked"}

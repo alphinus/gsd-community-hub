@@ -2,8 +2,8 @@
  * Compact verification score badge with color coding.
  *
  * Displays a verification score as "87/100" with color-coded background:
- * - Green (70+): strong verification
- * - Yellow (50-69): moderate verification
+ * - Violet (70+): strong verification
+ * - Gold (50-69): moderate verification
  * - Red (<50): weak verification
  *
  * Score is on 0-10000 basis points scale internally, displayed as 0-100.
@@ -19,14 +19,14 @@ interface VerificationScoreBadgeProps {
 }
 
 function getScoreColor(displayScore: number): string {
-  if (displayScore >= 70) return "from-emerald-500 to-teal-400";
-  if (displayScore >= 50) return "from-amber-500 to-yellow-400";
+  if (displayScore >= 70) return "from-[var(--color-gsd-accent)] to-[var(--color-gsd-accent-hover)]";
+  if (displayScore >= 50) return "from-[var(--color-gsd-gold)] to-yellow-400";
   return "from-red-500 to-rose-400";
 }
 
 function getTextColor(displayScore: number): string {
-  if (displayScore >= 70) return "text-emerald-400";
-  if (displayScore >= 50) return "text-amber-400";
+  if (displayScore >= 70) return "text-[var(--color-gsd-accent-hover)]";
+  if (displayScore >= 50) return "text-[var(--color-gsd-gold)]";
   return "text-red-400";
 }
 

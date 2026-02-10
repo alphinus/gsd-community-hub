@@ -45,17 +45,17 @@ interface AnalyticsResponse {
 
 function AnalyticsSkeleton() {
   return (
-    <div className="animate-pulse space-y-6">
+    <div className="animate-shimmer-violet space-y-6">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="h-20 rounded-lg bg-[var(--color-gsd-surface-raised)]"
+            className="h-20 rounded-2xl bg-[var(--color-gsd-surface-raised)]"
           />
         ))}
       </div>
-      <div className="h-[350px] rounded-lg bg-[var(--color-gsd-surface-raised)]" />
-      <div className="h-[300px] rounded-lg bg-[var(--color-gsd-surface-raised)]" />
+      <div className="h-[350px] rounded-2xl bg-[var(--color-gsd-surface-raised)]" />
+      <div className="h-[300px] rounded-2xl bg-[var(--color-gsd-surface-raised)]" />
       <p className="text-center text-sm text-[var(--color-gsd-text-muted)]">
         Loading analytics...
       </p>
@@ -85,7 +85,7 @@ export function GovernanceAnalytics() {
 
   if (isError || !data) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-6 py-8 text-center">
+      <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-6 py-8 text-center">
         <p className="text-sm text-[var(--color-gsd-error)]">
           Failed to load analytics. Please try again.
         </p>
@@ -110,7 +110,7 @@ export function GovernanceAnalytics() {
     <div className="space-y-8">
       {/* Quick Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Total Rounds
           </p>
@@ -118,13 +118,13 @@ export function GovernanceAnalytics() {
             {totalRounds}
           </p>
         </div>
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Avg Turnout
           </p>
-          <p className="text-2xl font-bold text-emerald-500">{avgTurnout}%</p>
+          <p className="text-2xl font-bold text-[var(--color-gsd-accent)]">{avgTurnout}%</p>
         </div>
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Active Voters
           </p>
@@ -132,11 +132,11 @@ export function GovernanceAnalytics() {
             {data.powerDistribution.totalDepositors}
           </p>
         </div>
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Delegated Tokens
           </p>
-          <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+          <p className="text-2xl font-bold gradient-text-violet">
             {delegatedTokensFormatted}
           </p>
           <p className="text-xs text-[var(--color-gsd-text-muted)]">$GSD</p>
@@ -170,7 +170,7 @@ export function GovernanceAnalytics() {
           Delegation Network
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+          <div className="glass rounded-2xl p-4">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Active Delegations
             </p>
@@ -178,11 +178,11 @@ export function GovernanceAnalytics() {
               {data.delegationStats.totalActiveDelegations}
             </p>
           </div>
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+          <div className="glass rounded-2xl p-4">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Total Delegated
             </p>
-            <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+            <p className="text-2xl font-bold gradient-text-violet">
               {delegatedTokensFormatted} $GSD
             </p>
           </div>
@@ -190,7 +190,7 @@ export function GovernanceAnalytics() {
 
         {/* Top delegates */}
         {data.delegationStats.topDelegates.length > 0 && (
-          <div className="mt-4 rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+          <div className="mt-4 glass rounded-2xl p-4">
             <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
               Top Delegates
             </h3>
@@ -199,10 +199,10 @@ export function GovernanceAnalytics() {
                 <Link
                   key={delegate.wallet}
                   href={`/profile/${delegate.wallet}`}
-                  className="flex items-center justify-between rounded-lg bg-[var(--color-gsd-bg)] px-3 py-2 transition-colors hover:bg-[var(--color-gsd-surface-raised)]"
+                  className="flex items-center justify-between rounded-2xl bg-[var(--color-gsd-bg)] px-3 py-2 cursor-pointer transition-theme duration-200 hover:bg-[var(--color-gsd-surface-raised)]"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/15 text-xs font-bold text-emerald-500">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-gsd-accent)]/15 text-xs font-bold text-[var(--color-gsd-accent)]">
                       {index + 1}
                     </span>
                     <span className="font-mono text-sm text-[var(--color-gsd-text)]">

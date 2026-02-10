@@ -79,10 +79,10 @@ function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 py-4">
       <div className="flex-1 space-y-2">
-        <div className="h-4 w-36 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
-        <div className="h-3 w-56 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+        <div className="h-4 w-36 animate-shimmer-violet rounded" />
+        <div className="h-3 w-56 animate-shimmer-violet rounded" />
       </div>
-      <div className="h-4 w-20 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+      <div className="h-4 w-20 animate-shimmer-violet rounded" />
     </div>
   );
 }
@@ -146,12 +146,12 @@ export default function ClaimPanel() {
   // Not connected state
   if (!publicKey) {
     return (
-      <Card>
+      <Card className="glass">
         <CardHeader>
           <CardTitle>My Claims</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="glass-surface rounded-2xl px-6 py-12 text-center">
             <WalletIcon />
             <p className="mt-3 text-sm text-[var(--color-gsd-text-muted)]">
               Connect your wallet to view your revenue claims.
@@ -167,7 +167,7 @@ export default function ClaimPanel() {
   }
 
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>My Claims</CardTitle>
@@ -184,8 +184,8 @@ export default function ClaimPanel() {
       <CardContent>
         {/* Summary card */}
         {claims.length > 0 && (
-          <div className="mb-4 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-4 py-3">
-            <p className="text-xs font-medium text-emerald-400">
+          <div className="mb-4 rounded-2xl border border-[var(--color-gsd-accent)]/20 bg-[var(--color-gsd-accent)]/5 px-4 py-3">
+            <p className="text-xs font-medium text-[var(--color-gsd-accent-hover)]">
               Total Claimed
             </p>
             <div className="mt-1 flex flex-wrap gap-3">
@@ -226,14 +226,14 @@ export default function ClaimPanel() {
 
         {/* Error */}
         {isError && (
-          <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+          <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
             Unable to load claim history.
           </div>
         )}
 
         {/* Empty state */}
         {!isLoading && !isError && claims.length === 0 && (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="glass-surface rounded-2xl px-6 py-12 text-center">
             <p className="text-sm text-[var(--color-gsd-text-muted)]">
               No revenue claims yet.
             </p>
@@ -262,14 +262,14 @@ export default function ClaimPanel() {
                       variant="secondary"
                       className={
                         claim.revenueEvent.token === "sol"
-                          ? "bg-violet-500/15 text-violet-400"
+                          ? "bg-[var(--color-gsd-accent)]/15 text-[var(--color-gsd-accent-hover)]"
                           : "bg-blue-500/15 text-blue-400"
                       }
                     >
                       {tokenLabel(claim.revenueEvent.token)}
                     </Badge>
                   </div>
-                  <p className="mt-1 text-lg font-bold tracking-tight text-emerald-400">
+                  <p className="mt-1 text-lg font-bold tracking-tight text-[var(--color-gsd-accent-hover)]">
                     +{formatAmount(claim.amount, claim.revenueEvent.token)}{" "}
                     <span className="text-sm font-normal text-[var(--color-gsd-text-muted)]">
                       {tokenLabel(claim.revenueEvent.token)}
@@ -294,7 +294,7 @@ export default function ClaimPanel() {
                     href={explorerUrl(claim.transactionSignature, "tx")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-1 inline-block font-mono text-[10px] text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                    className="mt-1 inline-block cursor-pointer font-mono text-[10px] text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                   >
                     {truncateAddress(claim.transactionSignature, 4)}
                   </a>

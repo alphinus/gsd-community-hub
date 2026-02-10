@@ -42,7 +42,7 @@ const PAGE_SIZE = 10;
 
 function IdeaSkeleton() {
   return (
-    <div className="animate-pulse rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4">
+    <div className="animate-shimmer-violet glass rounded-2xl p-4">
       <div className="mb-3 flex items-start justify-between">
         <div className="h-5 w-64 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-4 w-20 rounded bg-[var(--color-gsd-surface-raised)]" />
@@ -96,19 +96,19 @@ function VoteTallyBar({
     <div className="flex h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
       {yPct > 0 && (
         <div
-          className="h-full bg-emerald-500 transition-all"
+          className="h-full bg-[var(--color-gsd-success)] transition-theme duration-200"
           style={{ width: `${yPct}%` }}
         />
       )}
       {nPct > 0 && (
         <div
-          className="h-full bg-red-500 transition-all"
+          className="h-full bg-[var(--color-gsd-error)] transition-theme duration-200"
           style={{ width: `${nPct}%` }}
         />
       )}
       {aPct > 0 && (
         <div
-          className="h-full bg-gray-500 transition-all"
+          className="h-full bg-[var(--color-gsd-text-muted)] transition-theme duration-200"
           style={{ width: `${aPct}%` }}
         />
       )}
@@ -123,12 +123,12 @@ function IdeaCard({ idea }: { idea: IdeaData }) {
   const total = yes + no + abstain;
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-violet">
       <div className="mb-2 flex items-start justify-between gap-2">
         <h3 className="text-sm font-medium text-[var(--color-gsd-text)]">
           {idea.title}
         </h3>
-        <span className="shrink-0 rounded-full bg-[var(--color-gsd-surface-raised)] px-2 py-0.5 text-xs text-[var(--color-gsd-text-muted)]">
+        <span className="shrink-0 rounded-xl bg-[var(--color-gsd-surface-raised)] px-2 py-0.5 text-xs text-[var(--color-gsd-text-muted)]">
           {idea.status}
         </span>
       </div>
@@ -150,9 +150,9 @@ function IdeaCard({ idea }: { idea: IdeaData }) {
 
       {total > 0 && (
         <div className="mt-1.5 flex items-center gap-3 text-xs">
-          <span className="text-emerald-500">Yes {yes}</span>
-          <span className="text-red-500">No {no}</span>
-          <span className="text-gray-400">Abstain {abstain}</span>
+          <span className="text-[var(--color-gsd-success)]">Yes {yes}</span>
+          <span className="text-[var(--color-gsd-error)]">No {no}</span>
+          <span className="text-[var(--color-gsd-text-muted)]">Abstain {abstain}</span>
         </div>
       )}
     </div>
@@ -191,7 +191,7 @@ export function IdeaList({ roundId, roundStatus }: IdeaListProps) {
             setSort("newest");
             setPage(1);
           }}
-          className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+          className={`cursor-pointer rounded-xl px-2.5 py-1 text-xs font-medium transition-theme duration-200 ${
             sort === "newest"
               ? "bg-[var(--color-gsd-accent)] text-[var(--color-gsd-bg)]"
               : "text-[var(--color-gsd-text-muted)] hover:text-[var(--color-gsd-text)]"
@@ -204,7 +204,7 @@ export function IdeaList({ roundId, roundStatus }: IdeaListProps) {
             setSort("most_votes");
             setPage(1);
           }}
-          className={`rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
+          className={`cursor-pointer rounded-xl px-2.5 py-1 text-xs font-medium transition-theme duration-200 ${
             sort === "most_votes"
               ? "bg-[var(--color-gsd-accent)] text-[var(--color-gsd-bg)]"
               : "text-[var(--color-gsd-text-muted)] hover:text-[var(--color-gsd-text)]"
@@ -225,14 +225,14 @@ export function IdeaList({ roundId, roundStatus }: IdeaListProps) {
 
       {/* Error state */}
       {isError && (
-        <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+        <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
           Unable to load ideas. Please try again later.
         </div>
       )}
 
       {/* Empty state */}
       {data && data.ideas.length === 0 && (
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+        <div className="glass rounded-2xl px-6 py-12 text-center">
           <p className="text-sm text-[var(--color-gsd-text-muted)]">
             {roundStatus === "open"
               ? "No ideas submitted yet. Be the first!"
@@ -262,6 +262,7 @@ export function IdeaList({ roundId, roundStatus }: IdeaListProps) {
                   variant="outline"
                   size="sm"
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
+
                 >
                   Previous
                 </Button>
@@ -271,6 +272,7 @@ export function IdeaList({ roundId, roundStatus }: IdeaListProps) {
                   variant="outline"
                   size="sm"
                   onClick={() => setPage((p) => p + 1)}
+
                 >
                   Load more
                 </Button>

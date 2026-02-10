@@ -50,10 +50,12 @@ export default async function RoundsPage() {
   const totalRounds = activeRounds.length + closedRounds.length;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 mesh-gradient -z-10" />
+
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-[var(--color-gsd-text)]">
+          <h1 className="text-3xl font-bold gradient-text-violet">
             Idea Rounds
           </h1>
           <p className="mt-2 text-[var(--color-gsd-text-muted)]">
@@ -62,14 +64,14 @@ export default async function RoundsPage() {
         </div>
         <Link
           href="/governance"
-          className="text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          className="text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
         >
           Back to Governance
         </Link>
       </div>
 
       {totalRounds === 0 ? (
-        <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-6 py-16 text-center">
+        <div className="rounded-2xl glass px-6 py-16 text-center">
           <p className="text-lg font-medium text-[var(--color-gsd-text)]">
             No rounds yet
           </p>
@@ -83,7 +85,8 @@ export default async function RoundsPage() {
           {/* Active rounds */}
           {activeRounds.length > 0 && (
             <section>
-              <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-[var(--color-gsd-text-muted)]">
+              <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-gsd-text-muted)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gsd-success)] animate-pulse" />
                 Active ({activeRounds.length})
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">

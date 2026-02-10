@@ -43,15 +43,15 @@ export function QuadraticVoteDisplay({
   const weight = isQuadratic ? sqrtWeight(totalStr) : totalTokens;
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200">
       <div className="mb-2 flex items-center justify-between">
         <p className="text-xs font-medium text-[var(--color-gsd-text-muted)]">
           Vote Weight
         </p>
         <span
-          className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+          className={`rounded-xl px-2 py-0.5 text-[10px] font-semibold ${
             isQuadratic
-              ? "bg-emerald-500/15 text-emerald-500"
+              ? "bg-[var(--color-gsd-accent)]/15 text-[var(--color-gsd-accent)]"
               : "bg-[var(--color-gsd-surface-raised)] text-[var(--color-gsd-text-muted)]"
           }`}
         >
@@ -61,7 +61,7 @@ export function QuadraticVoteDisplay({
 
       {/* Weight display */}
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+        <span className="text-2xl font-bold gradient-text-violet">
           {weight}
         </span>
         <span className="text-xs text-[var(--color-gsd-text-muted)]">
@@ -89,12 +89,12 @@ export function QuadraticVoteDisplay({
                     {totalTokens}
                   </span>
                 </p>
-                <p className="font-mono text-emerald-400/80">
+                <p className="font-mono text-[var(--color-gsd-accent-hover)]/80">
                   sqrt({totalTokens}) = {weight}
                 </p>
               </div>
             ) : (
-              <p className="font-mono text-xs text-emerald-400/80">
+              <p className="font-mono text-xs text-[var(--color-gsd-accent-hover)]/80">
                 sqrt({depositTokens}) = {weight}
               </p>
             )}
