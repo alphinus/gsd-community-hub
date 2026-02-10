@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#4fd1c5" stroke-width="0.5" stroke-opacity="0.04"/>
+    </pattern>
+    <radialGradient id="gridFade" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#0f172a" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="orb1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4fd1c5" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#4fd1c5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fd1c5"/>
+      <stop offset="50%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#38b2ac"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4fd1c5" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4fd1c5" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#4fd1c5" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#4fd1c5"/>
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4fd1c5" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4fd1c5" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4fd1c5" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="#0f172a"/>
+
+  <!-- Grid + radial fade -->
+  <rect width="1200" height="400" fill="url(#grid)"/>
+  <rect width="1200" height="400" fill="url(#gridFade)"/>
+
+  <!-- Soft orbs -->
+  <circle cx="200" cy="170" r="240" fill="url(#orb1)"/>
+  <circle cx="1020" cy="300" r="220" fill="url(#orb2)"/>
+
+  <!-- Decorative hexagon — top-left -->
+  <g transform="translate(120, 85)" opacity="0.07">
+    <polygon points="0,-38 33,-19 33,19 0,38 -33,19 -33,-19" fill="none" stroke="#4fd1c5" stroke-width="1.5"/>
+    <circle cx="0" cy="-38" r="3" fill="#4fd1c5"/>
+    <circle cx="33" cy="-19" r="2.5" fill="#38b2ac"/>
+    <circle cx="33" cy="19" r="2.5" fill="#38b2ac"/>
+    <circle cx="0" cy="38" r="3" fill="#4fd1c5"/>
+    <circle cx="-33" cy="19" r="2.5" fill="#38b2ac"/>
+    <circle cx="-33" cy="-19" r="2.5" fill="#38b2ac"/>
+  </g>
+
+  <!-- Decorative hexagon — bottom-right -->
+  <g transform="translate(1070, 320)" opacity="0.05">
+    <polygon points="0,-48 42,-24 42,24 0,48 -42,24 -42,-24" fill="none" stroke="#4fd1c5" stroke-width="1.5"/>
+    <circle cx="0" cy="-48" r="3.5" fill="#4fd1c5"/>
+    <circle cx="42" cy="-24" r="2.8" fill="#38b2ac"/>
+    <circle cx="42" cy="24" r="2.8" fill="#38b2ac"/>
+    <circle cx="0" cy="48" r="3.5" fill="#4fd1c5"/>
+    <circle cx="-42" cy="24" r="2.8" fill="#38b2ac"/>
+    <circle cx="-42" cy="-24" r="2.8" fill="#38b2ac"/>
+  </g>
+
+  <!-- Decorative hexagon — top-right (small) -->
+  <g transform="translate(1010, 75)" opacity="0.04">
+    <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="none" stroke="#4fd1c5" stroke-width="1"/>
+    <circle cx="0" cy="-22" r="2" fill="#4fd1c5"/>
+    <circle cx="19" cy="-11" r="1.5" fill="#38b2ac"/>
+    <circle cx="0" cy="22" r="2" fill="#4fd1c5"/>
+  </g>
+
+  <!-- Decorative hexagon — left-center (tiny) -->
+  <g transform="translate(60, 240)" opacity="0.035">
+    <polygon points="0,-16 14,-8 14,8 0,16 -14,8 -14,-8" fill="none" stroke="#4fd1c5" stroke-width="0.8"/>
+    <circle cx="0" cy="-16" r="1.5" fill="#4fd1c5"/>
+  </g>
+
+  <!-- Network dots -->
+  <circle cx="85" cy="355" r="1.5" fill="#4fd1c5" opacity="0.12"/>
+  <circle cx="230" cy="38" r="1" fill="#4fd1c5" opacity="0.08"/>
+  <circle cx="340" cy="365" r="1.2" fill="#38b2ac" opacity="0.1"/>
+  <circle cx="860" cy="28" r="1" fill="#4fd1c5" opacity="0.1"/>
+  <circle cx="1155" cy="195" r="1.2" fill="#38b2ac" opacity="0.08"/>
+  <circle cx="45" cy="195" r="1" fill="#4fd1c5" opacity="0.06"/>
+  <circle cx="710" cy="375" r="1" fill="#38b2ac" opacity="0.08"/>
+  <circle cx="460" cy="25" r="0.8" fill="#4fd1c5" opacity="0.06"/>
+  <circle cx="780" cy="20" r="1.2" fill="#4fd1c5" opacity="0.07"/>
+  <circle cx="1140" cy="365" r="1" fill="#38b2ac" opacity="0.06"/>
+
+  <!-- Subtle network lines -->
+  <line x1="85" y1="355" x2="340" y2="365" stroke="#4fd1c5" stroke-width="0.3" stroke-opacity="0.05"/>
+  <line x1="860" y1="28" x2="1155" y2="195" stroke="#4fd1c5" stroke-width="0.3" stroke-opacity="0.05"/>
+  <line x1="230" y1="38" x2="460" y2="25" stroke="#38b2ac" stroke-width="0.3" stroke-opacity="0.04"/>
+  <line x1="780" y1="20" x2="860" y2="28" stroke="#4fd1c5" stroke-width="0.3" stroke-opacity="0.04"/>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+
+  <!-- GSD text -->
+  <text x="600" y="160" text-anchor="middle"
+        font-family="'Segoe UI', system-ui, -apple-system, sans-serif"
+        font-size="96" font-weight="200" letter-spacing="24" fill="url(#textGrad)">GSD</text>
+
+  <!-- Community Hub subtitle -->
+  <text x="600" y="208" text-anchor="middle"
+        font-family="'Segoe UI', system-ui, -apple-system, sans-serif"
+        font-size="26" font-weight="200" fill="#e2e8f0" letter-spacing="6">Community Hub</text>
+
+  <!-- Tagline -->
+  <text x="600" y="252" text-anchor="middle"
+        font-family="'Segoe UI', system-ui, -apple-system, sans-serif"
+        font-size="14" font-weight="300" fill="#94a3b8" letter-spacing="1.5">Open Source · Real Utility · For All · For Ever</text>
+
+  <!-- Decorative line -->
+  <line x1="380" y1="272" x2="820" y2="272" stroke="url(#lineGrad)" stroke-width="0.5"/>
+
+  <!-- "BUILT ON SOLANA" badge pill -->
+  <rect x="505" y="290" width="190" height="30" rx="15" fill="#0f172a" stroke="#4fd1c5" stroke-opacity="0.25" stroke-width="1"/>
+  <circle cx="526" cy="305" r="3.5" fill="#4fd1c5"/>
+  <text x="607" y="310" text-anchor="middle"
+        font-family="'Segoe UI', system-ui, -apple-system, sans-serif"
+        font-size="11" font-weight="400" fill="#4fd1c5" letter-spacing="2.5">BUILT ON SOLANA</text>
+
+  <!-- Top border glow -->
+  <line x1="0" y1="0.5" x2="1200" y2="0.5" stroke="url(#borderGrad)" stroke-width="1"/>
+  <!-- Bottom border glow -->
+  <line x1="0" y1="399.5" x2="1200" y2="399.5" stroke="url(#borderGrad)" stroke-width="1"/>
+</svg>

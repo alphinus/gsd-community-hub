@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" width="960" height="580">
+  <defs>
+    <pattern id="arch-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#4fd1c5" stroke-width="0.4" stroke-opacity="0.03"/>
+    </pattern>
+    <linearGradient id="a-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fd1c5"/>
+      <stop offset="100%" stop-color="#38b2ac"/>
+    </linearGradient>
+    <linearGradient id="a-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1e3a5f"/>
+    </linearGradient>
+    <radialGradient id="a-orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4fd1c5" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#4fd1c5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="580" rx="12" fill="#0f172a"/>
+  <rect width="960" height="580" rx="12" fill="url(#arch-grid)"/>
+  <circle cx="480" cy="290" r="300" fill="url(#a-orb)"/>
+
+  <!-- Border -->
+  <rect width="960" height="580" rx="12" fill="none" stroke="#4fd1c5" stroke-opacity="0.08" stroke-width="1"/>
+
+  <!-- ═══ CONNECTION LINES (drawn first, behind boxes) ═══ -->
+
+  <!-- Browser → Next.js -->
+  <line x1="480" y1="70" x2="480" y2="130" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1.5"/>
+  <polygon points="480,128 476,120 484,120" fill="#4fd1c5" fill-opacity="0.3"/>
+
+  <!-- Next.js → PostgreSQL -->
+  <line x1="400" y1="185" x2="280" y2="245" stroke="#4fd1c5" stroke-opacity="0.15" stroke-width="1"/>
+  <polygon points="282,243 280,233 290,237" fill="#4fd1c5" fill-opacity="0.25"/>
+
+  <!-- Next.js → Solana -->
+  <line x1="560" y1="185" x2="680" y2="245" stroke="#4fd1c5" stroke-opacity="0.15" stroke-width="1"/>
+  <polygon points="678,243 670,237 680,233" fill="#4fd1c5" fill-opacity="0.25"/>
+
+  <!-- Solana → Helius -->
+  <line x1="680" y1="305" x2="560" y2="365" stroke="#4fd1c5" stroke-opacity="0.15" stroke-width="1"/>
+  <polygon points="562,363 560,353 570,357" fill="#4fd1c5" fill-opacity="0.25"/>
+
+  <!-- Helius → PostgreSQL (index back) -->
+  <line x1="400" y1="395" x2="280" y2="305" stroke="#3b82f6" stroke-opacity="0.15" stroke-width="1" stroke-dasharray="4,3"/>
+  <polygon points="282,307 280,297 290,301" fill="#3b82f6" fill-opacity="0.25"/>
+
+  <!-- Helius → Claude -->
+  <line x1="430" y1="425" x2="320" y2="485" stroke="#4fd1c5" stroke-opacity="0.12" stroke-width="1"/>
+  <polygon points="322,483 320,473 330,477" fill="#4fd1c5" fill-opacity="0.2"/>
+
+  <!-- Helius → Jupiter -->
+  <line x1="530" y1="425" x2="640" y2="485" stroke="#4fd1c5" stroke-opacity="0.12" stroke-width="1"/>
+  <polygon points="638,483 630,477 640,473" fill="#4fd1c5" fill-opacity="0.2"/>
+
+  <!-- ═══ COMPONENT BOXES ═══ -->
+
+  <!-- Browser / Wallet -->
+  <rect x="380" y="25" width="200" height="48" rx="10" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="480" y="50" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="300" fill="#e2e8f0">Browser</text>
+  <text x="480" y="65" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#4fd1c5" letter-spacing="1">SOLANA WALLET</text>
+
+  <!-- Next.js App Router -->
+  <rect x="355" y="132" width="250" height="55" rx="10" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.3" stroke-width="1.5"/>
+  <text x="480" y="158" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="15" font-weight="400" fill="#f8fafc">Next.js App Router</text>
+  <text x="480" y="176" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#64748b">API Routes + SSR + Auth.js SIWS</text>
+
+  <!-- PostgreSQL -->
+  <rect x="155" y="248" width="200" height="55" rx="10" fill="#0b1120" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="255" y="274" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="300" fill="#e2e8f0">PostgreSQL</text>
+  <text x="255" y="292" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#3b82f6" letter-spacing="1">PRISMA 7</text>
+
+  <!-- Solana / Anchor -->
+  <rect x="605" y="248" width="200" height="55" rx="10" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.3" stroke-width="1.5"/>
+  <text x="705" y="274" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="300" fill="#e2e8f0">Solana Program</text>
+  <text x="705" y="292" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#4fd1c5" letter-spacing="1">ANCHOR 0.32</text>
+
+  <!-- Helius Pipeline -->
+  <rect x="355" y="368" width="250" height="55" rx="10" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="480" y="394" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="300" fill="#e2e8f0">Helius Webhook Pipeline</text>
+  <text x="480" y="412" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#64748b">6 Specialized Processors</text>
+
+  <!-- Claude AI -->
+  <rect x="175" y="488" width="180" height="48" rx="10" fill="#0b1120" stroke="#38b2ac" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="265" y="513" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" font-weight="300" fill="#e2e8f0">Claude AI</text>
+  <text x="265" y="528" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#38b2ac" letter-spacing="0.5">VERIFICATION</text>
+
+  <!-- Jupiter DEX -->
+  <rect x="605" y="488" width="180" height="48" rx="10" fill="#0b1120" stroke="#38b2ac" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="695" y="513" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" font-weight="300" fill="#e2e8f0">Jupiter DEX</text>
+  <text x="695" y="528" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#38b2ac" letter-spacing="0.5">BUY &amp; BURN</text>
+
+  <!-- ═══ DECORATIVE ELEMENTS ═══ -->
+
+  <!-- Small hexagon top-right corner -->
+  <g transform="translate(900, 50)" opacity="0.05">
+    <polygon points="0,-18 16,-9 16,9 0,18 -16,9 -16,-9" fill="none" stroke="#4fd1c5" stroke-width="1"/>
+    <circle cx="0" cy="-18" r="2" fill="#4fd1c5"/>
+  </g>
+
+  <!-- Small hexagon bottom-left -->
+  <g transform="translate(60, 530)" opacity="0.04">
+    <polygon points="0,-15 13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5" fill="none" stroke="#4fd1c5" stroke-width="0.8"/>
+    <circle cx="0" cy="-15" r="1.5" fill="#4fd1c5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="480" y="565" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#64748b" letter-spacing="3">SYSTEM ARCHITECTURE</text>
+</svg>

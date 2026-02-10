@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+  <defs>
+    <pattern id="r-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#4fd1c5" stroke-width="0.3" stroke-opacity="0.025"/>
+    </pattern>
+    <linearGradient id="r-cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4fd1c5"/>
+      <stop offset="100%" stop-color="#38b2ac"/>
+    </linearGradient>
+    <linearGradient id="r-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1e3a5f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="280" rx="12" fill="#0f172a"/>
+  <rect width="800" height="280" rx="12" fill="url(#r-grid)"/>
+  <rect width="800" height="280" rx="12" fill="none" stroke="#4fd1c5" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- Revenue Event source box -->
+  <rect x="300" y="20" width="200" height="44" rx="8" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="400" y="42" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" font-weight="300" fill="#e2e8f0">Revenue Event</text>
+  <text x="400" y="56" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" font-weight="300" fill="#64748b">SOL / USDC INFLOW</text>
+
+  <!-- Main vertical line from source -->
+  <line x1="400" y1="64" x2="400" y2="100" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+
+  <!-- Horizontal distribution line -->
+  <line x1="100" y1="100" x2="700" y2="100" stroke="#4fd1c5" stroke-opacity="0.15" stroke-width="1"/>
+
+  <!-- Distribution node -->
+  <circle cx="400" cy="100" r="4" fill="#0f172a" stroke="#4fd1c5" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- Drop lines to each bucket -->
+  <line x1="100" y1="100" x2="100" y2="140" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+  <line x1="300" y1="100" x2="300" y2="140" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+  <line x1="500" y1="100" x2="500" y2="140" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+  <line x1="700" y1="100" x2="700" y2="140" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+
+  <!-- 60% Developer Pool -->
+  <rect x="30" y="140" width="140" height="80" rx="8" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.3" stroke-width="1.5"/>
+  <text x="100" y="166" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="200" fill="#4fd1c5">60%</text>
+  <text x="100" y="185" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="300" fill="#e2e8f0">Developer Pool</text>
+  <text x="100" y="200" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" font-weight="300" fill="#64748b">CONTRIBUTION-WEIGHTED</text>
+
+  <!-- 20% DAO Treasury -->
+  <rect x="230" y="140" width="140" height="80" rx="8" fill="#0b1120" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="300" y="166" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="200" fill="#3b82f6">20%</text>
+  <text x="300" y="185" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="300" fill="#e2e8f0">DAO Treasury</text>
+  <text x="300" y="200" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" font-weight="300" fill="#64748b">COMMUNITY-GOVERNED</text>
+
+  <!-- 10% Buy & Burn -->
+  <rect x="430" y="140" width="140" height="80" rx="8" fill="#0b1120" stroke="#4fd1c5" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="500" y="166" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="200" fill="#38b2ac">10%</text>
+  <text x="500" y="185" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="300" fill="#e2e8f0">Buy &amp; Burn</text>
+  <text x="500" y="200" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" font-weight="300" fill="#64748b">JUPITER SWAP → BURN</text>
+
+  <!-- 10% Maintenance -->
+  <rect x="630" y="140" width="140" height="80" rx="8" fill="#0b1120" stroke="#38b2ac" stroke-opacity="0.15" stroke-width="1"/>
+  <text x="700" y="166" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="200" fill="#38b2ac">10%</text>
+  <text x="700" y="185" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="300" fill="#e2e8f0">Maintenance</text>
+  <text x="700" y="200" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="9" font-weight="300" fill="#64748b">INFRASTRUCTURE</text>
+
+  <!-- Footer label -->
+  <text x="400" y="260" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="300" fill="#64748b" letter-spacing="3">REVENUE DISTRIBUTION MODEL</text>
+</svg>
