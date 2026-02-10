@@ -49,7 +49,7 @@ export function ScoreBadge({
 
   if (!hasContributions) {
     return (
-      <Card>
+      <Card className="glass">
         <CardHeader>
           <CardTitle className="text-base">Contribution Score</CardTitle>
         </CardHeader>
@@ -63,14 +63,14 @@ export function ScoreBadge({
   }
 
   return (
-    <Card className="overflow-hidden">
-      <div className="h-1 bg-gradient-to-r from-emerald-500 to-teal-400" />
+    <Card className="glass overflow-hidden">
+      <div className="h-1 bg-gradient-to-r from-[var(--color-gsd-accent)] to-[var(--color-gsd-accent-hover)]" />
       <CardHeader className="pb-2">
         <CardTitle className="text-base">Contribution Score</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+          <span className="text-3xl font-bold gradient-text-violet">
             {formatScore(score)}
           </span>
         </div>

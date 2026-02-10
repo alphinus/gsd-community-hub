@@ -10,20 +10,22 @@ export const metadata: Metadata = {
 
 export default function DelegatesPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 mesh-gradient -z-10" />
+
       {/* Header */}
       <div className="mb-8">
         <div className="mb-2 flex items-center gap-2 text-sm text-[var(--color-gsd-text-muted)]">
           <Link
             href="/governance"
-            className="hover:text-[var(--color-gsd-text)]"
+            className="hover:text-[var(--color-gsd-accent)] transition-colors cursor-pointer"
           >
             Governance
           </Link>
-          <span>/</span>
+          <span className="text-[var(--color-gsd-border)]">/</span>
           <span className="text-[var(--color-gsd-text)]">Delegates</span>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-[var(--color-gsd-text)] sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight gradient-text-violet sm:text-4xl">
           Delegate Directory
         </h1>
         <p className="mt-2 text-lg text-[var(--color-gsd-text-secondary)]">
@@ -32,7 +34,7 @@ export default function DelegatesPage() {
       </div>
 
       {/* Explainer */}
-      <div className="mb-8 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="mb-8 rounded-2xl glass p-6">
         <h2 className="mb-2 text-base font-semibold text-[var(--color-gsd-text)]">
           What is Delegation?
         </h2>
@@ -45,7 +47,7 @@ export default function DelegatesPage() {
         </p>
         <Link
           href="/governance/delegate"
-          className="mt-3 inline-block text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+          className="mt-3 inline-block text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
         >
           Manage your delegation
         </Link>

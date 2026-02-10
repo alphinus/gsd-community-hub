@@ -27,9 +27,9 @@ function ShieldIcon({
   variant: "verified" | "expired" | "unverified";
 }) {
   const colors = {
-    verified: "text-emerald-500",
-    expired: "text-amber-500",
-    unverified: "text-gray-400",
+    verified: "text-[var(--color-gsd-success)]",
+    expired: "text-[var(--color-gsd-gold)]",
+    unverified: "text-[var(--color-gsd-text-muted)]",
   };
 
   return (
@@ -90,21 +90,21 @@ export function HumanVerificationBadge({
   };
 
   const bgColors = {
-    verified: "bg-emerald-500/10",
-    expired: "bg-amber-500/10",
-    unverified: "bg-gray-500/10",
+    verified: "bg-[var(--color-gsd-success)]/10",
+    expired: "bg-[var(--color-gsd-gold)]/10",
+    unverified: "bg-[var(--color-gsd-text-muted)]/10",
   };
 
   const textColors = {
-    verified: "text-emerald-500",
-    expired: "text-amber-500",
-    unverified: "text-gray-400",
+    verified: "text-[var(--color-gsd-success)]",
+    expired: "text-[var(--color-gsd-gold)]",
+    unverified: "text-[var(--color-gsd-text-muted)]",
   };
 
   if (inline) {
     return (
       <span
-        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium ${bgColors[status]} ${textColors[status]}`}
+        className={`inline-flex items-center gap-1 rounded-xl px-2 py-0.5 text-[10px] font-medium transition-theme duration-200 ${bgColors[status]} ${textColors[status]}`}
         title={labels[status]}
       >
         <ShieldIcon variant={status} className="h-3 w-3" />
@@ -116,7 +116,7 @@ export function HumanVerificationBadge({
 
   const content = (
     <div
-      className={`flex items-center gap-2 rounded-lg px-3 py-2 ${bgColors[status]}`}
+      className={`flex items-center gap-2 rounded-2xl px-3 py-2 transition-theme duration-200 ${bgColors[status]}`}
     >
       <ShieldIcon variant={status} className="h-5 w-5" />
       <div>
@@ -124,7 +124,7 @@ export function HumanVerificationBadge({
           {labels[status]}
         </p>
         {status === "expired" && (
-          <p className="text-xs text-amber-400/70">
+          <p className="text-xs text-[var(--color-gsd-gold)]/70">
             Re-verify to maintain voting eligibility
           </p>
         )}
@@ -134,7 +134,7 @@ export function HumanVerificationBadge({
 
   if (status === "unverified" || status === "expired") {
     return (
-      <Link href="/governance/delegate" className="block">
+      <Link href="/governance/delegate" className="block cursor-pointer">
         {content}
       </Link>
     );

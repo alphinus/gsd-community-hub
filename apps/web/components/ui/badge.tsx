@@ -4,11 +4,11 @@ function cn(...classes: (string | undefined | false | null)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-type BadgeVariant = "default" | "secondary" | "outline" | "success" | "warning";
+type BadgeVariant = "default" | "secondary" | "outline" | "success" | "warning" | "gold";
 
 const variantStyles: Record<BadgeVariant, string> = {
   default:
-    "border-transparent bg-[var(--color-gsd-accent)] text-[var(--color-gsd-bg)]",
+    "border-transparent bg-[var(--color-gsd-accent)]/15 text-[var(--color-gsd-accent)]",
   secondary:
     "border-transparent bg-[var(--color-gsd-surface-raised)] text-[var(--color-gsd-text-secondary)]",
   outline:
@@ -17,6 +17,8 @@ const variantStyles: Record<BadgeVariant, string> = {
     "border-transparent bg-[var(--color-gsd-success)]/15 text-[var(--color-gsd-success)]",
   warning:
     "border-transparent bg-[var(--color-gsd-warning)]/15 text-[var(--color-gsd-warning)]",
+  gold:
+    "border-transparent bg-[var(--color-gsd-gold)]/15 text-[var(--color-gsd-gold)]",
 };
 
 interface BadgeProps extends HTMLAttributes<HTMLDivElement> {

@@ -30,8 +30,8 @@ interface VerificationReportProps {
 
 function getBarColor(score: number, maxScore: number): string {
   const pct = (score / maxScore) * 100;
-  if (pct >= 70) return "bg-emerald-500";
-  if (pct >= 50) return "bg-amber-500";
+  if (pct >= 70) return "bg-[var(--color-gsd-accent)]";
+  if (pct >= 50) return "bg-[var(--color-gsd-gold)]";
   return "bg-red-500";
 }
 
@@ -41,11 +41,11 @@ function CategoryCard({ category }: { category: VerificationCategory }) {
   const barColor = getBarColor(category.score, category.maxScore);
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4">
+    <div className="glass-surface rounded-2xl p-4 transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/20">
       {/* Category header with score */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center justify-between text-left"
+        className="flex w-full cursor-pointer items-center justify-between text-left"
       >
         <div className="flex items-center gap-2">
           {expanded ? (
@@ -65,7 +65,7 @@ function CategoryCard({ category }: { category: VerificationCategory }) {
       {/* Score bar */}
       <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
         <div
-          className={`h-full rounded-full transition-all ${barColor}`}
+          className={`h-full rounded-full transition-theme ${barColor}`}
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -119,8 +119,8 @@ export function VerificationReport({ report }: VerificationReportProps) {
   const categories: VerificationCategory[] = report.categories ?? [];
 
   return (
-    <Card className="overflow-hidden">
-      <div className="h-1 bg-gradient-to-r from-emerald-500 to-teal-400" />
+    <Card className="glass overflow-hidden">
+      <div className="h-1 bg-gradient-to-r from-[var(--color-gsd-accent)] to-[var(--color-gsd-accent-hover)]" />
 
       <CardHeader>
         {/* Header: Score + Type + Date */}
@@ -193,7 +193,7 @@ export function VerificationReport({ report }: VerificationReportProps) {
           </code>
           <button
             onClick={handleCopyHash}
-            className="inline-flex h-5 w-5 items-center justify-center text-[var(--color-gsd-text-muted)] transition-colors hover:text-[var(--color-gsd-text)]"
+            className="inline-flex h-5 w-5 cursor-pointer items-center justify-center text-[var(--color-gsd-text-muted)] transition-theme duration-200 hover:text-[var(--color-gsd-text)]"
             title="Copy report hash"
           >
             {hashCopied ? (

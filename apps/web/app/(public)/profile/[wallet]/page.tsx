@@ -183,7 +183,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="relative mx-auto max-w-3xl px-4 py-12">
+      <div className="absolute inset-0 mesh-gradient -z-10" />
+
       <ProfileHeader profile={profile} />
 
       {/* Verification score in profile header area */}
@@ -224,7 +226,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         {verificationCount > 0 ? (
           <VerificationHistory walletAddress={wallet} />
         ) : (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="rounded-2xl glass-surface px-6 py-12 text-center">
             <p className="text-sm text-[var(--color-gsd-text-muted)]">
               No AI verifications yet
             </p>

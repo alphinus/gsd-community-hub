@@ -1,8 +1,27 @@
 import type { Metadata } from "next";
+import { Space_Grotesk, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { AppProviders } from "./providers";
 import { Header } from "@/components/layout/header";
 import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "GSD Community Hub",
@@ -24,18 +43,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
+    >
       <body>
         <AppProviders>
           <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen pt-24">{children}</main>
           <Toaster
             theme="dark"
             position="bottom-right"
             toastOptions={{
               style: {
-                background: "var(--color-gsd-surface)",
-                border: "1px solid var(--color-gsd-border)",
+                background: "rgba(22, 22, 55, 0.9)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(139, 92, 246, 0.15)",
                 color: "var(--color-gsd-text)",
               },
             }}

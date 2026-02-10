@@ -37,7 +37,7 @@ function CopyButton({ text }: { text: string }) {
       variant="ghost"
       size="icon"
       onClick={handleCopy}
-      className="h-6 w-6 shrink-0"
+      className="h-6 w-6 shrink-0 cursor-pointer transition-theme duration-200"
       title="Copy address"
     >
       <svg
@@ -65,7 +65,7 @@ export function MultisigCard({
   members,
 }: MultisigCardProps) {
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Program Governance</CardTitle>
@@ -80,7 +80,7 @@ export function MultisigCard({
       </CardHeader>
       <CardContent>
         {/* Multisig address */}
-        <div className="mb-6 flex items-center gap-2 rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-3">
+        <div className="mb-6 flex items-center gap-2 glass-surface rounded-2xl px-4 py-3">
           <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-gsd-text-muted)]">
             Multisig
           </span>
@@ -88,7 +88,7 @@ export function MultisigCard({
             href={squadsUrl(address)}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+            className="cursor-pointer font-mono text-sm text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
           >
             {truncateAddress(address, 6)}
           </a>
@@ -97,7 +97,7 @@ export function MultisigCard({
             href={explorerUrl(address)}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto text-xs text-[var(--color-gsd-text-muted)] underline-offset-4 hover:text-[var(--color-gsd-text-secondary)] hover:underline"
+            className="ml-auto cursor-pointer text-xs text-[var(--color-gsd-text-muted)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-text-secondary)] hover:underline"
           >
             Explorer
           </a>
@@ -111,7 +111,7 @@ export function MultisigCard({
           {members.map((member, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-2.5"
+              className="flex items-center gap-3 glass-surface rounded-2xl px-4 py-2.5 transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/20"
             >
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <span className="shrink-0 text-sm text-[var(--color-gsd-text)]">
@@ -129,7 +129,7 @@ export function MultisigCard({
                 href={explorerUrl(member.address)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                className="shrink-0 cursor-pointer font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
               >
                 {truncateAddress(member.address)}
               </a>

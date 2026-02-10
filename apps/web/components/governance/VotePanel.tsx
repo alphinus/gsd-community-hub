@@ -83,28 +83,28 @@ function VoteBar({
       <div className="flex h-3 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
         {yes > 0 && (
           <div
-            className="h-full bg-emerald-500"
+            className="h-full bg-[var(--color-gsd-success)]"
             style={{ width: `${yPct}%` }}
           />
         )}
         {no > 0 && (
-          <div className="h-full bg-red-500" style={{ width: `${nPct}%` }} />
+          <div className="h-full bg-[var(--color-gsd-error)]" style={{ width: `${nPct}%` }} />
         )}
         {abstain > 0 && (
           <div
-            className="h-full bg-gray-500"
+            className="h-full bg-[var(--color-gsd-text-muted)]"
             style={{ width: `${aPct}%` }}
           />
         )}
       </div>
       <div className="flex items-center gap-4 text-xs">
-        <span className="text-emerald-500">
+        <span className="text-[var(--color-gsd-success)]">
           Yes {yPct}% ({yes})
         </span>
-        <span className="text-red-500">
+        <span className="text-[var(--color-gsd-error)]">
           No {nPct}% ({no})
         </span>
-        <span className="text-gray-400">
+        <span className="text-[var(--color-gsd-text-muted)]">
           Abstain {aPct}% ({abstain})
         </span>
       </div>
@@ -222,7 +222,7 @@ export function VotePanel({
   }
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200">
       <h4 className="mb-3 text-sm font-medium text-[var(--color-gsd-text)]">
         Vote Tallies
       </h4>
@@ -239,16 +239,16 @@ export function VotePanel({
 
       {/* User vote status */}
       {userVote && (
-        <div className="mt-3 rounded-md bg-[var(--color-gsd-surface-raised)] px-3 py-2">
+        <div className="mt-3 rounded-xl bg-[var(--color-gsd-surface-raised)] px-3 py-2">
           <p className="text-xs text-[var(--color-gsd-text-secondary)]">
             You voted:{" "}
             <span
               className={
                 userVote.vote === "yes"
-                  ? "font-semibold text-emerald-500"
+                  ? "font-semibold text-[var(--color-gsd-success)]"
                   : userVote.vote === "no"
-                    ? "font-semibold text-red-500"
-                    : "font-semibold text-gray-400"
+                    ? "font-semibold text-[var(--color-gsd-error)]"
+                    : "font-semibold text-[var(--color-gsd-text-muted)]"
               }
             >
               {userVote.vote.charAt(0).toUpperCase() + userVote.vote.slice(1)}
@@ -269,7 +269,7 @@ export function VotePanel({
               size="sm"
               onClick={() => handleVote("yes")}
               disabled={isVoting}
-              className="flex-1 bg-emerald-600 hover:bg-emerald-700"
+              className="flex-1 bg-[var(--color-gsd-success)] hover:bg-[var(--color-gsd-success)]/80"
             >
               {isVoting && votingChoice === "yes" ? (
                 <span className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -281,7 +281,7 @@ export function VotePanel({
               size="sm"
               onClick={() => handleVote("no")}
               disabled={isVoting}
-              className="flex-1 bg-red-600 hover:bg-red-700"
+              className="flex-1 bg-[var(--color-gsd-error)] hover:bg-[var(--color-gsd-error)]/80"
             >
               {isVoting && votingChoice === "no" ? (
                 <span className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -308,7 +308,7 @@ export function VotePanel({
 
       {/* Not eligible message */}
       {roundStatus === "voting" && !isEligible && publicKey && !userVote && (
-        <div className="mt-3 rounded-md bg-[var(--color-gsd-surface-raised)] px-3 py-2">
+        <div className="mt-3 rounded-xl bg-[var(--color-gsd-surface-raised)] px-3 py-2">
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Deposit tokens and wait 7 days to become eligible to vote.
           </p>
@@ -317,7 +317,7 @@ export function VotePanel({
 
       {/* Not connected message */}
       {roundStatus === "voting" && !publicKey && (
-        <div className="mt-3 rounded-md bg-[var(--color-gsd-surface-raised)] px-3 py-2">
+        <div className="mt-3 rounded-xl bg-[var(--color-gsd-surface-raised)] px-3 py-2">
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Connect your wallet to vote on this idea.
           </p>

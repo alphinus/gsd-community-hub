@@ -84,7 +84,7 @@ export function ReviewConsensusProgress({
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
           <div
-            className="h-full rounded-full bg-emerald-500 transition-all"
+            className="h-full rounded-full bg-[var(--color-gsd-accent)] transition-theme"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -100,9 +100,9 @@ export function ReviewConsensusProgress({
             {reviews.map((review, i) => (
               <div
                 key={i}
-                className={`flex items-center gap-2 rounded-lg border px-3 py-2 ${
+                className={`flex items-center gap-2 rounded-2xl border px-3 py-2 transition-theme duration-200 ${
                   review.passed
-                    ? "border-emerald-500/20 bg-emerald-500/5"
+                    ? "border-[var(--color-gsd-accent)]/20 bg-[var(--color-gsd-accent)]/5"
                     : "border-red-500/20 bg-red-500/5"
                 }`}
               >
@@ -134,13 +134,13 @@ export function ReviewConsensusProgress({
           <div className="flex h-3 w-full overflow-hidden rounded-full">
             {passWeight > 0 && (
               <div
-                className="h-full bg-emerald-500 transition-all"
+                className="h-full bg-[var(--color-gsd-accent)] transition-theme"
                 style={{ width: `${passRatio * 100}%` }}
               />
             )}
             {failWeight > 0 && (
               <div
-                className="h-full bg-red-500 transition-all"
+                className="h-full bg-red-500 transition-theme"
                 style={{ width: `${failRatio * 100}%` }}
               />
             )}

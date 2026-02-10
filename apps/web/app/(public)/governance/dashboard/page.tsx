@@ -60,10 +60,10 @@ interface AnalyticsResponse {
 
 function DashboardSkeleton() {
   return (
-    <div className="animate-pulse space-y-6">
-      <div className="h-8 w-64 rounded bg-[var(--color-gsd-surface-raised)]" />
-      <div className="h-24 rounded-lg bg-[var(--color-gsd-surface-raised)]" />
-      <div className="h-48 rounded-lg bg-[var(--color-gsd-surface-raised)]" />
+    <div className="space-y-6">
+      <div className="h-8 w-64 rounded-xl animate-shimmer-violet" />
+      <div className="h-24 rounded-2xl animate-shimmer-violet" />
+      <div className="h-48 rounded-2xl animate-shimmer-violet" />
     </div>
   );
 }
@@ -71,10 +71,10 @@ function DashboardSkeleton() {
 function VoteChoiceLabel({ vote }: { vote: string }) {
   const colorClass =
     vote === "yes"
-      ? "text-emerald-500"
+      ? "text-[var(--color-gsd-success)]"
       : vote === "no"
-        ? "text-red-500"
-        : "text-gray-400";
+        ? "text-[var(--color-gsd-error)]"
+        : "text-[var(--color-gsd-text-muted)]";
 
   return (
     <span className={`font-medium ${colorClass}`}>
@@ -143,8 +143,8 @@ export default function GovernanceDashboard() {
   if (!wallet) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-12">
-        <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-6 py-16 text-center">
-          <h1 className="text-2xl font-bold text-[var(--color-gsd-text)]">
+        <div className="rounded-2xl glass px-6 py-16 text-center">
+          <h1 className="text-2xl font-bold gradient-text-violet">
             Governance Dashboard
           </h1>
           <p className="mt-2 text-sm text-[var(--color-gsd-text-muted)]">
@@ -160,8 +160,10 @@ export default function GovernanceDashboard() {
   const hasDelegation = !!delegationData?.stats?.asDelegator;
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="mb-6 text-3xl font-bold text-[var(--color-gsd-text)]">
+    <div className="relative mx-auto max-w-3xl px-4 py-12">
+      <div className="absolute inset-0 mesh-gradient -z-10" />
+
+      <h1 className="mb-6 text-3xl font-bold gradient-text-violet">
         Governance Dashboard
       </h1>
 
@@ -186,61 +188,26 @@ export default function GovernanceDashboard() {
 
       {/* Quick links */}
       <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
-        <Link
-          href="/governance/deposit"
-          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
-        >
-          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-            Deposit Tokens
-          </p>
-          <p className="text-xs text-[var(--color-gsd-text-muted)]">
-            Manage deposits
-          </p>
-        </Link>
-        <Link
-          href="/governance/delegate"
-          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
-        >
-          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-            Delegate
-          </p>
-          <p className="text-xs text-[var(--color-gsd-text-muted)]">
-            {hasDelegation ? "Active" : "Manage"}
-          </p>
-        </Link>
-        <Link
-          href="/governance/rounds"
-          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
-        >
-          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-            View Rounds
-          </p>
-          <p className="text-xs text-[var(--color-gsd-text-muted)]">
-            Browse proposals
-          </p>
-        </Link>
-        <Link
-          href="/governance/delegates"
-          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
-        >
-          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-            Delegates
-          </p>
-          <p className="text-xs text-[var(--color-gsd-text-muted)]">
-            Directory
-          </p>
-        </Link>
-        <Link
-          href="/governance/analytics"
-          className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4 text-center transition-colors hover:border-[var(--color-gsd-accent)]/50"
-        >
-          <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-            Analytics
-          </p>
-          <p className="text-xs text-[var(--color-gsd-text-muted)]">
-            Charts & data
-          </p>
-        </Link>
+        {[
+          { href: "/governance/deposit", title: "Deposit Tokens", sub: "Manage deposits" },
+          { href: "/governance/delegate", title: "Delegate", sub: hasDelegation ? "Active" : "Manage" },
+          { href: "/governance/rounds", title: "View Rounds", sub: "Browse proposals" },
+          { href: "/governance/delegates", title: "Delegates", sub: "Directory" },
+          { href: "/governance/analytics", title: "Analytics", sub: "Charts & data" },
+        ].map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="rounded-2xl glass-surface p-4 text-center transition-theme duration-200 hover:glow-violet cursor-pointer"
+          >
+            <p className="text-sm font-medium text-[var(--color-gsd-text)]">
+              {link.title}
+            </p>
+            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              {link.sub}
+            </p>
+          </Link>
+        ))}
       </div>
 
       {/* Decayed score */}
@@ -252,7 +219,7 @@ export default function GovernanceDashboard() {
       </div>
 
       {/* Advanced Governance Summary */}
-      <div className="mb-8 rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6">
+      <div className="mb-8 rounded-2xl glass p-6">
         <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
           Advanced Governance
         </h2>
@@ -261,7 +228,7 @@ export default function GovernanceDashboard() {
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Quadratic Voting
             </p>
-            <p className="text-sm font-semibold text-emerald-500">Enabled</p>
+            <p className="text-sm font-semibold text-[var(--color-gsd-accent)]">Enabled</p>
           </div>
           <div>
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
@@ -290,13 +257,13 @@ export default function GovernanceDashboard() {
         <div className="mt-4 flex items-center gap-3">
           <Link
             href="/governance/delegates"
-            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
           >
             View delegate directory
           </Link>
           <Link
             href="/governance/delegate"
-            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
           >
             Manage delegation
           </Link>
@@ -316,7 +283,7 @@ export default function GovernanceDashboard() {
             {votesData.votes.map((vote) => (
               <div
                 key={vote.id}
-                className="flex items-center justify-between rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-3"
+                className="flex items-center justify-between rounded-xl glass-surface px-4 py-3"
               >
                 <div>
                   <p className="text-sm font-medium text-[var(--color-gsd-text)]">
@@ -341,13 +308,13 @@ export default function GovernanceDashboard() {
             )}
           </div>
         ) : (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-8 text-center">
+          <div className="rounded-2xl glass-surface px-6 py-8 text-center">
             <p className="text-sm text-[var(--color-gsd-text-muted)]">
               No votes cast yet
             </p>
             <Link
               href="/governance/rounds"
-              className="mt-2 inline-block text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+              className="mt-2 inline-block text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
             >
               Browse active rounds to vote
             </Link>

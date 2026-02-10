@@ -129,7 +129,7 @@ export function PeerReviewPanel({
 
   if (statusLoading) {
     return (
-      <Card>
+      <Card className="glass">
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-5 w-5 animate-spin text-[var(--color-gsd-text-muted)]" />
           <span className="ml-2 text-sm text-[var(--color-gsd-text-muted)]">
@@ -141,8 +141,8 @@ export function PeerReviewPanel({
   }
 
   return (
-    <Card className="overflow-hidden">
-      <div className="h-1 bg-gradient-to-r from-purple-500 to-indigo-400" />
+    <Card className="glass overflow-hidden">
+      <div className="h-1 gradient-violet" />
 
       <CardHeader>
         <CardTitle className="text-base">Peer Review</CardTitle>
@@ -187,9 +187,9 @@ export function PeerReviewPanel({
               </span>
               <button
                 onClick={() => setPassed(true)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`cursor-pointer rounded-xl px-3 py-1.5 text-xs font-medium transition-theme duration-200 ${
                   passed
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                    ? "bg-[var(--color-gsd-accent)]/20 text-[var(--color-gsd-accent-hover)] border border-[var(--color-gsd-accent)]/30"
                     : "bg-[var(--color-gsd-surface-raised)] text-[var(--color-gsd-text-muted)] border border-transparent"
                 }`}
               >
@@ -197,7 +197,7 @@ export function PeerReviewPanel({
               </button>
               <button
                 onClick={() => setPassed(false)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`cursor-pointer rounded-xl px-3 py-1.5 text-xs font-medium transition-theme duration-200 ${
                   !passed
                     ? "bg-red-500/20 text-red-400 border border-red-500/30"
                     : "bg-[var(--color-gsd-surface-raised)] text-[var(--color-gsd-text-muted)] border border-transparent"
@@ -215,7 +215,7 @@ export function PeerReviewPanel({
                 </span>
                 <button
                   onClick={addEvidence}
-                  className="inline-flex items-center gap-1 text-xs text-[var(--color-gsd-accent)] hover:underline"
+                  className="inline-flex cursor-pointer items-center gap-1 text-xs text-[var(--color-gsd-accent)] transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                 >
                   <Plus className="h-3 w-3" />
                   Add criterion
@@ -226,7 +226,7 @@ export function PeerReviewPanel({
                 {evidence.map((entry, i) => (
                   <div
                     key={i}
-                    className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-3"
+                    className="glass-surface rounded-2xl p-3"
                   >
                     <div className="mb-2 flex items-center justify-between gap-2">
                       <input
@@ -236,14 +236,14 @@ export function PeerReviewPanel({
                         onChange={(e) =>
                           updateEvidence(i, "criterion", e.target.value)
                         }
-                        className="flex-1 rounded bg-[var(--color-gsd-surface-raised)] px-2 py-1 text-xs text-[var(--color-gsd-text)] placeholder-[var(--color-gsd-text-muted)] outline-none focus:ring-1 focus:ring-[var(--color-gsd-accent)]"
+                        className="flex-1 rounded-xl bg-[var(--color-gsd-surface-raised)] px-2 py-1 text-xs text-[var(--color-gsd-text)] placeholder-[var(--color-gsd-text-muted)] outline-none focus:ring-1 focus:ring-[var(--color-gsd-accent)]"
                       />
                       <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => updateEvidence(i, "met", !entry.met)}
-                          className={`rounded px-2 py-0.5 text-xs ${
+                          className={`cursor-pointer rounded-xl px-2 py-0.5 text-xs transition-theme duration-200 ${
                             entry.met
-                              ? "bg-emerald-500/20 text-emerald-400"
+                              ? "bg-[var(--color-gsd-accent)]/20 text-[var(--color-gsd-accent-hover)]"
                               : "bg-red-500/20 text-red-400"
                           }`}
                         >
@@ -252,7 +252,7 @@ export function PeerReviewPanel({
                         {evidence.length > 1 && (
                           <button
                             onClick={() => removeEvidence(i)}
-                            className="text-[var(--color-gsd-text-muted)] hover:text-[var(--color-gsd-error)]"
+                            className="cursor-pointer text-[var(--color-gsd-text-muted)] transition-theme duration-200 hover:text-[var(--color-gsd-error)]"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -266,7 +266,7 @@ export function PeerReviewPanel({
                         updateEvidence(i, "details", e.target.value)
                       }
                       rows={2}
-                      className="w-full resize-none rounded bg-[var(--color-gsd-surface-raised)] px-2 py-1 text-xs text-[var(--color-gsd-text)] placeholder-[var(--color-gsd-text-muted)] outline-none focus:ring-1 focus:ring-[var(--color-gsd-accent)]"
+                      className="w-full resize-none rounded-xl bg-[var(--color-gsd-surface-raised)] px-2 py-1 text-xs text-[var(--color-gsd-text)] placeholder-[var(--color-gsd-text-muted)] outline-none focus:ring-1 focus:ring-[var(--color-gsd-accent)]"
                     />
                   </div>
                 ))}

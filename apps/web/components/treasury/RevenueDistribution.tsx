@@ -97,12 +97,12 @@ function relativeDate(iso: string): string {
 function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 py-4">
-      <div className="h-8 w-8 animate-pulse rounded-full bg-[var(--color-gsd-border-subtle)]" />
+      <div className="h-8 w-8 animate-shimmer-violet rounded-full" />
       <div className="flex-1 space-y-2">
-        <div className="h-4 w-48 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
-        <div className="h-3 w-72 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+        <div className="h-4 w-48 animate-shimmer-violet rounded" />
+        <div className="h-3 w-72 animate-shimmer-violet rounded" />
       </div>
-      <div className="h-4 w-16 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+      <div className="h-4 w-16 animate-shimmer-violet rounded" />
     </div>
   );
 }
@@ -125,7 +125,7 @@ function SplitBar({ event }: { event: RevenueEventResponse }) {
       <div className="flex h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
         {dev > 0 && (
           <div
-            className="h-full bg-emerald-500"
+            className="h-full bg-[var(--color-gsd-accent)]"
             style={{ width: `${dev}%` }}
             title={`Developer ${dev.toFixed(0)}%`}
           />
@@ -146,7 +146,7 @@ function SplitBar({ event }: { event: RevenueEventResponse }) {
         )}
         {maint > 0 && (
           <div
-            className="h-full bg-purple-500"
+            className="h-full bg-[var(--color-gsd-accent-hover)]"
             style={{ width: `${maint}%` }}
             title={`Maintenance ${maint.toFixed(0)}%`}
           />
@@ -154,7 +154,7 @@ function SplitBar({ event }: { event: RevenueEventResponse }) {
       </div>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-[var(--color-gsd-text-muted)]">
         <span className="flex items-center gap-1">
-          <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+          <span className="inline-block h-2 w-2 rounded-full bg-[var(--color-gsd-accent)]" />
           Dev 60%: {formatAmount(event.developerPool, event.token)}
         </span>
         <span className="flex items-center gap-1">
@@ -166,7 +166,7 @@ function SplitBar({ event }: { event: RevenueEventResponse }) {
           Burn 10%: {formatAmount(event.burnAmount, event.token)}
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block h-2 w-2 rounded-full bg-purple-500" />
+          <span className="inline-block h-2 w-2 rounded-full bg-[var(--color-gsd-accent-hover)]" />
           Maint 10%: {formatAmount(event.maintenanceAmount, event.token)}
         </span>
       </div>
@@ -200,7 +200,7 @@ export default function RevenueDistribution() {
   const totalPages = Math.ceil(total / PAGE_SIZE);
 
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Revenue Events</CardTitle>
@@ -227,14 +227,14 @@ export default function RevenueDistribution() {
 
         {/* Error */}
         {isError && (
-          <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+          <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
             Unable to load revenue events.
           </div>
         )}
 
         {/* Empty state */}
         {!isLoading && !isError && events.length === 0 && (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="glass-surface rounded-2xl px-6 py-12 text-center">
             <p className="text-sm text-[var(--color-gsd-text-muted)]">
               No revenue events yet.
             </p>
@@ -262,7 +262,7 @@ export default function RevenueDistribution() {
                         variant="secondary"
                         className={
                           event.token === "sol"
-                            ? "bg-violet-500/15 text-violet-400"
+                            ? "bg-[var(--color-gsd-accent)]/15 text-[var(--color-gsd-accent-hover)]"
                             : "bg-blue-500/15 text-blue-400"
                         }
                       >
@@ -294,7 +294,7 @@ export default function RevenueDistribution() {
                       href={explorerUrl(event.originSignature, "tx")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-1 inline-block font-mono text-[10px] text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                      className="mt-1 inline-block cursor-pointer font-mono text-[10px] text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                     >
                       {truncateAddress(event.originSignature, 4)}
                     </a>
@@ -313,6 +313,7 @@ export default function RevenueDistribution() {
               size="sm"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page <= 1}
+
             >
               Previous
             </Button>
@@ -324,6 +325,7 @@ export default function RevenueDistribution() {
               size="sm"
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page >= totalPages}
+
             >
               Next
             </Button>

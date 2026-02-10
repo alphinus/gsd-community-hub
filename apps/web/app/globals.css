@@ -1,34 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* GSD Brand Colors - Professional dark developer tool aesthetic */
-  --color-gsd-bg: oklch(0.15 0.01 260);
-  --color-gsd-surface: oklch(0.20 0.01 260);
-  --color-gsd-surface-raised: oklch(0.25 0.015 260);
-  --color-gsd-border: oklch(0.32 0.015 260);
-  --color-gsd-border-subtle: oklch(0.27 0.01 260);
+  /* ================================================================
+     OBSIDIAN AURORA - Design System
+     GSD Community Hub Premium Redesign
+     ================================================================ */
 
-  /* Text */
-  --color-gsd-text: oklch(0.95 0.005 260);
-  --color-gsd-text-secondary: oklch(0.70 0.01 260);
-  --color-gsd-text-muted: oklch(0.55 0.01 260);
+  /* Background & Surfaces - Deep Space */
+  --color-gsd-bg: #0F0F23;
+  --color-gsd-surface: #161637;
+  --color-gsd-surface-raised: #1E1E4A;
+  --color-gsd-border: rgba(139, 92, 246, 0.15);
+  --color-gsd-border-subtle: rgba(255, 255, 255, 0.06);
 
-  /* Accent - Emerald for "building, growth, developer" */
-  --color-gsd-accent: oklch(0.72 0.17 160);
-  --color-gsd-accent-hover: oklch(0.78 0.17 160);
-  --color-gsd-accent-muted: oklch(0.40 0.08 160);
+  /* Text Hierarchy */
+  --color-gsd-text: #F8FAFC;
+  --color-gsd-text-secondary: #94A3B8;
+  --color-gsd-text-muted: #7C8CA3;
 
-  /* Status */
-  --color-gsd-success: oklch(0.72 0.17 145);
-  --color-gsd-warning: oklch(0.75 0.15 75);
-  --color-gsd-error: oklch(0.65 0.2 25);
+  /* Primary - Violet */
+  --color-gsd-accent: #8B5CF6;
+  --color-gsd-accent-hover: #A78BFA;
+  --color-gsd-accent-light: #C4B5FD;
+  --color-gsd-accent-deep: #6D28D9;
+  --color-gsd-accent-muted: rgba(139, 92, 246, 0.15);
 
-  /* Font */
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* CTA - Gold */
+  --color-gsd-gold: #FBBF24;
+  --color-gsd-gold-hover: #F59E0B;
+
+  /* Status Colors */
+  --color-gsd-success: #34D399;
+  --color-gsd-warning: #FB923C;
+  --color-gsd-error: #F87171;
+
+  /* Typography */
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
-/* Base styles */
+/* ================================================================
+   Base Styles
+   ================================================================ */
+
 body {
   background-color: var(--color-gsd-bg);
   color: var(--color-gsd-text);
@@ -37,27 +52,305 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Wallet adapter style overrides for dark theme */
+/* Display headings use Space Grotesk */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* ================================================================
+   Scoped Transition (avoids transitioning layout properties)
+   ================================================================ */
+
+.transition-theme {
+  transition-property: color, background-color, border-color, text-decoration-color,
+    fill, stroke, box-shadow, opacity, transform, filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================================================================
+   Glassmorphism Utilities
+   ================================================================ */
+
+.glass {
+  background: rgba(22, 22, 55, 0.9);
+  border: 1px solid rgba(139, 92, 246, 0.12);
+}
+
+.glass-strong {
+  background: rgba(22, 22, 55, 0.95);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+}
+
+.glass-surface {
+  background: rgba(30, 30, 74, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Progressive enhancement: blur only when supported */
+@supports (backdrop-filter: blur(1px)) {
+  .glass {
+    background: rgba(22, 22, 55, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-strong {
+    background: rgba(22, 22, 55, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .glass-surface {
+    background: rgba(30, 30, 74, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* ================================================================
+   Ambient Glow Effects
+   ================================================================ */
+
+.glow-violet {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.08),
+              0 0 60px rgba(139, 92, 246, 0.04);
+}
+
+.glow-violet-strong {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.15),
+              0 0 60px rgba(139, 92, 246, 0.08);
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.08),
+              0 0 60px rgba(251, 191, 36, 0.04);
+}
+
+.text-glow-violet {
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+/* ================================================================
+   Gradient Utilities
+   ================================================================ */
+
+.gradient-violet {
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+}
+
+.gradient-violet-gold {
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9, #F59E0B);
+}
+
+.gradient-text-violet {
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-aurora {
+  background: linear-gradient(135deg, #A78BFA, #8B5CF6, #FBBF24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================================================
+   Mesh Gradient Background (Hero)
+   ================================================================ */
+
+.mesh-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(139, 92, 246, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(109, 40, 217, 0.1), transparent),
+    radial-gradient(ellipse 40% 30% at 60% 80%, rgba(251, 191, 36, 0.05), transparent),
+    var(--color-gsd-bg);
+}
+
+.mesh-gradient-strong {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(139, 92, 246, 0.25), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(109, 40, 217, 0.15), transparent),
+    radial-gradient(ellipse 40% 30% at 60% 80%, rgba(251, 191, 36, 0.08), transparent),
+    var(--color-gsd-bg);
+}
+
+/* ================================================================
+   Animations
+   ================================================================ */
+
+@keyframes shimmer-violet {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.2); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-shimmer-violet {
+  background: linear-gradient(
+    90deg,
+    var(--color-gsd-surface) 0%,
+    rgba(139, 92, 246, 0.08) 50%,
+    var(--color-gsd-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-violet 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: count-up 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer-violet,
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-count-up,
+  .animate-slide-up,
+  .animate-fade-in {
+    animation: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .wallet-adapter-button:hover {
+    transform: none !important;
+  }
+}
+
+/* ================================================================
+   Wallet Adapter Overrides (Obsidian Aurora Theme)
+   ================================================================ */
+
 .wallet-adapter-button {
-  background-color: var(--color-gsd-accent) !important;
-  border-radius: 0.5rem !important;
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9) !important;
+  border-radius: 0.75rem !important;
   font-family: var(--font-sans) !important;
   font-weight: 600 !important;
   height: 2.5rem !important;
   padding: 0 1.25rem !important;
+  transition: color, background-color, border-color, box-shadow, opacity, transform 200ms ease !important;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15) !important;
 }
 
 .wallet-adapter-button:hover {
-  background-color: var(--color-gsd-accent-hover) !important;
+  background: linear-gradient(135deg, #A78BFA, #7C3AED) !important;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.25) !important;
+  transform: translateY(-1px) !important;
 }
 
 .wallet-adapter-modal-wrapper {
-  background-color: var(--color-gsd-surface) !important;
-  border: 1px solid var(--color-gsd-border) !important;
-  border-radius: 1rem !important;
+  background: rgba(22, 22, 55, 0.95) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.1) !important;
 }
 
 .wallet-adapter-modal-title {
   color: var(--color-gsd-text) !important;
-  font-family: var(--font-sans) !important;
+  font-family: var(--font-display) !important;
+}
+
+/* ================================================================
+   Toaster Overrides
+   ================================================================ */
+
+[data-sonner-toaster] [data-sonner-toast] {
+  background: rgba(22, 22, 55, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(139, 92, 246, 0.15) !important;
+  border-radius: 0.75rem !important;
+}
+
+/* ================================================================
+   Scrollbar Styling
+   ================================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.35);
+}
+
+/* ================================================================
+   Selection
+   ================================================================ */
+
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: #F8FAFC;
 }

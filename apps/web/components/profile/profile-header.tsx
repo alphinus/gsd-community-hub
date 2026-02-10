@@ -11,6 +11,7 @@ import {
   Copy,
   Check,
   ShieldCheck,
+  Pencil,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -67,15 +68,17 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
     <div className="space-y-6">
       {/* Avatar + Name */}
       <div className="flex items-start gap-6">
-        {/* Avatar */}
-        <div
-          className="h-20 w-20 shrink-0 rounded-full sm:h-24 sm:w-24"
-          style={{
-            background: profile.avatarUrl
-              ? `url(${profile.avatarUrl}) center/cover`
-              : walletGradient(profile.walletAddress),
-          }}
-        />
+        {/* Avatar with violet gradient ring */}
+        <div className="shrink-0 rounded-full bg-gradient-to-br from-[var(--color-gsd-accent)] to-[var(--color-gsd-accent-deep)] p-[3px] shadow-lg shadow-[var(--color-gsd-accent)]/20">
+          <div
+            className="h-20 w-20 rounded-full ring-2 ring-[var(--color-gsd-bg)] sm:h-24 sm:w-24"
+            style={{
+              background: profile.avatarUrl
+                ? `url(${profile.avatarUrl}) center/cover`
+                : walletGradient(profile.walletAddress),
+            }}
+          />
+        </div>
 
         <div className="min-w-0 flex-1">
           {/* Display name */}
@@ -87,7 +90,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
           <div className="mt-1 flex items-center gap-2">
             <button
               onClick={handleCopyAddress}
-              className="flex items-center gap-1.5 text-sm font-mono text-[var(--color-gsd-text-muted)] transition-colors hover:text-[var(--color-gsd-text-secondary)]"
+              className="flex cursor-pointer items-center gap-1.5 text-sm font-mono text-[var(--color-gsd-text-muted)] transition-colors duration-200 hover:text-[var(--color-gsd-text-secondary)]"
               title="Copy wallet address"
             >
               {truncatedAddress}
@@ -104,11 +107,11 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
                 href={explorerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center"
+                className="inline-flex cursor-pointer items-center"
                 title="View on-chain profile on Solana Explorer"
               >
-                <Badge variant="success" className="gap-1">
-                  <ShieldCheck className="h-3 w-3" />
+                <Badge className="gap-1 border-[var(--color-gsd-accent)]/30 bg-[var(--color-gsd-accent)]/10 text-[var(--color-gsd-accent-light)] hover:bg-[var(--color-gsd-accent)]/20">
+                  <ShieldCheck className="h-3 w-3 text-[var(--color-gsd-accent)]" />
                   Verified on-chain
                 </Badge>
               </a>
@@ -136,7 +139,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--color-gsd-border-subtle)] px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-colors hover:border-[var(--color-gsd-accent)] hover:text-[var(--color-gsd-accent)]"
+            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-violet hover:text-[var(--color-gsd-accent-light)]"
           >
             <Github className="h-4 w-4" />
             GitHub
@@ -149,7 +152,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.twitterUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--color-gsd-border-subtle)] px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-colors hover:border-[var(--color-gsd-accent)] hover:text-[var(--color-gsd-accent)]"
+            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-violet hover:text-[var(--color-gsd-accent-light)]"
           >
             <Twitter className="h-4 w-4" />
             Twitter/X
@@ -162,7 +165,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg border border-[var(--color-gsd-border-subtle)] px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-colors hover:border-[var(--color-gsd-accent)] hover:text-[var(--color-gsd-accent)]"
+            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-violet hover:text-[var(--color-gsd-accent-light)]"
           >
             <Globe className="h-4 w-4" />
             Website
@@ -172,7 +175,8 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
 
         {isOwnProfile && (
           <Link href="/profile/edit" className="ml-auto">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="gap-1.5 border-[var(--color-gsd-accent)]/30 text-[var(--color-gsd-accent-light)] hover:border-[var(--color-gsd-accent)] hover:bg-[var(--color-gsd-accent)]/10 hover:text-[var(--color-gsd-accent)]">
+              <Pencil className="h-3.5 w-3.5" />
               Edit Profile
             </Button>
           </Link>

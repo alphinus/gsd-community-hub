@@ -25,7 +25,7 @@ function DirectorySkeleton() {
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
-          className="animate-pulse rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-6"
+          className="animate-shimmer-violet glass rounded-2xl p-6"
         >
           <div className="mb-3 h-4 w-28 rounded bg-[var(--color-gsd-surface-raised)]" />
           <div className="h-6 w-20 rounded bg-[var(--color-gsd-surface-raised)]" />
@@ -52,7 +52,7 @@ export function DelegateDirectory() {
 
   if (isError) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+      <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
         Unable to load delegate directory.
       </div>
     );
@@ -62,7 +62,7 @@ export function DelegateDirectory() {
 
   if (topDelegates.length === 0) {
     return (
-      <div className="rounded-xl border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-6 py-12 text-center">
+      <div className="glass rounded-2xl px-6 py-12 text-center">
         <p className="text-sm text-[var(--color-gsd-text-muted)]">
           No active delegates yet. Be the first to receive delegation.
         </p>
@@ -87,7 +87,7 @@ export function DelegateDirectory() {
         </span>
         <button
           onClick={() => setSortBy("delegatorCount")}
-          className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`cursor-pointer rounded-xl px-3 py-1 text-xs font-medium transition-theme duration-200 ${
             sortBy === "delegatorCount"
               ? "bg-[var(--color-gsd-accent)] text-[var(--color-gsd-bg)]"
               : "bg-[var(--color-gsd-surface-raised)] text-[var(--color-gsd-text-muted)] hover:text-[var(--color-gsd-text)]"
@@ -97,7 +97,7 @@ export function DelegateDirectory() {
         </button>
         <button
           onClick={() => setSortBy("totalDelegated")}
-          className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`cursor-pointer rounded-xl px-3 py-1 text-xs font-medium transition-theme duration-200 ${
             sortBy === "totalDelegated"
               ? "bg-[var(--color-gsd-accent)] text-[var(--color-gsd-bg)]"
               : "bg-[var(--color-gsd-surface-raised)] text-[var(--color-gsd-text-muted)] hover:text-[var(--color-gsd-text)]"

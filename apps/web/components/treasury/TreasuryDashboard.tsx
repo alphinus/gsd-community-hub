@@ -61,10 +61,10 @@ function SkeletonCard() {
   return (
     <Card>
       <CardHeader>
-        <div className="h-4 w-24 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+        <div className="h-4 w-24 animate-shimmer-violet rounded-xl" />
       </CardHeader>
       <CardContent>
-        <div className="h-8 w-32 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+        <div className="h-8 w-32 animate-shimmer-violet rounded-xl" />
       </CardContent>
     </Card>
   );
@@ -88,7 +88,7 @@ function BalanceCard({
   note?: string;
 }) {
   return (
-    <Card>
+    <Card className="glass glow-violet">
       <CardHeader>
         <div className="flex items-center gap-2">
           {icon}
@@ -99,7 +99,7 @@ function BalanceCard({
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-bold tracking-tight text-[var(--color-gsd-text)]">
+          <span className="gradient-text-aurora text-3xl font-bold tracking-tight">
             {value}
           </span>
           <span className="text-sm text-[var(--color-gsd-text-muted)]">
@@ -130,7 +130,7 @@ function StatCard({
   unit?: string;
 }) {
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] px-4 py-3">
+    <div className="glass-surface rounded-2xl px-4 py-3">
       <p className="text-xs font-medium text-[var(--color-gsd-text-muted)]">
         {label}
       </p>
@@ -162,7 +162,7 @@ function SolIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="text-[var(--color-gsd-accent)]"
+      className="gradient-text-violet text-[var(--color-gsd-accent)]"
     >
       <circle cx="12" cy="12" r="10" />
       <path d="M8 12h8" />
@@ -183,7 +183,7 @@ function TokenIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="text-emerald-400"
+      className="text-[var(--color-gsd-gold)]"
     >
       <circle cx="12" cy="12" r="10" />
       <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
@@ -263,7 +263,7 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
 
   if (isError) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+      <div className="glass-surface rounded-2xl border border-[var(--color-gsd-error)]/30 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
         Unable to load treasury data. Please try again later.
       </div>
     );
@@ -274,7 +274,7 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
   const totalGsdBurned = revenueSummary?.totalGsdBurned ?? data?.burnTotal ?? "0";
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-slide-up">
       {/* Balance cards */}
       <div className="grid gap-4 sm:grid-cols-3">
         <BalanceCard
@@ -300,7 +300,7 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
       {/* Revenue Summary section */}
       {revenueSummary && revenueSummary.eventCount > 0 && (
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-[var(--color-gsd-text)]">
+          <h3 className="text-sm font-semibold text-[var(--color-gsd-accent)]">
             Revenue Summary
           </h3>
           <div className="grid gap-3 sm:grid-cols-4">

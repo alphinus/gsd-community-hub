@@ -82,7 +82,7 @@ export function DecayedScoreDisplay({
 
   if (isLoading) {
     return (
-      <div className="animate-pulse rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+      <div className="animate-shimmer-violet glass rounded-2xl p-4">
         <div className="mb-2 h-4 w-32 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-8 w-24 rounded bg-[var(--color-gsd-surface-raised)]" />
       </div>
@@ -91,7 +91,7 @@ export function DecayedScoreDisplay({
 
   if (isError) {
     return (
-      <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+      <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
         Unable to load decay score.
       </div>
     );
@@ -117,7 +117,7 @@ export function DecayedScoreDisplay({
   });
 
   return (
-    <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200">
       <p className="mb-3 text-xs font-medium text-[var(--color-gsd-text-muted)]">
         Contribution Score (with {DECAY_HALF_LIFE_DAYS}-day decay)
       </p>
@@ -136,7 +136,7 @@ export function DecayedScoreDisplay({
           <span className="text-xs text-[var(--color-gsd-text-muted)]">
             Effective Score
           </span>
-          <span className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+          <span className="text-lg font-bold gradient-text-violet">
             {formatScore(decayedScore)}
           </span>
         </div>
@@ -150,7 +150,7 @@ export function DecayedScoreDisplay({
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all"
+            className="h-full rounded-full gradient-violet transition-theme duration-200"
             style={{ width: `${effectivePct}%` }}
           />
         </div>
@@ -159,7 +159,7 @@ export function DecayedScoreDisplay({
       {/* Projections toggle */}
       <button
         onClick={() => setShowProjections(!showProjections)}
-        className="mt-3 text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+        className="mt-3 cursor-pointer text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline transition-theme duration-200"
       >
         {showProjections ? "Hide projections" : "Show 30/60/90 day projections"}
       </button>

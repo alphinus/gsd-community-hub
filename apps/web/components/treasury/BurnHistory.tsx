@@ -117,12 +117,12 @@ function ArrowRightIcon() {
 function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 py-4">
-      <div className="h-8 w-8 animate-pulse rounded-full bg-[var(--color-gsd-border-subtle)]" />
+      <div className="h-8 w-8 animate-shimmer-violet rounded-full" />
       <div className="flex-1 space-y-2">
-        <div className="h-4 w-40 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
-        <div className="h-3 w-64 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+        <div className="h-4 w-40 animate-shimmer-violet rounded" />
+        <div className="h-3 w-64 animate-shimmer-violet rounded" />
       </div>
-      <div className="h-4 w-20 animate-pulse rounded bg-[var(--color-gsd-border-subtle)]" />
+      <div className="h-4 w-20 animate-shimmer-violet rounded" />
     </div>
   );
 }
@@ -146,7 +146,7 @@ export default function BurnHistory() {
   const total = data?.total ?? 0;
 
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -176,14 +176,14 @@ export default function BurnHistory() {
 
         {/* Error */}
         {isError && (
-          <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+          <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
             Unable to load burn history.
           </div>
         )}
 
         {/* Empty state */}
         {!isLoading && !isError && burns.length === 0 && (
-          <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+          <div className="glass-surface rounded-2xl px-6 py-12 text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-orange-400/10">
               <FireIcon className="text-orange-400" />
             </div>
@@ -217,7 +217,7 @@ export default function BurnHistory() {
                         variant="secondary"
                         className={
                           burn.token === "sol"
-                            ? "bg-violet-500/15 text-violet-400"
+                            ? "bg-[var(--color-gsd-accent)]/15 text-[var(--color-gsd-accent-hover)]"
                             : "bg-blue-500/15 text-blue-400"
                         }
                       >
@@ -245,7 +245,7 @@ export default function BurnHistory() {
                           href={explorerUrl(burn.burnSignature, "tx")}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-mono text-orange-400/80 underline-offset-4 hover:underline"
+                          className="cursor-pointer font-mono text-orange-400/80 underline-offset-4 transition-theme duration-200 hover:underline"
                         >
                           Burn tx: {truncateAddress(burn.burnSignature, 4)}
                         </a>
@@ -254,7 +254,7 @@ export default function BurnHistory() {
                         href={explorerUrl(burn.originSignature, "tx")}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                        className="cursor-pointer font-mono text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                       >
                         Origin tx: {truncateAddress(burn.originSignature, 4)}
                       </a>

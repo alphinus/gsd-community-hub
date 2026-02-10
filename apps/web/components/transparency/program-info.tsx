@@ -29,7 +29,7 @@ function CopyButton({ text }: { text: string }) {
       variant="ghost"
       size="icon"
       onClick={handleCopy}
-      className="h-6 w-6 shrink-0"
+      className="h-6 w-6 shrink-0 cursor-pointer transition-theme duration-200"
       title="Copy to clipboard"
     >
       <svg
@@ -66,7 +66,7 @@ export function ProgramInfo({
   tokenInfo,
 }: ProgramInfoProps) {
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader>
         <CardTitle>On-Chain Programs</CardTitle>
       </CardHeader>
@@ -75,7 +75,7 @@ export function ProgramInfo({
         {programs.map((program, index) => (
           <div
             key={index}
-            className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4"
+            className="glass-surface rounded-2xl p-4 transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/20"
           >
             <div className="mb-3 flex items-center justify-between">
               <span className="font-medium text-[var(--color-gsd-text)]">
@@ -99,7 +99,7 @@ export function ProgramInfo({
                   href={explorerUrl(program.id)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                  className="cursor-pointer font-mono text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                 >
                   {truncateAddress(program.id, 6)}
                 </a>
@@ -114,7 +114,7 @@ export function ProgramInfo({
                   href={explorerUrl(program.upgradeAuthority)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                  className="cursor-pointer font-mono text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                 >
                   {truncateAddress(program.upgradeAuthority, 6)}
                 </a>
@@ -149,7 +149,7 @@ export function ProgramInfo({
             {tokenInfo.authorities.map((authority, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-2.5"
+                className="flex items-center justify-between glass-surface rounded-2xl px-4 py-2.5 transition-theme duration-200"
               >
                 <span className="text-sm text-[var(--color-gsd-text)]">
                   {authority.label}
@@ -164,7 +164,7 @@ export function ProgramInfo({
                         href={explorerUrl(authority.address)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+                        className="cursor-pointer font-mono text-xs text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
                       >
                         {truncateAddress(authority.address)}
                       </a>
@@ -181,7 +181,7 @@ export function ProgramInfo({
         </div>
 
         {/* Source code */}
-        <div className="flex items-center justify-between rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-4 py-3">
+        <div className="flex items-center justify-between glass-surface rounded-2xl px-4 py-3 transition-theme duration-200">
           <div>
             <span className="text-sm text-[var(--color-gsd-text)]">
               Source Code
@@ -194,7 +194,7 @@ export function ProgramInfo({
             href={repository.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[var(--color-gsd-accent)] underline-offset-4 hover:underline"
+            className="cursor-pointer text-sm text-[var(--color-gsd-accent)] underline-offset-4 transition-theme duration-200 hover:text-[var(--color-gsd-accent-hover)] hover:underline"
           >
             View on GitHub
           </a>

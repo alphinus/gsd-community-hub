@@ -27,8 +27,8 @@ interface VotingPowerDistributionProps {
 }
 
 const COLORS = {
-  top10: "#f59e0b", // amber-500
-  rest: "#10b981", // emerald-500
+  top10: "#FBBF24", // gold
+  rest: "#8B5CF6", // violet
 };
 
 function GiniIndicator({ value }: { value: number }) {
@@ -36,13 +36,13 @@ function GiniIndicator({ value }: { value: number }) {
   let label: string;
 
   if (value < 0.4) {
-    colorClass = "text-emerald-500 bg-emerald-500/15";
+    colorClass = "text-[var(--color-gsd-success)] bg-[var(--color-gsd-success)]/15";
     label = "Low inequality";
   } else if (value <= 0.6) {
-    colorClass = "text-amber-500 bg-amber-500/15";
+    colorClass = "text-[var(--color-gsd-gold)] bg-[var(--color-gsd-gold)]/15";
     label = "Moderate inequality";
   } else {
-    colorClass = "text-red-500 bg-red-500/15";
+    colorClass = "text-[var(--color-gsd-error)] bg-[var(--color-gsd-error)]/15";
     label = "High inequality";
   }
 
@@ -66,7 +66,7 @@ export function VotingPowerDistribution({
 }: VotingPowerDistributionProps) {
   if (powerDistribution.totalDepositors === 0) {
     return (
-      <div className="flex h-[300px] items-center justify-center rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)]">
+      <div className="flex h-[300px] items-center justify-center glass rounded-2xl">
         <p className="text-sm text-[var(--color-gsd-text-muted)]">
           Deposit tokens to see power distribution
         </p>
@@ -85,7 +85,7 @@ export function VotingPowerDistribution({
   return (
     <div className="space-y-4">
       {/* Pie chart */}
-      <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+      <div className="glass rounded-2xl p-4">
         <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
           Voting Power Distribution
         </h3>
@@ -113,10 +113,10 @@ export function VotingPowerDistribution({
             </Pie>
             <Tooltip
               contentStyle={{
-                backgroundColor: "#18181b",
-                border: "1px solid #3f3f46",
-                borderRadius: "0.5rem",
-                color: "#fafafa",
+                backgroundColor: "#161637",
+                border: "1px solid rgba(139, 92, 246, 0.3)",
+                borderRadius: "1rem",
+                color: "#F8FAFC",
                 fontSize: "0.875rem",
               }}
               formatter={(value: number | undefined) => [
@@ -125,7 +125,7 @@ export function VotingPowerDistribution({
               ]}
             />
             <Legend
-              wrapperStyle={{ fontSize: "0.75rem", color: "#a1a1aa" }}
+              wrapperStyle={{ fontSize: "0.75rem", color: "#94A3B8" }}
             />
           </PieChart>
         </ResponsiveContainer>
@@ -133,18 +133,18 @@ export function VotingPowerDistribution({
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
             Gini Coefficient
           </p>
           <GiniIndicator value={powerDistribution.giniCoefficient} />
         </div>
 
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
             Top 10 Hold
           </p>
-          <p className="text-lg font-bold text-amber-500">
+          <p className="text-lg font-bold text-[var(--color-gsd-gold)]">
             {top10Pct}%{" "}
             <span className="text-xs font-normal text-[var(--color-gsd-text-muted)]">
               of voting power
@@ -152,7 +152,7 @@ export function VotingPowerDistribution({
           </p>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-surface)] p-4">
+        <div className="glass rounded-2xl p-4">
           <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
             Total Active Voters
           </p>
@@ -164,8 +164,8 @@ export function VotingPowerDistribution({
 
       {/* Quadratic impact comparison */}
       {quadraticImpact && (
-        <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4">
-          <h3 className="mb-3 text-sm font-semibold text-emerald-500">
+        <div className="glass rounded-2xl border border-[var(--color-gsd-accent)]/30 bg-[var(--color-gsd-accent)]/5 p-4">
+          <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-accent)]">
             Quadratic Voting Impact
           </h3>
           <div className="grid grid-cols-2 gap-4">
@@ -173,7 +173,7 @@ export function VotingPowerDistribution({
               <p className="text-xs text-[var(--color-gsd-text-muted)]">
                 Whale Reduction
               </p>
-              <p className="text-lg font-bold text-emerald-500">
+              <p className="text-lg font-bold text-[var(--color-gsd-accent)]">
                 -{quadraticImpact.whaleReduction}%
               </p>
               <p className="text-xs text-[var(--color-gsd-text-muted)]">
@@ -184,7 +184,7 @@ export function VotingPowerDistribution({
               <p className="text-xs text-[var(--color-gsd-text-muted)]">
                 Small Holder Boost
               </p>
-              <p className="text-lg font-bold text-emerald-500">
+              <p className="text-lg font-bold text-[var(--color-gsd-success)]">
                 +{quadraticImpact.smallHolderBoost}%
               </p>
               <p className="text-xs text-[var(--color-gsd-text-muted)]">

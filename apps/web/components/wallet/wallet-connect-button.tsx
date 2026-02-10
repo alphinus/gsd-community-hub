@@ -124,17 +124,20 @@ export function WalletConnectButton() {
     if (isSigningIn.current || status === "loading") {
       return (
         <button
-          className="rounded-lg bg-[var(--color-gsd-accent-muted)] px-5 py-2 text-sm font-semibold text-[var(--color-gsd-text)]"
+          className="glass-surface rounded-xl border border-[var(--color-gsd-accent)]/20 px-5 py-2 text-sm font-semibold text-[var(--color-gsd-text)] opacity-80 cursor-not-allowed"
           disabled
         >
-          Signing in...
+          <span className="inline-flex items-center gap-2">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[var(--color-gsd-accent)]" />
+            Signing in...
+          </span>
         </button>
       );
     }
     return (
       <button
         onClick={handleSignIn}
-        className="rounded-lg bg-[var(--color-gsd-accent)] px-5 py-2 text-sm font-semibold text-[var(--color-gsd-bg)] transition-colors hover:bg-[var(--color-gsd-accent-hover)]"
+        className="gradient-violet glow-violet rounded-xl px-5 py-2 text-sm font-semibold text-white transition-theme hover:shadow-[0_0_24px_rgba(139,92,246,0.4)] cursor-pointer"
       >
         Sign In
       </button>
@@ -148,12 +151,12 @@ export function WalletConnectButton() {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm text-[var(--color-gsd-text-secondary)]">
+      <span className="font-mono text-sm text-[var(--color-gsd-accent)]/80">
         {truncatedAddress}
       </span>
       <button
         onClick={handleDisconnect}
-        className="rounded-lg border border-[var(--color-gsd-border)] px-4 py-2 text-sm font-medium text-[var(--color-gsd-text-secondary)] transition-colors hover:border-[var(--color-gsd-error)] hover:text-[var(--color-gsd-error)]"
+        className="glass-surface rounded-xl border border-[var(--color-gsd-text-muted)]/30 px-4 py-2 text-sm font-medium text-[var(--color-gsd-text-secondary)] transition-theme hover:border-[var(--color-gsd-error)]/60 hover:text-[var(--color-gsd-error)] hover:shadow-[0_0_16px_rgba(248,113,113,0.15)] cursor-pointer"
       >
         Disconnect
       </button>

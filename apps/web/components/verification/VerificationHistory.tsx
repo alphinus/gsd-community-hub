@@ -42,7 +42,7 @@ const PAGE_SIZE = 10;
 
 function VerificationSkeleton() {
   return (
-    <div className="animate-pulse rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4">
+    <div className="animate-shimmer-violet glass rounded-2xl p-4">
       <div className="mb-3 flex items-start justify-between">
         <div className="h-4 w-40 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-5 w-16 rounded-full bg-[var(--color-gsd-surface-raised)]" />
@@ -108,14 +108,14 @@ export function VerificationHistory({
 
       {/* Error state */}
       {isError && (
-        <div className="rounded-lg border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
+        <div className="rounded-2xl border border-[var(--color-gsd-error)]/30 bg-[var(--color-gsd-error)]/5 px-4 py-3 text-sm text-[var(--color-gsd-error)]">
           Unable to load verification reports. Please try again later.
         </div>
       )}
 
       {/* Empty state */}
       {data && data.reports.length === 0 && (
-        <div className="rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] px-6 py-12 text-center">
+        <div className="glass rounded-2xl px-6 py-12 text-center">
           <p className="text-sm text-[var(--color-gsd-text-muted)]">
             No verifications yet
           </p>
@@ -130,7 +130,7 @@ export function VerificationHistory({
               <a
                 key={report.id}
                 href={`/verification/${report.id}`}
-                className="block rounded-lg border border-[var(--color-gsd-border-subtle)] bg-[var(--color-gsd-bg)] p-4 transition-colors hover:border-[var(--color-gsd-border)]"
+                className="block glass rounded-2xl p-4 cursor-pointer transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/30 glow-violet"
               >
                 {/* Header: task ref + score */}
                 <div className="mb-2 flex items-start justify-between gap-2">
@@ -195,6 +195,7 @@ export function VerificationHistory({
                     e.preventDefault();
                     setPage((p) => Math.max(1, p - 1));
                   }}
+
                 >
                   Previous
                 </Button>
@@ -207,6 +208,7 @@ export function VerificationHistory({
                     e.preventDefault();
                     setPage((p) => p + 1);
                   }}
+
                 >
                   Load more
                 </Button>

@@ -28,20 +28,20 @@ export function DelegateCard({
   const formattedAmount = (Number(BigInt(totalDelegated)) / 1e9).toFixed(2);
 
   return (
-    <Link href={`/profile/${delegate}`}>
-      <Card className="transition-colors hover:border-[var(--color-gsd-accent)]/50">
+    <Link href={`/profile/${delegate}`} className="cursor-pointer">
+      <Card className="glass transition-theme duration-200 hover:glow-violet hover:border-[var(--color-gsd-accent)]/50">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-sm font-mono">
+            <CardTitle className="text-sm font-mono text-[var(--color-gsd-text)]">
               {truncateAddress(delegate)}
             </CardTitle>
             {isVerified && (
               <span
-                className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15"
+                className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--color-gsd-accent)]/15"
                 title="Verified Human"
               >
                 <svg
-                  className="h-3 w-3 text-emerald-500"
+                  className="h-3 w-3 text-[var(--color-gsd-accent)]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -59,10 +59,10 @@ export function DelegateCard({
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-3">
-            <Badge variant="secondary">
+            <Badge variant="secondary" className="rounded-xl">
               {delegatorCount} {delegatorCount === 1 ? "delegator" : "delegators"}
             </Badge>
-            <span className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+            <span className="text-sm font-semibold gradient-text-violet">
               {formattedAmount} $GSD
             </span>
           </div>

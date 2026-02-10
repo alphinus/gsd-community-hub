@@ -51,12 +51,18 @@ export default async function VerificationDashboardPage() {
   const stats = await getVerificationStats();
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-[var(--color-gsd-text)]">
+    <div className="relative mx-auto max-w-4xl px-4 py-12">
+      {/* Mesh gradient background */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-1/2 left-1/4 h-[600px] w-[600px] rounded-full bg-[#8B5CF6]/5 blur-[120px]" />
+        <div className="absolute -bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-[#FBBF24]/5 blur-[120px]" />
+      </div>
+
+      <div className="mb-8 animate-slide-up">
+        <h1 className="text-2xl font-bold gradient-text-violet">
           Verification Dashboard
         </h1>
-        <p className="mt-1 text-sm text-[var(--color-gsd-text-muted)]">
+        <p className="mt-1 text-sm text-[#94A3B8]">
           Publicly auditable AI and peer verification reports for all
           contributions
         </p>
@@ -64,56 +70,56 @@ export default async function VerificationDashboardPage() {
 
       {/* Stats bar */}
       <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Card>
+        <Card className="glass glow-violet border-0">
           <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[var(--color-gsd-text-muted)]">
+            <CardTitle className="text-xs font-normal text-[#94A3B8]">
               Total Verifications
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <span className="text-2xl font-bold text-[var(--color-gsd-text)]">
+            <span className="text-2xl font-bold text-[#F8FAFC]">
               {stats.total}
             </span>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="glass glow-violet border-0">
           <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[var(--color-gsd-text-muted)]">
+            <CardTitle className="text-xs font-normal text-[#94A3B8]">
               Average Score
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-400">
+            <span className="text-2xl font-bold gradient-text-aurora">
               {stats.averageScore}
             </span>
-            <span className="text-sm text-[var(--color-gsd-text-muted)]">
+            <span className="text-sm text-[#94A3B8]">
               /100
             </span>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="glass glow-violet border-0">
           <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[var(--color-gsd-text-muted)]">
+            <CardTitle className="text-xs font-normal text-[#94A3B8]">
               AI Verified
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <span className="text-2xl font-bold text-[var(--color-gsd-text)]">
+            <span className="text-2xl font-bold text-[#F8FAFC]">
               {stats.aiCount}
             </span>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="glass glow-violet border-0">
           <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[var(--color-gsd-text-muted)]">
+            <CardTitle className="text-xs font-normal text-[#94A3B8]">
               Peer Reviewed
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <span className="text-2xl font-bold text-[var(--color-gsd-text)]">
+            <span className="text-2xl font-bold text-[#F8FAFC]">
               {stats.peerCount}
             </span>
           </CardContent>
@@ -122,7 +128,8 @@ export default async function VerificationDashboardPage() {
 
       {/* Verification history (client component with TanStack Query) */}
       <div>
-        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
+        <h2 className="mb-4 text-lg font-semibold text-[#F8FAFC]">
+          <span className="inline-block h-4 w-1 rounded-full bg-[#8B5CF6] mr-2 align-middle" />
           All Verification Reports
         </h2>
         <VerificationHistory />

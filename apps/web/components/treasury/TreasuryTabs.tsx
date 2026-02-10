@@ -39,9 +39,9 @@ export function TreasuryTabs() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors ${
+            className={`cursor-pointer whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-theme duration-200 ${
               activeTab === tab.id
-                ? "border-b-2 border-emerald-500 text-emerald-400"
+                ? "border-b-2 border-[var(--color-gsd-accent)] text-[var(--color-gsd-accent-hover)]"
                 : "text-[var(--color-gsd-text-muted)] hover:text-[var(--color-gsd-text)]"
             }`}
           >
