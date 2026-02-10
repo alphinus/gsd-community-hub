@@ -26,16 +26,13 @@ function NavLink({
       href={href}
       onClick={onClick}
       className={cn(
-        "relative px-3 py-1.5 text-sm font-medium transition-theme duration-200 rounded-lg",
+        "eluma-nav-link relative px-3 py-1.5 text-sm font-light tracking-wide transition-theme duration-200 rounded-lg",
         active
           ? "text-[var(--color-gsd-text)] bg-[var(--color-gsd-accent)]/10"
-          : "text-[var(--color-gsd-text-secondary)] hover:text-[var(--color-gsd-text)] hover:bg-white/5"
+          : "text-[var(--color-gsd-text-secondary)] hover:text-[var(--color-gsd-text)]"
       )}
     >
       {children}
-      {active && (
-        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full gradient-cyan" />
-      )}
     </Link>
   );
 }
@@ -69,10 +66,10 @@ export function Header() {
         <div className="flex h-14 items-center justify-between px-5">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-            <span className="text-xl font-bold gradient-text-cyan">
+            <span className="text-xl font-extralight tracking-wider gradient-text-cyan">
               GSD
             </span>
-            <span className="text-sm font-medium text-[var(--color-gsd-text-muted)] group-hover:text-[var(--color-gsd-text-secondary)] transition-colors">
+            <span className="text-sm font-light text-[var(--color-gsd-text-muted)] group-hover:text-[var(--color-gsd-text-secondary)] transition-colors tracking-wide">
               Community Hub
             </span>
           </Link>

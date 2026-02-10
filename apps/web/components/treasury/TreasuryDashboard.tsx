@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import type { TreasuryData, TreasuryBalance } from "@/lib/treasury/client";
 
 // ---------------------------------------------------------------------------
@@ -88,26 +89,26 @@ function BalanceCard({
   note?: string;
 }) {
   return (
-    <Card className="glass glow-cyan">
+    <Card className="glass eluma-card glow-cyan">
       <CardHeader>
         <div className="flex items-center gap-2">
           {icon}
-          <CardTitle className="text-sm font-medium text-[var(--color-gsd-text-muted)]">
+          <CardTitle className="text-sm font-light tracking-wide text-[var(--color-gsd-text-muted)]">
             {label}
           </CardTitle>
         </div>
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-2">
-          <span className="gradient-text-aurora text-3xl font-bold tracking-tight">
+          <span className="gradient-text-aurora text-3xl font-extralight tracking-tight">
             {value}
           </span>
-          <span className="text-sm text-[var(--color-gsd-text-muted)]">
+          <span className="text-sm font-light text-[var(--color-gsd-text-muted)]">
             {unit}
           </span>
         </div>
         {note && (
-          <p className="mt-2 text-xs text-[var(--color-gsd-text-muted)]">
+          <p className="mt-2 text-xs font-light text-[var(--color-gsd-text-muted)]">
             {note}
           </p>
         )}
@@ -130,14 +131,14 @@ function StatCard({
   unit?: string;
 }) {
   return (
-    <div className="glass-surface rounded-2xl px-4 py-3">
-      <p className="text-xs font-medium text-[var(--color-gsd-text-muted)]">
+    <div className="glass-surface eluma-stat rounded-2xl px-4 py-3">
+      <p className="text-xs font-light tracking-wide text-[var(--color-gsd-text-muted)]">
         {label}
       </p>
-      <p className="mt-1 text-lg font-bold text-[var(--color-gsd-text)]">
+      <p className="mt-1 text-lg font-extralight text-[var(--color-gsd-text)]">
         {value}
         {unit && (
-          <span className="ml-1 text-xs font-normal text-[var(--color-gsd-text-muted)]">
+          <span className="ml-1 text-xs font-light text-[var(--color-gsd-text-muted)]">
             {unit}
           </span>
         )}
@@ -274,7 +275,8 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
   const totalGsdBurned = revenueSummary?.totalGsdBurned ?? data?.burnTotal ?? "0";
 
   return (
-    <div className="space-y-4 animate-slide-up">
+    <ScrollReveal delay={1}>
+    <div className="space-y-4">
       {/* Balance cards */}
       <div className="grid gap-4 sm:grid-cols-3">
         <BalanceCard
@@ -300,7 +302,7 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
       {/* Revenue Summary section */}
       {revenueSummary && revenueSummary.eventCount > 0 && (
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-[var(--color-gsd-accent)]">
+          <h3 className="eluma-badge text-[var(--color-gsd-accent)]">
             Revenue Summary
           </h3>
           <div className="grid gap-3 sm:grid-cols-4">
@@ -326,7 +328,7 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
       )}
 
       {balance?.lastUpdated && (
-        <p className="text-xs text-[var(--color-gsd-text-muted)]">
+        <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
           Last updated: {timeAgo(balance.lastUpdated)}
         </p>
       )}
@@ -335,5 +337,6 @@ export function TreasuryDashboard({ initialBalance }: TreasuryDashboardProps) {
         <p className="text-xs text-yellow-400/80">{data.warning}</p>
       )}
     </div>
+    </ScrollReveal>
   );
 }

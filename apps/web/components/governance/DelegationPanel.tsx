@@ -208,8 +208,8 @@ export function DelegationPanel() {
   return (
     <div className="space-y-6">
       {/* Current delegation status */}
-      <div className="glass rounded-2xl p-6">
-        <h3 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
+      <div className="glass eluma-card rounded-2xl p-6">
+        <h3 className="mb-4 text-lg font-extralight text-[var(--color-gsd-text)]">
           Delegation Status
         </h3>
 
@@ -218,7 +218,7 @@ export function DelegationPanel() {
             <div className="rounded-xl bg-[var(--color-gsd-accent)]/10 px-4 py-3">
               <p className="text-sm text-[var(--color-gsd-accent-hover)]">
                 You are delegating{" "}
-                <span className="font-semibold">
+                <span className="font-medium">
                   {(
                     Number(BigInt(activeDelegation.delegatedAmount)) / 1e9
                   ).toFixed(2)}{" "}
@@ -250,7 +250,7 @@ export function DelegationPanel() {
             </Button>
           </div>
         ) : (
-          <p className="text-sm text-[var(--color-gsd-text-muted)]">
+          <p className="text-sm font-light text-[var(--color-gsd-text-muted)]">
             No active delegation. You are voting directly with your deposited
             tokens.
           </p>
@@ -259,8 +259,8 @@ export function DelegationPanel() {
 
       {/* Delegate form */}
       {!activeDelegation && (
-        <div className="glass rounded-2xl p-6">
-          <h3 className="mb-4 text-base font-semibold text-[var(--color-gsd-text)]">
+        <div className="glass eluma-card rounded-2xl p-6">
+          <h3 className="mb-4 text-base font-normal text-[var(--color-gsd-text)]">
             Delegate Voting Power
           </h3>
           <form onSubmit={handleDelegate} className="space-y-3">
@@ -290,7 +290,7 @@ export function DelegationPanel() {
               )}
             </Button>
           </form>
-          <p className="mt-2 text-xs text-[var(--color-gsd-text-muted)]">
+          <p className="mt-2 text-xs font-light text-[var(--color-gsd-text-muted)]">
             Delegating transfers your voting power to another wallet. You can
             revoke at any time to regain direct voting ability.
           </p>
@@ -300,8 +300,8 @@ export function DelegationPanel() {
       {/* Delegation history */}
       {delegationData &&
         delegationData.delegations.length > 0 && (
-          <div className="glass rounded-2xl p-6">
-            <h3 className="mb-4 text-base font-semibold text-[var(--color-gsd-text)]">
+          <div className="glass eluma-card rounded-2xl p-6">
+            <h3 className="mb-4 text-base font-normal text-[var(--color-gsd-text)]">
               Delegation History
             </h3>
             <div className="space-y-2">

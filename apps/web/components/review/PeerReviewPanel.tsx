@@ -129,10 +129,10 @@ export function PeerReviewPanel({
 
   if (statusLoading) {
     return (
-      <Card className="glass">
+      <Card className="glass eluma-card">
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-5 w-5 animate-spin text-[var(--color-gsd-text-muted)]" />
-          <span className="ml-2 text-sm text-[var(--color-gsd-text-muted)]">
+          <span className="ml-2 text-sm font-light text-[var(--color-gsd-text-muted)]">
             Loading review status...
           </span>
         </CardContent>
@@ -141,11 +141,11 @@ export function PeerReviewPanel({
   }
 
   return (
-    <Card className="glass overflow-hidden">
+    <Card className="glass eluma-card overflow-hidden">
       <div className="h-1 gradient-cyan" />
 
       <CardHeader>
-        <CardTitle className="text-base">Peer Review</CardTitle>
+        <CardTitle className="text-base font-normal">Peer Review</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-6">
@@ -161,7 +161,7 @@ export function PeerReviewPanel({
         {/* Review form */}
         {status && !status.hasConsensus && (
           <div className="space-y-4 border-t border-[var(--color-gsd-border-subtle)] pt-4">
-            <h4 className="text-sm font-semibold text-[var(--color-gsd-text)]">
+            <h4 className="text-sm font-normal text-[var(--color-gsd-text)]">
               Submit Your Review
             </h4>
 

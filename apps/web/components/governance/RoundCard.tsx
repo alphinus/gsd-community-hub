@@ -77,10 +77,10 @@ export function RoundCard({ round }: RoundCardProps) {
 
   return (
     <Link href={`/governance/rounds/${round.id}`} className="block group cursor-pointer">
-      <Card className="glass transition-theme duration-200 group-hover:glow-cyan group-hover:border-[var(--color-gsd-accent)]/50">
+      <Card className="glass eluma-card transition-theme duration-200 group-hover:glow-cyan group-hover:border-[var(--color-gsd-accent)]/50">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-base leading-snug text-[var(--color-gsd-text)]">
+            <CardTitle className="text-base font-normal leading-snug text-[var(--color-gsd-text)]">
               {round.title}
             </CardTitle>
             <RoundStatusBadge
@@ -89,12 +89,12 @@ export function RoundCard({ round }: RoundCardProps) {
               votingEnd={round.votingEnd}
             />
           </div>
-          <CardDescription className="line-clamp-2 text-[var(--color-gsd-text-secondary)]">
+          <CardDescription className="line-clamp-2 font-light text-[var(--color-gsd-text-secondary)]">
             {round.description}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[var(--color-gsd-text-muted)]">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-[var(--color-gsd-text-muted)]">
             <span>{formatQuorumType(round.quorumType)}</span>
             <span>
               {ideaCount} {ideaCount === 1 ? "idea" : "ideas"}

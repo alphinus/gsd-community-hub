@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { VerificationHistory } from "@/components/verification/VerificationHistory";
+import { HeroBackground } from "@/components/ui/hero-background";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export const metadata: Metadata = {
   title: "Verification Dashboard | GSD Community Hub",
@@ -52,88 +54,93 @@ export default async function VerificationDashboardPage() {
 
   return (
     <div className="relative mx-auto max-w-4xl px-4 py-12">
-      {/* Mesh gradient background */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/4 h-[600px] w-[600px] rounded-full bg-[#4fd1c5]/5 blur-[120px]" />
-        <div className="absolute -bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-[#3b82f6]/5 blur-[120px]" />
-      </div>
+      {/* Eluma hero background */}
+      <HeroBackground particleCount={20} />
 
-      <div className="mb-8 animate-slide-up">
-        <h1 className="text-2xl font-bold gradient-text-cyan">
-          Verification Dashboard
-        </h1>
-        <p className="mt-1 text-sm text-[#94A3B8]">
-          Publicly auditable AI and peer verification reports for all
-          contributions
-        </p>
-      </div>
+      <ScrollReveal>
+        <div className="mb-8">
+          <span className="eluma-badge mb-3 inline-block">Audit Trail</span>
+          <h1 className="text-2xl font-extralight gradient-text-cyan">
+            Verification Dashboard
+          </h1>
+          <p className="mt-1 text-sm font-light text-[#94A3B8]">
+            Publicly auditable AI and peer verification reports for all
+            contributions
+          </p>
+        </div>
+      </ScrollReveal>
 
       {/* Stats bar */}
-      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Card className="glass glow-cyan border-0">
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[#94A3B8]">
-              Total Verifications
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-2xl font-bold text-[#F8FAFC]">
-              {stats.total}
-            </span>
-          </CardContent>
-        </Card>
+      <ScrollReveal delay={1}>
+        <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Card className="glass eluma-stat glow-cyan border-0">
+            <CardHeader className="pb-1">
+              <CardTitle className="text-xs font-light text-[#94A3B8]">
+                Total Verifications
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <span className="text-2xl font-extralight text-[#F8FAFC]">
+                {stats.total}
+              </span>
+            </CardContent>
+          </Card>
 
-        <Card className="glass glow-cyan border-0">
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[#94A3B8]">
-              Average Score
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-2xl font-bold gradient-text-aurora">
-              {stats.averageScore}
-            </span>
-            <span className="text-sm text-[#94A3B8]">
-              /100
-            </span>
-          </CardContent>
-        </Card>
+          <Card className="glass eluma-stat glow-cyan border-0">
+            <CardHeader className="pb-1">
+              <CardTitle className="text-xs font-light text-[#94A3B8]">
+                Average Score
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <span className="text-2xl font-extralight gradient-text-aurora">
+                {stats.averageScore}
+              </span>
+              <span className="text-sm font-light text-[#94A3B8]">
+                /100
+              </span>
+            </CardContent>
+          </Card>
 
-        <Card className="glass glow-cyan border-0">
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[#94A3B8]">
-              AI Verified
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-2xl font-bold text-[#F8FAFC]">
-              {stats.aiCount}
-            </span>
-          </CardContent>
-        </Card>
+          <Card className="glass eluma-stat glow-cyan border-0">
+            <CardHeader className="pb-1">
+              <CardTitle className="text-xs font-light text-[#94A3B8]">
+                AI Verified
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <span className="text-2xl font-extralight text-[#F8FAFC]">
+                {stats.aiCount}
+              </span>
+            </CardContent>
+          </Card>
 
-        <Card className="glass glow-cyan border-0">
-          <CardHeader className="pb-1">
-            <CardTitle className="text-xs font-normal text-[#94A3B8]">
-              Peer Reviewed
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-2xl font-bold text-[#F8FAFC]">
-              {stats.peerCount}
-            </span>
-          </CardContent>
-        </Card>
-      </div>
+          <Card className="glass eluma-stat glow-cyan border-0">
+            <CardHeader className="pb-1">
+              <CardTitle className="text-xs font-light text-[#94A3B8]">
+                Peer Reviewed
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <span className="text-2xl font-extralight text-[#F8FAFC]">
+                {stats.peerCount}
+              </span>
+            </CardContent>
+          </Card>
+        </div>
+      </ScrollReveal>
 
       {/* Verification history (client component with TanStack Query) */}
-      <div>
-        <h2 className="mb-4 text-lg font-semibold text-[#F8FAFC]">
-          <span className="inline-block h-4 w-1 rounded-full bg-[#4fd1c5] mr-2 align-middle" />
-          All Verification Reports
-        </h2>
-        <VerificationHistory />
-      </div>
+      <ScrollReveal delay={2}>
+        <div>
+          <span className="eluma-badge mb-2 inline-block">Reports</span>
+          <h2 className="mb-4 text-lg font-extralight text-[#F8FAFC]">
+            <span className="inline-block h-4 w-1 rounded-full bg-[#4fd1c5] mr-2 align-middle" />
+            All Verification Reports
+          </h2>
+          <VerificationHistory />
+        </div>
+      </ScrollReveal>
     </div>
   );
 }

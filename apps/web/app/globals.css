@@ -198,6 +198,289 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 60px 60px;
 }
 
+/* Grid with radial fade mask (hero) */
+.eluma-grid-masked {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79, 209, 197, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 209, 197, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ================================================================
+   Eluma Card — Hover glow-line + corner glow
+   ================================================================ */
+
+.eluma-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eluma-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(79, 209, 197, 0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 1;
+}
+
+.eluma-card::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(79, 209, 197, 0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.eluma-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79, 209, 197, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(79, 209, 197, 0.05);
+}
+
+.eluma-card:hover::before { opacity: 1; }
+.eluma-card:hover::after { opacity: 1; }
+
+/* ================================================================
+   Eluma Stat Card — Glow line at top
+   ================================================================ */
+
+.eluma-stat {
+  position: relative;
+}
+
+.eluma-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 30%;
+  right: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79, 209, 197, 0.6), transparent);
+  opacity: 0.5;
+}
+
+/* ================================================================
+   Eluma Section Badge — Uppercase + letter-spacing
+   ================================================================ */
+
+.eluma-badge {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gsd-accent);
+}
+
+/* ================================================================
+   Eluma CTA — Rotating conic gradient border
+   ================================================================ */
+
+@property --eluma-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes eluma-spin {
+  to { --eluma-angle: 360deg; }
+}
+
+.eluma-cta-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.eluma-cta-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--eluma-angle, 0deg), transparent 40%, rgba(79, 209, 197, 0.6) 50%, transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: eluma-spin 4s linear infinite;
+  pointer-events: none;
+}
+
+/* ================================================================
+   Eluma Pulse Rings (CTA section)
+   ================================================================ */
+
+@keyframes pulse-expand {
+  0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.5); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+}
+
+.eluma-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid rgba(79, 209, 197, 0.08);
+  transform: translate(-50%, -50%);
+  animation: pulse-expand 4s ease-out infinite;
+  pointer-events: none;
+}
+
+.eluma-pulse-ring:nth-child(2) { animation-delay: 1.3s; }
+.eluma-pulse-ring:nth-child(3) { animation-delay: 2.6s; }
+
+/* ================================================================
+   Eluma Aurora Bands
+   ================================================================ */
+
+@keyframes aurora-flow {
+  0%, 100% { transform: translateX(0) skewY(-3deg); }
+  50% { transform: translateX(15%) skewY(3deg); }
+}
+
+.eluma-aurora {
+  position: absolute;
+  width: 150%;
+  height: 200px;
+  filter: blur(40px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.eluma-aurora-1 {
+  background: linear-gradient(90deg, transparent, #4fd1c5, #38b2ac, transparent);
+  top: 20%;
+  left: -25%;
+  animation: aurora-flow 8s ease-in-out infinite;
+}
+
+.eluma-aurora-2 {
+  background: linear-gradient(90deg, transparent, #38b2ac, rgba(30, 58, 95, 0.5), transparent);
+  top: 40%;
+  left: -25%;
+  animation: aurora-flow 12s ease-in-out infinite reverse;
+  animation-delay: -2s;
+}
+
+/* ================================================================
+   Eluma Hero Orbs — Floating blurred circles
+   ================================================================ */
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(15px, -15px); }
+}
+
+@keyframes orb-drift-reverse {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-15px, 15px); }
+}
+
+.eluma-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.eluma-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(79, 209, 197, 0.06);
+  top: 10%;
+  left: 15%;
+  animation: orb-drift 8s ease-in-out infinite;
+}
+
+.eluma-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(30, 58, 95, 0.12);
+  bottom: 20%;
+  right: 10%;
+  animation: orb-drift-reverse 6s ease-in-out infinite;
+}
+
+/* ================================================================
+   Eluma Particles
+   ================================================================ */
+
+@keyframes particle-float {
+  0%, 100% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 0.4; transform: translateY(-35px); }
+}
+
+.eluma-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-gsd-accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-float 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ================================================================
+   Scroll Reveal System
+   ================================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ================================================================
+   Nav Link Underline Effect
+   ================================================================ */
+
+.eluma-nav-link {
+  position: relative;
+}
+
+.eluma-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gsd-accent);
+  transition: width 0.3s;
+}
+
+.eluma-nav-link:hover::after {
+  width: 100%;
+}
+
 /* ================================================================
    Animations
    ================================================================ */
@@ -243,6 +526,11 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-up-blur {
+  from { opacity: 0; transform: translateY(25px); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 @keyframes fade-in {
@@ -293,6 +581,11 @@ h1, h2, h3, h4, h5, h6 {
   animation: fade-in 0.3s ease-out forwards;
 }
 
+.animate-fade-up-blur {
+  opacity: 0;
+  animation: fade-up-blur 0.8s ease-out forwards;
+}
+
 /* Staggered animation delays */
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
@@ -310,10 +603,30 @@ h1, h2, h3, h4, h5, h6 {
   .animate-pulse-glow,
   .animate-count-up,
   .animate-slide-up,
-  .animate-fade-in {
+  .animate-fade-in,
+  .animate-fade-up-blur {
     animation: none;
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .eluma-card:hover {
+    transform: none;
+  }
+
+  .eluma-orb,
+  .eluma-particle,
+  .eluma-aurora,
+  .eluma-pulse-ring,
+  .eluma-cta-border::before {
+    animation: none;
   }
 
   .wallet-adapter-button:hover {

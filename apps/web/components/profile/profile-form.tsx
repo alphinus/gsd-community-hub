@@ -185,10 +185,10 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 space-y-6 sm:p-8">
+    <form onSubmit={handleSubmit} className="eluma-card glass rounded-2xl p-6 space-y-6 sm:p-8">
       {/* Display Name */}
       <div className="space-y-2">
-        <Label htmlFor="displayName">
+        <Label htmlFor="displayName" className="font-light tracking-wide">
           Display Name <span className="text-[var(--color-gsd-error)]">*</span>
         </Label>
         <Input
@@ -201,14 +201,14 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
           required
           disabled={isSubmitting}
         />
-        <p className="text-xs text-[var(--color-gsd-text-muted)]">
+        <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
           {displayName.length}/50 characters
         </p>
       </div>
 
       {/* Bio */}
       <div className="space-y-2">
-        <Label htmlFor="bio">
+        <Label htmlFor="bio" className="font-light tracking-wide">
           Bio <span className="text-[var(--color-gsd-error)]">*</span>
         </Label>
         <Textarea
@@ -222,7 +222,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
           disabled={isSubmitting}
           rows={4}
         />
-        <p className="text-xs text-[var(--color-gsd-text-muted)]">
+        <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
           <span className={bio.length > 450 ? "text-[var(--color-gsd-warning)]" : ""}>
             {bio.length}
           </span>
@@ -232,7 +232,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
 
       {/* GitHub URL */}
       <div className="space-y-2">
-        <Label htmlFor="githubUrl">GitHub URL</Label>
+        <Label htmlFor="githubUrl" className="font-light tracking-wide">GitHub URL</Label>
         <Input
           id="githubUrl"
           type="url"
@@ -245,7 +245,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
 
       {/* Twitter/X URL */}
       <div className="space-y-2">
-        <Label htmlFor="twitterUrl">Twitter/X URL</Label>
+        <Label htmlFor="twitterUrl" className="font-light tracking-wide">Twitter/X URL</Label>
         <Input
           id="twitterUrl"
           type="url"
@@ -258,7 +258,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
 
       {/* Website URL */}
       <div className="space-y-2">
-        <Label htmlFor="websiteUrl">Website</Label>
+        <Label htmlFor="websiteUrl" className="font-light tracking-wide">Website</Label>
         <Input
           id="websiteUrl"
           type="url"
@@ -289,7 +289,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
       </Button>
 
       {mode === "create" && (
-        <p className="text-center text-xs text-[var(--color-gsd-text-muted)]">
+        <p className="text-center text-xs font-light text-[var(--color-gsd-text-muted)]">
           This will create your on-chain developer profile.
           You&apos;ll need to approve a transaction in your wallet.
         </p>

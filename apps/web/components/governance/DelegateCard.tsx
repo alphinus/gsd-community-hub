@@ -29,7 +29,7 @@ export function DelegateCard({
 
   return (
     <Link href={`/profile/${delegate}`} className="cursor-pointer">
-      <Card className="glass transition-theme duration-200 hover:glow-cyan hover:border-[var(--color-gsd-accent)]/50">
+      <Card className="glass eluma-card transition-theme duration-200 hover:glow-cyan hover:border-[var(--color-gsd-accent)]/50">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle className="text-sm font-mono text-[var(--color-gsd-text)]">
@@ -62,7 +62,7 @@ export function DelegateCard({
             <Badge variant="secondary" className="rounded-xl">
               {delegatorCount} {delegatorCount === 1 ? "delegator" : "delegators"}
             </Badge>
-            <span className="text-sm font-semibold gradient-text-cyan">
+            <span className="text-sm font-normal gradient-text-cyan">
               {formattedAmount} $GSD
             </span>
           </div>

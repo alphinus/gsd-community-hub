@@ -48,7 +48,7 @@ function GiniIndicator({ value }: { value: number }) {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-lg font-bold text-[var(--color-gsd-text)]">
+      <span className="text-lg font-extralight text-[var(--color-gsd-text)]">
         {value.toFixed(4)}
       </span>
       <span
@@ -86,7 +86,7 @@ export function VotingPowerDistribution({
     <div className="space-y-4">
       {/* Pie chart */}
       <div className="glass rounded-2xl p-4">
-        <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
+        <h3 className="mb-3 text-sm font-normal tracking-wide text-[var(--color-gsd-text)]">
           Voting Power Distribution
         </h3>
         <ResponsiveContainer width="100%" height={250}>
@@ -133,18 +133,18 @@ export function VotingPowerDistribution({
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="glass rounded-2xl p-4">
-          <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
+        <div className="glass eluma-stat rounded-2xl p-4">
+          <p className="mb-1 text-xs font-light text-[var(--color-gsd-text-muted)]">
             Gini Coefficient
           </p>
           <GiniIndicator value={powerDistribution.giniCoefficient} />
         </div>
 
-        <div className="glass rounded-2xl p-4">
-          <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
+        <div className="glass eluma-stat rounded-2xl p-4">
+          <p className="mb-1 text-xs font-light text-[var(--color-gsd-text-muted)]">
             Top 10 Hold
           </p>
-          <p className="text-lg font-bold text-[var(--color-gsd-gold)]">
+          <p className="text-lg font-extralight text-[var(--color-gsd-gold)]">
             {top10Pct}%{" "}
             <span className="text-xs font-normal text-[var(--color-gsd-text-muted)]">
               of voting power
@@ -152,11 +152,11 @@ export function VotingPowerDistribution({
           </p>
         </div>
 
-        <div className="glass rounded-2xl p-4">
-          <p className="mb-1 text-xs text-[var(--color-gsd-text-muted)]">
+        <div className="glass eluma-stat rounded-2xl p-4">
+          <p className="mb-1 text-xs font-light text-[var(--color-gsd-text-muted)]">
             Total Active Voters
           </p>
-          <p className="text-lg font-bold text-[var(--color-gsd-text)]">
+          <p className="text-lg font-extralight text-[var(--color-gsd-text)]">
             {powerDistribution.totalDepositors}
           </p>
         </div>
@@ -165,7 +165,7 @@ export function VotingPowerDistribution({
       {/* Quadratic impact comparison */}
       {quadraticImpact && (
         <div className="glass rounded-2xl border border-[var(--color-gsd-accent)]/30 bg-[var(--color-gsd-accent)]/5 p-4">
-          <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-accent)]">
+          <h3 className="mb-3 text-sm font-normal tracking-wide text-[var(--color-gsd-accent)]">
             Quadratic Voting Impact
           </h3>
           <div className="grid grid-cols-2 gap-4">
@@ -173,10 +173,10 @@ export function VotingPowerDistribution({
               <p className="text-xs text-[var(--color-gsd-text-muted)]">
                 Whale Reduction
               </p>
-              <p className="text-lg font-bold text-[var(--color-gsd-accent)]">
+              <p className="text-lg font-extralight text-[var(--color-gsd-accent)]">
                 -{quadraticImpact.whaleReduction}%
               </p>
-              <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
                 voting power for top 10
               </p>
             </div>
@@ -184,10 +184,10 @@ export function VotingPowerDistribution({
               <p className="text-xs text-[var(--color-gsd-text-muted)]">
                 Small Holder Boost
               </p>
-              <p className="text-lg font-bold text-[var(--color-gsd-success)]">
+              <p className="text-lg font-extralight text-[var(--color-gsd-success)]">
                 +{quadraticImpact.smallHolderBoost}%
               </p>
-              <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
                 voting power for bottom 50
               </p>
             </div>

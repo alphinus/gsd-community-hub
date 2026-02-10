@@ -116,7 +116,7 @@ export function VerificationHistory({
       {/* Empty state */}
       {data && data.reports.length === 0 && (
         <div className="glass rounded-2xl px-6 py-12 text-center">
-          <p className="text-sm text-[var(--color-gsd-text-muted)]">
+          <p className="text-sm font-light text-[var(--color-gsd-text-muted)]">
             No verifications yet
           </p>
         </div>
@@ -130,11 +130,11 @@ export function VerificationHistory({
               <a
                 key={report.id}
                 href={`/verification/${report.id}`}
-                className="block glass rounded-2xl p-4 cursor-pointer transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/30 glow-cyan"
+                className="block glass eluma-card rounded-2xl p-4 cursor-pointer transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/30 glow-cyan"
               >
                 {/* Header: task ref + score */}
                 <div className="mb-2 flex items-start justify-between gap-2">
-                  <p className="text-sm font-medium text-[var(--color-gsd-text)] break-all">
+                  <p className="text-sm font-normal text-[var(--color-gsd-text)] break-all">
                     {report.taskRef}
                   </p>
                   <VerificationScoreBadge score={report.overallScore} size="sm" />
@@ -182,7 +182,7 @@ export function VerificationHistory({
 
           {/* Pagination */}
           <div className="flex items-center justify-between pt-2">
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+            <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
               Showing {(page - 1) * PAGE_SIZE + 1}-
               {Math.min(page * PAGE_SIZE, total)} of {total}
             </p>

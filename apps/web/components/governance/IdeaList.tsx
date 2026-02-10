@@ -123,9 +123,9 @@ function IdeaCard({ idea }: { idea: IdeaData }) {
   const total = yes + no + abstain;
 
   return (
-    <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-cyan">
+    <div className="glass eluma-card rounded-2xl p-4 transition-theme duration-200 hover:glow-cyan">
       <div className="mb-2 flex items-start justify-between gap-2">
-        <h3 className="text-sm font-medium text-[var(--color-gsd-text)]">
+        <h3 className="text-sm font-normal text-[var(--color-gsd-text)]">
           {idea.title}
         </h3>
         <span className="shrink-0 rounded-xl bg-[var(--color-gsd-surface-raised)] px-2 py-0.5 text-xs text-[var(--color-gsd-text-muted)]">
@@ -133,7 +133,7 @@ function IdeaCard({ idea }: { idea: IdeaData }) {
         </span>
       </div>
 
-      <p className="mb-3 line-clamp-2 text-xs text-[var(--color-gsd-text-muted)]">
+      <p className="mb-3 line-clamp-2 text-xs font-light text-[var(--color-gsd-text-muted)]">
         {idea.description}
       </p>
 

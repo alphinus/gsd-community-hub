@@ -35,7 +35,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
 
   return (
     <Link href={`/profile/${profile.walletAddress}`}>
-      <Card className="glass group cursor-pointer transition-theme duration-200 hover:glow-cyan-strong motion-safe:hover:scale-[1.02]">
+      <Card className="eluma-card glass group cursor-pointer transition-theme duration-200 motion-safe:hover:scale-[1.02]">
         <CardContent className="p-5">
           <div className="flex items-start gap-4">
             {/* Avatar with gradient ring on hover */}
@@ -53,7 +53,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
             <div className="min-w-0 flex-1">
               {/* Name + Verified */}
               <div className="flex items-center gap-2">
-                <h3 className="truncate text-sm font-semibold text-[var(--color-gsd-text)] transition-theme duration-200 group-hover:text-[var(--color-gsd-accent-hover)]">
+                <h3 className="truncate text-sm font-normal tracking-wide text-[var(--color-gsd-text)] transition-theme duration-200 group-hover:text-[var(--color-gsd-accent-hover)]">
                   {profile.displayName}
                 </h3>
                 {profile.onChainPda && (
@@ -68,13 +68,13 @@ export function ProfileCard({ profile }: ProfileCardProps) {
 
               {/* Bio excerpt */}
               {profile.bio && (
-                <p className="mt-2 line-clamp-2 text-xs text-[var(--color-gsd-text-secondary)]">
+                <p className="mt-2 line-clamp-2 text-xs font-light text-[var(--color-gsd-text-secondary)]">
                   {profile.bio}
                 </p>
               )}
 
               {/* Member since */}
-              <p className="mt-2 text-xs text-[var(--color-gsd-text-muted)]">
+              <p className="mt-2 text-xs font-light text-[var(--color-gsd-text-muted)]">
                 Joined {memberSince}
               </p>
             </div>

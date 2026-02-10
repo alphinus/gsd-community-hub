@@ -23,14 +23,14 @@ export function FallbackChoicePanel({
   onChoice,
 }: FallbackChoicePanelProps) {
   return (
-    <Card className="glass overflow-hidden">
+    <Card className="glass eluma-card overflow-hidden">
       <div className="h-1 bg-gradient-to-r from-[var(--color-gsd-gold)] to-yellow-400" />
 
       <CardHeader>
-        <CardTitle className="text-base">
+        <CardTitle className="text-base font-normal">
           Low Confidence Result
         </CardTitle>
-        <p className="text-sm text-[var(--color-gsd-text-muted)]">
+        <p className="text-sm font-light text-[var(--color-gsd-text-muted)]">
           The AI verification confidence is below the threshold. Choose how to
           proceed:
         </p>
@@ -46,10 +46,10 @@ export function FallbackChoicePanel({
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-gsd-accent)]/10">
               <Users className="h-5 w-5 text-[var(--color-gsd-accent-hover)]" />
             </div>
-            <h4 className="mb-1 text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent-hover)]">
+            <h4 className="mb-1 text-sm font-normal text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent-hover)]">
               Request Peer Review
             </h4>
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+            <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
               3+ community reviewers will assess your work. Takes up to 7 days.
             </p>
           </button>
@@ -62,10 +62,10 @@ export function FallbackChoicePanel({
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-gsd-accent)]/10">
               <RefreshCw className="h-5 w-5 text-[var(--color-gsd-accent-hover)]" />
             </div>
-            <h4 className="mb-1 text-sm font-semibold text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent-hover)]">
+            <h4 className="mb-1 text-sm font-normal text-[var(--color-gsd-text)] group-hover:text-[var(--color-gsd-accent-hover)]">
               Re-submit with More Context
             </h4>
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
+            <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
               Add more details and try AI verification again.
             </p>
           </button>

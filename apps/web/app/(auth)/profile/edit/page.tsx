@@ -64,7 +64,8 @@ export default function ProfileEditPage() {
         <div className="absolute inset-0 mesh-gradient -z-10" />
         <Card className="glass">
           <CardHeader>
-            <CardTitle className="text-2xl gradient-text-cyan">
+            <span className="eluma-badge">Onboarding</span>
+            <CardTitle className="text-2xl font-extralight tracking-wide gradient-text-cyan">
               Join the Movement
             </CardTitle>
           </CardHeader>
@@ -76,10 +77,10 @@ export default function ProfileEditPage() {
                 <line x1="15" x2="3" y1="12" y2="12" />
               </svg>
             </div>
-            <p className="text-lg font-semibold text-[var(--color-gsd-text)]">
+            <p className="text-lg font-extralight tracking-wide text-[var(--color-gsd-text)]">
               Connect Your Wallet
             </p>
-            <p className="text-sm text-[var(--color-gsd-text-muted)] max-w-sm mx-auto">
+            <p className="text-sm font-light text-[var(--color-gsd-text-muted)] max-w-sm mx-auto">
               To create or edit your developer profile, connect your Solana wallet using the button in the top right corner.
             </p>
           </CardContent>
@@ -94,11 +95,12 @@ export default function ProfileEditPage() {
 
       <Card className="glass">
         <CardHeader>
-          <CardTitle className="text-2xl gradient-text-cyan">
+          <span className="eluma-badge">{mode === "create" ? "Onboarding" : "Settings"}</span>
+          <CardTitle className="text-2xl font-extralight tracking-wide gradient-text-cyan">
             {mode === "create" ? "Join the Movement" : "Edit Profile"}
           </CardTitle>
           {mode === "create" && (
-            <p className="text-sm text-[var(--color-gsd-text-muted)]">
+            <p className="text-sm font-light text-[var(--color-gsd-text-muted)]">
               Create your developer profile and register your on-chain identity.
               Your profile becomes part of the GSD community directory.
             </p>

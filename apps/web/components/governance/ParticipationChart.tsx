@@ -74,7 +74,7 @@ export function ParticipationChart({
     <div className="space-y-4">
       {/* Bar chart */}
       <div className="glass rounded-2xl p-4">
-        <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
+        <h3 className="mb-3 text-sm font-normal tracking-wide text-[var(--color-gsd-text)]">
           Voter Turnout by Round
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -116,22 +116,22 @@ export function ParticipationChart({
 
       {/* Participation trends table */}
       <div className="glass rounded-2xl p-4">
-        <h3 className="mb-3 text-sm font-semibold text-[var(--color-gsd-text)]">
+        <h3 className="mb-3 text-sm font-normal tracking-wide text-[var(--color-gsd-text)]">
           Participation Trends (Rolling Averages)
         </h3>
         <div className="grid grid-cols-3 gap-3">
           {trends.map((trend) => (
             <div
               key={trend.period}
-              className="rounded-2xl bg-[var(--color-gsd-bg)] p-3 text-center transition-theme duration-200"
+              className="eluma-stat rounded-2xl bg-[var(--color-gsd-bg)] p-3 text-center transition-theme duration-200"
             >
-              <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
                 Last {trend.period}
               </p>
-              <p className="mt-1 text-lg font-bold text-[var(--color-gsd-accent)]">
+              <p className="mt-1 text-lg font-extralight text-[var(--color-gsd-accent)]">
                 {trend.turnout}
               </p>
-              <p className="text-xs text-[var(--color-gsd-text-muted)]">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
                 {trend.voters} unique voters
               </p>
             </div>

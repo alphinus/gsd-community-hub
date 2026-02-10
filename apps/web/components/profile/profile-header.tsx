@@ -82,7 +82,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
 
         <div className="min-w-0 flex-1">
           {/* Display name */}
-          <h1 className="text-2xl font-bold text-[var(--color-gsd-text)] sm:text-3xl">
+          <h1 className="text-2xl font-extralight tracking-wide text-[var(--color-gsd-text)] sm:text-3xl">
             {profile.displayName}
           </h1>
 
@@ -110,7 +110,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
                 className="inline-flex cursor-pointer items-center"
                 title="View on-chain profile on Solana Explorer"
               >
-                <Badge className="gap-1 border-[var(--color-gsd-accent)]/30 bg-[var(--color-gsd-accent)]/10 text-[var(--color-gsd-accent-light)] hover:bg-[var(--color-gsd-accent)]/20">
+                <Badge className="gap-1 border-[var(--color-gsd-accent)]/30 bg-[var(--color-gsd-accent)]/10 text-[var(--color-gsd-accent-light)] hover:bg-[var(--color-gsd-accent)]/20 text-[10px] font-light uppercase tracking-[0.15em]">
                   <ShieldCheck className="h-3 w-3 text-[var(--color-gsd-accent)]" />
                   Verified on-chain
                 </Badge>
@@ -119,7 +119,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
           </div>
 
           {/* Member since */}
-          <p className="mt-1 text-sm text-[var(--color-gsd-text-muted)]">
+          <p className="mt-1 text-sm font-light text-[var(--color-gsd-text-muted)]">
             Member since {memberSince}
           </p>
         </div>
@@ -127,7 +127,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
 
       {/* Bio */}
       {profile.bio && (
-        <p className="text-[var(--color-gsd-text-secondary)] leading-relaxed">
+        <p className="font-light text-[var(--color-gsd-text-secondary)] leading-relaxed">
           {profile.bio}
         </p>
       )}
@@ -139,7 +139,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-cyan hover:text-[var(--color-gsd-accent-light)]"
+            className="eluma-card glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-light text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:text-[var(--color-gsd-accent-light)]"
           >
             <Github className="h-4 w-4" />
             GitHub
@@ -152,7 +152,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.twitterUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-cyan hover:text-[var(--color-gsd-accent-light)]"
+            className="eluma-card glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-light text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:text-[var(--color-gsd-accent-light)]"
           >
             <Twitter className="h-4 w-4" />
             Twitter/X
@@ -165,7 +165,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-cyan hover:text-[var(--color-gsd-accent-light)]"
+            className="eluma-card glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-light text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:text-[var(--color-gsd-accent-light)]"
           >
             <Globe className="h-4 w-4" />
             Website
@@ -175,7 +175,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
 
         {isOwnProfile && (
           <Link href="/profile/edit" className="ml-auto">
-            <Button variant="outline" size="sm" className="gap-1.5 border-[var(--color-gsd-accent)]/30 text-[var(--color-gsd-accent-light)] hover:border-[var(--color-gsd-accent)] hover:bg-[var(--color-gsd-accent)]/10 hover:text-[var(--color-gsd-accent)]">
+            <Button variant="outline" size="sm" className="gap-1.5 font-light tracking-wide border-[var(--color-gsd-accent)]/30 text-[var(--color-gsd-accent-light)] hover:border-[var(--color-gsd-accent)] hover:bg-[var(--color-gsd-accent)]/10 hover:text-[var(--color-gsd-accent)]">
               <Pencil className="h-3.5 w-3.5" />
               Edit Profile
             </Button>

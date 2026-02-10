@@ -7,6 +7,7 @@ import { VotingPowerDisplay } from "@/components/governance/VotingPowerDisplay";
 import { QuadraticVoteDisplay } from "@/components/governance/QuadraticVoteDisplay";
 import { HumanVerificationBadge } from "@/components/governance/HumanVerificationBadge";
 import { DecayedScoreDisplay } from "@/components/governance/DecayedScoreDisplay";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 interface VoteEntry {
   id: string;
@@ -77,7 +78,7 @@ function VoteChoiceLabel({ vote }: { vote: string }) {
         : "text-[var(--color-gsd-text-muted)]";
 
   return (
-    <span className={`font-medium ${colorClass}`}>
+    <span className={`font-normal ${colorClass}`}>
       {vote.charAt(0).toUpperCase() + vote.slice(1)}
     </span>
   );
@@ -143,11 +144,11 @@ export default function GovernanceDashboard() {
   if (!wallet) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-12">
-        <div className="rounded-2xl glass px-6 py-16 text-center">
-          <h1 className="text-2xl font-bold gradient-text-cyan">
+        <div className="rounded-2xl glass eluma-card px-6 py-16 text-center">
+          <h1 className="text-2xl font-extralight gradient-text-cyan">
             Governance Dashboard
           </h1>
-          <p className="mt-2 text-sm text-[var(--color-gsd-text-muted)]">
+          <p className="mt-2 text-sm font-light text-[var(--color-gsd-text-muted)]">
             Connect your wallet to view your governance activity.
           </p>
         </div>
@@ -163,164 +164,182 @@ export default function GovernanceDashboard() {
     <div className="relative mx-auto max-w-3xl px-4 py-12">
       <div className="absolute inset-0 mesh-gradient -z-10" />
 
-      <h1 className="mb-6 text-3xl font-bold gradient-text-cyan">
-        Governance Dashboard
-      </h1>
+      <ScrollReveal>
+        <span className="eluma-badge mb-3 inline-block">Your Activity</span>
+        <h1 className="mb-6 text-3xl font-extralight gradient-text-cyan">
+          Governance Dashboard
+        </h1>
+      </ScrollReveal>
 
       {/* Voting power and verification */}
-      <div className="mb-6 grid gap-4 sm:grid-cols-2">
-        <VotingPowerDisplay wallet={wallet} />
-        <HumanVerificationBadge wallet={wallet} />
-      </div>
+      <ScrollReveal delay={1}>
+        <div className="mb-6 grid gap-4 sm:grid-cols-2">
+          <VotingPowerDisplay wallet={wallet} />
+          <HumanVerificationBadge wallet={wallet} />
+        </div>
+      </ScrollReveal>
 
       {/* Quadratic vote weight */}
       {depositData?.deposit && (
-        <div className="mb-6">
-          <QuadraticVoteDisplay
-            depositedAmount={depositAmount}
-            isQuadratic={true}
-            delegatedAmount={
-              BigInt(delegatedToMe) > 0n ? delegatedToMe : undefined
-            }
-          />
-        </div>
+        <ScrollReveal delay={2}>
+          <div className="mb-6">
+            <QuadraticVoteDisplay
+              depositedAmount={depositAmount}
+              isQuadratic={true}
+              delegatedAmount={
+                BigInt(delegatedToMe) > 0n ? delegatedToMe : undefined
+              }
+            />
+          </div>
+        </ScrollReveal>
       )}
 
       {/* Quick links */}
-      <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
-        {[
-          { href: "/governance/deposit", title: "Deposit Tokens", sub: "Manage deposits" },
-          { href: "/governance/delegate", title: "Delegate", sub: hasDelegation ? "Active" : "Manage" },
-          { href: "/governance/rounds", title: "View Rounds", sub: "Browse proposals" },
-          { href: "/governance/delegates", title: "Delegates", sub: "Directory" },
-          { href: "/governance/analytics", title: "Analytics", sub: "Charts & data" },
-        ].map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="rounded-2xl glass-surface p-4 text-center transition-theme duration-200 hover:glow-cyan cursor-pointer"
-          >
-            <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-              {link.title}
-            </p>
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
-              {link.sub}
-            </p>
-          </Link>
-        ))}
-      </div>
+      <ScrollReveal delay={2}>
+        <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
+          {[
+            { href: "/governance/deposit", title: "Deposit Tokens", sub: "Manage deposits" },
+            { href: "/governance/delegate", title: "Delegate", sub: hasDelegation ? "Active" : "Manage" },
+            { href: "/governance/rounds", title: "View Rounds", sub: "Browse proposals" },
+            { href: "/governance/delegates", title: "Delegates", sub: "Directory" },
+            { href: "/governance/analytics", title: "Analytics", sub: "Charts & data" },
+          ].map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-2xl glass-surface eluma-card p-4 text-center transition-theme duration-200 hover:glow-cyan cursor-pointer"
+            >
+              <p className="text-sm font-normal text-[var(--color-gsd-text)]">
+                {link.title}
+              </p>
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
+                {link.sub}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </ScrollReveal>
 
       {/* Decayed score */}
-      <div className="mb-8">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
-          Contribution Score
-        </h2>
-        <DecayedScoreDisplay wallet={wallet} />
-      </div>
+      <ScrollReveal delay={3}>
+        <div className="mb-8">
+          <span className="eluma-badge mb-2 inline-block">Metrics</span>
+          <h2 className="mb-4 text-lg font-extralight text-[var(--color-gsd-text)]">
+            Contribution Score
+          </h2>
+          <DecayedScoreDisplay wallet={wallet} />
+        </div>
+      </ScrollReveal>
 
       {/* Advanced Governance Summary */}
-      <div className="mb-8 rounded-2xl glass p-6">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
-          Advanced Governance
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div>
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
-              Quadratic Voting
-            </p>
-            <p className="text-sm font-semibold text-[var(--color-gsd-accent)]">Enabled</p>
-          </div>
-          <div>
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
-              Active Delegations
-            </p>
-            <p className="text-sm font-semibold text-[var(--color-gsd-text)]">
-              {analyticsData?.delegationStats?.totalActiveDelegations ?? 0}
-            </p>
-          </div>
-          <div>
-            <p className="text-xs text-[var(--color-gsd-text-muted)]">
-              Total Delegated
-            </p>
-            <p className="text-sm font-semibold text-[var(--color-gsd-text)]">
-              {(
-                Number(
-                  BigInt(
-                    analyticsData?.delegationStats?.totalDelegatedTokens ?? "0"
-                  )
-                ) / 1e9
-              ).toFixed(2)}{" "}
-              $GSD
-            </p>
-          </div>
-        </div>
-        <div className="mt-4 flex items-center gap-3">
-          <Link
-            href="/governance/delegates"
-            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
-          >
-            View delegate directory
-          </Link>
-          <Link
-            href="/governance/delegate"
-            className="text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
-          >
-            Manage delegation
-          </Link>
-        </div>
-      </div>
-
-      {/* Recent votes */}
-      <div>
-        <h2 className="mb-4 text-lg font-semibold text-[var(--color-gsd-text)]">
-          Your Recent Votes
-        </h2>
-
-        {votesLoading ? (
-          <DashboardSkeleton />
-        ) : votesData && votesData.votes.length > 0 ? (
-          <div className="space-y-2">
-            {votesData.votes.map((vote) => (
-              <div
-                key={vote.id}
-                className="flex items-center justify-between rounded-xl glass-surface px-4 py-3"
-              >
-                <div>
-                  <p className="text-sm font-medium text-[var(--color-gsd-text)]">
-                    {vote.idea.title}
-                  </p>
-                  <p className="text-xs text-[var(--color-gsd-text-muted)]">
-                    Weight: {vote.weight}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <VoteChoiceLabel vote={vote.vote} />
-                  <p className="text-xs text-[var(--color-gsd-text-muted)]">
-                    {new Date(vote.votedAt).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-            ))}
-            {votesData.total > 10 && (
-              <p className="pt-2 text-center text-xs text-[var(--color-gsd-text-muted)]">
-                Showing 10 of {votesData.total} votes
+      <ScrollReveal delay={4}>
+        <div className="mb-8 rounded-2xl glass eluma-card p-6">
+          <span className="eluma-badge mb-2 inline-block">Advanced</span>
+          <h2 className="mb-4 text-lg font-extralight text-[var(--color-gsd-text)]">
+            Advanced Governance
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="eluma-stat rounded-xl p-3">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
+                Quadratic Voting
               </p>
-            )}
+              <p className="text-sm font-normal text-[var(--color-gsd-accent)]">Enabled</p>
+            </div>
+            <div className="eluma-stat rounded-xl p-3">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
+                Active Delegations
+              </p>
+              <p className="text-sm font-normal text-[var(--color-gsd-text)]">
+                {analyticsData?.delegationStats?.totalActiveDelegations ?? 0}
+              </p>
+            </div>
+            <div className="eluma-stat rounded-xl p-3">
+              <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
+                Total Delegated
+              </p>
+              <p className="text-sm font-normal text-[var(--color-gsd-text)]">
+                {(
+                  Number(
+                    BigInt(
+                      analyticsData?.delegationStats?.totalDelegatedTokens ?? "0"
+                    )
+                  ) / 1e9
+                ).toFixed(2)}{" "}
+                $GSD
+              </p>
+            </div>
           </div>
-        ) : (
-          <div className="rounded-2xl glass-surface px-6 py-8 text-center">
-            <p className="text-sm text-[var(--color-gsd-text-muted)]">
-              No votes cast yet
-            </p>
+          <div className="mt-4 flex items-center gap-3">
             <Link
-              href="/governance/rounds"
-              className="mt-2 inline-block text-xs text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
+              href="/governance/delegates"
+              className="text-xs font-light text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
             >
-              Browse active rounds to vote
+              View delegate directory
+            </Link>
+            <Link
+              href="/governance/delegate"
+              className="text-xs font-light text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
+            >
+              Manage delegation
             </Link>
           </div>
-        )}
-      </div>
+        </div>
+      </ScrollReveal>
+
+      {/* Recent votes */}
+      <ScrollReveal delay={5}>
+        <div>
+          <span className="eluma-badge mb-2 inline-block">History</span>
+          <h2 className="mb-4 text-lg font-extralight text-[var(--color-gsd-text)]">
+            Your Recent Votes
+          </h2>
+
+          {votesLoading ? (
+            <DashboardSkeleton />
+          ) : votesData && votesData.votes.length > 0 ? (
+            <div className="space-y-2">
+              {votesData.votes.map((vote) => (
+                <div
+                  key={vote.id}
+                  className="flex items-center justify-between rounded-xl glass-surface eluma-card px-4 py-3"
+                >
+                  <div>
+                    <p className="text-sm font-normal text-[var(--color-gsd-text)]">
+                      {vote.idea.title}
+                    </p>
+                    <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
+                      Weight: {vote.weight}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <VoteChoiceLabel vote={vote.vote} />
+                    <p className="text-xs font-light text-[var(--color-gsd-text-muted)]">
+                      {new Date(vote.votedAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              {votesData.total > 10 && (
+                <p className="pt-2 text-center text-xs font-light text-[var(--color-gsd-text-muted)]">
+                  Showing 10 of {votesData.total} votes
+                </p>
+              )}
+            </div>
+          ) : (
+            <div className="rounded-2xl glass-surface eluma-card px-6 py-8 text-center">
+              <p className="text-sm font-light text-[var(--color-gsd-text-muted)]">
+                No votes cast yet
+              </p>
+              <Link
+                href="/governance/rounds"
+                className="mt-2 inline-block text-xs font-light text-[var(--color-gsd-accent)] underline-offset-4 hover:underline cursor-pointer transition-colors"
+              >
+                Browse active rounds to vote
+              </Link>
+            </div>
+          )}
+        </div>
+      </ScrollReveal>
     </div>
   );
 }

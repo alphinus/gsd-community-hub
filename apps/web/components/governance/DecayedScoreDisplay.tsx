@@ -118,7 +118,7 @@ export function DecayedScoreDisplay({
 
   return (
     <div className="glass rounded-2xl p-4 transition-theme duration-200">
-      <p className="mb-3 text-xs font-medium text-[var(--color-gsd-text-muted)]">
+      <p className="mb-3 text-xs font-light tracking-wide text-[var(--color-gsd-text-muted)]">
         Contribution Score (with {DECAY_HALF_LIFE_DAYS}-day decay)
       </p>
 
@@ -128,7 +128,7 @@ export function DecayedScoreDisplay({
           <span className="text-xs text-[var(--color-gsd-text-muted)]">
             Base Score
           </span>
-          <span className="text-lg font-semibold text-[var(--color-gsd-text)]">
+          <span className="text-lg font-normal text-[var(--color-gsd-text)]">
             {formatScore(originalScore)}
           </span>
         </div>
@@ -136,7 +136,7 @@ export function DecayedScoreDisplay({
           <span className="text-xs text-[var(--color-gsd-text-muted)]">
             Effective Score
           </span>
-          <span className="text-lg font-bold gradient-text-cyan">
+          <span className="text-lg font-extralight gradient-text-cyan">
             {formatScore(decayedScore)}
           </span>
         </div>
@@ -177,7 +177,7 @@ export function DecayedScoreDisplay({
               </span>
             </div>
           ))}
-          <p className="mt-1 text-[10px] text-[var(--color-gsd-text-muted)]">
+          <p className="mt-1 text-[10px] font-light text-[var(--color-gsd-text-muted)]">
             Complete new verified tasks to maintain your effective score.
           </p>
         </div>
