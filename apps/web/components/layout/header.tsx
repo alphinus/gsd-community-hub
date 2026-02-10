@@ -34,7 +34,7 @@ function NavLink({
     >
       {children}
       {active && (
-        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full gradient-violet" />
+        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full gradient-cyan" />
       )}
     </Link>
   );
@@ -65,11 +65,11 @@ export function Header() {
 
   return (
     <header className="fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl">
-      <div className="glass-strong rounded-2xl shadow-[0_0_40px_rgba(139,92,246,0.06)]">
+      <div className="glass-strong rounded-2xl shadow-[0_0_40px_rgba(79,209,197,0.06)]">
         <div className="flex h-14 items-center justify-between px-5">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-            <span className="text-xl font-bold gradient-text-violet">
+            <span className="text-xl font-bold gradient-text-cyan">
               GSD
             </span>
             <span className="text-sm font-medium text-[var(--color-gsd-text-muted)] group-hover:text-[var(--color-gsd-text-secondary)] transition-colors">

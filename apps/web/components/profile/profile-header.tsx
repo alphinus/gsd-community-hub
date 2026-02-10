@@ -68,7 +68,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
     <div className="space-y-6">
       {/* Avatar + Name */}
       <div className="flex items-start gap-6">
-        {/* Avatar with violet gradient ring */}
+        {/* Avatar with cyan gradient ring */}
         <div className="shrink-0 rounded-full bg-gradient-to-br from-[var(--color-gsd-accent)] to-[var(--color-gsd-accent-deep)] p-[3px] shadow-lg shadow-[var(--color-gsd-accent)]/20">
           <div
             className="h-20 w-20 rounded-full ring-2 ring-[var(--color-gsd-bg)] sm:h-24 sm:w-24"
@@ -139,7 +139,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-violet hover:text-[var(--color-gsd-accent-light)]"
+            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-cyan hover:text-[var(--color-gsd-accent-light)]"
           >
             <Github className="h-4 w-4" />
             GitHub
@@ -152,7 +152,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.twitterUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-violet hover:text-[var(--color-gsd-accent-light)]"
+            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-cyan hover:text-[var(--color-gsd-accent-light)]"
           >
             <Twitter className="h-4 w-4" />
             Twitter/X
@@ -165,7 +165,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
             href={profile.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-violet hover:text-[var(--color-gsd-accent-light)]"
+            className="glass-surface flex cursor-pointer items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:glow-cyan hover:text-[var(--color-gsd-accent-light)]"
           >
             <Globe className="h-4 w-4" />
             Website

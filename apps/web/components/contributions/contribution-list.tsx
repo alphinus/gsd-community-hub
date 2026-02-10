@@ -43,7 +43,7 @@ const PAGE_SIZE = 10;
  */
 function ContributionSkeleton() {
   return (
-    <div className="animate-shimmer-violet glass rounded-2xl p-4">
+    <div className="animate-shimmer-cyan glass rounded-2xl p-4">
       <div className="mb-3 flex items-start justify-between">
         <div className="h-4 w-48 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-3 w-16 rounded bg-[var(--color-gsd-surface-raised)]" />

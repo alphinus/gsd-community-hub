@@ -142,7 +142,7 @@ export function PeerReviewPanel({
 
   return (
     <Card className="glass overflow-hidden">
-      <div className="h-1 gradient-violet" />
+      <div className="h-1 gradient-cyan" />
 
       <CardHeader>
         <CardTitle className="text-base">Peer Review</CardTitle>

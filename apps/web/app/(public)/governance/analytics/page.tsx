@@ -14,7 +14,7 @@ export default function GovernanceAnalyticsPage() {
 
       {/* Page header */}
       <div className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight gradient-text-violet sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight gradient-text-cyan sm:text-4xl">
           Governance Analytics
         </h1>
         <p className="mt-2 text-lg text-[var(--color-gsd-text-secondary)]">

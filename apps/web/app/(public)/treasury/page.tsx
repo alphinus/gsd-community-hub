@@ -30,7 +30,7 @@ export default function TreasuryPage() {
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="mb-10 animate-slide-up">
-          <h1 className="gradient-text-violet text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="gradient-text-cyan text-3xl font-bold tracking-tight sm:text-4xl">
             Treasury
           </h1>
           <p className="mt-2 text-lg text-[var(--color-gsd-text-secondary)]">
@@ -60,7 +60,7 @@ export default function TreasuryPage() {
               href={explorerUrl(TREASURY_ADDRESS_STR)}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-surface inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-2 text-sm text-[var(--color-gsd-accent)] transition-theme hover:border-[var(--color-gsd-accent)]/50 hover:text-[var(--color-gsd-accent-hover)] hover:glow-violet"
+              className="glass-surface inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-2 text-sm text-[var(--color-gsd-accent)] transition-theme hover:border-[var(--color-gsd-accent)]/50 hover:text-[var(--color-gsd-accent-hover)] hover:glow-cyan"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ export default function TreasuryPage() {
               href={squadsUrl(multisigAddress)}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-surface inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-2 text-sm text-[var(--color-gsd-accent)] transition-theme hover:border-[var(--color-gsd-accent)]/50 hover:text-[var(--color-gsd-accent-hover)] hover:glow-violet"
+              className="glass-surface inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-2 text-sm text-[var(--color-gsd-accent)] transition-theme hover:border-[var(--color-gsd-accent)]/50 hover:text-[var(--color-gsd-accent-hover)] hover:glow-cyan"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -97,12 +97,12 @@ function relativeDate(iso: string): string {
 function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 py-4">
-      <div className="h-8 w-8 animate-shimmer-violet rounded-full" />
+      <div className="h-8 w-8 animate-shimmer-cyan rounded-full" />
       <div className="flex-1 space-y-2">
-        <div className="h-4 w-48 animate-shimmer-violet rounded" />
-        <div className="h-3 w-72 animate-shimmer-violet rounded" />
+        <div className="h-4 w-48 animate-shimmer-cyan rounded" />
+        <div className="h-3 w-72 animate-shimmer-cyan rounded" />
       </div>
-      <div className="h-4 w-16 animate-shimmer-violet rounded" />
+      <div className="h-4 w-16 animate-shimmer-cyan rounded" />
     </div>
   );
 }

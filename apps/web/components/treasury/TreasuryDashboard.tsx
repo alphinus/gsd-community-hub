@@ -61,10 +61,10 @@ function SkeletonCard() {
   return (
     <Card>
       <CardHeader>
-        <div className="h-4 w-24 animate-shimmer-violet rounded-xl" />
+        <div className="h-4 w-24 animate-shimmer-cyan rounded-xl" />
       </CardHeader>
       <CardContent>
-        <div className="h-8 w-32 animate-shimmer-violet rounded-xl" />
+        <div className="h-8 w-32 animate-shimmer-cyan rounded-xl" />
       </CardContent>
     </Card>
   );
@@ -88,7 +88,7 @@ function BalanceCard({
   note?: string;
 }) {
   return (
-    <Card className="glass glow-violet">
+    <Card className="glass glow-cyan">
       <CardHeader>
         <div className="flex items-center gap-2">
           {icon}
@@ -162,7 +162,7 @@ function SolIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="gradient-text-violet text-[var(--color-gsd-accent)]"
+      className="gradient-text-cyan text-[var(--color-gsd-accent)]"
     >
       <circle cx="12" cy="12" r="10" />
       <path d="M8 12h8" />

@@ -137,7 +137,7 @@ export function WalletConnectButton() {
     return (
       <button
         onClick={handleSignIn}
-        className="gradient-violet glow-violet rounded-xl px-5 py-2 text-sm font-semibold text-white transition-theme hover:shadow-[0_0_24px_rgba(139,92,246,0.4)] cursor-pointer"
+        className="gradient-cyan glow-cyan rounded-xl px-5 py-2 text-sm font-semibold text-white transition-theme hover:shadow-[0_0_24px_rgba(79,209,197,0.4)] cursor-pointer"
       >
         Sign In
       </button>

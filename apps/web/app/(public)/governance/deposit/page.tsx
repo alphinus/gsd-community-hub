@@ -20,7 +20,7 @@ export default function DepositPage() {
           <span className="text-[var(--color-gsd-border)]">/</span>
           <span className="text-[var(--color-gsd-text)]">Deposit</span>
         </div>
-        <h1 className="text-3xl font-bold gradient-text-violet">
+        <h1 className="text-3xl font-bold gradient-text-cyan">
           Token Deposit
         </h1>
         <p className="mt-2 text-[var(--color-gsd-text-secondary)]">

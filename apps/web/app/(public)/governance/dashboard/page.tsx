@@ -61,9 +61,9 @@ interface AnalyticsResponse {
 function DashboardSkeleton() {
   return (
     <div className="space-y-6">
-      <div className="h-8 w-64 rounded-xl animate-shimmer-violet" />
-      <div className="h-24 rounded-2xl animate-shimmer-violet" />
-      <div className="h-48 rounded-2xl animate-shimmer-violet" />
+      <div className="h-8 w-64 rounded-xl animate-shimmer-cyan" />
+      <div className="h-24 rounded-2xl animate-shimmer-cyan" />
+      <div className="h-48 rounded-2xl animate-shimmer-cyan" />
     </div>
   );
 }
@@ -144,7 +144,7 @@ export default function GovernanceDashboard() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-12">
         <div className="rounded-2xl glass px-6 py-16 text-center">
-          <h1 className="text-2xl font-bold gradient-text-violet">
+          <h1 className="text-2xl font-bold gradient-text-cyan">
             Governance Dashboard
           </h1>
           <p className="mt-2 text-sm text-[var(--color-gsd-text-muted)]">
@@ -163,7 +163,7 @@ export default function GovernanceDashboard() {
     <div className="relative mx-auto max-w-3xl px-4 py-12">
       <div className="absolute inset-0 mesh-gradient -z-10" />
 
-      <h1 className="mb-6 text-3xl font-bold gradient-text-violet">
+      <h1 className="mb-6 text-3xl font-bold gradient-text-cyan">
         Governance Dashboard
       </h1>
 
@@ -198,7 +198,7 @@ export default function GovernanceDashboard() {
           <Link
             key={link.href}
             href={link.href}
-            className="rounded-2xl glass-surface p-4 text-center transition-theme duration-200 hover:glow-violet cursor-pointer"
+            className="rounded-2xl glass-surface p-4 text-center transition-theme duration-200 hover:glow-cyan cursor-pointer"
           >
             <p className="text-sm font-medium text-[var(--color-gsd-text)]">
               {link.title}

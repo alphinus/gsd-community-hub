@@ -48,15 +48,15 @@ export default async function ExplorePage() {
     <div className="relative mx-auto max-w-5xl px-4 py-12">
       {/* Subtle mesh gradient background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-[#8B5CF6]/5 blur-[100px]" />
-        <div className="absolute -top-16 left-1/4 h-48 w-72 rounded-full bg-[#6D28D9]/5 blur-[80px]" />
+        <div className="absolute -top-32 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-[#4fd1c5]/5 blur-[100px]" />
+        <div className="absolute -top-16 left-1/4 h-48 w-72 rounded-full bg-[#38b2ac]/5 blur-[80px]" />
       </div>
 
       <div className="mb-10 flex items-center justify-between">
         <div className="animate-slide-up">
           <div className="mb-2 flex items-center gap-3">
             <Compass className="h-7 w-7 text-[var(--color-gsd-accent)]" />
-            <h1 className="text-3xl font-bold gradient-text-violet sm:text-4xl">
+            <h1 className="text-3xl font-bold gradient-text-cyan sm:text-4xl">
               Explore Builders
             </h1>
           </div>
@@ -67,7 +67,7 @@ export default async function ExplorePage() {
 
         <Link
           href="/profile/edit"
-          className="hidden cursor-pointer rounded-xl gradient-violet px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#8B5CF6]/20 transition-theme duration-200 hover:scale-105 hover:shadow-xl hover:shadow-[#8B5CF6]/30 sm:block"
+          className="hidden cursor-pointer rounded-xl gradient-cyan px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4fd1c5]/20 transition-theme duration-200 hover:scale-105 hover:shadow-xl hover:shadow-[#4fd1c5]/30 sm:block"
         >
           Join the Movement
         </Link>
@@ -82,7 +82,7 @@ export default async function ExplorePage() {
       <div className="mt-8 block sm:hidden">
         <Link
           href="/profile/edit"
-          className="block cursor-pointer rounded-xl gradient-violet px-5 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-[#8B5CF6]/20 transition-theme duration-200 hover:scale-105 hover:shadow-xl hover:shadow-[#8B5CF6]/30"
+          className="block cursor-pointer rounded-xl gradient-cyan px-5 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-[#4fd1c5]/20 transition-theme duration-200 hover:scale-105 hover:shadow-xl hover:shadow-[#4fd1c5]/30"
         >
           Join the Movement
         </Link>

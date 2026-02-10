@@ -17,7 +17,7 @@ interface VotingPowerDisplayProps {
 
 function VotingPowerSkeleton() {
   return (
-    <div className="animate-shimmer-violet glass rounded-2xl p-4">
+    <div className="animate-shimmer-cyan glass rounded-2xl p-4">
       <div className="mb-2 h-4 w-24 rounded bg-[var(--color-gsd-surface-raised)]" />
       <div className="h-8 w-16 rounded bg-[var(--color-gsd-surface-raised)]" />
     </div>
@@ -80,7 +80,7 @@ export function VotingPowerDisplay({ wallet }: VotingPowerDisplayProps) {
         Voting Power
       </p>
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold gradient-text-violet">
+        <span className="text-2xl font-bold gradient-text-cyan">
           {formattedAmount}
         </span>
         <span className="text-xs text-[var(--color-gsd-text-muted)]">$GSD</span>

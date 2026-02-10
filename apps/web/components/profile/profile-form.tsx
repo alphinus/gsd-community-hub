@@ -273,7 +273,7 @@ export function ProfileForm({ existingProfile, mode }: ProfileFormProps) {
       <Button
         type="submit"
         disabled={isSubmitting || !displayName || !bio}
-        className="w-full gradient-violet text-white shadow-lg shadow-[var(--color-gsd-accent)]/20 motion-safe:hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--color-gsd-accent)]/30 glow-violet"
+        className="w-full gradient-cyan text-white shadow-lg shadow-[var(--color-gsd-accent)]/20 motion-safe:hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--color-gsd-accent)]/30 glow-cyan"
         size="lg"
       >
         {isSubmitting ? (

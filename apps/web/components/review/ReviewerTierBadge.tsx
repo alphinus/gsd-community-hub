@@ -1,9 +1,9 @@
 /**
  * Reviewer tier badge with tier-specific icon and color.
  *
- * Explorer: compass icon, violet
- * Builder: hammer icon, lighter violet
- * Architect: crown icon, gold
+ * Explorer: compass icon, cyan
+ * Builder: hammer icon, lighter cyan
+ * Architect: crown icon, blue
  */
 
 import { Compass, Hammer, Crown } from "lucide-react";

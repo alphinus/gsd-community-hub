@@ -70,7 +70,7 @@ export function ScoreBadge({
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-bold gradient-text-violet">
+          <span className="text-3xl font-bold gradient-text-cyan">
             {formatScore(score)}
           </span>
         </div>

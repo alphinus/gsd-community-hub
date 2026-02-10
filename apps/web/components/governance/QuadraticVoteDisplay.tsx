@@ -61,7 +61,7 @@ export function QuadraticVoteDisplay({
 
       {/* Weight display */}
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold gradient-text-violet">
+        <span className="text-2xl font-bold gradient-text-cyan">
           {weight}
         </span>
         <span className="text-xs text-[var(--color-gsd-text-muted)]">

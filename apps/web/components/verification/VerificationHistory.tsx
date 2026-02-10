@@ -42,7 +42,7 @@ const PAGE_SIZE = 10;
 
 function VerificationSkeleton() {
   return (
-    <div className="animate-shimmer-violet glass rounded-2xl p-4">
+    <div className="animate-shimmer-cyan glass rounded-2xl p-4">
       <div className="mb-3 flex items-start justify-between">
         <div className="h-4 w-40 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-5 w-16 rounded-full bg-[var(--color-gsd-surface-raised)]" />
@@ -130,7 +130,7 @@ export function VerificationHistory({
               <a
                 key={report.id}
                 href={`/verification/${report.id}`}
-                className="block glass rounded-2xl p-4 cursor-pointer transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/30 glow-violet"
+                className="block glass rounded-2xl p-4 cursor-pointer transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/30 glow-cyan"
               >
                 {/* Header: task ref + score */}
                 <div className="mb-2 flex items-start justify-between gap-2">

@@ -96,7 +96,7 @@ export function VerificationSubmitButton({
     <Button
       onClick={handleSubmit}
       disabled={isLoading}
-      className="glow-violet"
+      className="glow-cyan"
     >
       {isLoading ? (
         <>

@@ -20,7 +20,7 @@ export default function DelegatePage() {
           <span className="text-[var(--color-gsd-border)]">/</span>
           <span className="text-[var(--color-gsd-text)]">Delegate</span>
         </div>
-        <h1 className="text-3xl font-bold gradient-text-violet">
+        <h1 className="text-3xl font-bold gradient-text-cyan">
           Vote Delegation
         </h1>
         <p className="mt-2 text-[var(--color-gsd-text-secondary)]">

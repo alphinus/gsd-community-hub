@@ -79,10 +79,10 @@ function SkeletonRow() {
   return (
     <div className="flex items-center gap-3 py-4">
       <div className="flex-1 space-y-2">
-        <div className="h-4 w-36 animate-shimmer-violet rounded" />
-        <div className="h-3 w-56 animate-shimmer-violet rounded" />
+        <div className="h-4 w-36 animate-shimmer-cyan rounded" />
+        <div className="h-3 w-56 animate-shimmer-cyan rounded" />
       </div>
-      <div className="h-4 w-20 animate-shimmer-violet rounded" />
+      <div className="h-4 w-20 animate-shimmer-cyan rounded" />
     </div>
   );
 }

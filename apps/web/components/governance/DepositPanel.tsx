@@ -187,7 +187,7 @@ export function DepositPanel() {
 
   if (isLoading) {
     return (
-      <div className="animate-shimmer-violet space-y-4 glass rounded-2xl p-6">
+      <div className="animate-shimmer-cyan space-y-4 glass rounded-2xl p-6">
         <div className="h-6 w-48 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-20 w-full rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-10 w-full rounded bg-[var(--color-gsd-surface-raised)]" />
@@ -206,7 +206,7 @@ export function DepositPanel() {
         {deposit ? (
           <div className="space-y-3">
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold gradient-text-violet">
+              <span className="text-3xl font-bold gradient-text-cyan">
                 {(Number(BigInt(deposit.depositedAmount)) / 1e9).toFixed(2)}
               </span>
               <span className="text-sm text-[var(--color-gsd-text-muted)]">

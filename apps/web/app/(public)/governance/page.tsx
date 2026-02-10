@@ -34,7 +34,7 @@ export default async function GovernancePage() {
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero */}
         <div className="mb-10 animate-slide-up">
-          <h1 className="gradient-text-violet text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="gradient-text-cyan text-3xl font-bold tracking-tight sm:text-4xl">
             Governance
           </h1>
           <p className="mt-2 text-lg text-[var(--color-gsd-text-secondary)]">
@@ -50,7 +50,7 @@ export default async function GovernancePage() {
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
-              <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-gsd-accent)]/15 text-sm font-bold text-[#8B5CF6]">
+              <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-gsd-accent)]/15 text-sm font-bold text-[#4fd1c5]">
                 1
               </div>
               <h3 className="mb-1 text-sm font-medium text-[var(--color-gsd-text)]">
@@ -62,7 +62,7 @@ export default async function GovernancePage() {
               </p>
             </div>
             <div>
-              <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-gsd-gold)]/15 text-sm font-bold text-[#FBBF24]">
+              <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-gsd-gold)]/15 text-sm font-bold text-[#3b82f6]">
                 2
               </div>
               <h3 className="mb-1 text-sm font-medium text-[var(--color-gsd-text)]">
@@ -90,7 +90,7 @@ export default async function GovernancePage() {
 
         {/* Stats */}
         <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3 animate-slide-up delay-200">
-          <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-violet">
+          <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-cyan">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Total Rounds
             </p>
@@ -98,15 +98,15 @@ export default async function GovernancePage() {
               {stats.totalRounds}
             </p>
           </div>
-          <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-violet">
+          <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-cyan">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Active Rounds
             </p>
-            <p className="animate-count-up text-2xl font-bold text-[#8B5CF6]">
+            <p className="animate-count-up text-2xl font-bold text-[#4fd1c5]">
               {stats.activeRounds}
             </p>
           </div>
-          <div className="glass col-span-2 rounded-2xl p-4 sm:col-span-1 transition-theme duration-200 hover:glow-violet">
+          <div className="glass col-span-2 rounded-2xl p-4 sm:col-span-1 transition-theme duration-200 hover:glow-cyan">
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               On-chain Governance
             </p>
@@ -117,7 +117,7 @@ export default async function GovernancePage() {
         </div>
 
         {/* Analytics card */}
-        <div className="glass glow-violet mb-8 rounded-2xl p-6 animate-slide-up delay-300">
+        <div className="glass glow-cyan mb-8 rounded-2xl p-6 animate-slide-up delay-300">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-semibold text-[var(--color-gsd-text)]">
@@ -129,7 +129,7 @@ export default async function GovernancePage() {
             </div>
             <Link
               href="/governance/analytics"
-              className="gradient-violet cursor-pointer rounded-xl px-4 py-2 text-sm font-medium text-white transition-theme duration-200 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:brightness-110"
+              className="gradient-cyan cursor-pointer rounded-xl px-4 py-2 text-sm font-medium text-white transition-theme duration-200 hover:shadow-[0_0_20px_rgba(79,209,197,0.3)] hover:brightness-110"
             >
               View Analytics
             </Link>
@@ -140,13 +140,13 @@ export default async function GovernancePage() {
         <div className="flex flex-col gap-3 sm:flex-row animate-slide-up delay-400">
           <Link
             href="/governance/rounds"
-            className="gradient-violet flex-1 cursor-pointer rounded-xl px-6 py-3 text-center text-sm font-semibold text-white transition-theme duration-200 hover:shadow-[0_0_25px_rgba(139,92,246,0.3)] hover:brightness-110"
+            className="gradient-cyan flex-1 cursor-pointer rounded-xl px-6 py-3 text-center text-sm font-semibold text-white transition-theme duration-200 hover:shadow-[0_0_25px_rgba(79,209,197,0.3)] hover:brightness-110"
           >
             Browse Rounds
           </Link>
           <Link
             href="/governance/deposit"
-            className="flex-1 cursor-pointer rounded-xl border border-[var(--color-gsd-border)] px-6 py-3 text-center text-sm font-semibold text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:border-[#8B5CF6] hover:bg-[var(--color-gsd-accent-muted)] hover:text-[#8B5CF6]"
+            className="flex-1 cursor-pointer rounded-xl border border-[var(--color-gsd-border)] px-6 py-3 text-center text-sm font-semibold text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:border-[#4fd1c5] hover:bg-[var(--color-gsd-accent-muted)] hover:text-[#4fd1c5]"
           >
             Deposit Tokens to Vote
           </Link>

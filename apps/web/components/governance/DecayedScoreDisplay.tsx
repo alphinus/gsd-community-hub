@@ -82,7 +82,7 @@ export function DecayedScoreDisplay({
 
   if (isLoading) {
     return (
-      <div className="animate-shimmer-violet glass rounded-2xl p-4">
+      <div className="animate-shimmer-cyan glass rounded-2xl p-4">
         <div className="mb-2 h-4 w-32 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-8 w-24 rounded bg-[var(--color-gsd-surface-raised)]" />
       </div>
@@ -136,7 +136,7 @@ export function DecayedScoreDisplay({
           <span className="text-xs text-[var(--color-gsd-text-muted)]">
             Effective Score
           </span>
-          <span className="text-lg font-bold gradient-text-violet">
+          <span className="text-lg font-bold gradient-text-cyan">
             {formatScore(decayedScore)}
           </span>
         </div>
@@ -150,7 +150,7 @@ export function DecayedScoreDisplay({
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--color-gsd-surface-raised)]">
           <div
-            className="h-full rounded-full gradient-violet transition-theme duration-200"
+            className="h-full rounded-full gradient-cyan transition-theme duration-200"
             style={{ width: `${effectivePct}%` }}
           />
         </div>

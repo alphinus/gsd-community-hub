@@ -41,7 +41,7 @@ export function FallbackChoicePanel({
           {/* Peer Review option */}
           <button
             onClick={() => onChoice("peer_review")}
-            className="group cursor-pointer glass-surface rounded-2xl p-5 text-left transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/40 hover:bg-[var(--color-gsd-accent)]/5 glow-violet"
+            className="group cursor-pointer glass-surface rounded-2xl p-5 text-left transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/40 hover:bg-[var(--color-gsd-accent)]/5 glow-cyan"
           >
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-gsd-accent)]/10">
               <Users className="h-5 w-5 text-[var(--color-gsd-accent-hover)]" />
@@ -57,7 +57,7 @@ export function FallbackChoicePanel({
           {/* Re-submit option */}
           <button
             onClick={() => onChoice("resubmit")}
-            className="group cursor-pointer glass-surface rounded-2xl p-5 text-left transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/40 hover:bg-[var(--color-gsd-accent)]/5 glow-violet"
+            className="group cursor-pointer glass-surface rounded-2xl p-5 text-left transition-theme duration-200 hover:border-[var(--color-gsd-accent)]/40 hover:bg-[var(--color-gsd-accent)]/5 glow-cyan"
           >
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-gsd-accent)]/10">
               <RefreshCw className="h-5 w-5 text-[var(--color-gsd-accent-hover)]" />

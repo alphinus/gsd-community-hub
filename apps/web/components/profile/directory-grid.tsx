@@ -48,12 +48,12 @@ export function DirectoryGrid({ initialData }: DirectoryGridProps) {
   if (isLoading && !data) {
     return (
       <div className="space-y-6">
-        <div className="h-8 w-64 animate-shimmer-violet rounded-2xl bg-[var(--color-gsd-surface-raised)]" />
+        <div className="h-8 w-64 animate-shimmer-cyan rounded-2xl bg-[var(--color-gsd-surface-raised)]" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className="h-36 animate-shimmer-violet rounded-2xl glass"
+              className="h-36 animate-shimmer-cyan rounded-2xl glass"
             />
           ))}
         </div>

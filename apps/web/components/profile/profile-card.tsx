@@ -35,7 +35,7 @@ export function ProfileCard({ profile }: ProfileCardProps) {
 
   return (
     <Link href={`/profile/${profile.walletAddress}`}>
-      <Card className="glass group cursor-pointer transition-theme duration-200 hover:glow-violet-strong motion-safe:hover:scale-[1.02]">
+      <Card className="glass group cursor-pointer transition-theme duration-200 hover:glow-cyan-strong motion-safe:hover:scale-[1.02]">
         <CardContent className="p-5">
           <div className="flex items-start gap-4">
             {/* Avatar with gradient ring on hover */}

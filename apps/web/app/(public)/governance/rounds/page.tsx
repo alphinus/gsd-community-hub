@@ -55,7 +55,7 @@ export default async function RoundsPage() {
 
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold gradient-text-violet">
+          <h1 className="text-3xl font-bold gradient-text-cyan">
             Idea Rounds
           </h1>
           <p className="mt-2 text-[var(--color-gsd-text-muted)]">

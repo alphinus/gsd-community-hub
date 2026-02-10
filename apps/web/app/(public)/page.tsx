@@ -25,7 +25,7 @@ function FeatureCard({
   return (
     <Link
       href={href}
-      className={`group relative cursor-pointer rounded-2xl glass p-6 transition-theme duration-300 hover:glow-violet-strong motion-safe:hover:scale-[1.02] ${span || ""}`}
+      className={`group relative cursor-pointer rounded-2xl glass p-6 transition-theme duration-300 hover:glow-cyan-strong motion-safe:hover:scale-[1.02] ${span || ""}`}
     >
       <div className="mb-4 inline-flex rounded-xl bg-[var(--color-gsd-accent)]/10 p-3">
         <Icon className="h-6 w-6 text-[var(--color-gsd-accent)]" />
@@ -85,7 +85,7 @@ export default async function HomePage() {
 
           <h1 className="text-5xl font-bold tracking-tight sm:text-7xl">
             <span className="text-[var(--color-gsd-text)]">GSD</span>{" "}
-            <span className="gradient-text-aurora text-glow-violet">Community Hub</span>
+            <span className="gradient-text-aurora text-glow-cyan">Community Hub</span>
           </h1>
 
           <p className="mt-4 text-xl font-medium text-[var(--color-gsd-text-secondary)]">
@@ -104,13 +104,13 @@ export default async function HomePage() {
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row animate-slide-up delay-200">
           <Link
             href="/profile/edit"
-            className="rounded-xl gradient-violet px-8 py-3.5 text-lg font-semibold text-white shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-theme duration-200 hover:shadow-[0_0_40px_rgba(139,92,246,0.35)] hover:brightness-110 cursor-pointer"
+            className="rounded-xl gradient-cyan px-8 py-3.5 text-lg font-semibold text-white shadow-[0_0_30px_rgba(79,209,197,0.2)] transition-theme duration-200 hover:shadow-[0_0_40px_rgba(79,209,197,0.35)] hover:brightness-110 cursor-pointer"
           >
             Join the Movement
           </Link>
           <Link
             href="/transparency"
-            className="rounded-xl border border-[var(--color-gsd-border)] px-8 py-3.5 text-lg font-semibold text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:border-[var(--color-gsd-accent)] hover:text-[var(--color-gsd-accent)] hover:shadow-[0_0_20px_rgba(139,92,246,0.1)] cursor-pointer"
+            className="rounded-xl border border-[var(--color-gsd-border)] px-8 py-3.5 text-lg font-semibold text-[var(--color-gsd-text-secondary)] transition-theme duration-200 hover:border-[var(--color-gsd-accent)] hover:text-[var(--color-gsd-accent)] hover:shadow-[0_0_20px_rgba(79,209,197,0.1)] cursor-pointer"
           >
             View Transparency
           </Link>

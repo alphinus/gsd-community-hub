@@ -25,7 +25,7 @@ function DirectorySkeleton() {
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
-          className="animate-shimmer-violet glass rounded-2xl p-6"
+          className="animate-shimmer-cyan glass rounded-2xl p-6"
         >
           <div className="mb-3 h-4 w-28 rounded bg-[var(--color-gsd-surface-raised)]" />
           <div className="h-6 w-20 rounded bg-[var(--color-gsd-surface-raised)]" />

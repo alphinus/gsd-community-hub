@@ -77,7 +77,7 @@ export function RoundCard({ round }: RoundCardProps) {
 
   return (
     <Link href={`/governance/rounds/${round.id}`} className="block group cursor-pointer">
-      <Card className="glass transition-theme duration-200 group-hover:glow-violet group-hover:border-[var(--color-gsd-accent)]/50">
+      <Card className="glass transition-theme duration-200 group-hover:glow-cyan group-hover:border-[var(--color-gsd-accent)]/50">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-base leading-snug text-[var(--color-gsd-text)]">

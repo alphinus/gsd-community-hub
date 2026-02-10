@@ -56,9 +56,9 @@ export default function RootLayout({
             position="bottom-right"
             toastOptions={{
               style: {
-                background: "rgba(22, 22, 55, 0.9)",
+                background: "rgba(11, 17, 32, 0.9)",
                 backdropFilter: "blur(16px)",
-                border: "1px solid rgba(139, 92, 246, 0.15)",
+                border: "1px solid rgba(79, 209, 197, 0.15)",
                 color: "var(--color-gsd-text)",
               },
             }}

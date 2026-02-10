@@ -79,22 +79,22 @@ export function ParticipationChart({
         </h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(139, 92, 246, 0.15)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(79, 209, 197, 0.15)" />
             <XAxis
               dataKey="name"
               tick={{ fill: "#94A3B8", fontSize: 12 }}
-              axisLine={{ stroke: "rgba(139, 92, 246, 0.2)" }}
+              axisLine={{ stroke: "rgba(79, 209, 197, 0.2)" }}
             />
             <YAxis
               tick={{ fill: "#94A3B8", fontSize: 12 }}
-              axisLine={{ stroke: "rgba(139, 92, 246, 0.2)" }}
+              axisLine={{ stroke: "rgba(79, 209, 197, 0.2)" }}
               domain={[0, 100]}
               tickFormatter={(v: number) => `${v}%`}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#161637",
-                border: "1px solid rgba(139, 92, 246, 0.3)",
+                backgroundColor: "#0b1120",
+                border: "1px solid rgba(79, 209, 197, 0.3)",
                 borderRadius: "1rem",
                 color: "#F8FAFC",
                 fontSize: "0.875rem",
@@ -106,7 +106,7 @@ export function ParticipationChart({
             />
             <Bar
               dataKey="turnout"
-              fill="#8B5CF6"
+              fill="#4fd1c5"
               radius={[4, 4, 0, 0]}
               maxBarSize={48}
             />

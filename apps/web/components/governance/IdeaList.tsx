@@ -42,7 +42,7 @@ const PAGE_SIZE = 10;
 
 function IdeaSkeleton() {
   return (
-    <div className="animate-shimmer-violet glass rounded-2xl p-4">
+    <div className="animate-shimmer-cyan glass rounded-2xl p-4">
       <div className="mb-3 flex items-start justify-between">
         <div className="h-5 w-64 rounded bg-[var(--color-gsd-surface-raised)]" />
         <div className="h-4 w-20 rounded bg-[var(--color-gsd-surface-raised)]" />
@@ -123,7 +123,7 @@ function IdeaCard({ idea }: { idea: IdeaData }) {
   const total = yes + no + abstain;
 
   return (
-    <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-violet">
+    <div className="glass rounded-2xl p-4 transition-theme duration-200 hover:glow-cyan">
       <div className="mb-2 flex items-start justify-between gap-2">
         <h3 className="text-sm font-medium text-[var(--color-gsd-text)]">
           {idea.title}

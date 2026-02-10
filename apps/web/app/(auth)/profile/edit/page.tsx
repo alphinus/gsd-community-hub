@@ -51,8 +51,8 @@ export default function ProfileEditPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12">
         <div className="space-y-4">
-          <div className="h-8 w-48 rounded-xl animate-shimmer-violet" />
-          <div className="h-96 rounded-2xl animate-shimmer-violet" />
+          <div className="h-8 w-48 rounded-xl animate-shimmer-cyan" />
+          <div className="h-96 rounded-2xl animate-shimmer-cyan" />
         </div>
       </div>
     );
@@ -64,7 +64,7 @@ export default function ProfileEditPage() {
         <div className="absolute inset-0 mesh-gradient -z-10" />
         <Card className="glass">
           <CardHeader>
-            <CardTitle className="text-2xl gradient-text-violet">
+            <CardTitle className="text-2xl gradient-text-cyan">
               Join the Movement
             </CardTitle>
           </CardHeader>
@@ -94,7 +94,7 @@ export default function ProfileEditPage() {
 
       <Card className="glass">
         <CardHeader>
-          <CardTitle className="text-2xl gradient-text-violet">
+          <CardTitle className="text-2xl gradient-text-cyan">
             {mode === "create" ? "Join the Movement" : "Edit Profile"}
           </CardTitle>
           {mode === "create" && (

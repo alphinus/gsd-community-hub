@@ -54,12 +54,12 @@ export default async function VerificationDashboardPage() {
     <div className="relative mx-auto max-w-4xl px-4 py-12">
       {/* Mesh gradient background */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-1/2 left-1/4 h-[600px] w-[600px] rounded-full bg-[#8B5CF6]/5 blur-[120px]" />
-        <div className="absolute -bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-[#FBBF24]/5 blur-[120px]" />
+        <div className="absolute -top-1/2 left-1/4 h-[600px] w-[600px] rounded-full bg-[#4fd1c5]/5 blur-[120px]" />
+        <div className="absolute -bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-[#3b82f6]/5 blur-[120px]" />
       </div>
 
       <div className="mb-8 animate-slide-up">
-        <h1 className="text-2xl font-bold gradient-text-violet">
+        <h1 className="text-2xl font-bold gradient-text-cyan">
           Verification Dashboard
         </h1>
         <p className="mt-1 text-sm text-[#94A3B8]">
@@ -70,7 +70,7 @@ export default async function VerificationDashboardPage() {
 
       {/* Stats bar */}
       <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Card className="glass glow-violet border-0">
+        <Card className="glass glow-cyan border-0">
           <CardHeader className="pb-1">
             <CardTitle className="text-xs font-normal text-[#94A3B8]">
               Total Verifications
@@ -83,7 +83,7 @@ export default async function VerificationDashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="glass glow-violet border-0">
+        <Card className="glass glow-cyan border-0">
           <CardHeader className="pb-1">
             <CardTitle className="text-xs font-normal text-[#94A3B8]">
               Average Score
@@ -99,7 +99,7 @@ export default async function VerificationDashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="glass glow-violet border-0">
+        <Card className="glass glow-cyan border-0">
           <CardHeader className="pb-1">
             <CardTitle className="text-xs font-normal text-[#94A3B8]">
               AI Verified
@@ -112,7 +112,7 @@ export default async function VerificationDashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="glass glow-violet border-0">
+        <Card className="glass glow-cyan border-0">
           <CardHeader className="pb-1">
             <CardTitle className="text-xs font-normal text-[#94A3B8]">
               Peer Reviewed
@@ -129,7 +129,7 @@ export default async function VerificationDashboardPage() {
       {/* Verification history (client component with TanStack Query) */}
       <div>
         <h2 className="mb-4 text-lg font-semibold text-[#F8FAFC]">
-          <span className="inline-block h-4 w-1 rounded-full bg-[#8B5CF6] mr-2 align-middle" />
+          <span className="inline-block h-4 w-1 rounded-full bg-[#4fd1c5] mr-2 align-middle" />
           All Verification Reports
         </h2>
         <VerificationHistory />

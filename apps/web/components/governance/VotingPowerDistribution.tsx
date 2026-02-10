@@ -27,8 +27,8 @@ interface VotingPowerDistributionProps {
 }
 
 const COLORS = {
-  top10: "#FBBF24", // gold
-  rest: "#8B5CF6", // violet
+  top10: "#3b82f6", // blue
+  rest: "#4fd1c5", // cyan
 };
 
 function GiniIndicator({ value }: { value: number }) {
@@ -113,8 +113,8 @@ export function VotingPowerDistribution({
             </Pie>
             <Tooltip
               contentStyle={{
-                backgroundColor: "#161637",
-                border: "1px solid rgba(139, 92, 246, 0.3)",
+                backgroundColor: "#0b1120",
+                border: "1px solid rgba(79, 209, 197, 0.3)",
                 borderRadius: "1rem",
                 color: "#F8FAFC",
                 fontSize: "0.875rem",

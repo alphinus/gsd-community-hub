@@ -45,7 +45,7 @@ interface AnalyticsResponse {
 
 function AnalyticsSkeleton() {
   return (
-    <div className="animate-shimmer-violet space-y-6">
+    <div className="animate-shimmer-cyan space-y-6">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
           <div
@@ -136,7 +136,7 @@ export function GovernanceAnalytics() {
           <p className="text-xs text-[var(--color-gsd-text-muted)]">
             Delegated Tokens
           </p>
-          <p className="text-2xl font-bold gradient-text-violet">
+          <p className="text-2xl font-bold gradient-text-cyan">
             {delegatedTokensFormatted}
           </p>
           <p className="text-xs text-[var(--color-gsd-text-muted)]">$GSD</p>
@@ -182,7 +182,7 @@ export function GovernanceAnalytics() {
             <p className="text-xs text-[var(--color-gsd-text-muted)]">
               Total Delegated
             </p>
-            <p className="text-2xl font-bold gradient-text-violet">
+            <p className="text-2xl font-bold gradient-text-cyan">
               {delegatedTokensFormatted} $GSD
             </p>
           </div>
