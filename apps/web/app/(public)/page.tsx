@@ -145,56 +145,46 @@ export default async function HomePage() {
           </p>
         </ScrollReveal>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <ScrollReveal delay={1}>
+        <ScrollReveal>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <FeatureCard
               icon={Shield}
               title="On-Chain Identity"
               description="Your developer profile lives on Solana. Wallet-verified, tamper-proof, and always under your control."
               href="/explore"
             />
-          </ScrollReveal>
-          <ScrollReveal delay={2}>
             <FeatureCard
               icon={Vote}
               title="Transparent Governance"
               description="Multisig-controlled upgrades, public changelogs, and on-chain voting. Every decision is auditable."
               href="/governance"
             />
-          </ScrollReveal>
-          <ScrollReveal delay={3}>
             <FeatureCard
               icon={Coins}
               title="Fair Revenue Sharing"
               description="Contribution-weighted revenue distribution. Build more, earn more. Verified on-chain."
               href="/treasury"
             />
-          </ScrollReveal>
-          <ScrollReveal delay={4}>
             <FeatureCard
               icon={GitBranch}
               title="Contribution Tracking"
               description="Every commit, PR, and review is indexed and scored. Your work speaks for itself."
               href="/explore"
             />
-          </ScrollReveal>
-          <ScrollReveal delay={5}>
             <FeatureCard
               icon={BarChart3}
               title="AI Verification"
               description="Automated quality scoring with AI and peer review consensus. Fair and unbiased."
               href="/verification"
             />
-          </ScrollReveal>
-          <ScrollReveal delay={6}>
             <FeatureCard
               icon={Users}
               title="Community-Driven"
               description="No central authority. Community votes on direction, spending, and priorities."
               href="/governance"
             />
-          </ScrollReveal>
-        </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* CTA Section with rotating conic border */}
